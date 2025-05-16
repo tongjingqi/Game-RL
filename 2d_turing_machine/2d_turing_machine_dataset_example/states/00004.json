@@ -1,0 +1,105 @@
+{
+    "rules": [
+        {
+            "state": 0,
+            "symbol": 0,
+            "new_state": 0,
+            "new_symbol": 2,
+            "direction": 0
+        },
+        {
+            "state": 0,
+            "symbol": 1,
+            "new_state": 0,
+            "new_symbol": 2,
+            "direction": 3
+        },
+        {
+            "state": 0,
+            "symbol": 2,
+            "new_state": 1,
+            "new_symbol": 2,
+            "direction": 3
+        },
+        {
+            "state": 0,
+            "symbol": 3,
+            "new_state": 0,
+            "new_symbol": 0,
+            "direction": 1
+        },
+        {
+            "state": 0,
+            "symbol": 4,
+            "new_state": 1,
+            "new_symbol": 4,
+            "direction": 0
+        },
+        {
+            "state": 1,
+            "symbol": 0,
+            "new_state": 1,
+            "new_symbol": 2,
+            "direction": 3
+        },
+        {
+            "state": 1,
+            "symbol": 1,
+            "new_state": 0,
+            "new_symbol": 4,
+            "direction": 1
+        },
+        {
+            "state": 1,
+            "symbol": 2,
+            "new_state": 0,
+            "new_symbol": 3,
+            "direction": 3
+        },
+        {
+            "state": 1,
+            "symbol": 3,
+            "new_state": 1,
+            "new_symbol": 0,
+            "direction": 1
+        },
+        {
+            "state": 1,
+            "symbol": 4,
+            "new_state": 1,
+            "new_symbol": 2,
+            "direction": 2
+        }
+    ],
+    "head": {
+        "x": 2,
+        "y": 0,
+        "state": 1
+    },
+    "grid": [
+        [
+            1,
+            4,
+            3,
+            0
+        ],
+        [
+            3,
+            1,
+            2,
+            0
+        ],
+        [
+            3,
+            2,
+            4,
+            4
+        ],
+        [
+            0,
+            1,
+            3,
+            2
+        ]
+    ]
+}

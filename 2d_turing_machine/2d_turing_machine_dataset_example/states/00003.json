@@ -1,0 +1,143 @@
+{
+    "rules": [
+        {
+            "state": 0,
+            "symbol": 0,
+            "new_state": 2,
+            "new_symbol": 1,
+            "direction": 2
+        },
+        {
+            "state": 0,
+            "symbol": 1,
+            "new_state": 1,
+            "new_symbol": 3,
+            "direction": 3
+        },
+        {
+            "state": 0,
+            "symbol": 2,
+            "new_state": 3,
+            "new_symbol": 3,
+            "direction": 2
+        },
+        {
+            "state": 0,
+            "symbol": 3,
+            "new_state": 3,
+            "new_symbol": 1,
+            "direction": 0
+        },
+        {
+            "state": 1,
+            "symbol": 0,
+            "new_state": 2,
+            "new_symbol": 1,
+            "direction": 2
+        },
+        {
+            "state": 1,
+            "symbol": 1,
+            "new_state": 3,
+            "new_symbol": 3,
+            "direction": 1
+        },
+        {
+            "state": 1,
+            "symbol": 2,
+            "new_state": 3,
+            "new_symbol": 3,
+            "direction": 1
+        },
+        {
+            "state": 1,
+            "symbol": 3,
+            "new_state": 1,
+            "new_symbol": 2,
+            "direction": 2
+        },
+        {
+            "state": 2,
+            "symbol": 0,
+            "new_state": 1,
+            "new_symbol": 0,
+            "direction": 0
+        },
+        {
+            "state": 2,
+            "symbol": 1,
+            "new_state": 2,
+            "new_symbol": 0,
+            "direction": 1
+        },
+        {
+            "state": 2,
+            "symbol": 2,
+            "new_state": 3,
+            "new_symbol": 3,
+            "direction": 3
+        },
+        {
+            "state": 2,
+            "symbol": 3,
+            "new_state": 2,
+            "new_symbol": 0,
+            "direction": 2
+        },
+        {
+            "state": 3,
+            "symbol": 0,
+            "new_state": 2,
+            "new_symbol": 1,
+            "direction": 2
+        },
+        {
+            "state": 3,
+            "symbol": 1,
+            "new_state": 0,
+            "new_symbol": 2,
+            "direction": 2
+        },
+        {
+            "state": 3,
+            "symbol": 2,
+            "new_state": 3,
+            "new_symbol": 2,
+            "direction": 3
+        },
+        {
+            "state": 3,
+            "symbol": 3,
+            "new_state": 2,
+            "new_symbol": 0,
+            "direction": 1
+        }
+    ],
+    "head": {
+        "x": 1,
+        "y": 0,
+        "state": 0
+    },
+    "grid": [
+        [
+            3,
+            1,
+            1
+        ],
+        [
+            2,
+            2,
+            0
+        ],
+        [
+            1,
+            2,
+            3
+        ],
+        [
+            1,
+            1,
+            1
+        ]
+    ]
+}

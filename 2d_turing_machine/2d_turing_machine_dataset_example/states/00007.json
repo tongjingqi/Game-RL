@@ -1,0 +1,99 @@
+{
+    "rules": [
+        {
+            "state": 0,
+            "symbol": 0,
+            "new_state": 1,
+            "new_symbol": 1,
+            "direction": 3
+        },
+        {
+            "state": 0,
+            "symbol": 1,
+            "new_state": 0,
+            "new_symbol": 1,
+            "direction": 2
+        },
+        {
+            "state": 0,
+            "symbol": 2,
+            "new_state": 0,
+            "new_symbol": 2,
+            "direction": 0
+        },
+        {
+            "state": 1,
+            "symbol": 0,
+            "new_state": 1,
+            "new_symbol": 2,
+            "direction": 3
+        },
+        {
+            "state": 1,
+            "symbol": 1,
+            "new_state": 2,
+            "new_symbol": 2,
+            "direction": 3
+        },
+        {
+            "state": 1,
+            "symbol": 2,
+            "new_state": 0,
+            "new_symbol": 2,
+            "direction": 2
+        },
+        {
+            "state": 2,
+            "symbol": 0,
+            "new_state": 1,
+            "new_symbol": 1,
+            "direction": 3
+        },
+        {
+            "state": 2,
+            "symbol": 1,
+            "new_state": 2,
+            "new_symbol": 0,
+            "direction": 0
+        },
+        {
+            "state": 2,
+            "symbol": 2,
+            "new_state": 0,
+            "new_symbol": 0,
+            "direction": 2
+        }
+    ],
+    "head": {
+        "x": 2,
+        "y": 2,
+        "state": 0
+    },
+    "grid": [
+        [
+            0,
+            1,
+            1
+        ],
+        [
+            2,
+            2,
+            2
+        ],
+        [
+            2,
+            1,
+            2
+        ],
+        [
+            2,
+            0,
+            2
+        ],
+        [
+            2,
+            1,
+            0
+        ]
+    ]
+}

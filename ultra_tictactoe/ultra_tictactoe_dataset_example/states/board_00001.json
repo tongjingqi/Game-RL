@@ -1,0 +1,65 @@
+{
+    "rows": 3,
+    "cols": 3,
+    "middle_cell_count": 1,
+    "last_step": [
+        2,
+        2,
+        2,
+        3
+    ],
+    "best_next_step": [
+        2,
+        3,
+        2,
+        3
+    ],
+    "total_steps": 9,
+    "piece_info": [
+        {
+            "nine_grid": "(2, 1)",
+            "position": "(2, 3)",
+            "type": "X"
+        },
+        {
+            "nine_grid": "(2, 1)",
+            "position": "(3, 1)",
+            "type": "O"
+        },
+        {
+            "nine_grid": "(2, 2)",
+            "position": "(3, 3)",
+            "type": "X"
+        },
+        {
+            "nine_grid": "(2, 2)",
+            "position": "(2, 3)",
+            "type": "X"
+        },
+        {
+            "nine_grid": "(2, 3)",
+            "position": "(2, 1)",
+            "type": "O"
+        },
+        {
+            "nine_grid": "(2, 3)",
+            "position": "(2, 2)",
+            "type": "O"
+        },
+        {
+            "nine_grid": "(3, 1)",
+            "position": "(2, 1)",
+            "type": "X"
+        },
+        {
+            "nine_grid": "(3, 1)",
+            "position": "(2, 3)",
+            "type": "X"
+        },
+        {
+            "nine_grid": "(3, 3)",
+            "position": "(3, 1)",
+            "type": "O"
+        }
+    ]
+}

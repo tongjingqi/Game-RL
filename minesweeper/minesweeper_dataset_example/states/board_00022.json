@@ -1,0 +1,84 @@
+{
+    "rows": 4,
+    "cols": 4,
+    "mines": 3,
+    "mine_board": [
+        [
+            0,
+            0,
+            0,
+            0
+        ],
+        [
+            0,
+            1,
+            1,
+            1
+        ],
+        [
+            0,
+            2,
+            "M",
+            3
+        ],
+        [
+            0,
+            2,
+            "M",
+            "M"
+        ]
+    ],
+    "revealed": [
+        [
+            true,
+            true,
+            true,
+            true
+        ],
+        [
+            true,
+            true,
+            true,
+            true
+        ],
+        [
+            true,
+            true,
+            false,
+            false
+        ],
+        [
+            true,
+            true,
+            false,
+            false
+        ]
+    ],
+    "flagged": [
+        [
+            false,
+            false,
+            false,
+            false
+        ],
+        [
+            false,
+            false,
+            false,
+            false
+        ],
+        [
+            false,
+            false,
+            true,
+            false
+        ],
+        [
+            false,
+            false,
+            true,
+            false
+        ]
+    ],
+    "first_click": false
+}

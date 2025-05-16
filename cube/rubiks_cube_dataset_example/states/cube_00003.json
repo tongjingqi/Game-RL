@@ -1,0 +1,282 @@
+{
+    "faces": {
+        "U": [
+            [
+                0,
+                0,
+                4
+            ],
+            [
+                0,
+                0,
+                4
+            ],
+            [
+                0,
+                0,
+                4
+            ]
+        ],
+        "D": [
+            [
+                1,
+                1,
+                5
+            ],
+            [
+                1,
+                1,
+                5
+            ],
+            [
+                1,
+                1,
+                5
+            ]
+        ],
+        "L": [
+            [
+                2,
+                2,
+                2
+            ],
+            [
+                2,
+                2,
+                2
+            ],
+            [
+                2,
+                2,
+                2
+            ]
+        ],
+        "R": [
+            [
+                3,
+                3,
+                3
+            ],
+            [
+                3,
+                3,
+                3
+            ],
+            [
+                3,
+                3,
+                3
+            ]
+        ],
+        "F": [
+            [
+                4,
+                4,
+                1
+            ],
+            [
+                4,
+                4,
+                1
+            ],
+            [
+                4,
+                4,
+                1
+            ]
+        ],
+        "B": [
+            [
+                0,
+                5,
+                5
+            ],
+            [
+                0,
+                5,
+                5
+            ],
+            [
+                0,
+                5,
+                5
+            ]
+        ]
+    },
+    "colors": [
+        "yellow",
+        "white",
+        "orange",
+        "red",
+        "blue",
+        "green"
+    ],
+    "move_history": [
+        "R'"
+    ],
+    "face_states": {
+        "U": {
+            "colors": [
+                [
+                    "yellow",
+                    "yellow",
+                    "blue"
+                ],
+                [
+                    "yellow",
+                    "yellow",
+                    "blue"
+                ],
+                [
+                    "yellow",
+                    "yellow",
+                    "blue"
+                ]
+            ],
+            "dominant_color": "yellow",
+            "is_solved": false,
+            "matching_stickers": 6,
+            "color_counts": {
+                "yellow": 6,
+                "blue": 3
+            }
+        },
+        "D": {
+            "colors": [
+                [
+                    "white",
+                    "white",
+                    "green"
+                ],
+                [
+                    "white",
+                    "white",
+                    "green"
+                ],
+                [
+                    "white",
+                    "white",
+                    "green"
+                ]
+            ],
+            "dominant_color": "white",
+            "is_solved": false,
+            "matching_stickers": 6,
+            "color_counts": {
+                "white": 6,
+                "green": 3
+            }
+        },
+        "L": {
+            "colors": [
+                [
+                    "orange",
+                    "orange",
+                    "orange"
+                ],
+                [
+                    "orange",
+                    "orange",
+                    "orange"
+                ],
+                [
+                    "orange",
+                    "orange",
+                    "orange"
+                ]
+            ],
+            "dominant_color": "orange",
+            "is_solved": true,
+            "matching_stickers": 9,
+            "color_counts": {
+                "orange": 9
+            }
+        },
+        "R": {
+            "colors": [
+                [
+                    "red",
+                    "red",
+                    "red"
+                ],
+                [
+                    "red",
+                    "red",
+                    "red"
+                ],
+                [
+                    "red",
+                    "red",
+                    "red"
+                ]
+            ],
+            "dominant_color": "red",
+            "is_solved": true,
+            "matching_stickers": 9,
+            "color_counts": {
+                "red": 9
+            }
+        },
+        "F": {
+            "colors": [
+                [
+                    "blue",
+                    "blue",
+                    "white"
+                ],
+                [
+                    "blue",
+                    "blue",
+                    "white"
+                ],
+                [
+                    "blue",
+                    "blue",
+                    "white"
+                ]
+            ],
+            "dominant_color": "blue",
+            "is_solved": false,
+            "matching_stickers": 6,
+            "color_counts": {
+                "blue": 6,
+                "white": 3
+            }
+        },
+        "B": {
+            "colors": [
+                [
+                    "yellow",
+                    "green",
+                    "green"
+                ],
+                [
+                    "yellow",
+                    "green",
+                    "green"
+                ],
+                [
+                    "yellow",
+                    "green",
+                    "green"
+                ]
+            ],
+            "dominant_color": "green",
+            "is_solved": false,
+            "matching_stickers": 6,
+            "color_counts": {
+                "yellow": 3,
+                "green": 6
+            }
+        }
+    },
+    "is_solved": false,
+    "symbols": {
+        "yellow": 0,
+        "white": 1,
+        "orange": 2,
+        "red": 3,
+        "blue": 4,
+        "green": 5
+    }
+}

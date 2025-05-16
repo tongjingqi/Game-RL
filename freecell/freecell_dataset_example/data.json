@@ -1,0 +1,197 @@
+[
+    {
+        "data_id": "free_cell-specified_card-Easy-00001",
+        "qa_type": "StateInfo",
+        "question_id": 1,
+        "question_description": "Given a particular game state, the puzzle will present a question about which card is at a specific position in one of the cascade piles.Your task is to indentify the card in the options. ",
+        "image": "images/state_analysis_Easy_00001.png",
+        "state": "states/state_analysis_Easy_00001.json",
+        "plot_level": "Easy",
+        "qa_level": "Easy",
+        "question": "In this FreeCell game:\nwe have 8 cascade piles at sum, and their indexes are [0, 1, 2, 3, 4, 5, 6, 7]We have 4 freecell on the left top, and their indexes are 0,1,2,3.We have 4 foundation piles on the right top, and their indexes are 0,1,2,3.In FreeCell, cards can be moved according to specific rules: A card can be moved to a free cell if available, stacked in descending order alternating colors in cascade piles, or placed in foundation piles starting from Ace. Now, find the 2-th card from the top of cascade pile 0.the options are as follows:\n1.(Spade, 3)\n2.(Diamond, 6)\n3.(Club, 4)\n4.(Spade, Q)\n5.(Spade, 9)\n6.(Club, 2)\n7.(Club, 3)\n8.(Spade, 2)\n",
+        "answer": 1,
+        "analysis": "The selected pile0 contains (from top to bottom) the following cards:\n (Spade,10), (Spade,3), (Spade,Q), (Diamond,K), (Spade,2), (Diamond,10), (Heart,6). The 2-th card from the top is (Spade, 3).",
+        "options": [
+            "(Spade, 3)",
+            "(Diamond, 6)",
+            "(Club, 4)",
+            "(Spade, Q)",
+            "(Spade, 9)",
+            "(Club, 2)",
+            "(Club, 3)",
+            "(Spade, 2)"
+        ]
+    },
+    {
+        "data_id": "free_cell-valid_move-Easy-00001",
+        "qa_type": "StateInfo",
+        "question_id": 2,
+        "question_description": "Given the current game state, identify which of the following moves is valid according to FreeCell rules.",
+        "image": "images/state_analysis_Easy_00001.png",
+        "state": "states/state_analysis_Easy_00001.json",
+        "plot_level": "Easy",
+        "qa_level": "Medium",
+        "question": "In this FreeCell game:\nwe have 8 cascade piles at sum, and their indexes are [0, 1, 2, 3, 4, 5, 6, 7]We have 4 freecell on the left top, and their indexes are 0,1,2,3.We have 4 foundation piles on the right top, and their indexes are 0,1,2,3.In FreeCell, cards must be moved according to specific rules:\n1. Cards in cascade piles must be stacked in descending order with alternating colors\n2. Only one card can be moved at a time (unless using free cells)\n3. Foundation piles must be built up by suit from Ace to King\n4. Free cells can hold only one card each\n\nWhich of the following moves is valid in the current game state?the options are as follows:\n1.Move (Diamond,4) from FreeCell 0 to Foundation Heart\n2.Move (Heart,8) from FreeCell 2 to Foundation Diamond\n3.Move (Heart,9) from Cascade 5 to Cascade 0\n4.Move (Heart,8) from FreeCell 1 to Cascade 3\n",
+        "answer": 3,
+        "analysis": "Let's analyze each option in detail:\n\nOption 1: Move (Diamond,4) from FreeCell 0 to Foundation Heart\n• Moving card: 4 of Diamond (red)\n• From: FreeCell 0\n• To: Foundation Heart\nThis is an INVALID move because:\nFree Cell 0 doesn't hold the card (Diamond,4)\n- The foundation pile is empty but the card (4 of Diamond) is not an Ace\n- Foundation piles must start with Ace\n\nOption 2: Move (Heart,8) from FreeCell 2 to Foundation Diamond\n• Moving card: 8 of Heart (red)\n• From: FreeCell 2\n• To: Foundation Diamond\nThis is an INVALID move because:\nFree Cell 2 doesn't hold the card (Heart,8)\n- The foundation pile is empty but the card (8 of Heart) is not an Ace\n- Foundation piles must start with Ace\n\nOption 3: Move (Heart,9) from Cascade 5 to Cascade 0\n• Moving card: 9 of Heart (red)\n• From: Cascade 5\n• To: Cascade 0\nThis is the CORRECT move because:\n- Top card of destination pile: 10 of Spade (black)\n- Moving 9 of Heart (red) underneath\n- This follows cascade rules:\n  1. Colors alternate (red ≠ black)\n  2. Values descend (10 = 10)\n\nOption 4: Move (Heart,8) from FreeCell 1 to Cascade 3\n• Moving card: 8 of Heart (red)\n• From: FreeCell 1\n• To: Cascade 3\nThis is an INVALID move because:\nFree Cell 1 doesn't hold the card (Heart,8)\n- Top card of destination pile: 2 of Heart (red)\n- Attempting to move: 8 of Heart (red)\n- This violates cascade rules:\n  * Colors must alternate (both are red)\n  * Values must descend (difference is not 1)\n\n",
+        "options": [
+            "Move (Diamond,4) from FreeCell 0 to Foundation Heart",
+            "Move (Heart,8) from FreeCell 2 to Foundation Diamond",
+            "Move (Heart,9) from Cascade 5 to Cascade 0",
+            "Move (Heart,8) from FreeCell 1 to Cascade 3"
+        ]
+    },
+    {
+        "data_id": "free_cell-card_after_move-Easy-00001",
+        "qa_type": "ActionOutcome",
+        "question_id": 3,
+        "question_description": "Given a particular game state,a selected move and a selected cascade pile, the puzzle will present a question about which card is at the top of the cascade pile.\nYour task is to indentify the card in the options. ",
+        "image": "images/state_analysis_Easy_00001.png",
+        "state": "states/state_analysis_Easy_00001.json",
+        "plot_level": "Easy",
+        "qa_level": "Hard",
+        "question": "In this FreeCell game:\nwe have 8 cascade piles, and their indexes are [0, 1, 2, 3, 4, 5, 6, 7]We have 4 freecell on the left top, and their indexes are 0,1,2,3.We have 4 foundation piles on the right top, and their indexes are 0,1,2,3.In FreeCell, cards can be moved according to specific rules: A card can be moved to a free cell if available, stacked in descending order alternating colors in cascade piles, or placed in foundation piles starting from Ace. Now, find the top card from cascade pile 1 after moving the card (Diamond,1) from Cascade 1 to FreeCell 1.the options are as follows:\n1.(Heart, 7)\n2.(Diamond, 1)\n3.(Heart, 3)\n4.(Spade, 2)\n5.(Club, K)\n6.(Diamond, 4)\n7.(Club, J)\n8.(Heart, 1)\n",
+        "answer": 7,
+        "analysis": "We have 8 cascade piles.Their indexes are [0, 1, 2, 3, 4, 5, 6, 7].\nBefore the move,the state of the cascade_pile1 is:['(Club,12)', '(Spade,6)', '(Club,8)', '(Heart,11)', '(Heart,8)', '(Club,11)', '(Diamond,1)']. After moving the card (Diamond,A) from Cascade 1 to FreeCell 1,the top card of the cascade_pile 1 is (Club,11).and the top card of the FreeCell 1 becomes card (Club,J).the new state of the cascade_pile 1 is:\n['(Club,12)', '(Spade,6)', '(Club,8)', '(Heart,11)', '(Heart,8)', '(Club,11)']\n Therefore the top card of the cascade_pile 1 is (Club, J)",
+        "options": [
+            "(Heart, 7)",
+            "(Diamond, 1)",
+            "(Heart, 3)",
+            "(Spade, 2)",
+            "(Club, K)",
+            "(Diamond, 4)",
+            "(Club, J)",
+            "(Heart, 1)"
+        ]
+    },
+    {
+        "data_id": "free_cell-specified_card-Medium-00001",
+        "qa_type": "StateInfo",
+        "question_id": 1,
+        "question_description": "Given a particular game state, the puzzle will present a question about which card is at a specific position in one of the cascade piles.Your task is to indentify the card in the options. ",
+        "image": "images/state_analysis_Medium_00001.png",
+        "state": "states/state_analysis_Medium_00001.json",
+        "plot_level": "Medium",
+        "qa_level": "Easy",
+        "question": "In this FreeCell game:\nwe have 6 cascade piles at sum, and their indexes are [0, 1, 2, 3, 4, 5]We have 4 freecell on the left top, and their indexes are 0,1,2,3.We have 4 foundation piles on the right top, and their indexes are 0,1,2,3.In FreeCell, cards can be moved according to specific rules: A card can be moved to a free cell if available, stacked in descending order alternating colors in cascade piles, or placed in foundation piles starting from Ace. Now, find the 3-th card from the top of cascade pile 4.the options are as follows:\n1.(Heart, 8)\n2.(Club, 3)\n3.(Club, 7)\n4.(Heart, J)\n5.(Diamond, Q)\n6.(Club, 5)\n7.(Spade, 5)\n8.(Spade, 4)\n",
+        "answer": 2,
+        "analysis": "The selected pile4 contains (from top to bottom) the following cards:\n (Diamond,A), (Club,10), (Club,3), (Club,A), (Diamond,Q), (Spade,10), (Spade,7), (Club,Q). The 3-th card from the top is (Club, 3).",
+        "options": [
+            "(Heart, 8)",
+            "(Club, 3)",
+            "(Club, 7)",
+            "(Heart, J)",
+            "(Diamond, Q)",
+            "(Club, 5)",
+            "(Spade, 5)",
+            "(Spade, 4)"
+        ]
+    },
+    {
+        "data_id": "free_cell-valid_move-Medium-00001",
+        "qa_type": "StateInfo",
+        "question_id": 2,
+        "question_description": "Given the current game state, identify which of the following moves is valid according to FreeCell rules.",
+        "image": "images/state_analysis_Medium_00001.png",
+        "state": "states/state_analysis_Medium_00001.json",
+        "plot_level": "Medium",
+        "qa_level": "Medium",
+        "question": "In this FreeCell game:\nwe have 6 cascade piles at sum, and their indexes are [0, 1, 2, 3, 4, 5]We have 4 freecell on the left top, and their indexes are 0,1,2,3.We have 4 foundation piles on the right top, and their indexes are 0,1,2,3.In FreeCell, cards must be moved according to specific rules:\n1. Cards in cascade piles must be stacked in descending order with alternating colors\n2. Only one card can be moved at a time (unless using free cells)\n3. Foundation piles must be built up by suit from Ace to King\n4. Free cells can hold only one card each\n\nWhich of the following moves is valid in the current game state?the options are as follows:\n1.Move (Spade,7) from FreeCell 3 to Foundation Diamond\n2.Move (Diamond,13) from Cascade 0 to FreeCell 1\n3.Move (Diamond,1) from Cascade 4 to FreeCell 0\n4.Move (Diamond,4) from FreeCell 2 to Cascade 5\n",
+        "answer": 3,
+        "analysis": "Let's analyze each option in detail:\n\nOption 1: Move (Spade,7) from FreeCell 3 to Foundation Diamond\n• Moving card: 7 of Spade (black)\n• From: FreeCell 3\n• To: Foundation Diamond\nThis is an INVALID move because:\nFree Cell 3 doesn't hold the card (Spade,7)\n- The foundation pile is empty but the card (7 of Spade) is not an Ace\n- Foundation piles must start with Ace\n\nOption 2: Move (Diamond,13) from Cascade 0 to FreeCell 1\n• Moving card: 13 of Diamond (red)\n• From: Cascade 0\n• To: FreeCell 1\nThis is an INVALID move because:\ncard (Diamond,13) is not the top card of Cascade  pile 0\n\nOption 3: Move (Diamond,1) from Cascade 4 to FreeCell 0\n• Moving card: 1 of Diamond (red)\n• From: Cascade 4\n• To: FreeCell 0\nThis is the CORRECT move because:\n- Free Cell 0 is empty\n- Any single card can be moved to an empty free cell\n- The 1 of Diamond is a single card move\n\nOption 4: Move (Diamond,4) from FreeCell 2 to Cascade 5\n• Moving card: 4 of Diamond (red)\n• From: FreeCell 2\n• To: Cascade 5\nThis is an INVALID move because:\nFree Cell 2 doesn't hold the card (Diamond,4)\n- Top card of destination pile: 2 of Heart (red)\n- Attempting to move: 4 of Diamond (red)\n- This violates cascade rules:\n  * Colors must alternate (both are red)\n  * Values must descend (difference is not 1)\n\n",
+        "options": [
+            "Move (Spade,7) from FreeCell 3 to Foundation Diamond",
+            "Move (Diamond,13) from Cascade 0 to FreeCell 1",
+            "Move (Diamond,1) from Cascade 4 to FreeCell 0",
+            "Move (Diamond,4) from FreeCell 2 to Cascade 5"
+        ]
+    },
+    {
+        "data_id": "free_cell-card_after_move-Medium-00001",
+        "qa_type": "ActionOutcome",
+        "question_id": 3,
+        "question_description": "Given a particular game state,a selected move and a selected cascade pile, the puzzle will present a question about which card is at the top of the cascade pile.\nYour task is to indentify the card in the options. ",
+        "image": "images/state_analysis_Medium_00001.png",
+        "state": "states/state_analysis_Medium_00001.json",
+        "plot_level": "Medium",
+        "qa_level": "Hard",
+        "question": "In this FreeCell game:\nwe have 6 cascade piles, and their indexes are [0, 1, 2, 3, 4, 5]We have 4 freecell on the left top, and their indexes are 0,1,2,3.We have 4 foundation piles on the right top, and their indexes are 0,1,2,3.In FreeCell, cards can be moved according to specific rules: A card can be moved to a free cell if available, stacked in descending order alternating colors in cascade piles, or placed in foundation piles starting from Ace. Now, find the top card from cascade pile 4 after moving the card (Diamond,1) from Cascade 4 to FreeCell 0.the options are as follows:\n1.(Diamond, K)\n2.(Spade, 2)\n3.(Club, K)\n4.(Heart, Q)\n5.(Club, 10)\n6.(Club, 5)\n7.(Heart, 2)\n8.(Diamond, 9)\n",
+        "answer": 5,
+        "analysis": "We have 6 cascade piles.Their indexes are [0, 1, 2, 3, 4, 5].\nBefore the move,the state of the cascade_pile4 is:['(Club,12)', '(Spade,7)', '(Spade,10)', '(Diamond,12)', '(Club,1)', '(Club,3)', '(Club,10)', '(Diamond,1)']. After moving the card (Diamond,A) from Cascade 4 to FreeCell 0,the top card of the cascade_pile 4 is (Club,10).and the top card of the FreeCell 0 becomes card (Club,10).the new state of the cascade_pile 4 is:\n['(Club,12)', '(Spade,7)', '(Spade,10)', '(Diamond,12)', '(Club,1)', '(Club,3)', '(Club,10)']\n Therefore the top card of the cascade_pile 4 is (Club, 10)",
+        "options": [
+            "(Diamond, K)",
+            "(Spade, 2)",
+            "(Club, K)",
+            "(Heart, Q)",
+            "(Club, 10)",
+            "(Club, 5)",
+            "(Heart, 2)",
+            "(Diamond, 9)"
+        ]
+    },
+    {
+        "data_id": "free_cell-specified_card-Hard-00001",
+        "qa_type": "StateInfo",
+        "question_id": 1,
+        "question_description": "Given a particular game state, the puzzle will present a question about which card is at a specific position in one of the cascade piles.Your task is to indentify the card in the options. ",
+        "image": "images/state_analysis_Hard_00001.png",
+        "state": "states/state_analysis_Hard_00001.json",
+        "plot_level": "Hard",
+        "qa_level": "Easy",
+        "question": "In this FreeCell game:\nwe have 4 cascade piles at sum, and their indexes are [0, 1, 2, 3]We have 4 freecell on the left top, and their indexes are 0,1,2,3.We have 4 foundation piles on the right top, and their indexes are 0,1,2,3.In FreeCell, cards can be moved according to specific rules: A card can be moved to a free cell if available, stacked in descending order alternating colors in cascade piles, or placed in foundation piles starting from Ace. Now, find the 3-th card from the top of cascade pile 1.the options are as follows:\n1.(Club, 4)\n2.(Spade, 3)\n3.(Heart, Q)\n4.(Spade, Q)\n5.(Club, 7)\n6.(Heart, 3)\n7.(Diamond, 3)\n8.(Diamond, J)\n",
+        "answer": 8,
+        "analysis": "The selected pile1 contains (from top to bottom) the following cards:\n (Club,Q), (Club,4), (Diamond,J), (Heart,9), (Club,9), (Diamond,K), (Heart,4), (Heart,K), (Spade,A), (Spade,4), (Diamond,7), (Club,K), (Spade,10). The 3-th card from the top is (Diamond, J).",
+        "options": [
+            "(Club, 4)",
+            "(Spade, 3)",
+            "(Heart, Q)",
+            "(Spade, Q)",
+            "(Club, 7)",
+            "(Heart, 3)",
+            "(Diamond, 3)",
+            "(Diamond, J)"
+        ]
+    },
+    {
+        "data_id": "free_cell-valid_move-Hard-00001",
+        "qa_type": "StateInfo",
+        "question_id": 2,
+        "question_description": "Given the current game state, identify which of the following moves is valid according to FreeCell rules.",
+        "image": "images/state_analysis_Hard_00001.png",
+        "state": "states/state_analysis_Hard_00001.json",
+        "plot_level": "Hard",
+        "qa_level": "Medium",
+        "question": "In this FreeCell game:\nwe have 4 cascade piles at sum, and their indexes are [0, 1, 2, 3]We have 4 freecell on the left top, and their indexes are 0,1,2,3.We have 4 foundation piles on the right top, and their indexes are 0,1,2,3.In FreeCell, cards must be moved according to specific rules:\n1. Cards in cascade piles must be stacked in descending order with alternating colors\n2. Only one card can be moved at a time (unless using free cells)\n3. Foundation piles must be built up by suit from Ace to King\n4. Free cells can hold only one card each\n\nWhich of the following moves is valid in the current game state?the options are as follows:\n1.Move (Spade,2) from Cascade 0 to Cascade 3\n2.Move (Club,12) from Cascade 1 to FreeCell 3\n3.Move (Heart,8) from Cascade 0 to Cascade 3\n4.Move (Spade,4) from Cascade 1 to Foundation Club\n",
+        "answer": 2,
+        "analysis": "Let's analyze each option in detail:\n\nOption 1: Move (Spade,2) from Cascade 0 to Cascade 3\n• Moving card: 2 of Spade (black)\n• From: Cascade 0\n• To: Cascade 3\nThis is an INVALID move because:\ncard (Spade,2) is not the top card of Cascade  pile 0\n- Top card of destination pile: 11 of Spade (black)\n- Attempting to move: 2 of Spade (black)\n- This violates cascade rules:\n  * Colors must alternate (both are black)\n  * Values must descend (difference is not 1)\n\nOption 2: Move (Club,12) from Cascade 1 to FreeCell 3\n• Moving card: 12 of Club (black)\n• From: Cascade 1\n• To: FreeCell 3\nThis is the CORRECT move because:\n- Free Cell 3 is empty\n- Any single card can be moved to an empty free cell\n- The 12 of Club is a single card move\n\nOption 3: Move (Heart,8) from Cascade 0 to Cascade 3\n• Moving card: 8 of Heart (red)\n• From: Cascade 0\n• To: Cascade 3\nThis is an INVALID move because:\ncard (Heart,8) is not the top card of Cascade  pile 0\n- Top card of destination pile: 11 of Spade (black)\n- Attempting to move: 8 of Heart (red)\n- This violates cascade rules:\n  * Values must descend (difference is not 1)\n\nOption 4: Move (Spade,4) from Cascade 1 to Foundation Club\n• Moving card: 4 of Spade (black)\n• From: Cascade 1\n• To: Foundation Club\nThis is an INVALID move because:\ncard (Spade,4) is not the top card of Cascade  pile 1\n- The foundation pile is empty but the card (4 of Spade) is not an Ace\n- Foundation piles must start with Ace\n\n",
+        "options": [
+            "Move (Spade,2) from Cascade 0 to Cascade 3",
+            "Move (Club,12) from Cascade 1 to FreeCell 3",
+            "Move (Heart,8) from Cascade 0 to Cascade 3",
+            "Move (Spade,4) from Cascade 1 to Foundation Club"
+        ]
+    },
+    {
+        "data_id": "free_cell-card_after_move-Hard-00001",
+        "qa_type": "ActionOutcome",
+        "question_id": 3,
+        "question_description": "Given a particular game state,a selected move and a selected cascade pile, the puzzle will present a question about which card is at the top of the cascade pile.\nYour task is to indentify the card in the options. ",
+        "image": "images/state_analysis_Hard_00001.png",
+        "state": "states/state_analysis_Hard_00001.json",
+        "plot_level": "Hard",
+        "qa_level": "Hard",
+        "question": "In this FreeCell game:\nwe have 4 cascade piles, and their indexes are [0, 1, 2, 3]We have 4 freecell on the left top, and their indexes are 0,1,2,3.We have 4 foundation piles on the right top, and their indexes are 0,1,2,3.In FreeCell, cards can be moved according to specific rules: A card can be moved to a free cell if available, stacked in descending order alternating colors in cascade piles, or placed in foundation piles starting from Ace. Now, find the top card from cascade pile 2 after moving the card (Diamond,4) from Cascade 2 to FreeCell 2.the options are as follows:\n1.(Spade, K)\n2.(Diamond, 7)\n3.(Heart, 1)\n4.(Diamond, 5)\n5.(Club, J)\n6.(Spade, 8)\n7.(Club, Q)\n8.(Spade, 6)\n",
+        "answer": 5,
+        "analysis": "We have 4 cascade piles.Their indexes are [0, 1, 2, 3].\nBefore the move,the state of the cascade_pile2 is:['(Spade,2)', '(Heart,11)', '(Club,7)', '(Spade,6)', '(Spade,3)', '(Diamond,1)', '(Heart,5)', '(Diamond,9)', '(Diamond,8)', '(Heart,6)', '(Diamond,3)', '(Club,11)', '(Diamond,4)']. After moving the card (Diamond,4) from Cascade 2 to FreeCell 2,the top card of the cascade_pile 2 is (Club,11).and the top card of the FreeCell 2 becomes card (Club,J).the new state of the cascade_pile 2 is:\n['(Spade,2)', '(Heart,11)', '(Club,7)', '(Spade,6)', '(Spade,3)', '(Diamond,1)', '(Heart,5)', '(Diamond,9)', '(Diamond,8)', '(Heart,6)', '(Diamond,3)', '(Club,11)']\n Therefore the top card of the cascade_pile 2 is (Club, J)",
+        "options": [
+            "(Spade, K)",
+            "(Diamond, 7)",
+            "(Heart, 1)",
+            "(Diamond, 5)",
+            "(Club, J)",
+            "(Spade, 8)",
+            "(Club, Q)",
+            "(Spade, 6)"
+        ]
+    }
+]

@@ -1,0 +1,650 @@
+{
+    "stock": [
+        {
+            "code": 48,
+            "rank": 10,
+            "suit": "spade",
+            "faceUp": false
+        },
+        {
+            "code": 59,
+            "rank": 8,
+            "suit": "spade",
+            "faceUp": false
+        },
+        {
+            "code": 22,
+            "rank": 10,
+            "suit": "spade",
+            "faceUp": false
+        },
+        {
+            "code": 58,
+            "rank": 7,
+            "suit": "spade",
+            "faceUp": false
+        },
+        {
+            "code": 101,
+            "rank": 11,
+            "suit": "spade",
+            "faceUp": false
+        },
+        {
+            "code": 90,
+            "rank": 13,
+            "suit": "spade",
+            "faceUp": false
+        },
+        {
+            "code": 18,
+            "rank": 6,
+            "suit": "spade",
+            "faceUp": false
+        },
+        {
+            "code": 29,
+            "rank": 4,
+            "suit": "spade",
+            "faceUp": false
+        },
+        {
+            "code": 14,
+            "rank": 2,
+            "suit": "spade",
+            "faceUp": false
+        },
+        {
+            "code": 16,
+            "rank": 4,
+            "suit": "spade",
+            "faceUp": false
+        },
+        {
+            "code": 79,
+            "rank": 2,
+            "suit": "spade",
+            "faceUp": false
+        },
+        {
+            "code": 7,
+            "rank": 8,
+            "suit": "spade",
+            "faceUp": false
+        },
+        {
+            "code": 42,
+            "rank": 4,
+            "suit": "spade",
+            "faceUp": false
+        },
+        {
+            "code": 12,
+            "rank": 13,
+            "suit": "spade",
+            "faceUp": false
+        },
+        {
+            "code": 11,
+            "rank": 12,
+            "suit": "spade",
+            "faceUp": false
+        },
+        {
+            "code": 56,
+            "rank": 5,
+            "suit": "spade",
+            "faceUp": false
+        },
+        {
+            "code": 57,
+            "rank": 6,
+            "suit": "spade",
+            "faceUp": false
+        },
+        {
+            "code": 91,
+            "rank": 1,
+            "suit": "spade",
+            "faceUp": false
+        },
+        {
+            "code": 33,
+            "rank": 8,
+            "suit": "spade",
+            "faceUp": false
+        },
+        {
+            "code": 49,
+            "rank": 11,
+            "suit": "spade",
+            "faceUp": false
+        }
+    ],
+    "waste": [
+        [
+            {
+                "code": 5,
+                "rank": 6,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 6,
+                "rank": 7,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 8,
+                "rank": 9,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 0,
+                "rank": 1,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 92,
+                "rank": 2,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 54,
+                "rank": 3,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 81,
+                "rank": 4,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 95,
+                "rank": 5,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 66,
+                "rank": 2,
+                "suit": "spade",
+                "faceUp": true
+            }
+        ],
+        [
+            {
+                "code": 31,
+                "rank": 6,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 2,
+                "rank": 3,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 76,
+                "rank": 12,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 80,
+                "rank": 3,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 10,
+                "rank": 11,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 86,
+                "rank": 9,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 37,
+                "rank": 12,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 43,
+                "rank": 5,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 24,
+                "rank": 12,
+                "suit": "spade",
+                "faceUp": true
+            }
+        ],
+        [
+            {
+                "code": 9,
+                "rank": 10,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 39,
+                "rank": 1,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 82,
+                "rank": 5,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 89,
+                "rank": 12,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 69,
+                "rank": 5,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 19,
+                "rank": 7,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 35,
+                "rank": 10,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 99,
+                "rank": 9,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 67,
+                "rank": 3,
+                "suit": "spade",
+                "faceUp": true
+            }
+        ],
+        [
+            {
+                "code": 23,
+                "rank": 11,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 50,
+                "rank": 12,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 74,
+                "rank": 10,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 71,
+                "rank": 7,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 93,
+                "rank": 3,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 26,
+                "rank": 1,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 15,
+                "rank": 3,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 63,
+                "rank": 12,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 4,
+                "rank": 5,
+                "suit": "spade",
+                "faceUp": true
+            }
+        ],
+        [
+            {
+                "code": 1,
+                "rank": 2,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 98,
+                "rank": 8,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 27,
+                "rank": 2,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 55,
+                "rank": 4,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 34,
+                "rank": 9,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 70,
+                "rank": 6,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 28,
+                "rank": 3,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 36,
+                "rank": 11,
+                "suit": "spade",
+                "faceUp": true
+            }
+        ],
+        [
+            {
+                "code": 60,
+                "rank": 9,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 47,
+                "rank": 9,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 62,
+                "rank": 11,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 17,
+                "rank": 5,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 94,
+                "rank": 4,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 100,
+                "rank": 10,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 25,
+                "rank": 13,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 65,
+                "rank": 1,
+                "suit": "spade",
+                "faceUp": true
+            }
+        ],
+        [
+            {
+                "code": 32,
+                "rank": 7,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 78,
+                "rank": 1,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 53,
+                "rank": 2,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 72,
+                "rank": 8,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 64,
+                "rank": 13,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 85,
+                "rank": 8,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 97,
+                "rank": 7,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 61,
+                "rank": 10,
+                "suit": "spade",
+                "faceUp": true
+            }
+        ],
+        [
+            {
+                "code": 46,
+                "rank": 8,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 44,
+                "rank": 6,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 84,
+                "rank": 7,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 20,
+                "rank": 8,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 21,
+                "rank": 9,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 51,
+                "rank": 13,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 96,
+                "rank": 6,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 52,
+                "rank": 1,
+                "suit": "spade",
+                "faceUp": true
+            }
+        ],
+        [
+            {
+                "code": 3,
+                "rank": 4,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 30,
+                "rank": 5,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 13,
+                "rank": 1,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 40,
+                "rank": 2,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 68,
+                "rank": 4,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 102,
+                "rank": 12,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 75,
+                "rank": 11,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 77,
+                "rank": 13,
+                "suit": "spade",
+                "faceUp": true
+            }
+        ],
+        [
+            {
+                "code": 88,
+                "rank": 11,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 45,
+                "rank": 7,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 73,
+                "rank": 9,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 41,
+                "rank": 3,
+                "suit": "spade",
+                "faceUp": false
+            },
+            {
+                "code": 87,
+                "rank": 10,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 38,
+                "rank": 13,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 103,
+                "rank": 13,
+                "suit": "spade",
+                "faceUp": true
+            },
+            {
+                "code": 83,
+                "rank": 6,
+                "suit": "spade",
+                "faceUp": true
+            }
+        ]
+    ]
+}
