@@ -1,0 +1,350 @@
+[
+  {
+    "data_id": "maze_00000_01",
+    "qa_type": "StateInfo",
+    "question_id": 1,
+    "question_description": "Ask for the position of player.",
+    "image": "images/image_00000.png",
+    "state": "states/state_00000.json",
+    "plot_level": "Easy",
+    "qa_level": "Easy",
+    "question": "**Rules:**\n1. This is a maze mini-game.The player needs to navigate around obstacles to reach the destination and achieve victory.\n2. The red circle represents the player, the green block is the goal and the blue blocks are obstacles.\n3. The player can only move within the white blocks.\n4. The coordinates are given in the format (row, col), where row represents the vertical position and col represents the horizontal position.\n\n**Question:** Which of the following are the coordinates of the player?\n\n**Options:**\nA. (4, 6)\nB. (5, 5)\nC. (3, 5)\nD. (4, 4)\nE. (4, 5)",
+    "answer": "E",
+    "options": [
+      "A. (4, 6)",
+      "B. (5, 5)",
+      "C. (3, 5)",
+      "D. (4, 4)",
+      "E. (4, 5)"
+    ],
+    "analysis": "Take a look at the game screen, the red circle represents the player.\nThe coordinates of player are (4, 5), so the right option is E"
+  },
+  {
+    "data_id": "maze_00000_02",
+    "qa_type": "StateInfo",
+    "question_id": 2,
+    "question_description": "Ask for the position of goal within the maze.",
+    "image": "images/image_00000.png",
+    "state": "states/state_00000.json",
+    "plot_level": "Easy",
+    "qa_level": "Easy",
+    "question": "**Rules:**\n1. This is a maze mini-game.The player needs to navigate around obstacles to reach the destination and achieve victory.\n2. The red circle represents the player, the green block is the goal and the blue blocks are obstacles.\n3. The player can only move within the white blocks.\n4. The coordinates are given in the format (row, col), where row represents the vertical position and col represents the horizontal position.\n\n**Question:** Which of the following are the coordinates of the goal?\"\n\n**Optoins:**\nA. (7, 7)\nB. (7, 8)\nC. (6, 7)\nD. (7, 6)\nE. (8, 7)",
+    "answer": "A",
+    "options": [
+      "A. (7, 7)",
+      "B. (7, 8)",
+      "C. (6, 7)",
+      "D. (7, 6)",
+      "E. (8, 7)"
+    ],
+    "analysis": "Take a look at the game screen, the green block represents the goal.\nThe coordinates of goal are (7, 7), so the right option is A"
+  },
+  {
+    "data_id": "maze_00000_06",
+    "qa_type": "ActionOutcome",
+    "question_id": 6,
+    "question_description": "The position after moving.",
+    "image": "images/image_00000.png",
+    "state": "states/state_00000.json",
+    "plot_level": "Easy",
+    "qa_level": "Medium",
+    "question": "**Rules:**\n1. This is a maze mini-game.The player needs to navigate around obstacles to reach the destination and achieve victory.\n2. The red circle represents the player, the green block is the goal and the blue blocks are obstacles.\n3. The player can only move within the white blocks.\n4. The coordinates are given in the format (row, col), where row represents the vertical position and col represents the horizontal position.\n\n**Question:** What are the coordinates of player after moving down?\n\n**Options:**\nA. (4, 6)\nB. (5, 5)\nC. (3, 5)\nD. (4, 4)\nE. (4, 5)",
+    "answer": "B",
+    "options": [
+      "A. (4, 6)",
+      "B. (5, 5)",
+      "C. (3, 5)",
+      "D. (4, 4)",
+      "E. (4, 5)"
+    ],
+    "analysis": "Observe the screen, the position of player is (4,5). After moving down, the player is in (5, 5). Therefore, the right option is B"
+  },
+  {
+    "data_id": "maze_00000_05",
+    "qa_type": "StateInfo",
+    "question_id": 5,
+    "question_description": "Ask for the available directions to move are currently.",
+    "image": "images/image_00000.png",
+    "state": "states/state_00000.json",
+    "plot_level": "Easy",
+    "qa_level": "Easy",
+    "question": "**Rules:**\n1. This is a maze mini-game.The player needs to navigate around obstacles to reach the destination and achieve victory.\n2. The red circle represents the player, the green block is the goal and the blue blocks are obstacles.\n3. The player can only move within the white blocks.\n4. The coordinates are given in the format (row, col), where row represents the vertical position and col represents the horizontal position.\n\n**Question:** Which directions are available to move now?\n\n**Options:**\nA. up\nB. down\nC. up, down\nD. up, right\nE. left, right\nF. up, down, right\nG. down, left, right\nH. up, down, left, right",
+    "answer": "C",
+    "options": [
+      "A. up",
+      "B. down",
+      "C. up, down",
+      "D. up, right",
+      "E. left, right",
+      "F. up, down, right",
+      "G. down, left, right",
+      "H. up, down, left, right"
+    ],
+    "analysis": "The player is on (4, 5), and (3, 5) (5, 5) is empty. The player can move up, down. Therefore, The option is C"
+  },
+  {
+    "data_id": "maze_00000_03",
+    "qa_type": "TransitionPath",
+    "question_id": 3,
+    "question_description": "Find the path to the goal",
+    "image": "images/image_00000.png",
+    "state": "states/state_00000.json",
+    "plot_level": "Easy",
+    "qa_level": "Medium",
+    "question": "**Rules:**\n1. This is a maze mini-game.The player needs to navigate around obstacles to reach the destination and achieve victory.\n2. The red circle represents the player, the green block is the goal and the blue blocks are obstacles.\n3. The player can only move within the white blocks.\n4. The coordinates are given in the format (row, col), where row represents the vertical position and col represents the horizontal position.\n\n**Question:** Which sequence of movements will allow the player to reach the destination?\n\n**Options:**\nA. left, left, left, right, right, left\nB. down, right, right, down, down\nC. down, down, left, up, right, down\nD. up, up, up, right, up, down\nE. left, down, left, right, down, left",
+    "answer": "B",
+    "options": [
+      "A. left, left, left, right, right, left",
+      "B. down, right, right, down, down",
+      "C. down, down, left, up, right, down",
+      "D. up, up, up, right, up, down",
+      "E. left, down, left, right, down, left"
+    ],
+    "analysis": "Let’s figure out the path to the goal step by step.\nStep 1. Go down, from (4, 5) to (5, 5). \nStep 2. Go right, from (5, 5) to (5, 6). \nStep 3. Go right, from (5, 6) to (5, 7). \nStep 4. Go down, from (5, 7) to (6, 7). \nStep 5. Go down, from (6, 7) to (7, 7). Achieved the goal!\n\nTherefore, the right sequence of movements are: down, right, right, down, down\nThe right option is B"
+  },
+  {
+    "data_id": "maze_00000_04",
+    "qa_type": "TransitionPath",
+    "question_id": 4,
+    "question_description": "Count how many turns it takes to reach the finish.",
+    "image": "images/image_00000.png",
+    "state": "states/state_00000.json",
+    "plot_level": "Easy",
+    "qa_level": "Hard",
+    "question": "**Rules:**\n1. This is a maze mini-game.The player needs to navigate around obstacles to reach the destination and achieve victory.\n2. The red circle represents the player, the green block is the goal and the blue blocks are obstacles.\n3. The player can only move within the white blocks.\n4. The coordinates are given in the format (row, col), where row represents the vertical position and col represents the horizontal position.\n\n**Question:** Find the path to the finish and count the number of turns it takes to get there. You only need to provide one number.",
+    "answer": "2",
+    "analysis": "First,Let’s figure out the path to the goal step by step.\nStep 1. Go down, from (4, 5) to (5, 5). \nStep 2. Go right, from (5, 5) to (5, 6). \nStep 3. Go right, from (5, 6) to (5, 7). \nStep 4. Go down, from (5, 7) to (6, 7). \nStep 5. Go down, from (6, 7) to (7, 7). Achieved the goal!Therefore, the path is: (4, 5), (5, 5), (5, 6), (5, 7), (6, 7), (7, 7)\n\nThen,Let\u0027s count the number of turns step by step.\nStep 2. Turn detected: from down to right.\nStep 3. No turn detected.\nStep 4. Turn detected: from right to down.\nStep 5. No turn detected.\n\nIn summary, the total number of turns is 2"
+  },
+  {
+    "data_id": "maze_00001_01",
+    "qa_type": "StateInfo",
+    "question_id": 1,
+    "question_description": "Ask for the position of player.",
+    "image": "images/image_00001.png",
+    "state": "states/state_00001.json",
+    "plot_level": "Medium",
+    "qa_level": "Easy",
+    "question": "**Rules:**\n1. This is a maze mini-game.The player needs to navigate around obstacles to reach the destination and achieve victory.\n2. The red circle represents the player, the green block is the goal and the blue blocks are obstacles.\n3. The player can only move within the white blocks.\n4. The coordinates are given in the format (row, col), where row represents the vertical position and col represents the horizontal position.\n\n**Question:** Which of the following are the coordinates of the player?\n\n**Options:**\nA. (10, 9)\nB. (9, 9)\nC. (9, 10)\nD. (8, 9)\nE. (9, 8)",
+    "answer": "B",
+    "options": [
+      "A. (10, 9)",
+      "B. (9, 9)",
+      "C. (9, 10)",
+      "D. (8, 9)",
+      "E. (9, 8)"
+    ],
+    "analysis": "Take a look at the game screen, the red circle represents the player.\nThe coordinates of player are (9, 9), so the right option is B"
+  },
+  {
+    "data_id": "maze_00001_02",
+    "qa_type": "StateInfo",
+    "question_id": 2,
+    "question_description": "Ask for the position of goal within the maze.",
+    "image": "images/image_00001.png",
+    "state": "states/state_00001.json",
+    "plot_level": "Medium",
+    "qa_level": "Easy",
+    "question": "**Rules:**\n1. This is a maze mini-game.The player needs to navigate around obstacles to reach the destination and achieve victory.\n2. The red circle represents the player, the green block is the goal and the blue blocks are obstacles.\n3. The player can only move within the white blocks.\n4. The coordinates are given in the format (row, col), where row represents the vertical position and col represents the horizontal position.\n\n**Question:** Which of the following are the coordinates of the goal?\"\n\n**Optoins:**\nA. (2, 1)\nB. (3, 1)\nC. (3, 2)\nD. (4, 1)\nE. (3, 0)",
+    "answer": "B",
+    "options": [
+      "A. (2, 1)",
+      "B. (3, 1)",
+      "C. (3, 2)",
+      "D. (4, 1)",
+      "E. (3, 0)"
+    ],
+    "analysis": "Take a look at the game screen, the green block represents the goal.\nThe coordinates of goal are (3, 1), so the right option is B"
+  },
+  {
+    "data_id": "maze_00001_06",
+    "qa_type": "ActionOutcome",
+    "question_id": 6,
+    "question_description": "The position after moving.",
+    "image": "images/image_00001.png",
+    "state": "states/state_00001.json",
+    "plot_level": "Medium",
+    "qa_level": "Medium",
+    "question": "**Rules:**\n1. This is a maze mini-game.The player needs to navigate around obstacles to reach the destination and achieve victory.\n2. The red circle represents the player, the green block is the goal and the blue blocks are obstacles.\n3. The player can only move within the white blocks.\n4. The coordinates are given in the format (row, col), where row represents the vertical position and col represents the horizontal position.\n\n**Question:** What are the coordinates of player after moving left?\n\n**Options:**\nA. (10, 9)\nB. (9, 9)\nC. (9, 10)\nD. (9, 8)\nE. (8, 9)",
+    "answer": "D",
+    "options": [
+      "A. (10, 9)",
+      "B. (9, 9)",
+      "C. (9, 10)",
+      "D. (9, 8)",
+      "E. (8, 9)"
+    ],
+    "analysis": "Observe the screen, the position of player is (9,9). After moving left, the player is in (9, 8). Therefore, the right option is D"
+  },
+  {
+    "data_id": "maze_00001_05",
+    "qa_type": "StateInfo",
+    "question_id": 5,
+    "question_description": "Ask for the available directions to move are currently.",
+    "image": "images/image_00001.png",
+    "state": "states/state_00001.json",
+    "plot_level": "Medium",
+    "qa_level": "Easy",
+    "question": "**Rules:**\n1. This is a maze mini-game.The player needs to navigate around obstacles to reach the destination and achieve victory.\n2. The red circle represents the player, the green block is the goal and the blue blocks are obstacles.\n3. The player can only move within the white blocks.\n4. The coordinates are given in the format (row, col), where row represents the vertical position and col represents the horizontal position.\n\n**Question:** Which directions are available to move now?\n\n**Options:**\nA. left\nB. down\nC. right\nD. up, left\nE. left, right\nF. up, down, right\nG. down, left, right\nH. up, down, left, right",
+    "answer": "A",
+    "options": [
+      "A. left",
+      "B. down",
+      "C. right",
+      "D. up, left",
+      "E. left, right",
+      "F. up, down, right",
+      "G. down, left, right",
+      "H. up, down, left, right"
+    ],
+    "analysis": "The player is on (9, 9), and (9, 8) is empty. The player can move left. Therefore, The option is A"
+  },
+  {
+    "data_id": "maze_00001_03",
+    "qa_type": "TransitionPath",
+    "question_id": 3,
+    "question_description": "Find the path to the goal",
+    "image": "images/image_00001.png",
+    "state": "states/state_00001.json",
+    "plot_level": "Medium",
+    "qa_level": "Medium",
+    "question": "**Rules:**\n1. This is a maze mini-game.The player needs to navigate around obstacles to reach the destination and achieve victory.\n2. The red circle represents the player, the green block is the goal and the blue blocks are obstacles.\n3. The player can only move within the white blocks.\n4. The coordinates are given in the format (row, col), where row represents the vertical position and col represents the horizontal position.\n\n**Question:** Which sequence of movements will allow the player to reach the destination?\n\n**Options:**\nA. left, up, right, up, up, up, right, left, right, up, up, down, left, left, down, up, left, left, left, down, right, down, down, left, right, left, left, down, down, down, down, up, left, right, right\nB. right, down, left, up, up, down, left, up, down, left, left, right, up, up, down, up, left, down, left, right, left, up, left, right, up, down, right, down, right, right, down, right, left, up, down\nC. left, left, right, up, right, left, up, right, up, up, down, down, down, left, down, down, left, up, left, up, down, down, down, right, down, up, left, down, right, left, up, right, left, right, down\nD. right, right, up, left, left, down, up, up, up, left, left, up, right, left, left, down, down, left, right, down, down, left, right, right, up, right, left, left, up, right, right, left, down, up, right\nE. left, left, up, up, right, right, up, up, up, up, left, left, up, up, left, left, down, down, down, down, down, down, left, left, down, down, left, left, up, up, up, up, up, up",
+    "answer": "E",
+    "options": [
+      "A. left, up, right, up, up, up, right, left, right, up, up, down, left, left, down, up, left, left, left, down, right, down, down, left, right, left, left, down, down, down, down, up, left, right, right",
+      "B. right, down, left, up, up, down, left, up, down, left, left, right, up, up, down, up, left, down, left, right, left, up, left, right, up, down, right, down, right, right, down, right, left, up, down",
+      "C. left, left, right, up, right, left, up, right, up, up, down, down, down, left, down, down, left, up, left, up, down, down, down, right, down, up, left, down, right, left, up, right, left, right, down",
+      "D. right, right, up, left, left, down, up, up, up, left, left, up, right, left, left, down, down, left, right, down, down, left, right, right, up, right, left, left, up, right, right, left, down, up, right",
+      "E. left, left, up, up, right, right, up, up, up, up, left, left, up, up, left, left, down, down, down, down, down, down, left, left, down, down, left, left, up, up, up, up, up, up"
+    ],
+    "analysis": "Let’s figure out the path to the goal step by step.\nStep 1. Go left, from (9, 9) to (9, 8). \nStep 2. Go left, from (9, 8) to (9, 7). \nStep 3. Go up, from (9, 7) to (8, 7). \nStep 4. Go up, from (8, 7) to (7, 7). \nStep 5. Go up, from (7, 7) to (6, 7). \nStep 6. Go up, from (6, 7) to (5, 7). Oops! We hit a dead end. Going back to the last unexplored branch at (7, 7).\nStep 7. Go right, from (7, 7) to (7, 8). \nStep 8. Go right, from (7, 8) to (7, 9). \nStep 9. Go up, from (7, 9) to (6, 9). \nStep 10. Go up, from (6, 9) to (5, 9). \nStep 11. Go up, from (5, 9) to (4, 9). \nStep 12. Go up, from (4, 9) to (3, 9). \nStep 13. Go up, from (3, 9) to (2, 9). \nStep 14. Go up, from (2, 9) to (1, 9). Oops! We hit a dead end. Going back to the last unexplored branch at (3, 9).\nStep 15. Go left, from (3, 9) to (3, 8). \nStep 16. Go left, from (3, 8) to (3, 7). \nStep 17. Go up, from (3, 7) to (2, 7). \nStep 18. Go up, from (2, 7) to (1, 7). \nStep 19. Go left, from (1, 7) to (1, 6). \nStep 20. Go left, from (1, 6) to (1, 5). \nStep 21. Go down, from (1, 5) to (2, 5). \nStep 22. Go down, from (2, 5) to (3, 5). \nStep 23. Go down, from (3, 5) to (4, 5). \nStep 24. Go down, from (4, 5) to (5, 5). \nStep 25. Go down, from (5, 5) to (6, 5). \nStep 26. Go down, from (6, 5) to (7, 5). \nStep 27. Go left, from (7, 5) to (7, 4). \nStep 28. Go left, from (7, 4) to (7, 3). \nStep 29. Go down, from (7, 3) to (8, 3). \nStep 30. Go down, from (8, 3) to (9, 3). \nStep 31. Go left, from (9, 3) to (9, 2). \nStep 32. Go left, from (9, 2) to (9, 1). \nStep 33. Go up, from (9, 1) to (8, 1). \nStep 34. Go up, from (8, 1) to (7, 1). \nStep 35. Go up, from (7, 1) to (6, 1). \nStep 36. Go up, from (6, 1) to (5, 1). \nStep 37. Go right, from (5, 1) to (5, 2). \nStep 38. Go right, from (5, 2) to (5, 3). \nStep 39. Go up, from (5, 3) to (4, 3). \nStep 40. Go up, from (4, 3) to (3, 3). \nStep 41. Go up, from (3, 3) to (2, 3). \nStep 42. Go up, from (2, 3) to (1, 3). \nStep 43. Go left, from (1, 3) to (1, 2). \nStep 44. Go left, from (1, 2) to (1, 1). Oops! We hit a dead end. Going back to the last unexplored branch at (5, 1).\nStep 45. Go up, from (5, 1) to (4, 1). \nStep 46. Go up, from (4, 1) to (3, 1). Achieved the goal!\n\nTherefore, the right sequence of movements are: left, left, up, up, right, right, up, up, up, up, left, left, up, up, left, left, down, down, down, down, down, down, left, left, down, down, left, left, up, up, up, up, up, up\nThe right option is E"
+  },
+  {
+    "data_id": "maze_00001_04",
+    "qa_type": "TransitionPath",
+    "question_id": 4,
+    "question_description": "Count how many turns it takes to reach the finish.",
+    "image": "images/image_00001.png",
+    "state": "states/state_00001.json",
+    "plot_level": "Medium",
+    "qa_level": "Hard",
+    "question": "**Rules:**\n1. This is a maze mini-game.The player needs to navigate around obstacles to reach the destination and achieve victory.\n2. The red circle represents the player, the green block is the goal and the blue blocks are obstacles.\n3. The player can only move within the white blocks.\n4. The coordinates are given in the format (row, col), where row represents the vertical position and col represents the horizontal position.\n\n**Question:** Find the path to the finish and count the number of turns it takes to get there. You only need to provide one number.",
+    "answer": "11",
+    "analysis": "First,Let’s figure out the path to the goal step by step.\nStep 1. Go left, from (9, 9) to (9, 8). \nStep 2. Go left, from (9, 8) to (9, 7). \nStep 3. Go left, from (9, 7) to (9, 6). \nStep 4. Go left, from (9, 6) to (9, 5). Oops! We hit a dead end. Going back to the last unexplored branch at (9, 7).\nStep 5. Go up, from (9, 7) to (8, 7). \nStep 6. Go up, from (8, 7) to (7, 7). \nStep 7. Go up, from (7, 7) to (6, 7). \nStep 8. Go up, from (6, 7) to (5, 7). Oops! We hit a dead end. Going back to the last unexplored branch at (7, 7).\nStep 9. Go right, from (7, 7) to (7, 8). \nStep 10. Go right, from (7, 8) to (7, 9). \nStep 11. Go up, from (7, 9) to (6, 9). \nStep 12. Go up, from (6, 9) to (5, 9). \nStep 13. Go up, from (5, 9) to (4, 9). \nStep 14. Go up, from (4, 9) to (3, 9). \nStep 15. Go left, from (3, 9) to (3, 8). \nStep 16. Go left, from (3, 8) to (3, 7). \nStep 17. Go up, from (3, 7) to (2, 7). \nStep 18. Go up, from (2, 7) to (1, 7). \nStep 19. Go left, from (1, 7) to (1, 6). \nStep 20. Go left, from (1, 6) to (1, 5). \nStep 21. Go down, from (1, 5) to (2, 5). \nStep 22. Go down, from (2, 5) to (3, 5). \nStep 23. Go down, from (3, 5) to (4, 5). \nStep 24. Go down, from (4, 5) to (5, 5). \nStep 25. Go down, from (5, 5) to (6, 5). \nStep 26. Go down, from (6, 5) to (7, 5). \nStep 27. Go left, from (7, 5) to (7, 4). \nStep 28. Go left, from (7, 4) to (7, 3). \nStep 29. Go down, from (7, 3) to (8, 3). \nStep 30. Go down, from (8, 3) to (9, 3). \nStep 31. Go left, from (9, 3) to (9, 2). \nStep 32. Go left, from (9, 2) to (9, 1). \nStep 33. Go up, from (9, 1) to (8, 1). \nStep 34. Go up, from (8, 1) to (7, 1). \nStep 35. Go up, from (7, 1) to (6, 1). \nStep 36. Go up, from (6, 1) to (5, 1). \nStep 37. Go right, from (5, 1) to (5, 2). \nStep 38. Go right, from (5, 2) to (5, 3). \nStep 39. Go up, from (5, 3) to (4, 3). \nStep 40. Go up, from (4, 3) to (3, 3). \nStep 41. Go up, from (3, 3) to (2, 3). \nStep 42. Go up, from (2, 3) to (1, 3). \nStep 43. Go left, from (1, 3) to (1, 2). \nStep 44. Go left, from (1, 2) to (1, 1). Oops! We hit a dead end. Going back to the last unexplored branch at (5, 1).\nStep 45. Go up, from (5, 1) to (4, 1). \nStep 46. Go up, from (4, 1) to (3, 1). Achieved the goal!Therefore, the path is: (9, 9), (9, 8), (9, 7), (8, 7), (7, 7), (7, 8), (7, 9), (6, 9), (5, 9), (4, 9), (3, 9), (3, 8), (3, 7), (2, 7), (1, 7), (1, 6), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5), (6, 5), (7, 5), (7, 4), (7, 3), (8, 3), (9, 3), (9, 2), (9, 1), (8, 1), (7, 1), (6, 1), (5, 1), (4, 1), (3, 1)\n\nThen,Let\u0027s count the number of turns step by step.\nStep 2. No turn detected.\nStep 3. Turn detected: from left to up.\nStep 4. No turn detected.\nStep 5. Turn detected: from up to right.\nStep 6. No turn detected.\nStep 7. Turn detected: from right to up.\nStep 8. No turn detected.\nStep 9. No turn detected.\nStep 10. No turn detected.\nStep 11. Turn detected: from up to left.\nStep 12. No turn detected.\nStep 13. Turn detected: from left to up.\nStep 14. No turn detected.\nStep 15. Turn detected: from up to left.\nStep 16. No turn detected.\nStep 17. Turn detected: from left to down.\nStep 18. No turn detected.\nStep 19. No turn detected.\nStep 20. No turn detected.\nStep 21. No turn detected.\nStep 22. No turn detected.\nStep 23. Turn detected: from down to left.\nStep 24. No turn detected.\nStep 25. Turn detected: from left to down.\nStep 26. No turn detected.\nStep 27. Turn detected: from down to left.\nStep 28. No turn detected.\nStep 29. Turn detected: from left to up.\nStep 30. No turn detected.\nStep 31. No turn detected.\nStep 32. No turn detected.\nStep 33. No turn detected.\nStep 34. No turn detected.\n\nIn summary, the total number of turns is 11"
+  },
+  {
+    "data_id": "maze_00002_01",
+    "qa_type": "StateInfo",
+    "question_id": 1,
+    "question_description": "Ask for the position of player.",
+    "image": "images/image_00002.png",
+    "state": "states/state_00002.json",
+    "plot_level": "Hard",
+    "qa_level": "Easy",
+    "question": "**Rules:**\n1. This is a maze mini-game.The player needs to navigate around obstacles to reach the destination and achieve victory.\n2. The red circle represents the player, the green block is the goal and the blue blocks are obstacles.\n3. The player can only move within the white blocks.\n4. The coordinates are given in the format (row, col), where row represents the vertical position and col represents the horizontal position.\n\n**Question:** Which of the following are the coordinates of the player?\n\n**Options:**\nA. (5, 5)\nB. (4, 4)\nC. (5, 3)\nD. (5, 4)\nE. (6, 4)",
+    "answer": "D",
+    "options": [
+      "A. (5, 5)",
+      "B. (4, 4)",
+      "C. (5, 3)",
+      "D. (5, 4)",
+      "E. (6, 4)"
+    ],
+    "analysis": "Take a look at the game screen, the red circle represents the player.\nThe coordinates of player are (5, 4), so the right option is D"
+  },
+  {
+    "data_id": "maze_00002_02",
+    "qa_type": "StateInfo",
+    "question_id": 2,
+    "question_description": "Ask for the position of goal within the maze.",
+    "image": "images/image_00002.png",
+    "state": "states/state_00002.json",
+    "plot_level": "Hard",
+    "qa_level": "Easy",
+    "question": "**Rules:**\n1. This is a maze mini-game.The player needs to navigate around obstacles to reach the destination and achieve victory.\n2. The red circle represents the player, the green block is the goal and the blue blocks are obstacles.\n3. The player can only move within the white blocks.\n4. The coordinates are given in the format (row, col), where row represents the vertical position and col represents the horizontal position.\n\n**Question:** Which of the following are the coordinates of the goal?\"\n\n**Optoins:**\nA. (11, 8)\nB. (11, 9)\nC. (10, 9)\nD. (12, 9)\nE. (11, 10)",
+    "answer": "B",
+    "options": [
+      "A. (11, 8)",
+      "B. (11, 9)",
+      "C. (10, 9)",
+      "D. (12, 9)",
+      "E. (11, 10)"
+    ],
+    "analysis": "Take a look at the game screen, the green block represents the goal.\nThe coordinates of goal are (11, 9), so the right option is B"
+  },
+  {
+    "data_id": "maze_00002_06",
+    "qa_type": "ActionOutcome",
+    "question_id": 6,
+    "question_description": "The position after moving.",
+    "image": "images/image_00002.png",
+    "state": "states/state_00002.json",
+    "plot_level": "Hard",
+    "qa_level": "Medium",
+    "question": "**Rules:**\n1. This is a maze mini-game.The player needs to navigate around obstacles to reach the destination and achieve victory.\n2. The red circle represents the player, the green block is the goal and the blue blocks are obstacles.\n3. The player can only move within the white blocks.\n4. The coordinates are given in the format (row, col), where row represents the vertical position and col represents the horizontal position.\n\n**Question:** What are the coordinates of player after moving left?\n\n**Options:**\nA. (5, 5)\nB. (5, 3)\nC. (4, 4)\nD. (5, 4)\nE. (6, 4)",
+    "answer": "B",
+    "options": [
+      "A. (5, 5)",
+      "B. (5, 3)",
+      "C. (4, 4)",
+      "D. (5, 4)",
+      "E. (6, 4)"
+    ],
+    "analysis": "Observe the screen, the position of player is (5,4). After moving left, the player is in (5, 3). Therefore, the right option is B"
+  },
+  {
+    "data_id": "maze_00002_05",
+    "qa_type": "StateInfo",
+    "question_id": 5,
+    "question_description": "Ask for the available directions to move are currently.",
+    "image": "images/image_00002.png",
+    "state": "states/state_00002.json",
+    "plot_level": "Hard",
+    "qa_level": "Easy",
+    "question": "**Rules:**\n1. This is a maze mini-game.The player needs to navigate around obstacles to reach the destination and achieve victory.\n2. The red circle represents the player, the green block is the goal and the blue blocks are obstacles.\n3. The player can only move within the white blocks.\n4. The coordinates are given in the format (row, col), where row represents the vertical position and col represents the horizontal position.\n\n**Question:** Which directions are available to move now?\n\n**Options:**\nA. up\nB. down\nC. up, down\nD. up, right\nE. left, right\nF. up, dow, left\nG. up, down, right\nH. up, down, left, right",
+    "answer": "E",
+    "options": [
+      "A. up",
+      "B. down",
+      "C. up, down",
+      "D. up, right",
+      "E. left, right",
+      "F. up, dow, left",
+      "G. up, down, right",
+      "H. up, down, left, right"
+    ],
+    "analysis": "The player is on (5, 4), and (5, 3) (5, 5) is empty. The player can move left, right. Therefore, The option is E"
+  },
+  {
+    "data_id": "maze_00002_03",
+    "qa_type": "TransitionPath",
+    "question_id": 3,
+    "question_description": "Find the path to the goal",
+    "image": "images/image_00002.png",
+    "state": "states/state_00002.json",
+    "plot_level": "Hard",
+    "qa_level": "Medium",
+    "question": "**Rules:**\n1. This is a maze mini-game.The player needs to navigate around obstacles to reach the destination and achieve victory.\n2. The red circle represents the player, the green block is the goal and the blue blocks are obstacles.\n3. The player can only move within the white blocks.\n4. The coordinates are given in the format (row, col), where row represents the vertical position and col represents the horizontal position.\n\n**Question:** Which sequence of movements will allow the player to reach the destination?\n\n**Options:**\nA. up, right, left, up, up, right, left, left, up, up, up, up, down, right\nB. left, right, right, up, right, left, up, right, left, down, up, down, up, right\nC. right, right, right, left, left, up, down, up, up, up, up, down, up, down\nD. right, down, up, right, down, left, right, down, up, up, left, up, left, left\nE. left, down, down, right, right, right, right, down, down, right, right, down, down",
+    "answer": "E",
+    "options": [
+      "A. up, right, left, up, up, right, left, left, up, up, up, up, down, right",
+      "B. left, right, right, up, right, left, up, right, left, down, up, down, up, right",
+      "C. right, right, right, left, left, up, down, up, up, up, up, down, up, down",
+      "D. right, down, up, right, down, left, right, down, up, up, left, up, left, left",
+      "E. left, down, down, right, right, right, right, down, down, right, right, down, down"
+    ],
+    "analysis": "Let’s figure out the path to the goal step by step.\nStep 1. Go left, from (5, 4) to (5, 3). \nStep 2. Go down, from (5, 3) to (6, 3). \nStep 3. Go down, from (6, 3) to (7, 3). \nStep 4. Go right, from (7, 3) to (7, 4). \nStep 5. Go right, from (7, 4) to (7, 5). \nStep 6. Go right, from (7, 5) to (7, 6). \nStep 7. Go right, from (7, 6) to (7, 7). \nStep 8. Go down, from (7, 7) to (8, 7). \nStep 9. Go down, from (8, 7) to (9, 7). \nStep 10. Go right, from (9, 7) to (9, 8). \nStep 11. Go right, from (9, 8) to (9, 9). \nStep 12. Go down, from (9, 9) to (10, 9). \nStep 13. Go down, from (10, 9) to (11, 9). Achieved the goal!\n\nTherefore, the right sequence of movements are: left, down, down, right, right, right, right, down, down, right, right, down, down\nThe right option is E"
+  },
+  {
+    "data_id": "maze_00002_04",
+    "qa_type": "TransitionPath",
+    "question_id": 4,
+    "question_description": "Count how many turns it takes to reach the finish.",
+    "image": "images/image_00002.png",
+    "state": "states/state_00002.json",
+    "plot_level": "Hard",
+    "qa_level": "Hard",
+    "question": "**Rules:**\n1. This is a maze mini-game.The player needs to navigate around obstacles to reach the destination and achieve victory.\n2. The red circle represents the player, the green block is the goal and the blue blocks are obstacles.\n3. The player can only move within the white blocks.\n4. The coordinates are given in the format (row, col), where row represents the vertical position and col represents the horizontal position.\n\n**Question:** Find the path to the finish and count the number of turns it takes to get there. You only need to provide one number.",
+    "answer": "5",
+    "analysis": "First,Let’s figure out the path to the goal step by step.\nStep 1. Go left, from (5, 4) to (5, 3). \nStep 2. Go down, from (5, 3) to (6, 3). \nStep 3. Go down, from (6, 3) to (7, 3). \nStep 4. Go right, from (7, 3) to (7, 4). \nStep 5. Go right, from (7, 4) to (7, 5). \nStep 6. Go right, from (7, 5) to (7, 6). \nStep 7. Go right, from (7, 6) to (7, 7). \nStep 8. Go down, from (7, 7) to (8, 7). \nStep 9. Go down, from (8, 7) to (9, 7). \nStep 10. Go right, from (9, 7) to (9, 8). \nStep 11. Go right, from (9, 8) to (9, 9). \nStep 12. Go down, from (9, 9) to (10, 9). \nStep 13. Go down, from (10, 9) to (11, 9). Achieved the goal!Therefore, the path is: (5, 4), (5, 3), (6, 3), (7, 3), (7, 4), (7, 5), (7, 6), (7, 7), (8, 7), (9, 7), (9, 8), (9, 9), (10, 9), (11, 9)\n\nThen,Let\u0027s count the number of turns step by step.\nStep 2. Turn detected: from left to down.\nStep 3. No turn detected.\nStep 4. Turn detected: from down to right.\nStep 5. No turn detected.\nStep 6. No turn detected.\nStep 7. No turn detected.\nStep 8. Turn detected: from right to down.\nStep 9. No turn detected.\nStep 10. Turn detected: from down to right.\nStep 11. No turn detected.\nStep 12. Turn detected: from right to down.\nStep 13. No turn detected.\n\nIn summary, the total number of turns is 5"
+  }
+]

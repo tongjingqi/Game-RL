@@ -1,0 +1,69 @@
+{
+    "enemy_rows": 3,
+    "enemy_cols": 5,
+    "enemy_area_rows": 5,
+    "total_cols": 9,
+    "ship_col": 3,
+    "enemies": [
+        {
+            "x": 3,
+            "y": 1,
+            "color": "purple"
+        },
+        {
+            "x": 3,
+            "y": 2,
+            "color": "purple"
+        },
+        {
+            "x": 4,
+            "y": 2,
+            "color": "blue"
+        },
+        {
+            "x": 3,
+            "y": 3,
+            "color": "purple"
+        },
+        {
+            "x": 4,
+            "y": 3,
+            "color": "blue"
+        },
+        {
+            "x": 5,
+            "y": 3,
+            "color": "green"
+        },
+        {
+            "x": 3,
+            "y": 4,
+            "color": "purple"
+        },
+        {
+            "x": 4,
+            "y": 4,
+            "color": "blue"
+        },
+        {
+            "x": 5,
+            "y": 4,
+            "color": "green"
+        },
+        {
+            "x": 3,
+            "y": 5,
+            "color": "purple"
+        },
+        {
+            "x": 4,
+            "y": 5,
+            "color": "blue"
+        },
+        {
+            "x": 5,
+            "y": 5,
+            "color": "green"
+        }
+    ]
+}

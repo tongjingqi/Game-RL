@@ -1,0 +1,81 @@
+{
+    "draw": [
+        "<Card Sprite(in 1 groups)>",
+        "<Card Sprite(in 1 groups)>",
+        "<Card Sprite(in 1 groups)>",
+        "<Card Sprite(in 1 groups)>",
+        "<Card Sprite(in 1 groups)>",
+        "<Card Sprite(in 1 groups)>",
+        "<Card Sprite(in 1 groups)>",
+        "<Card Sprite(in 1 groups)>",
+        "<Card Sprite(in 1 groups)>"
+    ],
+    "dump": [],
+    "piles": [
+        [
+            "spade 1"
+        ],
+        [
+            "heart 1"
+        ],
+        [],
+        []
+    ],
+    "tableau": [
+        [
+            "<Card Sprite(in 1 groups)>",
+            "<Card Sprite(in 1 groups)>",
+            "<Card Sprite(in 1 groups)>",
+            "<Card Sprite(in 1 groups)>",
+            "spade 8",
+            "diamond 7",
+            "spade 6",
+            "diamond 5",
+            "club 4",
+            "heart 3",
+            "spade 2",
+            "diamond 1"
+        ],
+        [
+            "<Card Sprite(in 1 groups)>",
+            "<Card Sprite(in 1 groups)>",
+            "<Card Sprite(in 1 groups)>",
+            "club 3",
+            "heart 2",
+            "club 1"
+        ],
+        [
+            "<Card Sprite(in 1 groups)>",
+            "heart 12",
+            "spade 11",
+            "heart 10",
+            "spade 9"
+        ],
+        [
+            "<Card Sprite(in 1 groups)>",
+            "<Card Sprite(in 1 groups)>",
+            "<Card Sprite(in 1 groups)>",
+            "<Card Sprite(in 1 groups)>",
+            "diamond 8",
+            "club 7",
+            "heart 6",
+            "spade 5",
+            "heart 4"
+        ],
+        [
+            "<Card Sprite(in 1 groups)>",
+            "diamond 6"
+        ],
+        [
+            "spade 3",
+            "diamond 2"
+        ],
+        [
+            "<Card Sprite(in 1 groups)>",
+            "<Card Sprite(in 1 groups)>",
+            "<Card Sprite(in 1 groups)>",
+            "<Card Sprite(in 1 groups)>",
+            "heart 11"
+        ]
+    ]
+}

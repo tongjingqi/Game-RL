@@ -1,0 +1,12 @@
+colorama==0.4.6
+numpy==2.2.1
+Panda3D==1.10.15
+panda3d-gltf==1.2.1
+panda3d-simplepbr==0.12.0
+pillow==11.1.0
+pygame==2.6.1
+pyperclip==1.9.0
+screeninfo==0.8.1
+tqdm==4.67.1
+typing_extensions==4.12.2
+ursina==7.0.0

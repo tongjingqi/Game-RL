@@ -1,0 +1,81 @@
+{
+    "draw": [
+        "<Card Sprite(in 1 groups)>",
+        "<Card Sprite(in 1 groups)>",
+        "<Card Sprite(in 1 groups)>",
+        "<Card Sprite(in 1 groups)>",
+        "<Card Sprite(in 1 groups)>",
+        "<Card Sprite(in 1 groups)>",
+        "<Card Sprite(in 1 groups)>",
+        "<Card Sprite(in 1 groups)>",
+        "<Card Sprite(in 1 groups)>",
+        "<Card Sprite(in 1 groups)>",
+        "<Card Sprite(in 1 groups)>",
+        "<Card Sprite(in 1 groups)>",
+        "<Card Sprite(in 1 groups)>",
+        "<Card Sprite(in 1 groups)>"
+    ],
+    "dump": [
+        "diamond 5",
+        "heart 1"
+    ],
+    "piles": [
+        [
+            "club 1",
+            "club 2",
+            "club 3",
+            "club 4",
+            "club 5"
+        ],
+        [],
+        [],
+        []
+    ],
+    "tableau": [
+        [
+            "<Card Sprite(in 1 groups)>",
+            "<Card Sprite(in 1 groups)>",
+            "<Card Sprite(in 1 groups)>",
+            "heart 2",
+            "spade 1"
+        ],
+        [
+            "<Card Sprite(in 1 groups)>",
+            "diamond 3",
+            "spade 2",
+            "diamond 1"
+        ],
+        [
+            "<Card Sprite(in 1 groups)>",
+            "<Card Sprite(in 1 groups)>",
+            "diamond 6",
+            "spade 5",
+            "heart 4",
+            "spade 3",
+            "diamond 2"
+        ],
+        [
+            "<Card Sprite(in 1 groups)>",
+            "<Card Sprite(in 1 groups)>",
+            "<Card Sprite(in 1 groups)>",
+            "<Card Sprite(in 1 groups)>",
+            "heart 3"
+        ],
+        [
+            "spade 11",
+            "heart 10",
+            "spade 9",
+            "diamond 8",
+            "club 7"
+        ],
+        [
+            "<Card Sprite(in 1 groups)>",
+            "heart 7",
+            "club 6"
+        ],
+        [
+            "club 8",
+            "diamond 7"
+        ]
+    ]
+}

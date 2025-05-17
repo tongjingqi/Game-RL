@@ -1,0 +1,209 @@
+{
+    "enemy_rows": 5,
+    "enemy_cols": 10,
+    "enemy_area_rows": 7,
+    "total_cols": 14,
+    "ship_col": 7,
+    "enemies": [
+        {
+            "x": 1,
+            "y": 4,
+            "color": "purple"
+        },
+        {
+            "x": 2,
+            "y": 4,
+            "color": "blue"
+        },
+        {
+            "x": 3,
+            "y": 4,
+            "color": "blue"
+        },
+        {
+            "x": 1,
+            "y": 5,
+            "color": "purple"
+        },
+        {
+            "x": 2,
+            "y": 5,
+            "color": "blue"
+        },
+        {
+            "x": 3,
+            "y": 5,
+            "color": "blue"
+        },
+        {
+            "x": 4,
+            "y": 5,
+            "color": "green"
+        },
+        {
+            "x": 1,
+            "y": 6,
+            "color": "purple"
+        },
+        {
+            "x": 2,
+            "y": 6,
+            "color": "blue"
+        },
+        {
+            "x": 3,
+            "y": 6,
+            "color": "blue"
+        },
+        {
+            "x": 4,
+            "y": 6,
+            "color": "green"
+        },
+        {
+            "x": 5,
+            "y": 6,
+            "color": "green"
+        },
+        {
+            "x": 1,
+            "y": 7,
+            "color": "purple"
+        },
+        {
+            "x": 2,
+            "y": 7,
+            "color": "blue"
+        },
+        {
+            "x": 3,
+            "y": 7,
+            "color": "blue"
+        },
+        {
+            "x": 4,
+            "y": 7,
+            "color": "green"
+        },
+        {
+            "x": 5,
+            "y": 7,
+            "color": "green"
+        },
+        {
+            "x": 1,
+            "y": 8,
+            "color": "purple"
+        },
+        {
+            "x": 2,
+            "y": 8,
+            "color": "blue"
+        },
+        {
+            "x": 3,
+            "y": 8,
+            "color": "blue"
+        },
+        {
+            "x": 4,
+            "y": 8,
+            "color": "green"
+        },
+        {
+            "x": 1,
+            "y": 9,
+            "color": "purple"
+        },
+        {
+            "x": 2,
+            "y": 9,
+            "color": "blue"
+        },
+        {
+            "x": 3,
+            "y": 9,
+            "color": "blue"
+        },
+        {
+            "x": 4,
+            "y": 9,
+            "color": "green"
+        },
+        {
+            "x": 1,
+            "y": 10,
+            "color": "purple"
+        },
+        {
+            "x": 2,
+            "y": 10,
+            "color": "blue"
+        },
+        {
+            "x": 3,
+            "y": 10,
+            "color": "blue"
+        },
+        {
+            "x": 1,
+            "y": 11,
+            "color": "purple"
+        },
+        {
+            "x": 2,
+            "y": 11,
+            "color": "blue"
+        },
+        {
+            "x": 3,
+            "y": 11,
+            "color": "blue"
+        },
+        {
+            "x": 4,
+            "y": 11,
+            "color": "green"
+        },
+        {
+            "x": 5,
+            "y": 11,
+            "color": "green"
+        },
+        {
+            "x": 1,
+            "y": 12,
+            "color": "purple"
+        },
+        {
+            "x": 2,
+            "y": 12,
+            "color": "blue"
+        },
+        {
+            "x": 3,
+            "y": 12,
+            "color": "blue"
+        },
+        {
+            "x": 4,
+            "y": 12,
+            "color": "green"
+        },
+        {
+            "x": 5,
+            "y": 12,
+            "color": "green"
+        },
+        {
+            "x": 1,
+            "y": 13,
+            "color": "purple"
+        },
+        {
+            "x": 2,
+            "y": 13,
+            "color": "blue"
+        }
+    ]
+}

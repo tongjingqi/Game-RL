@@ -1,0 +1,179 @@
+{
+    "enemy_rows": 5,
+    "enemy_cols": 9,
+    "enemy_area_rows": 8,
+    "total_cols": 13,
+    "ship_col": 1,
+    "enemies": [
+        {
+            "x": 3,
+            "y": 3,
+            "color": "purple"
+        },
+        {
+            "x": 4,
+            "y": 3,
+            "color": "blue"
+        },
+        {
+            "x": 5,
+            "y": 3,
+            "color": "blue"
+        },
+        {
+            "x": 6,
+            "y": 3,
+            "color": "green"
+        },
+        {
+            "x": 7,
+            "y": 3,
+            "color": "green"
+        },
+        {
+            "x": 3,
+            "y": 4,
+            "color": "purple"
+        },
+        {
+            "x": 4,
+            "y": 4,
+            "color": "blue"
+        },
+        {
+            "x": 5,
+            "y": 4,
+            "color": "blue"
+        },
+        {
+            "x": 6,
+            "y": 4,
+            "color": "green"
+        },
+        {
+            "x": 3,
+            "y": 5,
+            "color": "purple"
+        },
+        {
+            "x": 4,
+            "y": 5,
+            "color": "blue"
+        },
+        {
+            "x": 5,
+            "y": 5,
+            "color": "blue"
+        },
+        {
+            "x": 6,
+            "y": 5,
+            "color": "green"
+        },
+        {
+            "x": 7,
+            "y": 5,
+            "color": "green"
+        },
+        {
+            "x": 3,
+            "y": 6,
+            "color": "purple"
+        },
+        {
+            "x": 4,
+            "y": 6,
+            "color": "blue"
+        },
+        {
+            "x": 5,
+            "y": 6,
+            "color": "blue"
+        },
+        {
+            "x": 6,
+            "y": 6,
+            "color": "green"
+        },
+        {
+            "x": 3,
+            "y": 7,
+            "color": "purple"
+        },
+        {
+            "x": 4,
+            "y": 7,
+            "color": "blue"
+        },
+        {
+            "x": 5,
+            "y": 7,
+            "color": "blue"
+        },
+        {
+            "x": 3,
+            "y": 8,
+            "color": "purple"
+        },
+        {
+            "x": 4,
+            "y": 8,
+            "color": "blue"
+        },
+        {
+            "x": 5,
+            "y": 8,
+            "color": "blue"
+        },
+        {
+            "x": 6,
+            "y": 8,
+            "color": "green"
+        },
+        {
+            "x": 3,
+            "y": 9,
+            "color": "purple"
+        },
+        {
+            "x": 4,
+            "y": 9,
+            "color": "blue"
+        },
+        {
+            "x": 5,
+            "y": 9,
+            "color": "blue"
+        },
+        {
+            "x": 6,
+            "y": 9,
+            "color": "green"
+        },
+        {
+            "x": 3,
+            "y": 10,
+            "color": "purple"
+        },
+        {
+            "x": 4,
+            "y": 10,
+            "color": "blue"
+        },
+        {
+            "x": 5,
+            "y": 10,
+            "color": "blue"
+        },
+        {
+            "x": 6,
+            "y": 10,
+            "color": "green"
+        },
+        {
+            "x": 7,
+            "y": 10,
+            "color": "green"
+        }
+    ]
+}

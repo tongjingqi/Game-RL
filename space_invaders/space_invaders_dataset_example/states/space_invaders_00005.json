@@ -1,0 +1,119 @@
+{
+    "enemy_rows": 4,
+    "enemy_cols": 8,
+    "enemy_area_rows": 7,
+    "total_cols": 12,
+    "ship_col": 10,
+    "enemies": [
+        {
+            "x": 1,
+            "y": 4,
+            "color": "purple"
+        },
+        {
+            "x": 2,
+            "y": 4,
+            "color": "blue"
+        },
+        {
+            "x": 3,
+            "y": 4,
+            "color": "green"
+        },
+        {
+            "x": 1,
+            "y": 5,
+            "color": "purple"
+        },
+        {
+            "x": 2,
+            "y": 5,
+            "color": "blue"
+        },
+        {
+            "x": 1,
+            "y": 6,
+            "color": "purple"
+        },
+        {
+            "x": 2,
+            "y": 6,
+            "color": "blue"
+        },
+        {
+            "x": 3,
+            "y": 6,
+            "color": "green"
+        },
+        {
+            "x": 1,
+            "y": 7,
+            "color": "purple"
+        },
+        {
+            "x": 2,
+            "y": 7,
+            "color": "blue"
+        },
+        {
+            "x": 3,
+            "y": 7,
+            "color": "green"
+        },
+        {
+            "x": 4,
+            "y": 7,
+            "color": "green"
+        },
+        {
+            "x": 1,
+            "y": 8,
+            "color": "purple"
+        },
+        {
+            "x": 1,
+            "y": 9,
+            "color": "purple"
+        },
+        {
+            "x": 2,
+            "y": 9,
+            "color": "blue"
+        },
+        {
+            "x": 3,
+            "y": 9,
+            "color": "green"
+        },
+        {
+            "x": 4,
+            "y": 9,
+            "color": "green"
+        },
+        {
+            "x": 1,
+            "y": 10,
+            "color": "purple"
+        },
+        {
+            "x": 2,
+            "y": 10,
+            "color": "blue"
+        },
+        {
+            "x": 3,
+            "y": 10,
+            "color": "green"
+        },
+        {
+            "x": 1,
+            "y": 11,
+            "color": "purple"
+        },
+        {
+            "x": 2,
+            "y": 11,
+            "color": "blue"
+        }
+    ]
+}
