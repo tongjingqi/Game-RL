@@ -18,7 +18,7 @@ que_prompts=[
     'Which will happen until this process ends if the snake moves like this each step: ',
     'How long is the shortest path if the snake wants to reach the food? If there is no path, print -1.'
 ]
-real_qa_types=['StateInfo','StateInfo','StateInfo','ActionOutcome','TransitionPath']
+real_qa_types=['Target Perception','Target Perception','Target Perception','State Prediction','Strategy Optimization']
 
 def generate_moves(length,head,neck):
     pos2dir={

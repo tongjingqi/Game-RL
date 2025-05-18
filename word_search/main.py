@@ -452,10 +452,10 @@ class WordSearchGenerator:
         }
         
         self.qa_type_mapping={
-            QuestionType.CELL_LETTER.value: "StateInfo",
-            QuestionType.LETTER_COUNT.value: "StateInfo",
-            QuestionType.WORD_DIRECTION.value: "TransitionPath",
-            QuestionType.FIND_WORD_LOCATION.value: "TransitionPath",
+            QuestionType.CELL_LETTER.value: "Target Perception",
+            QuestionType.LETTER_COUNT.value: "Target Perception",
+            QuestionType.WORD_DIRECTION.value: "Target Perception",
+            QuestionType.FIND_WORD_LOCATION.value: "Target Perception",
         }
         
         self.qa_index_mapping={
@@ -528,7 +528,6 @@ class WordSearchGenerator:
                 'question_description': qa_data["qa_type"],
                 "image": f"images/{problem_id}.png",
                 "state": f"states/{problem_id}.json",
-                "plot_id": plot_id,
                 "plot_level": plot_level,  # Based on grid size
                 "qa_level": qa_level,      # Based on question type
                 "question": qa_data["question"],

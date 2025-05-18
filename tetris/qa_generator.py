@@ -25,7 +25,7 @@ class TetrisQAGenerator:
         # Create Q&A entry
         qa_entry = {
             "data_id": f"{puzzle_id}-empty-cells",
-            "qa_type": "StateInfo",
+            "qa_type": "Target Perception",
             "question_id": 0,
             "question_description": "empty cells in row",
             "image": image_path,
@@ -165,7 +165,7 @@ class TetrisQAGenerator:
         # Create Q&A entry
         qa_entry = {
             "data_id": f"{puzzle_id}-shape-recognizing",
-            "qa_type": "StateInfo",
+            "qa_type": "Target Perception",
             "question_id": 1,
             "question_description": "shape_recognizing",
             "image": image_path,
@@ -310,7 +310,7 @@ class TetrisQAGenerator:
         # Create Q&A entry
         qa_entry = {
             "data_id": f"{puzzle_id}-onestep-outcome",
-            "qa_type": "ActionOutcome",
+            "qa_type": "State Prediction",
             "question_id": 2,
             "question_description": "timesteps_until_collision",
             "image": image_path,
@@ -479,7 +479,7 @@ class TetrisQAGenerator:
         # Create Q&A entry
         qa_entry = {
             "data_id": f"{puzzle_id}-max-rows",
-            "qa_type": "StrategyOptimization",
+            "qa_type": "Strategy Optimization",
             "question_id": 3,
             "question_description": "maximum rows to be cleared",
             "image": image_path,

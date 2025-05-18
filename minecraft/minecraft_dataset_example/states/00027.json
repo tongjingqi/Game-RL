@@ -1,0 +1,17 @@
+{
+    "river_direction": "x",
+    "river_width": 2,
+    "player_position": [
+        0,
+        -1,
+        -3
+    ],
+    "pumkin_position": [
+        -3,
+        0,
+        2
+    ],
+    "player_pumpkin_same_side": false,
+    "blocks_under_pumpkin": 0,
+    "blocks_with_ladder": true
+}

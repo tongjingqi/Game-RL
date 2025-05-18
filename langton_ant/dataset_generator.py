@@ -67,12 +67,12 @@ The coordinates system: The top-left cell is (0,0), with x increasing downward a
 # 问题类型和难度映射
 MCQ_QUESTION_TYPES = {
     1: {
-        "type": "StateInfo",
+        "type": "Target Perception",
         "description": "Identify the current position and direction of the ant",
         "qa_level": "Easy"
     },
     2: {
-        "type": "ActionOutcome",
+        "type": "State Prediction",
         "description": "Predict the ant's position and direction after several steps",
         "qa_level": "Medium"
     }
@@ -80,7 +80,7 @@ MCQ_QUESTION_TYPES = {
 
 FILL_QUESTION_TYPES = {
     3: {
-        "type": "ActionOutcome",
+        "type": "State Prediction",
         "description": "Predict the color state of a specific cell after several steps",
         "qa_level": "Hard"
     }

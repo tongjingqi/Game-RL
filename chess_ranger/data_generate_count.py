@@ -110,7 +110,7 @@ def generate_data_count(num, num_pieces, data_path, image_path, state_path):
 
     data = {
         "data_id": f"chess-ranger-{num:03}-{qtype}",  # 使用递增编号
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Asking how many pieces of a specific type are on the board",
         "image": image_path,

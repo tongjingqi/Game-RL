@@ -349,7 +349,7 @@ class TengramGenerator:
         
         return QAPair(
             data_id=f"tengram-mcq-{index:05d}-piece_count",
-            qa_type="StateInfo",
+            qa_type="Target Perception",
             question_id=1,
             question_description="piece_count",
             image=f"images/tengram-mcq-{index:05d}.png",
@@ -466,7 +466,7 @@ class TengramGenerator:
         
         return QAPair(
             data_id=f"tengram-mcq-{index:05d}-rotation",
-            qa_type="ActionOutcome",
+            qa_type="State Prediction",
             question_id=2,
             question_description="piece_rotation",
             image=f"images/tengram-mcq-{index:05d}.png",
@@ -691,7 +691,7 @@ class TengramGenerator:
         
         return QAPair(
             data_id=f"tengram-mcq-{index:05d}-adjacency",
-            qa_type="StateInfo",
+            qa_type="Target Perception",
             question_id=4,
             question_description="piece_adjacency",
             image=f"images/tengram-mcq-{index:05d}.png",
@@ -785,7 +785,7 @@ class TengramGenerator:
         )
         return QAPair(
             data_id=f"tengram-mcq-{index:05d}-piece_area",
-            qa_type="StateInfo",
+            qa_type="Target Perception",
             question_id=3,
             question_description="piece_area",
             image=f"images/tengram-mcq-{index:05d}.png",
@@ -1038,7 +1038,7 @@ class TengramGenerator:
 
         return QAPair(
             data_id=f"tengram-mcq-{index:05d}-placement",
-            qa_type="TransitionPath",
+            qa_type="State Prediction",
             question_id=5,
             question_description="piece_placement",
             image=f"images/tengram-mcq-{index:05d}.png",

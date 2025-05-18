@@ -57,7 +57,7 @@ class SudokuDataGenerator:
         
         return {
             "question_id": 1,
-            "qa_type": "StateInfo",
+            "qa_type": "Target Perception",
             "qa_level": "Easy",
             "question_description": "Check color state at position",
             "question": f"This is a sudoku game in which the board is filled with a total number of colours equal to the length of the board's sides, and no rows, columns or squares are allowed to have duplicate colours.You should fill the empty cells on the board with following {self.size} colors: {self.colors_str}.In this Sudoku board, the row coordinates are 1-{self.size} from top to bottom, and the column coordinates are 1-{self.size} from left to right.What color is at position ({row+1},{col+1})(note that on the board the position ({row+1},{col+1}) has already been filled with a certain color)?Choose from following options:{color_options}",
@@ -78,7 +78,7 @@ class SudokuDataGenerator:
         count = len(positions)
         return {
             "question_id": 2,
-            "qa_type": "StateInfo",
+            "qa_type": "Target Perception",
             "qa_level": "Easy",
             "question_description": "Count occurrences of specific color",
             "question": f"This is a sudoku game in which the board is filled with a total number of colours equal to the length of the board's sides, and no rows, columns or squares are allowed to have duplicate colours.You should fill the empty cells on the board with following {self.size} colors: {self.colors_str}.In this Sudoku board, the row coordinates are 1-{self.size} from top to bottom, and the column coordinates are 1-{self.size} from left to right.How many times does {self.visualizer.colors_word[color_idx]} appear on the board?",
@@ -105,7 +105,7 @@ class SudokuDataGenerator:
         
         return {
             "question_id": 3,
-            "qa_type": "StrategyOptimization",
+            "qa_type": "State Prediction",
             "qa_level": "Medium",
             "question_description": "Analyze possible colors to fill",
             "question": f"This is a sudoku game in which the board is filled with a total number of colours equal to the length of the board's sides, and no rows, columns or squares are allowed to have duplicate colours.You should fill the empty cells on the board with following {self.size} colors:{self.colors_str}.In this Sudoku board, the row coordinates are 1-{self.size} from top to bottom, and the column coordinates are 1-{self.size} from left to right.How many colors can be filled in position ({row+1},{col+1})?Inference based on the current situation focusing only on the colour of the position.",
@@ -142,7 +142,7 @@ class SudokuDataGenerator:
         
         return {
             "question_id": 4,
-            "qa_type": "StateInfo",
+            "qa_type": "Target Perception",
             "qa_level": "Medium",
             "question_description": "Count regions with empty cells exceeding threshold",
             "question": f"This is a sudoku game in which the board is filled with a total number of colours equal to the length of the board's sides, and no rows, columns or squares are allowed to have duplicate colours.You should fill the empty cells on the board with following {self.size} colors: {self.colors_str}.In this Sudoku board, the row coordinates are 1-{self.size} from top to bottom, and the column coordinates are 1-{self.size} from left to right.How many {target_type}s have more than {N} empty cells?",
@@ -256,7 +256,7 @@ class SudokuDataGenerator:
 
         return {
             "question_id": 5,
-            "qa_type": "ActionOutcome",
+            "qa_type": "State Prediction",
             "qa_level": "Hard",
             "question_description": "Multi-step deductive reasoning with constraints analysis",
             "question": f"This is a sudoku game in which the board is filled with a total number of colours equal to the length of the board's sides, and no rows, columns or squares are allowed to have duplicate colours.You should fill the empty cells on the board with following {self.size} colors:{self.colors_str}.In this Sudoku board, the row coordinates are 1-{self.size} from top to bottom, and the column coordinates are 1-{self.size} from left to right.After determining colors at positions {', '.join([f'({x},{y})' for x,y in dependencies])}, what color should be at position ({final_i},{final_j})?Choose from following options:{color_options}",

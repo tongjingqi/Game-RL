@@ -95,11 +95,11 @@ class Game:
 
             # Map question types to qa_type values
             qa_type_mapping = {
-                "board_state": "StateInfo",
+                "board_state": "Target Perception",
                 # "move_validity": "ActionOutcome",
                 # "foundation_move": "TransitionPath",
-                "deadlock": "StrategyOptimization",
-                "move_effectiveness": "StrategyOptimization"
+                "deadlock": "State Prediction",
+                "move_effectiveness": "Strategy Optimization"
             }
 
             # Map question types to difficulty levels

@@ -1,0 +1,9 @@
+{
+    "river_direction": "x",
+    "river_width": 2,
+    "player_position": [
+        0,
+        -1,
+        -6
+    ]
+}

@@ -391,7 +391,7 @@ class MinecraftQAGenerator:
         self.sample_count += 1
         return {
             'data_id': f'minecraft-{self.sample_count:05d}-scenery_recog',
-            'qa_type': 'StateInfo',
+            'qa_type': 'Target Perception',
             'question_id': 1,
             'question_description': 'Ask to recognize the sceneries in the scene.',
             'image': self._take_screenshot(),
@@ -501,7 +501,7 @@ class MinecraftQAGenerator:
         self.sample_count += 1
         return {
             'data_id': f'minecraft-{self.sample_count:05d}-cube_count',
-            'qa_type': 'StateInfo',
+            'qa_type': 'Target Perception',
             'question_id': 2,
             'question_description': 'Ask how many cubes are there in total.',
             'image': self._take_screenshot(),
@@ -554,7 +554,7 @@ class MinecraftQAGenerator:
         self.sample_count += 1
         return {
             'data_id': f'minecraft-{self.sample_count:05d}-cross_river',
-            'qa_type': 'TransitionPath',
+            'qa_type': 'State Prediction',
             'question_id': 3,
             'question_description': 'Ask the minimum number of blocks needed to cross the river.',
             'image': self._take_screenshot(),
@@ -610,7 +610,7 @@ class MinecraftQAGenerator:
         self.sample_count += 1
         return {
             'data_id': f'minecraft-{self.sample_count:05d}-climb',
-            'qa_type': 'StateInfo',
+            'qa_type': 'State Prediction',
             'question_id': 4,
             'question_description': 'Ask the minimum number of blocks needed to reach a block (pumpkin/gold ore/diamond ore), considering the possibility of using existing ladders.',
             'image': self._take_screenshot(),
@@ -702,7 +702,7 @@ class MinecraftQAGenerator:
         self.sample_count += 1
         return {
             'data_id': f'minecraft-{self.sample_count:05d}-cross_river_climb',
-            'qa_type': 'StrategyOptimization',
+            'qa_type': 'State Prediction',
             'question_id': 5,
             'question_description': 'Ask the minimum number of blocks needed to reach a block (pumpkin/gold ore/diamond ore) that may require crossing a river, considering the possibility of using existing ladders.',
             'image': self._take_screenshot(),

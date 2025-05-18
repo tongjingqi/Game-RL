@@ -73,7 +73,7 @@ def generate_data_aq(num, num_pieces, data_path, image_path, state_path, max_ana
         # 创建问题和解答结构
         data = {
             "data_id": f"chess-ranger-{num:03}-{qtype}",  # 使用递增编号
-            "qa_type": "TransitionPath",
+            "qa_type": "State Prediction",
             "question_id": 1,
             "question_description": "Asking for the number of moves to solve the puzzle",
             "image": image_path,
@@ -100,7 +100,7 @@ def generate_data_aq(num, num_pieces, data_path, image_path, state_path, max_ana
         # 创建问题和解答结构
         data = {
             "data_id": f"chess-ranger-{num:03}-{qtype}",  # 使用递增编号
-            "qa_type": "TransitionPath",
+            "qa_type": "State Prediction",
             "question_id": 1,
             "question_description": "Asking for the number of moves to solve the puzzle",
             "image": image_path,

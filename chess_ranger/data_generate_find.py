@@ -111,7 +111,7 @@ def generate_data_find(num, num_pieces, data_path, image_path, state_path):
     
     data = {
         "data_id": f"chess-ranger-{num:03}-{qtype}",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Asking for the location of a single piece of a specific type",
         "image": image_path,

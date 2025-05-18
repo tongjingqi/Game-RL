@@ -204,7 +204,7 @@ def generate_data_predict(num, num_pieces, data_path, image_path, state_path, ma
             # 创建问题和解答结构
     data = {
         "data_id": f"chess-ranger-{num:03}-{qtype}",  # 使用递增编号
-        "qa_type": "ActionOutcome",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Asking for the next move that can lead to solving the puzzle",
         "image": image_path,

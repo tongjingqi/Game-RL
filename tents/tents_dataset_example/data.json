@@ -1,7 +1,7 @@
 [
     {
         "data_id": "tents-fill-00001-tents-in-row",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "how many tents are there in a randomly selected row currently?",
         "image": "images/00001.png",
@@ -14,7 +14,7 @@
     },
     {
         "data_id": "tents-fill-00001-missing-tents-in-column",
-        "qa_type": "ActionOutcome",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "how many tents are still missing in a randomly selected column?",
         "image": "images/00001.png",
@@ -27,7 +27,7 @@
     },
     {
         "data_id": "tents-fill-00001-missing-tents-in-grid",
-        "qa_type": "ActionOutcome",
+        "qa_type": "Target Perception",
         "question_id": 4,
         "question_description": "how many tents are still missing in the entire grid?",
         "image": "images/00001.png",
@@ -40,7 +40,7 @@
     },
     {
         "data_id": "tents-fill-00001-possible-tent-positions",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 5,
         "question_description": "Given the tree positions and considering only the second rule, how many positions in the entire grid are available to place tents (including those already occupied by tents)?",
         "image": "images/00001.png",
@@ -53,7 +53,7 @@
     },
     {
         "data_id": "tents-fill-00001-new-tent-positions",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 6,
         "question_description": "how many positions in the grid are available to place a new tent without breaking the game rules immediately (it does not have to be a part of a whole solution to the puzzle)?",
         "image": "images/00001.png",
@@ -66,7 +66,7 @@
     },
     {
         "data_id": "tents-fill-00002-tents-in-row",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "how many tents are there in a randomly selected row currently?",
         "image": "images/00002.png",
@@ -79,7 +79,7 @@
     },
     {
         "data_id": "tents-fill-00002-missing-tents-in-column",
-        "qa_type": "ActionOutcome",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "how many tents are still missing in a randomly selected column?",
         "image": "images/00002.png",
@@ -92,7 +92,7 @@
     },
     {
         "data_id": "tents-fill-00002-missing-tents-in-grid",
-        "qa_type": "ActionOutcome",
+        "qa_type": "Target Perception",
         "question_id": 4,
         "question_description": "how many tents are still missing in the entire grid?",
         "image": "images/00002.png",
@@ -105,7 +105,7 @@
     },
     {
         "data_id": "tents-fill-00002-possible-tent-positions",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 5,
         "question_description": "Given the tree positions and considering only the second rule, how many positions in the entire grid are available to place tents (including those already occupied by tents)?",
         "image": "images/00002.png",
@@ -118,7 +118,7 @@
     },
     {
         "data_id": "tents-fill-00002-new-tent-positions",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 6,
         "question_description": "how many positions in the grid are available to place a new tent without breaking the game rules immediately (it does not have to be a part of a whole solution to the puzzle)?",
         "image": "images/00002.png",
@@ -131,7 +131,7 @@
     },
     {
         "data_id": "tents-fill-00003-tents-in-row",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "how many tents are there in a randomly selected row currently?",
         "image": "images/00003.png",
@@ -144,7 +144,7 @@
     },
     {
         "data_id": "tents-fill-00003-missing-tents-in-column",
-        "qa_type": "ActionOutcome",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "how many tents are still missing in a randomly selected column?",
         "image": "images/00003.png",
@@ -157,7 +157,7 @@
     },
     {
         "data_id": "tents-fill-00003-missing-tents-in-grid",
-        "qa_type": "ActionOutcome",
+        "qa_type": "Target Perception",
         "question_id": 4,
         "question_description": "how many tents are still missing in the entire grid?",
         "image": "images/00003.png",
@@ -170,7 +170,7 @@
     },
     {
         "data_id": "tents-fill-00003-possible-tent-positions",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 5,
         "question_description": "Given the tree positions and considering only the second rule, how many positions in the entire grid are available to place tents (including those already occupied by tents)?",
         "image": "images/00003.png",
@@ -183,7 +183,7 @@
     },
     {
         "data_id": "tents-fill-00003-new-tent-positions",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 6,
         "question_description": "how many positions in the grid are available to place a new tent without breaking the game rules immediately (it does not have to be a part of a whole solution to the puzzle)?",
         "image": "images/00003.png",
@@ -196,7 +196,7 @@
     },
     {
         "data_id": "tents-mcq-00001-which-position-has-tree",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 8,
         "question_description": "which of the following positions contains a tree?",
         "image": "images/00001.png",
@@ -243,7 +243,7 @@
     },
     {
         "data_id": "tents-new-tent-mcq-00001-which-position-is-valid",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 9,
         "question_description": "which of the following positions is available to place a new tent?",
         "image": "images/00001.png",
@@ -290,7 +290,7 @@
     },
     {
         "data_id": "tents-mcq-00002-which-position-has-tree",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 8,
         "question_description": "which of the following positions contains a tree?",
         "image": "images/00002.png",
@@ -337,7 +337,7 @@
     },
     {
         "data_id": "tents-new-tent-mcq-00002-which-position-is-valid",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 9,
         "question_description": "which of the following positions is available to place a new tent?",
         "image": "images/00002.png",
@@ -384,7 +384,7 @@
     },
     {
         "data_id": "tents-mcq-00003-which-position-has-tree",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 8,
         "question_description": "which of the following positions contains a tree?",
         "image": "images/00003.png",
@@ -431,7 +431,7 @@
     },
     {
         "data_id": "tents-new-tent-mcq-00003-which-position-is-valid",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 9,
         "question_description": "which of the following positions is available to place a new tent?",
         "image": "images/00003.png",

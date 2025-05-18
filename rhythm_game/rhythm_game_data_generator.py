@@ -252,12 +252,11 @@ def generate_question_1(data_id, plot_id, image_filename, state_filename, game_s
     # 定义题目模板
     question_template = {
         "data_id": data_id,
-        "plot_id": plot_id,
         "image": image_filename,
         "state": state_filename,
         "plot_level": plot_level,
         "qa_level": "Easy",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Find the type of the block in a given coordinate.",
         "question": game_explanation + " Which type of block does row {row} and column {col} in the image belong to? Options: {option_list}",
@@ -297,12 +296,11 @@ def generate_question_2(data_id, plot_id, image_filename, state_filename, game_s
     # 定义题目模板
     question_template = {
         "data_id": data_id,
-        "plot_id": plot_id,
         "image": image_filename,
         "state": state_filename,
         "plot_level": plot_level,
         "qa_level": "Easy",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Find the percentage of cells with blocks, retaining 3 significant figures.",
         "question": game_explanation + " What percentage of the grid in the current image is occupied by the operation blocks? The answer is expressed as a decimal, retaining 3 significant figures.",
@@ -347,12 +345,11 @@ def generate_question_3(data_id, plot_id, image_filename, state_filename, game_s
     # 定义题目模板
     question_template = {
         "data_id": data_id,
-        "plot_id": plot_id,
         "image": image_filename,
         "state": state_filename,
         "plot_level": plot_level,
         "qa_level": "Medium",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 3,
         "question_description": "Find the length of Snake block headed by a given coordinate after given sconds.",
         "question": game_explanation + " Without selecting any column to click, what is the length of the snake block headed (which means being the lower end) by {head_position_after} after {time} second(s)? Options: {option_list}",
@@ -402,12 +399,11 @@ def generate_question_4(data_id, plot_id, image_filename, state_filename, game_s
     # 定义题目模板
     question_template = {
         "data_id": data_id,
-        "plot_id": plot_id,
         "image": image_filename,
         "state": state_filename,
         "plot_level": plot_level,
         "qa_level": "Medium",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 4,
         "question_description": "Find the final point of choosing a given column to click.",
         "question": game_explanation + " While selecting column {select_col} to click, how many points will you get? Options: {option_list}",
@@ -466,12 +462,11 @@ def generate_question_5(data_id, plot_id, image_filename, state_filename, game_s
     # 定义题目模板
     question_template = {
         "data_id": data_id,
-        "plot_id": plot_id,
         "image": image_filename,
         "state": state_filename,
         "plot_level": plot_level,
         "qa_level": "Medium",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 5,
         "question_description": "Find the final point of choosing a given column to click when it takes 1 second to reverse the grid.",
         "question": game_explanation + " Now it takes 1 second to reverse the grid, during which the blocks will still be falling, but you can't click them. While selecting column {select_col} to click, how many points will you get? Options: {option_list}",
@@ -531,12 +526,11 @@ def generate_question_6(data_id, plot_id, image_filename, state_filename, game_s
     # 定义题目模板
     question_template = {
         "data_id": data_id,
-        "plot_id": plot_id,
         "image": image_filename,
         "state": state_filename,
         "plot_level": plot_level,
         "qa_level": "Hard",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 6,
         "question_description": "Find choosing which column to click can get the highest score.",
         "question": game_explanation + " Which column(s) should I choose to click to get the highest final score? Options: {option_list}",
@@ -591,12 +585,11 @@ def generate_question_7(data_id, plot_id, image_filename, state_filename, game_s
     # 定义题目模板
     question_template = {
         "data_id": data_id,
-        "plot_id": plot_id,
         "image": image_filename,
         "state": state_filename,
         "plot_level": plot_level,
         "qa_level": "Hard",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 7,
         "question_description": "Find choosing which column to click can get the highest score when it takes 1 second to reverse the grid.",
         "question": game_explanation + " Now it takes 1 second to reverse the grid, during which the blocks will still be falling, but you can't cilck them. Which column(s) should I choose to click to get the highest final score? Options: {option_list}",

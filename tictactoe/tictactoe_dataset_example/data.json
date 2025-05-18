@@ -1,7 +1,7 @@
 [
     {
         "data_id": "tictactoe-mcq-1-StateInfo",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Questions about the current state of a specific block of the board.",
         "image": "images/board_1.png",
@@ -19,7 +19,7 @@
     },
     {
         "data_id": "tictactoe-mcq-1-StrategyOptimization",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 2,
         "question_description": "Questions about the optimal strategy to take a move of the current player of the board.",
         "image": "images/board_1.png",
@@ -42,7 +42,7 @@
     },
     {
         "data_id": "tictactoe-mcq-1-ActionOutcome",
-        "qa_type": "ActionOutcome",
+        "qa_type": "Strategy Optimization",
         "question_id": 3,
         "question_description": "Questions about the outcome to take a specific move of the current player of the board, and the optimal strategy to take a move of the opponent player after the specific move.",
         "image": "images/board_1.png",
@@ -65,7 +65,7 @@
     },
     {
         "data_id": "tictactoe-mcq-2-StateInfo",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Questions about the current state of a specific block of the board.",
         "image": "images/board_2.png",
@@ -83,7 +83,7 @@
     },
     {
         "data_id": "tictactoe-mcq-2-StrategyOptimization",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 2,
         "question_description": "Questions about the optimal strategy to take a move of the current player of the board.",
         "image": "images/board_2.png",
@@ -106,7 +106,7 @@
     },
     {
         "data_id": "tictactoe-mcq-2-ActionOutcome",
-        "qa_type": "ActionOutcome",
+        "qa_type": "Strategy Optimization",
         "question_id": 3,
         "question_description": "Questions about the outcome to take a specific move of the current player of the board, and the optimal strategy to take a move of the opponent player after the specific move.",
         "image": "images/board_2.png",
@@ -129,7 +129,7 @@
     },
     {
         "data_id": "tictactoe-mcq-3-StateInfo",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Questions about the current state of a specific block of the board.",
         "image": "images/board_3.png",
@@ -147,7 +147,7 @@
     },
     {
         "data_id": "tictactoe-mcq-3-StrategyOptimization",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 2,
         "question_description": "Questions about the optimal strategy to take a move of the current player of the board.",
         "image": "images/board_3.png",
@@ -170,7 +170,7 @@
     },
     {
         "data_id": "tictactoe-mcq-3-ActionOutcome",
-        "qa_type": "ActionOutcome",
+        "qa_type": "Strategy Optimization",
         "question_id": 3,
         "question_description": "Questions about the outcome to take a specific move of the current player of the board, and the optimal strategy to take a move of the opponent player after the specific move.",
         "image": "images/board_3.png",
@@ -193,7 +193,7 @@
     },
     {
         "data_id": "tictactoe-mcq-4-StateInfo",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Questions about the current state of a specific block of the board.",
         "image": "images/board_4.png",
@@ -211,7 +211,7 @@
     },
     {
         "data_id": "tictactoe-mcq-4-StrategyOptimization",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 2,
         "question_description": "Questions about the optimal strategy to take a move of the current player of the board.",
         "image": "images/board_4.png",
@@ -234,7 +234,7 @@
     },
     {
         "data_id": "tictactoe-mcq-4-ActionOutcome",
-        "qa_type": "ActionOutcome",
+        "qa_type": "Strategy Optimization",
         "question_id": 3,
         "question_description": "Questions about the outcome to take a specific move of the current player of the board, and the optimal strategy to take a move of the opponent player after the specific move.",
         "image": "images/board_4.png",
@@ -257,7 +257,7 @@
     },
     {
         "data_id": "tictactoe-mcq-5-StateInfo",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Questions about the current state of a specific block of the board.",
         "image": "images/board_5.png",
@@ -275,7 +275,7 @@
     },
     {
         "data_id": "tictactoe-mcq-5-StrategyOptimization",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 2,
         "question_description": "Questions about the optimal strategy to take a move of the current player of the board.",
         "image": "images/board_5.png",
@@ -298,7 +298,7 @@
     },
     {
         "data_id": "tictactoe-mcq-5-ActionOutcome",
-        "qa_type": "ActionOutcome",
+        "qa_type": "Strategy Optimization",
         "question_id": 3,
         "question_description": "Questions about the outcome to take a specific move of the current player of the board, and the optimal strategy to take a move of the opponent player after the specific move.",
         "image": "images/board_5.png",
@@ -321,7 +321,7 @@
     },
     {
         "data_id": "tictactoe-mcq-6-StateInfo",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Questions about the current state of a specific block of the board.",
         "image": "images/board_6.png",
@@ -339,7 +339,7 @@
     },
     {
         "data_id": "tictactoe-mcq-6-StrategyOptimization",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 2,
         "question_description": "Questions about the optimal strategy to take a move of the current player of the board.",
         "image": "images/board_6.png",
@@ -362,7 +362,7 @@
     },
     {
         "data_id": "tictactoe-mcq-6-ActionOutcome",
-        "qa_type": "ActionOutcome",
+        "qa_type": "Strategy Optimization",
         "question_id": 3,
         "question_description": "Questions about the outcome to take a specific move of the current player of the board, and the optimal strategy to take a move of the opponent player after the specific move.",
         "image": "images/board_6.png",
@@ -385,7 +385,7 @@
     },
     {
         "data_id": "tictactoe-mcq-7-StateInfo",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Questions about the current state of a specific block of the board.",
         "image": "images/board_7.png",
@@ -403,7 +403,7 @@
     },
     {
         "data_id": "tictactoe-mcq-7-StrategyOptimization",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 2,
         "question_description": "Questions about the optimal strategy to take a move of the current player of the board.",
         "image": "images/board_7.png",
@@ -426,7 +426,7 @@
     },
     {
         "data_id": "tictactoe-mcq-7-ActionOutcome",
-        "qa_type": "ActionOutcome",
+        "qa_type": "Strategy Optimization",
         "question_id": 3,
         "question_description": "Questions about the outcome to take a specific move of the current player of the board, and the optimal strategy to take a move of the opponent player after the specific move.",
         "image": "images/board_7.png",
@@ -449,7 +449,7 @@
     },
     {
         "data_id": "tictactoe-mcq-8-StateInfo",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Questions about the current state of a specific block of the board.",
         "image": "images/board_8.png",
@@ -467,7 +467,7 @@
     },
     {
         "data_id": "tictactoe-mcq-8-StrategyOptimization",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 2,
         "question_description": "Questions about the optimal strategy to take a move of the current player of the board.",
         "image": "images/board_8.png",
@@ -490,7 +490,7 @@
     },
     {
         "data_id": "tictactoe-mcq-8-ActionOutcome",
-        "qa_type": "ActionOutcome",
+        "qa_type": "Strategy Optimization",
         "question_id": 3,
         "question_description": "Questions about the outcome to take a specific move of the current player of the board, and the optimal strategy to take a move of the opponent player after the specific move.",
         "image": "images/board_8.png",
@@ -513,7 +513,7 @@
     },
     {
         "data_id": "tictactoe-mcq-9-StateInfo",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Questions about the current state of a specific block of the board.",
         "image": "images/board_9.png",
@@ -531,7 +531,7 @@
     },
     {
         "data_id": "tictactoe-mcq-9-StrategyOptimization",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 2,
         "question_description": "Questions about the optimal strategy to take a move of the current player of the board.",
         "image": "images/board_9.png",
@@ -554,7 +554,7 @@
     },
     {
         "data_id": "tictactoe-mcq-9-ActionOutcome",
-        "qa_type": "ActionOutcome",
+        "qa_type": "Strategy Optimization",
         "question_id": 3,
         "question_description": "Questions about the outcome to take a specific move of the current player of the board, and the optimal strategy to take a move of the opponent player after the specific move.",
         "image": "images/board_9.png",
@@ -577,7 +577,7 @@
     },
     {
         "data_id": "tictactoe-mcq-10-StateInfo",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Questions about the current state of a specific block of the board.",
         "image": "images/board_10.png",
@@ -595,7 +595,7 @@
     },
     {
         "data_id": "tictactoe-mcq-10-StrategyOptimization",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 2,
         "question_description": "Questions about the optimal strategy to take a move of the current player of the board.",
         "image": "images/board_10.png",
@@ -618,7 +618,7 @@
     },
     {
         "data_id": "tictactoe-mcq-10-ActionOutcome",
-        "qa_type": "ActionOutcome",
+        "qa_type": "Strategy Optimization",
         "question_id": 3,
         "question_description": "Questions about the outcome to take a specific move of the current player of the board, and the optimal strategy to take a move of the opponent player after the specific move.",
         "image": "images/board_10.png",

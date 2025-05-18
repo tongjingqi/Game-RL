@@ -593,7 +593,7 @@ def generate_dataset(num_questions: int):
             
         question_types=["color_matching", "color_description", "gradient_pattern"]
         question_descriptions=["Ask which option's color fits a specific empty cell","Ask what color a specific cell is","Ask what the gradient pattern is in a specific row or column"]
-        qa_types=['ActionOutcome','StateInfo','StateInfo']
+        qa_types=['State Prediction','Target Perception','Target Perception']
         question_type = random.choice(question_types)
         question_type_index=question_types.index(question_type)
         
@@ -640,7 +640,6 @@ def generate_dataset(num_questions: int):
             'qa_type':qa_types[question_type_index],
             "question_id":question_type_index,
             "question_description":question_type,
-            "plot_id": f"color-plot-{generator.question_count+1:05d}",
             "image": f"images/color-mcq-{generator.question_count+1:05d}.png",
             "state": f"states/color-mcq-{generator.question_count+1:05d}.json",
             "plot_level": plot_level,  # Based on grid size

@@ -233,7 +233,7 @@ def generate_questions(board, data_id):
 
    questions.append({
        "data_id": f"tictactoe-mcq-{data_id}-StateInfo",
-       "qa_type": "StateInfo",
+       "qa_type": "Target Perception",
        "question_id": 1,
        "question_description": "Questions about the current state of a specific block of the board.",
        "image": f"images/board_{data_id}.png",
@@ -251,7 +251,7 @@ def generate_questions(board, data_id):
    if game_over:
        questions.append({
            "data_id": f"tictactoe-mcq-{data_id}-StrategyOptimization",
-           "qa_type": "StrategyOptimization",
+           "qa_type": "Strategy Optimization",
            "question_id": 2,
            "question_description": StrategyOptimization_description,
            "image": f"images/board_{data_id}.png",
@@ -268,7 +268,7 @@ def generate_questions(board, data_id):
            ai_suggestion.options = "H"
        questions.append({
            "data_id": f"tictactoe-mcq-{data_id}-StrategyOptimization",
-           "qa_type": "StrategyOptimization",
+           "qa_type": "Strategy Optimization",
            "question_id": 2,
            "question_description": StrategyOptimization_description,
            "image": f"images/board_{data_id}.png",
@@ -290,7 +290,7 @@ def generate_questions(board, data_id):
    if game_over:
        questions.append({
            "data_id": f"tictactoe-mcq-{data_id}-ActionOutcome",
-           "qa_type": "ActionOutcome",
+           "qa_type": "Strategy Optimization",
            "question_id": 3,
            "question_description": ActionOutcome_description,
            "image": f"images/board_{data_id}.png",
@@ -312,7 +312,7 @@ def generate_questions(board, data_id):
        if game_over:
             questions.append({
                 "data_id": f"tictactoe-mcq-{data_id}-ActionOutcome",
-                "qa_type": "ActionOutcome",
+                "qa_type": "Strategy Optimization",
                 "question_id": 3,
                 "question_description": ActionOutcome_description,
                 "image": f"images/board_{data_id}.png",
@@ -329,7 +329,7 @@ def generate_questions(board, data_id):
                 opponent_suggestion.options = "H"
             questions.append({
                 "data_id": f"tictactoe-mcq-{data_id}-ActionOutcome",
-                "qa_type": "ActionOutcome",
+                "qa_type": "Strategy Optimization",
                 "question_id": 3,
                 "question_description": ActionOutcome_description,
                 "image": f"images/board_{data_id}.png",
@@ -344,7 +344,7 @@ def generate_questions(board, data_id):
    else:
        questions.append({
            "data_id": f"tictactoe-mcq-{data_id}-ActionOutcome",
-           "qa_type": "ActionOutcome",
+           "qa_type": "Strategy Optimization",
            "question_id": 3,
            "question_description": ActionOutcome_description,
            "image": f"images/board_{data_id}.png",

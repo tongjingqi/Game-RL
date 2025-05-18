@@ -1,7 +1,7 @@
 [
     {
         "data_id": "pyramidchess-mcq-00000-StateInfo",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Choose a random coordinate and ask what status is the cooradinate",
         "image": "images/board_00000.png",
@@ -20,7 +20,7 @@
     },
     {
         "data_id": "pyramidchess-mcq-00001-StateInfo",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Choose a random coordinate and ask what status is the cooradinate",
         "image": "images/board_00001.png",
@@ -39,7 +39,7 @@
     },
     {
         "data_id": "pyramidchess-mcq-00002-StateInfo",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Choose a random coordinate and ask what status is the cooradinate",
         "image": "images/board_00002.png",
@@ -58,7 +58,7 @@
     },
     {
         "data_id": "pyramidchess-mcq-00003-ActionOutcome",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 1,
         "question_description": "Select a coordinate and determine whether a ball can be placed at this coordinate. If so, what would happen after the place of the ball.",
         "image": "images/board_00003.png",
@@ -77,7 +77,7 @@
     },
     {
         "data_id": "pyramidchess-mcq-00004-ActionOutcome",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 1,
         "question_description": "Select a coordinate and determine whether a ball can be placed at this coordinate. If so, what would happen after the place of the ball.",
         "image": "images/board_00004.png",
@@ -96,7 +96,7 @@
     },
     {
         "data_id": "pyramidchess-mcq-00005-ActionOutcome",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 1,
         "question_description": "Select a coordinate and determine whether a ball can be placed at this coordinate. If so, what would happen after the place of the ball.",
         "image": "images/board_00005.png",
@@ -115,7 +115,7 @@
     },
     {
         "data_id": "pyramidchess-fill-00006-TransitionPath",
-        "qa_type": "TransitionPath",
+        "qa_type": "State Prediction",
         "question_id": 2,
         "question_description": "Calculate how many steps (turns) are required for a ball to be placed at certain coordinate.(Including the step putting the ball at the cooradinate)",
         "image": "images/board_00006.png",
@@ -128,7 +128,7 @@
     },
     {
         "data_id": "pyramidchess-fill-00007-TransitionPath",
-        "qa_type": "TransitionPath",
+        "qa_type": "State Prediction",
         "question_id": 2,
         "question_description": "Calculate how many steps (turns) are required for a ball to be placed at certain coordinate.(Including the step putting the ball at the cooradinate)",
         "image": "images/board_00007.png",
@@ -141,7 +141,7 @@
     },
     {
         "data_id": "pyramidchess-fill-00008-TransitionPath",
-        "qa_type": "TransitionPath",
+        "qa_type": "State Prediction",
         "question_id": 2,
         "question_description": "Calculate how many steps (turns) are required for a ball to be placed at certain coordinate.(Including the step putting the ball at the cooradinate)",
         "image": "images/board_00008.png",
@@ -154,7 +154,7 @@
     },
     {
         "data_id": "pyramidchess-fill-00009-StrategyOptimization",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 3,
         "question_description": "Give out the best position to put the ball at a certain point of a game.",
         "image": "images/board_00009.png",
@@ -167,7 +167,7 @@
     },
     {
         "data_id": "pyramidchess-fill-00010-StrategyOptimization",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 3,
         "question_description": "Give out the best position to put the ball at a certain point of a game.",
         "image": "images/board_00010.png",
@@ -180,7 +180,7 @@
     },
     {
         "data_id": "pyramidchess-fill-00011-StrategyOptimization",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 3,
         "question_description": "Give out the best position to put the ball at a certain point of a game.",
         "image": "images/board_00011.png",
@@ -193,7 +193,7 @@
     },
     {
         "data_id": "pyramidchess-fill-00012-StateInfo",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 4,
         "question_description": "Calculate how many balls are there one the board.",
         "image": "images/board_00012.png",
@@ -206,7 +206,7 @@
     },
     {
         "data_id": "pyramidchess-fill-00013-StateInfo",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 4,
         "question_description": "Calculate how many balls are there one the board.",
         "image": "images/board_00013.png",
@@ -219,7 +219,7 @@
     },
     {
         "data_id": "pyramidchess-fill-00014-StateInfo",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 4,
         "question_description": "Calculate how many balls are there one the board.",
         "image": "images/board_00014.png",
@@ -232,7 +232,7 @@
     },
     {
         "data_id": "pyramidchess-mcq-00015-StateInfo",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 5,
         "question_description": "Provide the higher level status of a coordinate: Is the coordinate legal? Does it contain a ball? Can the ball be taken? Can a ball be placed?",
         "image": "images/board_00015.png",
@@ -252,7 +252,7 @@
     },
     {
         "data_id": "pyramidchess-mcq-00016-StateInfo",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 5,
         "question_description": "Provide the higher level status of a coordinate: Is the coordinate legal? Does it contain a ball? Can the ball be taken? Can a ball be placed?",
         "image": "images/board_00016.png",
@@ -272,7 +272,7 @@
     },
     {
         "data_id": "pyramidchess-mcq-00017-StateInfo",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 5,
         "question_description": "Provide the higher level status of a coordinate: Is the coordinate legal? Does it contain a ball? Can the ball be taken? Can a ball be placed?",
         "image": "images/board_00017.png",

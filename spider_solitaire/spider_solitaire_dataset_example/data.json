@@ -1,7 +1,7 @@
 [
     {
         "data_id": "spider_solitaire-train-00001-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Remaining deals in the stockpile",
         "image": "images/board_00001.png",
@@ -14,7 +14,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00001-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Identify a card of a waste pile",
         "image": "images/board_00001.png",
@@ -27,7 +27,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00001-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count face-down cards in all waste piles",
         "image": "images/board_00001.png",
@@ -40,7 +40,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00001-3",
-        "qa_type": "StateInfo",
+        "qa_type": "State Prediction",
         "question_id": 3,
         "question_description": "Simulate click stockpile",
         "image": "images/board_00001.png",
@@ -53,7 +53,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00001-4",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 4,
         "question_description": "Predict card move result",
         "image": "images/board_00001.png",
@@ -73,7 +73,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00001-5",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 4,
         "question_description": "Predict card move result",
         "image": "images/board_00001.png",
@@ -93,7 +93,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00001-6",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 4,
         "question_description": "Predict card move result",
         "image": "images/board_00001.png",
@@ -113,7 +113,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00001-7",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 4,
         "question_description": "Predict card move result",
         "image": "images/board_00001.png",
@@ -133,7 +133,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00001-8",
-        "qa_type": "TransitionPath",
+        "qa_type": "State Prediction",
         "question_id": 5,
         "question_description": "Reveal face-down card strategy",
         "image": "images/board_00001.png",
@@ -156,7 +156,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00001-9",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 6,
         "question_description": "Optimal card move selection",
         "image": "images/board_00001.png",
@@ -179,7 +179,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00002-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Remaining deals in the stockpile",
         "image": "images/board_00002.png",
@@ -192,7 +192,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00002-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Identify a card of a waste pile",
         "image": "images/board_00002.png",
@@ -205,7 +205,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00002-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count face-down cards in all waste piles",
         "image": "images/board_00002.png",
@@ -218,7 +218,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00002-3",
-        "qa_type": "StateInfo",
+        "qa_type": "State Prediction",
         "question_id": 3,
         "question_description": "Simulate click stockpile",
         "image": "images/board_00002.png",
@@ -231,7 +231,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00002-4",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 4,
         "question_description": "Predict card move result",
         "image": "images/board_00002.png",
@@ -251,7 +251,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00002-5",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 4,
         "question_description": "Predict card move result",
         "image": "images/board_00002.png",
@@ -271,7 +271,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00002-6",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 4,
         "question_description": "Predict card move result",
         "image": "images/board_00002.png",
@@ -291,7 +291,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00002-7",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 4,
         "question_description": "Predict card move result",
         "image": "images/board_00002.png",
@@ -311,7 +311,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00002-8",
-        "qa_type": "TransitionPath",
+        "qa_type": "State Prediction",
         "question_id": 5,
         "question_description": "Reveal face-down card strategy",
         "image": "images/board_00002.png",
@@ -334,7 +334,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00002-9",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 6,
         "question_description": "Optimal card move selection",
         "image": "images/board_00002.png",
@@ -357,7 +357,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00003-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Remaining deals in the stockpile",
         "image": "images/board_00003.png",
@@ -370,7 +370,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00003-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Identify a card of a waste pile",
         "image": "images/board_00003.png",
@@ -383,7 +383,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00003-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count face-down cards in all waste piles",
         "image": "images/board_00003.png",
@@ -396,7 +396,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00003-3",
-        "qa_type": "StateInfo",
+        "qa_type": "State Prediction",
         "question_id": 3,
         "question_description": "Simulate click stockpile",
         "image": "images/board_00003.png",
@@ -409,7 +409,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00003-4",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 4,
         "question_description": "Predict card move result",
         "image": "images/board_00003.png",
@@ -429,7 +429,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00003-5",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 4,
         "question_description": "Predict card move result",
         "image": "images/board_00003.png",
@@ -449,7 +449,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00003-6",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 4,
         "question_description": "Predict card move result",
         "image": "images/board_00003.png",
@@ -469,7 +469,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00003-7",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 4,
         "question_description": "Predict card move result",
         "image": "images/board_00003.png",
@@ -489,7 +489,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00003-8",
-        "qa_type": "TransitionPath",
+        "qa_type": "State Prediction",
         "question_id": 5,
         "question_description": "Reveal face-down card strategy",
         "image": "images/board_00003.png",
@@ -512,7 +512,7 @@
     },
     {
         "data_id": "spider_solitaire-train-00003-9",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 6,
         "question_description": "Optimal card move selection",
         "image": "images/board_00003.png",

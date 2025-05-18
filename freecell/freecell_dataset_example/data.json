@@ -1,7 +1,7 @@
 [
     {
         "data_id": "free_cell-specified_card-Easy-00001",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Given a particular game state, the puzzle will present a question about which card is at a specific position in one of the cascade piles.Your task is to indentify the card in the options. ",
         "image": "images/state_analysis_Easy_00001.png",
@@ -24,7 +24,7 @@
     },
     {
         "data_id": "free_cell-valid_move-Easy-00001",
-        "qa_type": "StateInfo",
+        "qa_type": "State Prediction",
         "question_id": 2,
         "question_description": "Given the current game state, identify which of the following moves is valid according to FreeCell rules.",
         "image": "images/state_analysis_Easy_00001.png",
@@ -43,7 +43,7 @@
     },
     {
         "data_id": "free_cell-card_after_move-Easy-00001",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 3,
         "question_description": "Given a particular game state,a selected move and a selected cascade pile, the puzzle will present a question about which card is at the top of the cascade pile.\nYour task is to indentify the card in the options. ",
         "image": "images/state_analysis_Easy_00001.png",
@@ -66,7 +66,7 @@
     },
     {
         "data_id": "free_cell-specified_card-Medium-00001",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Given a particular game state, the puzzle will present a question about which card is at a specific position in one of the cascade piles.Your task is to indentify the card in the options. ",
         "image": "images/state_analysis_Medium_00001.png",
@@ -89,7 +89,7 @@
     },
     {
         "data_id": "free_cell-valid_move-Medium-00001",
-        "qa_type": "StateInfo",
+        "qa_type": "State Prediction",
         "question_id": 2,
         "question_description": "Given the current game state, identify which of the following moves is valid according to FreeCell rules.",
         "image": "images/state_analysis_Medium_00001.png",
@@ -108,7 +108,7 @@
     },
     {
         "data_id": "free_cell-card_after_move-Medium-00001",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 3,
         "question_description": "Given a particular game state,a selected move and a selected cascade pile, the puzzle will present a question about which card is at the top of the cascade pile.\nYour task is to indentify the card in the options. ",
         "image": "images/state_analysis_Medium_00001.png",
@@ -131,7 +131,7 @@
     },
     {
         "data_id": "free_cell-specified_card-Hard-00001",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Given a particular game state, the puzzle will present a question about which card is at a specific position in one of the cascade piles.Your task is to indentify the card in the options. ",
         "image": "images/state_analysis_Hard_00001.png",
@@ -154,7 +154,7 @@
     },
     {
         "data_id": "free_cell-valid_move-Hard-00001",
-        "qa_type": "StateInfo",
+        "qa_type": "State Prediction",
         "question_id": 2,
         "question_description": "Given the current game state, identify which of the following moves is valid according to FreeCell rules.",
         "image": "images/state_analysis_Hard_00001.png",
@@ -173,7 +173,7 @@
     },
     {
         "data_id": "free_cell-card_after_move-Hard-00001",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 3,
         "question_description": "Given a particular game state,a selected move and a selected cascade pile, the puzzle will present a question about which card is at the top of the cascade pile.\nYour task is to indentify the card in the options. ",
         "image": "images/state_analysis_Hard_00001.png",

@@ -1,7 +1,7 @@
 [
     {
         "data_id": "snake-0-path",
-        "qa_type": "TransitionPath",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "How long is the shortest path if the snake wants to reach the food? If there is no path, print -1.",
         "image": "images/snake_0.png",
@@ -14,7 +14,7 @@
     },
     {
         "data_id": "snake-1-head_pos",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Where is the head of the snake?",
         "image": "images/snake_1.png",
@@ -27,7 +27,7 @@
     },
     {
         "data_id": "snake-2-snake_len",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "How long is the snake?",
         "image": "images/snake_2.png",
@@ -40,7 +40,7 @@
     },
     {
         "data_id": "snake-3-head_pos",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Where is the head of the snake?",
         "image": "images/snake_3.png",
@@ -53,7 +53,7 @@
     },
     {
         "data_id": "snake-4-which_happen",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 3,
         "question_description": "Which will happen until this process ends if the snake moves like this each step: ",
         "image": "images/snake_4.png",
@@ -72,7 +72,7 @@
     },
     {
         "data_id": "snake-5-food_pos",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Where is the food?",
         "image": "images/snake_5.png",
@@ -85,7 +85,7 @@
     },
     {
         "data_id": "snake-6-path",
-        "qa_type": "TransitionPath",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "How long is the shortest path if the snake wants to reach the food? If there is no path, print -1.",
         "image": "images/snake_6.png",
@@ -98,7 +98,7 @@
     },
     {
         "data_id": "snake-7-snake_len",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "How long is the snake?",
         "image": "images/snake_7.png",
@@ -111,7 +111,7 @@
     },
     {
         "data_id": "snake-8-food_pos",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Where is the food?",
         "image": "images/snake_8.png",
@@ -124,7 +124,7 @@
     },
     {
         "data_id": "snake-9-which_happen",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 3,
         "question_description": "Which will happen until this process ends if the snake moves like this each step: ",
         "image": "images/snake_9.png",

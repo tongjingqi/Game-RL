@@ -299,12 +299,11 @@ def generate_question_1(data_id, plot_id, image_filename, state_filename, game_s
     # 定义题目模板
     question_template = {
         "data_id": data_id,
-        "plot_id": plot_id,
         "image": image_filename,
         "state": state_filename,
         "plot_level": plot_level,
         "qa_level": "Easy",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Find which player marked the cell at a given coordinate.",
         "question": game_explanation + " Which player marked the cell at {coord} in the image? Options: {option_list}",
@@ -364,12 +363,11 @@ def generate_question_2(data_id, plot_id, image_filename, state_filename, game_s
     # 定义题目模板
     question_template = {
         "data_id": data_id,
-        "plot_id": plot_id,
         "image": image_filename,
         "state": state_filename,
         "plot_level": plot_level,
         "qa_level": "Easy",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Given the coordinate of last step, find the number of possible coordinates of next step.",
         "question": game_explanation + " Now your opponent place a piece at {last_piece_coord}. What is the number of possible coordinates of your next step? Options: {option_list}",
@@ -438,12 +436,11 @@ def generate_question_3(data_id, plot_id, image_filename, state_filename, game_s
     # 定义题目模板
     question_template = {
         "data_id": data_id,
-        "plot_id": plot_id,
         "image": image_filename,
         "state": state_filename,
         "plot_level": plot_level,
         "qa_level": "Easy",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Find the number of marked middle cells in the image.",
         "question": game_explanation + " How many middle cells in the image are marked? Options: {option_list}",
@@ -497,12 +494,11 @@ def generate_question_4(data_id, plot_id, image_filename, state_filename, game_s
     # 定义题目模板
     question_template = {
         "data_id": data_id,
-        "plot_id": plot_id,
         "image": image_filename,
         "state": state_filename,
         "plot_level": plot_level,
         "qa_level": "Medium",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 4,
         "question_description": "Find the number of pieces in the image.",
         "question": game_explanation + " How many pieces are there in the image? Options: {option_list}",
@@ -568,12 +564,11 @@ def generate_question_5(data_id, plot_id, image_filename, state_filename, game_s
     # 定义题目模板
     question_template = {
         "data_id": data_id,
-        "plot_id": plot_id,
         "image": image_filename,
         "state": state_filename,
         "plot_level": plot_level,
         "qa_level": "Medium",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 5,
         "question_description": "Find the points the given player has got within the given Nine-grid.",
         "question": game_explanation + " How many points has the {player_name} got within the Nine-grid {nine_grid_coord}? Options: {option_list}",
@@ -637,12 +632,11 @@ def generate_question_6(data_id, plot_id, image_filename, state_filename, game_s
     # 定义题目模板
     question_template = {
         "data_id": data_id,
-        "plot_id": plot_id,
         "image": image_filename,
         "state": state_filename,
         "plot_level": plot_level,
         "qa_level": "Hard",
-        "qa_type": "StateInfo",
+        "qa_type": "State Prediction",
         "question_id": 6,
         "question_description": "Given the Player name, find in which Nine-grid to place the piece.",
         "question": game_explanation + " If you are {player_name}, from the image, we can see now it's your turn to place a piece. According to the rules of the game, in which Nine-grid should you place the next piece? Options: {option_list}",
@@ -746,12 +740,11 @@ def generate_question_7(data_id, plot_id, image_filename, state_filename, game_s
     # 定义题目模板
     question_template = {
         "data_id": data_id,
-        "plot_id": plot_id,
         "image": image_filename,
         "state": state_filename,
         "plot_level": plot_level,
         "qa_level": "Hard",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 7,
         "question_description": "Given the coordinate of last step, find the coordinate to place the next piece to get the highest point.",
         "question": game_explanation + " Now your opponent place a piece at {last_piece_coord}. At which coordinate should you place your next piece to win the highest point?",

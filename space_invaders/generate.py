@@ -34,7 +34,7 @@ def gen_num_enemies_on_row_qa(game: SpaceInvaders, q_type: Literal['fill', 'choi
     if q_type == 'fill':
         return {
             'qa_level': 'Easy',
-            'qa_type': 'StateInfo', 'question': question, 'answer': num,
+            'qa_type': 'Target Perception', 'question': question, 'answer': num,
             'analysis': analysis,
         }
     else:
@@ -44,7 +44,7 @@ def gen_num_enemies_on_row_qa(game: SpaceInvaders, q_type: Literal['fill', 'choi
         analysis += f'The option number is {options.index(num)+1}.'
         return {
             'qa_level': 'Easy',
-            'qa_type': 'StateInfo', 'question': question, 'answer': options.index(num) + 1,
+            'qa_type': 'Target Perception', 'question': question, 'answer': options.index(num) + 1,
             'analysis': analysis,
             'options': options,
         }
@@ -65,7 +65,7 @@ def gen_num_enemies_on_col_qa(game: SpaceInvaders, q_type: Literal['fill', 'choi
     if q_type == 'fill':
         return {
             'qa_level': 'Easy',
-            'qa_type': 'StateInfo', 'question': question, 'answer': num,
+            'qa_type': 'Target Perception', 'question': question, 'answer': num,
             'analysis': analysis,
         }
     else:
@@ -75,7 +75,7 @@ def gen_num_enemies_on_col_qa(game: SpaceInvaders, q_type: Literal['fill', 'choi
         analysis += f'The option number is {options.index(num)+1}.'
         return {
             'qa_level': 'Easy',
-            'qa_type': 'StateInfo', 'question': question, 'answer': options.index(num) + 1,
+            'qa_type': 'Target Perception', 'question': question, 'answer': options.index(num) + 1,
             'analysis': analysis,
             'options': options,
         }
@@ -97,7 +97,7 @@ def gen_total_num_enemies_qa(game: SpaceInvaders, q_type: Literal['fill', 'choic
     if q_type == 'fill':
         return {
             'qa_level': 'Medium',
-            'qa_type': 'StateInfo', 'question': question, 'answer': num,
+            'qa_type': 'Target Perception', 'question': question, 'answer': num,
             'analysis': analysis,
         }
     else:
@@ -107,7 +107,7 @@ def gen_total_num_enemies_qa(game: SpaceInvaders, q_type: Literal['fill', 'choic
         analysis += f'The option number is {options.index(num)+1}.'
         return {
             'qa_level': 'Medium',
-            'qa_type': 'StateInfo', 'question': question, 'answer': options.index(num) + 1,
+            'qa_type': 'Target Perception', 'question': question, 'answer': options.index(num) + 1,
             'analysis': analysis,
             'options': options,
         }
@@ -133,7 +133,7 @@ def gen_num_color_enemies_qa(game: SpaceInvaders, color: Literal['purple', 'blue
     if q_type == 'fill':
         return {
             'qa_level': 'Medium',
-            'qa_type': 'StateInfo', 'question': question, 'answer': num,
+            'qa_type': 'Target Perception', 'question': question, 'answer': num,
             'analysis': analysis,
         }
     else:
@@ -143,7 +143,7 @@ def gen_num_color_enemies_qa(game: SpaceInvaders, color: Literal['purple', 'blue
         analysis += f'The option number is {options.index(num)+1}.'
         return {
             'qa_level': 'Medium',
-            'qa_type': 'StateInfo', 'question': question, 'answer': options.index(num) + 1,
+            'qa_type': 'Target Perception', 'question': question, 'answer': options.index(num) + 1,
             'analysis': analysis,
             'options': options,
         }
@@ -173,7 +173,7 @@ def gen_shoot_here_gain_points_qa(game: SpaceInvaders, q_type: Literal['fill', '
     
     ret = {
         'qa_level': 'Easy',
-        'qa_type': 'ActionOutcome', 'question': question, 'answer': score,
+        'qa_type': 'State Prediction', 'question': question, 'answer': score,
         'analysis': analysis,
     }
     if q_type == 'choice':
@@ -206,7 +206,7 @@ def gen_move_and_shoot_gain_points_qa(game: SpaceInvaders, q_type: Literal['fill
         analysis += f'The option number is {options.index(score)+1}.'
     ret = {
         'qa_level': 'Easy',
-        'qa_type': 'ActionOutcome', 'question': question, 'answer': score,
+        'qa_type': 'State Prediction', 'question': question, 'answer': score,
         'analysis': analysis,
     }
     if q_type == 'choice':
@@ -264,7 +264,7 @@ Thus equivalently, in the current scene, there will be laser attacks from the sh
         analysis += f'The option number is {options.index(score)+1}.'
     ret = {
         'qa_level': 'Hard',
-        'qa_type': 'ActionOutcome', 'question': question, 'answer': score,
+        'qa_type': 'State Prediction', 'question': question, 'answer': score,
         'analysis': analysis,
     } 
     if q_type == 'choice':
@@ -307,7 +307,7 @@ def gen_move_shoot_once_max_points_qa(game: SpaceInvaders, q_type: Literal['fill
         analysis += f'The option number is {options.index(max_score)+1}.'
     ret = {
         'qa_level': 'Medium',
-        'qa_type': 'StrategyOptimization', 'question': question, 'answer': max_score,
+        'qa_type': 'Strategy Optimization', 'question': question, 'answer': max_score,
         'analysis': analysis,
     }
     if q_type == 'choice':
@@ -376,7 +376,7 @@ def gen_move_shoot_twice_max_points_qa(game: SpaceInvaders, q_type: Literal['fil
         analysis += f'The option number is {options.index(score)+1}.'
     ret = {
         'qa_level': 'Hard',
-        'qa_type': 'StrategyOptimization', 'question': question, 'answer': score,
+        'qa_type': 'Strategy Optimization', 'question': question, 'answer': score,
         'analysis': analysis,
     }
     if q_type == 'choice':

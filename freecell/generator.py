@@ -198,7 +198,7 @@ def generate_specified_card_dataset(game:FreeCell,generated_number,image_file,st
     # Generate the puzzle data
     puzzle_data = {
         "data_id": f"free_cell-specified_card-{plot_level}-{generated_number+1:05d}",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id":1,
         "question_description":"Given a particular game state, the puzzle will present a question about which card is at a specific position in one of the cascade piles.Your task is to indentify the card in the options. ",
         "image": f"{image_file}",
@@ -217,7 +217,6 @@ def generate_specified_card_dataset(game:FreeCell,generated_number,image_file,st
         "analysis": analysis,
         "options": options
     }
-
     return puzzle_data
 
 foundation_to_suit_map={
@@ -434,7 +433,7 @@ def generate_valid_move_dataset(game: FreeCell, generated_number, image_file, st
     
     puzzle_data = {
         "data_id": f"free_cell-valid_move-{plot_level}-{generated_number+1:05d}",
-        "qa_type": "StateInfo",
+        "qa_type": "State Prediction",
         "question_id": 2,
         "question_description": "Given the current game state, identify which of the following moves is valid according to FreeCell rules.",
         "image": f"{image_file}",
@@ -528,7 +527,7 @@ def generate_state_after_move_dataset(game:FreeCell,generated_number,image_file,
     analysis+=f"the new state of the cascade_pile {cascade_index} is:\n{[f'({suit_to_string_map[card.suit.value]},{card.value})' for card in new_state['cascade_piles'][cascade_index]]}\n Therefore the top card of the cascade_pile {cascade_index} is {answer_text}"
     puzzle_data={
         "data_id": f"free_cell-card_after_move-{plot_level}-{generated_number+1:05d}",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id":3,
         "question_description":"Given a particular game state,a selected move and a selected cascade pile, the puzzle will present a question about which card is at the top of the cascade pile.\nYour task is to indentify the card in the options. ",
         "image": f"{image_file}",

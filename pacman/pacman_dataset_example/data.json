@@ -1,7 +1,7 @@
 [
     {
         "data_id": "pacman-train-00001-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Identify Pacman location",
         "image": "images/image_00001.png",
@@ -24,7 +24,7 @@
     },
     {
         "data_id": "pacman-train-00001-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Count Pacman's surrounding beans",
         "image": "images/image_00001.png",
@@ -37,7 +37,7 @@
     },
     {
         "data_id": "pacman-train-00001-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Identify the closest ghost",
         "image": "images/image_00001.png",
@@ -55,7 +55,7 @@
     },
     {
         "data_id": "pacman-train-00001-3",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 3,
         "question_description": "Count beans in Pacman's path",
         "image": "images/image_00001.png",
@@ -68,7 +68,7 @@
     },
     {
         "data_id": "pacman-train-00001-4",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 4,
         "question_description": "Predict Pacman's movement result",
         "image": "images/image_00001.png",
@@ -91,7 +91,7 @@
     },
     {
         "data_id": "pacman-train-00001-5",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 5,
         "question_description": "Predict change in Pinky's movement",
         "image": "images/image_00001.png",
@@ -110,7 +110,7 @@
     },
     {
         "data_id": "pacman-train-00001-6",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 6,
         "question_description": "Predict change in Blinky's movement",
         "image": "images/image_00001.png",
@@ -129,7 +129,7 @@
     },
     {
         "data_id": "pacman-train-00001-7",
-        "qa_type": "TransitionPath",
+        "qa_type": "State Prediction",
         "question_id": 7,
         "question_description": "Infer Pinky's next move",
         "image": "images/image_00001.png",
@@ -148,7 +148,7 @@
     },
     {
         "data_id": "pacman-train-00001-8",
-        "qa_type": "TransitionPath",
+        "qa_type": "State Prediction",
         "question_id": 8,
         "question_description": "Infer Blinky's next move",
         "image": "images/image_00001.png",
@@ -167,7 +167,7 @@
     },
     {
         "data_id": "pacman-train-00001-9",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 9,
         "question_description": "Judge Pacman's optimal movement",
         "image": "images/image_00001.png",
@@ -187,7 +187,7 @@
     },
     {
         "data_id": "pacman-train-00002-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Identify Pacman location",
         "image": "images/image_00002.png",
@@ -210,7 +210,7 @@
     },
     {
         "data_id": "pacman-train-00002-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Count Pacman's surrounding beans",
         "image": "images/image_00002.png",
@@ -223,7 +223,7 @@
     },
     {
         "data_id": "pacman-train-00002-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Identify the closest ghost",
         "image": "images/image_00002.png",
@@ -241,7 +241,7 @@
     },
     {
         "data_id": "pacman-train-00002-3",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 3,
         "question_description": "Count beans in Pacman's path",
         "image": "images/image_00002.png",
@@ -254,7 +254,7 @@
     },
     {
         "data_id": "pacman-train-00002-4",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 4,
         "question_description": "Predict Pacman's movement result",
         "image": "images/image_00002.png",
@@ -277,7 +277,7 @@
     },
     {
         "data_id": "pacman-train-00002-5",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 5,
         "question_description": "Predict change in Pinky's movement",
         "image": "images/image_00002.png",
@@ -296,7 +296,7 @@
     },
     {
         "data_id": "pacman-train-00002-6",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 6,
         "question_description": "Predict change in Blinky's movement",
         "image": "images/image_00002.png",
@@ -315,7 +315,7 @@
     },
     {
         "data_id": "pacman-train-00002-7",
-        "qa_type": "TransitionPath",
+        "qa_type": "State Prediction",
         "question_id": 7,
         "question_description": "Infer Pinky's next move",
         "image": "images/image_00002.png",
@@ -334,7 +334,7 @@
     },
     {
         "data_id": "pacman-train-00002-8",
-        "qa_type": "TransitionPath",
+        "qa_type": "State Prediction",
         "question_id": 8,
         "question_description": "Infer Blinky's next move",
         "image": "images/image_00002.png",
@@ -353,7 +353,7 @@
     },
     {
         "data_id": "pacman-train-00002-9",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 9,
         "question_description": "Judge Pacman's optimal movement",
         "image": "images/image_00002.png",
@@ -373,7 +373,7 @@
     },
     {
         "data_id": "pacman-train-00003-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Identify Pacman location",
         "image": "images/image_00003.png",
@@ -396,7 +396,7 @@
     },
     {
         "data_id": "pacman-train-00003-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Count Pacman's surrounding beans",
         "image": "images/image_00003.png",
@@ -409,7 +409,7 @@
     },
     {
         "data_id": "pacman-train-00003-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Identify the closest ghost",
         "image": "images/image_00003.png",
@@ -427,7 +427,7 @@
     },
     {
         "data_id": "pacman-train-00003-3",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 3,
         "question_description": "Count beans in Pacman's path",
         "image": "images/image_00003.png",
@@ -440,7 +440,7 @@
     },
     {
         "data_id": "pacman-train-00003-4",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 4,
         "question_description": "Predict Pacman's movement result",
         "image": "images/image_00003.png",
@@ -463,7 +463,7 @@
     },
     {
         "data_id": "pacman-train-00003-5",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 5,
         "question_description": "Predict change in Pinky's movement",
         "image": "images/image_00003.png",
@@ -482,7 +482,7 @@
     },
     {
         "data_id": "pacman-train-00003-6",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 6,
         "question_description": "Predict change in Blinky's movement",
         "image": "images/image_00003.png",
@@ -501,7 +501,7 @@
     },
     {
         "data_id": "pacman-train-00003-7",
-        "qa_type": "TransitionPath",
+        "qa_type": "State Prediction",
         "question_id": 7,
         "question_description": "Infer Pinky's next move",
         "image": "images/image_00003.png",
@@ -520,7 +520,7 @@
     },
     {
         "data_id": "pacman-train-00003-8",
-        "qa_type": "TransitionPath",
+        "qa_type": "State Prediction",
         "question_id": 8,
         "question_description": "Infer Blinky's next move",
         "image": "images/image_00003.png",
@@ -539,7 +539,7 @@
     },
     {
         "data_id": "pacman-train-00003-9",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 9,
         "question_description": "Judge Pacman's optimal movement",
         "image": "images/image_00003.png",
@@ -559,7 +559,7 @@
     },
     {
         "data_id": "pacman-train-00004-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Identify Pacman location",
         "image": "images/image_00004.png",
@@ -582,7 +582,7 @@
     },
     {
         "data_id": "pacman-train-00004-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Count Pacman's surrounding beans",
         "image": "images/image_00004.png",
@@ -595,7 +595,7 @@
     },
     {
         "data_id": "pacman-train-00004-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Identify the closest ghost",
         "image": "images/image_00004.png",
@@ -613,7 +613,7 @@
     },
     {
         "data_id": "pacman-train-00004-3",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 3,
         "question_description": "Count beans in Pacman's path",
         "image": "images/image_00004.png",
@@ -626,7 +626,7 @@
     },
     {
         "data_id": "pacman-train-00004-4",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 4,
         "question_description": "Predict Pacman's movement result",
         "image": "images/image_00004.png",
@@ -649,7 +649,7 @@
     },
     {
         "data_id": "pacman-train-00004-5",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 5,
         "question_description": "Predict change in Pinky's movement",
         "image": "images/image_00004.png",
@@ -668,7 +668,7 @@
     },
     {
         "data_id": "pacman-train-00004-6",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 6,
         "question_description": "Predict change in Blinky's movement",
         "image": "images/image_00004.png",
@@ -687,7 +687,7 @@
     },
     {
         "data_id": "pacman-train-00004-7",
-        "qa_type": "TransitionPath",
+        "qa_type": "State Prediction",
         "question_id": 7,
         "question_description": "Infer Pinky's next move",
         "image": "images/image_00004.png",
@@ -706,7 +706,7 @@
     },
     {
         "data_id": "pacman-train-00004-8",
-        "qa_type": "TransitionPath",
+        "qa_type": "State Prediction",
         "question_id": 8,
         "question_description": "Infer Blinky's next move",
         "image": "images/image_00004.png",
@@ -725,7 +725,7 @@
     },
     {
         "data_id": "pacman-train-00004-9",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 9,
         "question_description": "Judge Pacman's optimal movement",
         "image": "images/image_00004.png",
@@ -745,7 +745,7 @@
     },
     {
         "data_id": "pacman-train-00005-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Identify Pacman location",
         "image": "images/image_00005.png",
@@ -768,7 +768,7 @@
     },
     {
         "data_id": "pacman-train-00005-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Count Pacman's surrounding beans",
         "image": "images/image_00005.png",
@@ -781,7 +781,7 @@
     },
     {
         "data_id": "pacman-train-00005-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Identify the closest ghost",
         "image": "images/image_00005.png",
@@ -799,7 +799,7 @@
     },
     {
         "data_id": "pacman-train-00005-3",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 3,
         "question_description": "Count beans in Pacman's path",
         "image": "images/image_00005.png",
@@ -812,7 +812,7 @@
     },
     {
         "data_id": "pacman-train-00005-4",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 4,
         "question_description": "Predict Pacman's movement result",
         "image": "images/image_00005.png",
@@ -835,7 +835,7 @@
     },
     {
         "data_id": "pacman-train-00005-5",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 5,
         "question_description": "Predict change in Pinky's movement",
         "image": "images/image_00005.png",
@@ -854,7 +854,7 @@
     },
     {
         "data_id": "pacman-train-00005-6",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 6,
         "question_description": "Predict change in Blinky's movement",
         "image": "images/image_00005.png",
@@ -873,7 +873,7 @@
     },
     {
         "data_id": "pacman-train-00005-7",
-        "qa_type": "TransitionPath",
+        "qa_type": "State Prediction",
         "question_id": 7,
         "question_description": "Infer Pinky's next move",
         "image": "images/image_00005.png",
@@ -892,7 +892,7 @@
     },
     {
         "data_id": "pacman-train-00005-8",
-        "qa_type": "TransitionPath",
+        "qa_type": "State Prediction",
         "question_id": 8,
         "question_description": "Infer Blinky's next move",
         "image": "images/image_00005.png",
@@ -911,7 +911,7 @@
     },
     {
         "data_id": "pacman-train-00005-9",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 9,
         "question_description": "Judge Pacman's optimal movement",
         "image": "images/image_00005.png",
@@ -931,7 +931,7 @@
     },
     {
         "data_id": "pacman-train-00006-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Identify Pacman location",
         "image": "images/image_00006.png",
@@ -954,7 +954,7 @@
     },
     {
         "data_id": "pacman-train-00006-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Count Pacman's surrounding beans",
         "image": "images/image_00006.png",
@@ -967,7 +967,7 @@
     },
     {
         "data_id": "pacman-train-00006-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Identify the closest ghost",
         "image": "images/image_00006.png",
@@ -985,7 +985,7 @@
     },
     {
         "data_id": "pacman-train-00006-3",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 3,
         "question_description": "Count beans in Pacman's path",
         "image": "images/image_00006.png",
@@ -998,7 +998,7 @@
     },
     {
         "data_id": "pacman-train-00006-4",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 4,
         "question_description": "Predict Pacman's movement result",
         "image": "images/image_00006.png",
@@ -1021,7 +1021,7 @@
     },
     {
         "data_id": "pacman-train-00006-5",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 5,
         "question_description": "Predict change in Pinky's movement",
         "image": "images/image_00006.png",
@@ -1040,7 +1040,7 @@
     },
     {
         "data_id": "pacman-train-00006-6",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 6,
         "question_description": "Predict change in Blinky's movement",
         "image": "images/image_00006.png",
@@ -1059,7 +1059,7 @@
     },
     {
         "data_id": "pacman-train-00006-7",
-        "qa_type": "TransitionPath",
+        "qa_type": "State Prediction",
         "question_id": 7,
         "question_description": "Infer Pinky's next move",
         "image": "images/image_00006.png",
@@ -1078,7 +1078,7 @@
     },
     {
         "data_id": "pacman-train-00006-8",
-        "qa_type": "TransitionPath",
+        "qa_type": "State Prediction",
         "question_id": 8,
         "question_description": "Infer Blinky's next move",
         "image": "images/image_00006.png",
@@ -1097,7 +1097,7 @@
     },
     {
         "data_id": "pacman-train-00006-9",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 9,
         "question_description": "Judge Pacman's optimal movement",
         "image": "images/image_00006.png",

@@ -270,7 +270,7 @@ def gen_num_tents_in_row_fill(grid, tent_positions, puzzle_number):
     # 填空题的JSON数据格式
     question_data = {
         "data_id": f"tents-fill-{puzzle_number:05d}-tents-in-row",
-        "qa_type": "StateInfo",  # 问题类型
+        "qa_type": "Target Perception",  # 问题类型
         "question_id": 0,
         "question_description": "how many tents are there in a randomly selected row currently?",
         "image": f"images/{puzzle_number:05d}.png",
@@ -328,7 +328,7 @@ def gen_num_missing_tents_in_column_fill(grid, tent_positions, col_tent_counts, 
     # 填空题的JSON数据格式
     question_data = {
         "data_id": f"tents-fill-{puzzle_number:05d}-missing-tents-in-column",
-        "qa_type": "ActionOutcome",  # 问题类型
+        "qa_type": "Target Perception",  # 问题类型
         "question_id": 3,
         "question_description": "how many tents are still missing in a randomly selected column?",
         "image": f"images/{puzzle_number:05d}.png",
@@ -365,7 +365,7 @@ def gen_num_missing_tents_in_grid_fill(grid, tent_positions, col_tent_counts, pu
     # 填空题的JSON数据格式
     question_data = {
         "data_id": f"tents-fill-{puzzle_number:05d}-missing-tents-in-grid",
-        "qa_type": "ActionOutcome",  # 问题类型
+        "qa_type": "Target Perception",  # 问题类型
         "question_id": 4,
         "question_description": "how many tents are still missing in the entire grid?",
         "image": f"images/{puzzle_number:05d}.png",
@@ -437,7 +437,7 @@ def gen_possible_tent_positions_fill(grid, tree_positions, puzzle_number):
     # 填空题的JSON数据格式
     question_data = {
         "data_id": f"tents-fill-{puzzle_number:05d}-possible-tent-positions",
-        "qa_type": "ActionOutcome",  # 问题类型
+        "qa_type": "State Prediction",  # 问题类型
         "question_id": 5,
         "question_description": "Given the tree positions and considering only the second rule, how many positions in the entire grid are available to place tents (including those already occupied by tents)?",
         "image": f"images/{puzzle_number:05d}.png",
@@ -481,7 +481,7 @@ def gen_new_tent_count_fill(grid, tent_positions, tree_positions, col_tent_count
     # 填空题的JSON数据格式
     question_data = {
         "data_id": f"tents-fill-{puzzle_number:05d}-new-tent-positions",
-        "qa_type": "ActionOutcome",  # 问题类型
+        "qa_type": "State Prediction",  # 问题类型
         "question_id": 6,
         "question_description": "how many positions in the grid are available to place a new tent without breaking the game rules immediately (it does not have to be a part of a whole solution to the puzzle)?",
         "image": f"images/{puzzle_number:05d}.png",
@@ -541,7 +541,7 @@ def gen_tree_position_mcq(grid, tent_positions, tree_positions, puzzle_number, n
     # 单选题的JSON数据格式
     question_data = {
         "data_id": f"tents-mcq-{puzzle_number:05d}-which-position-has-tree",
-        "qa_type": "StateInfo",  # 问题类型
+        "qa_type": "Target Perception",  # 问题类型
         "question_id": 8,
         "question_description": "which of the following positions contains a tree?",
         "image": f"images/{puzzle_number:05d}.png",
@@ -601,7 +601,7 @@ def gen_new_tent_position_mcq(grid, tent_positions, tree_positions, col_tent_cou
     # 单选题的JSON数据格式
     question_data = {
         "data_id": f"tents-new-tent-mcq-{puzzle_number:05d}-which-position-is-valid",
-        "qa_type": "ActionOutcome",  # 问题类型
+        "qa_type": "State Prediction",  # 问题类型
         "question_id": 9,
         "question_description": "which of the following positions is available to place a new tent?",
         "image": f"images/{puzzle_number:05d}.png",

@@ -17,7 +17,12 @@ class Board:
         # Define easy-to-differentiate colors
         self.colors = ['red', 'green', 'blue', 'magenta', 'cyan', 'yellow', 'orange', 'purple']
         self.questionTypes=['position', 'head_state','symbol_at_position','first_state_entry']
-        self.questionTypesMapping={'position':'ActionOutcome','head_state':'ActionOutcome','symbol_at_position':'ActionOutcome','first_state_entry':'ActionOutcome'}
+        self.questionTypesMapping={
+            'position': 'State Prediction',
+            'head_state': 'State Prediction',
+            'symbol_at_position': 'State Prediction',
+            'first_state_entry': 'State Prediction'
+        }
         self.qaLevelMapping={'position':'Medium','head_state':'Medium','symbol_at_position':'Medium','first_state_entry':'Medium'} # core parts are the same (executing the machine) so have the same level
 
     def saveState(self) -> Dict:
@@ -653,7 +658,6 @@ def GenerateDataset(num_boards: int, output_dir: str = "2d_turing_machine_datase
         # Append the QA info to the list
         qa_entry = {
             "data_id": f"turing-machine-train-{i:05}",
-            "plot_id": f"turing-machine-train-plot-{i:05}",
             "image": os.path.join("images", f"{i:05}.png"),
             "state": os.path.join("states", f"{i:05}.json"),
             "plot_level": getPlotLevel(board),

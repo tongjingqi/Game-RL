@@ -123,7 +123,7 @@ def generate_data_pos(num, num_pieces, data_path, image_path, state_path):
 
     data = {
         "data_id": f"chess-ranger-{num:03}-{qtype}",  # 使用递增编号
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 4,
         "question_description": "Asking for a piece located at a specific square",
         "image": image_path,

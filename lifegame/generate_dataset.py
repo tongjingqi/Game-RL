@@ -1580,7 +1580,7 @@ def generate_state_info_question(grid: List[List[int]], data_id: int, plot_level
         
         return {
             "data_id": f"lifegame-mcq-{data_id:05d}-state",
-            "qa_type": "StateInfo",
+            "qa_type": "Target Perception",
             **QUESTION_SETTINGS["StateInfo"],
             "plot_level": plot_level,
             "question": question_text,
@@ -1625,7 +1625,7 @@ def generate_action_outcome_question(grid: List[List[int]], data_id: int, plot_l
         
         return {
             "data_id": f"lifegame-mcq-{data_id:05d}-action",
-            "qa_type": "ActionOutcome",
+            "qa_type": "State Prediction",
             **QUESTION_SETTINGS["ActionOutcome"],
             "plot_level": plot_level,
             "question": question_text,
@@ -1690,7 +1690,7 @@ def generate_cell_change_question(grid: List[List[int]], data_id: int, plot_leve
         
         return {
             "data_id": f"lifegame-mcq-{data_id:05d}-cell-changes",
-            "qa_type": "ActionOutcome",
+            "qa_type": "State Prediction",
             **QUESTION_SETTINGS["CellChangeCount"],
             "plot_level": plot_level,
             "question": question_text,
@@ -1863,7 +1863,7 @@ def generate_stability_question(grid: List[List[int]], data_id: int, plot_level:
         
         return {
             "data_id": f"lifegame-mcq-{data_id:05d}-stability",
-            "qa_type": "ActionOutcome",
+            "qa_type": "State Prediction",
             **QUESTION_SETTINGS["StabilitySteps"],
             "plot_level": plot_level,
             "question": question_text,

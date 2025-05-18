@@ -1,9 +1,9 @@
 [
     {
         "data_id": "space_invaders-fill-00001",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
-        "question_description": "Ask the number of enemies in a row",
+        "question_description": "Ask the number of enemies in a column",
         "image": "images/space_invaders_00001.png",
         "state": "states/space_invaders_00001.json",
         "plot_level": "Easy",
@@ -14,9 +14,9 @@
     },
     {
         "data_id": "space_invaders-fill-00002",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
-        "question_description": "Ask the number of enemies in a column",
+        "question_description": "Ask the number of enemies in a row",
         "image": "images/space_invaders_00001.png",
         "state": "states/space_invaders_00001.json",
         "plot_level": "Easy",
@@ -27,7 +27,7 @@
     },
     {
         "data_id": "space_invaders-fill-00003",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Ask the total number of enemies",
         "image": "images/space_invaders_00001.png",
@@ -40,7 +40,7 @@
     },
     {
         "data_id": "space_invaders-fill-00004",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 4,
         "question_description": "Ask the number of enemies with a specific color",
         "image": "images/space_invaders_00001.png",
@@ -53,7 +53,7 @@
     },
     {
         "data_id": "space_invaders-fill-00005",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 5,
         "question_description": "Ask the points gained by shooting once where the ship is",
         "image": "images/space_invaders_00001.png",
@@ -66,7 +66,7 @@
     },
     {
         "data_id": "space_invaders-fill-00006",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 6,
         "question_description": "Ask the points gained by moving to a given column and shooting once",
         "image": "images/space_invaders_00001.png",
@@ -79,7 +79,7 @@
     },
     {
         "data_id": "space_invaders-fill-00007",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 7,
         "question_description": "Ask the points gained by continually shooting where the ship is with the enemies keeping on moving",
         "image": "images/space_invaders_00001.png",
@@ -92,7 +92,7 @@
     },
     {
         "data_id": "space_invaders-fill-00008",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 8,
         "question_description": "Ask the maximum points gained by shooting once",
         "image": "images/space_invaders_00001.png",
@@ -105,7 +105,7 @@
     },
     {
         "data_id": "space_invaders-fill-00009",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 9,
         "question_description": "Ask the maximum points gained by shooting twice",
         "image": "images/space_invaders_00001.png",
@@ -118,9 +118,9 @@
     },
     {
         "data_id": "space_invaders-fill-00010",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
-        "question_description": "Ask the number of enemies in a row",
+        "question_description": "Ask the number of enemies in a column",
         "image": "images/space_invaders_00002.png",
         "state": "states/space_invaders_00002.json",
         "plot_level": "Easy",
@@ -131,9 +131,9 @@
     },
     {
         "data_id": "space_invaders-fill-00011",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
-        "question_description": "Ask the number of enemies in a column",
+        "question_description": "Ask the number of enemies in a row",
         "image": "images/space_invaders_00002.png",
         "state": "states/space_invaders_00002.json",
         "plot_level": "Easy",
@@ -144,7 +144,7 @@
     },
     {
         "data_id": "space_invaders-fill-00012",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Ask the total number of enemies",
         "image": "images/space_invaders_00002.png",
@@ -157,7 +157,7 @@
     },
     {
         "data_id": "space_invaders-fill-00013",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 4,
         "question_description": "Ask the number of enemies with a specific color",
         "image": "images/space_invaders_00002.png",
@@ -170,7 +170,7 @@
     },
     {
         "data_id": "space_invaders-fill-00014",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 5,
         "question_description": "Ask the points gained by shooting once where the ship is",
         "image": "images/space_invaders_00002.png",
@@ -183,7 +183,7 @@
     },
     {
         "data_id": "space_invaders-fill-00015",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 6,
         "question_description": "Ask the points gained by moving to a given column and shooting once",
         "image": "images/space_invaders_00002.png",
@@ -196,7 +196,7 @@
     },
     {
         "data_id": "space_invaders-fill-00016",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 7,
         "question_description": "Ask the points gained by continually shooting where the ship is with the enemies keeping on moving",
         "image": "images/space_invaders_00002.png",
@@ -209,7 +209,7 @@
     },
     {
         "data_id": "space_invaders-fill-00017",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 8,
         "question_description": "Ask the maximum points gained by shooting once",
         "image": "images/space_invaders_00002.png",
@@ -222,7 +222,7 @@
     },
     {
         "data_id": "space_invaders-fill-00018",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 9,
         "question_description": "Ask the maximum points gained by shooting twice",
         "image": "images/space_invaders_00002.png",
@@ -235,9 +235,9 @@
     },
     {
         "data_id": "space_invaders-fill-00019",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
-        "question_description": "Ask the number of enemies in a row",
+        "question_description": "Ask the number of enemies in a column",
         "image": "images/space_invaders_00003.png",
         "state": "states/space_invaders_00003.json",
         "plot_level": "Easy",
@@ -248,9 +248,9 @@
     },
     {
         "data_id": "space_invaders-fill-00020",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
-        "question_description": "Ask the number of enemies in a column",
+        "question_description": "Ask the number of enemies in a row",
         "image": "images/space_invaders_00003.png",
         "state": "states/space_invaders_00003.json",
         "plot_level": "Easy",
@@ -261,7 +261,7 @@
     },
     {
         "data_id": "space_invaders-fill-00021",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Ask the total number of enemies",
         "image": "images/space_invaders_00003.png",
@@ -274,7 +274,7 @@
     },
     {
         "data_id": "space_invaders-fill-00022",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 4,
         "question_description": "Ask the number of enemies with a specific color",
         "image": "images/space_invaders_00003.png",
@@ -287,7 +287,7 @@
     },
     {
         "data_id": "space_invaders-fill-00023",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 5,
         "question_description": "Ask the points gained by shooting once where the ship is",
         "image": "images/space_invaders_00003.png",
@@ -300,7 +300,7 @@
     },
     {
         "data_id": "space_invaders-fill-00024",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 6,
         "question_description": "Ask the points gained by moving to a given column and shooting once",
         "image": "images/space_invaders_00003.png",
@@ -313,7 +313,7 @@
     },
     {
         "data_id": "space_invaders-fill-00025",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 7,
         "question_description": "Ask the points gained by continually shooting where the ship is with the enemies keeping on moving",
         "image": "images/space_invaders_00003.png",
@@ -326,9 +326,9 @@
     },
     {
         "data_id": "space_invaders-fill-00026",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
-        "question_description": "Ask the number of enemies in a row",
+        "question_description": "Ask the number of enemies in a column",
         "image": "images/space_invaders_00004.png",
         "state": "states/space_invaders_00004.json",
         "plot_level": "Medium",
@@ -339,9 +339,9 @@
     },
     {
         "data_id": "space_invaders-fill-00027",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
-        "question_description": "Ask the number of enemies in a column",
+        "question_description": "Ask the number of enemies in a row",
         "image": "images/space_invaders_00004.png",
         "state": "states/space_invaders_00004.json",
         "plot_level": "Medium",
@@ -352,7 +352,7 @@
     },
     {
         "data_id": "space_invaders-fill-00028",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Ask the total number of enemies",
         "image": "images/space_invaders_00004.png",
@@ -365,7 +365,7 @@
     },
     {
         "data_id": "space_invaders-fill-00029",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 4,
         "question_description": "Ask the number of enemies with a specific color",
         "image": "images/space_invaders_00004.png",
@@ -378,7 +378,7 @@
     },
     {
         "data_id": "space_invaders-fill-00030",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 5,
         "question_description": "Ask the points gained by shooting once where the ship is",
         "image": "images/space_invaders_00004.png",
@@ -391,7 +391,7 @@
     },
     {
         "data_id": "space_invaders-fill-00031",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 6,
         "question_description": "Ask the points gained by moving to a given column and shooting once",
         "image": "images/space_invaders_00004.png",
@@ -404,7 +404,7 @@
     },
     {
         "data_id": "space_invaders-fill-00032",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 7,
         "question_description": "Ask the points gained by continually shooting where the ship is with the enemies keeping on moving",
         "image": "images/space_invaders_00004.png",
@@ -417,7 +417,7 @@
     },
     {
         "data_id": "space_invaders-fill-00033",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 8,
         "question_description": "Ask the maximum points gained by shooting once",
         "image": "images/space_invaders_00004.png",
@@ -430,7 +430,7 @@
     },
     {
         "data_id": "space_invaders-fill-00034",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 9,
         "question_description": "Ask the maximum points gained by shooting twice",
         "image": "images/space_invaders_00004.png",
@@ -443,9 +443,9 @@
     },
     {
         "data_id": "space_invaders-fill-00035",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
-        "question_description": "Ask the number of enemies in a row",
+        "question_description": "Ask the number of enemies in a column",
         "image": "images/space_invaders_00005.png",
         "state": "states/space_invaders_00005.json",
         "plot_level": "Medium",
@@ -456,9 +456,9 @@
     },
     {
         "data_id": "space_invaders-fill-00036",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
-        "question_description": "Ask the number of enemies in a column",
+        "question_description": "Ask the number of enemies in a row",
         "image": "images/space_invaders_00005.png",
         "state": "states/space_invaders_00005.json",
         "plot_level": "Medium",
@@ -469,7 +469,7 @@
     },
     {
         "data_id": "space_invaders-fill-00037",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Ask the total number of enemies",
         "image": "images/space_invaders_00005.png",
@@ -482,7 +482,7 @@
     },
     {
         "data_id": "space_invaders-fill-00038",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 4,
         "question_description": "Ask the number of enemies with a specific color",
         "image": "images/space_invaders_00005.png",
@@ -495,7 +495,7 @@
     },
     {
         "data_id": "space_invaders-fill-00039",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 5,
         "question_description": "Ask the points gained by shooting once where the ship is",
         "image": "images/space_invaders_00005.png",
@@ -508,7 +508,7 @@
     },
     {
         "data_id": "space_invaders-fill-00040",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 6,
         "question_description": "Ask the points gained by moving to a given column and shooting once",
         "image": "images/space_invaders_00005.png",
@@ -521,9 +521,9 @@
     },
     {
         "data_id": "space_invaders-fill-00041",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
-        "question_description": "Ask the number of enemies in a row",
+        "question_description": "Ask the number of enemies in a column",
         "image": "images/space_invaders_00006.png",
         "state": "states/space_invaders_00006.json",
         "plot_level": "Hard",
@@ -534,9 +534,9 @@
     },
     {
         "data_id": "space_invaders-fill-00042",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
-        "question_description": "Ask the number of enemies in a column",
+        "question_description": "Ask the number of enemies in a row",
         "image": "images/space_invaders_00006.png",
         "state": "states/space_invaders_00006.json",
         "plot_level": "Hard",
@@ -547,7 +547,7 @@
     },
     {
         "data_id": "space_invaders-fill-00043",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Ask the total number of enemies",
         "image": "images/space_invaders_00006.png",
@@ -560,7 +560,7 @@
     },
     {
         "data_id": "space_invaders-fill-00044",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 4,
         "question_description": "Ask the number of enemies with a specific color",
         "image": "images/space_invaders_00006.png",
@@ -573,7 +573,7 @@
     },
     {
         "data_id": "space_invaders-fill-00045",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 5,
         "question_description": "Ask the points gained by shooting once where the ship is",
         "image": "images/space_invaders_00006.png",
@@ -586,7 +586,7 @@
     },
     {
         "data_id": "space_invaders-fill-00046",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 6,
         "question_description": "Ask the points gained by moving to a given column and shooting once",
         "image": "images/space_invaders_00006.png",
@@ -599,7 +599,7 @@
     },
     {
         "data_id": "space_invaders-fill-00047",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 7,
         "question_description": "Ask the points gained by continually shooting where the ship is with the enemies keeping on moving",
         "image": "images/space_invaders_00006.png",
@@ -612,7 +612,7 @@
     },
     {
         "data_id": "space_invaders-fill-00048",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 8,
         "question_description": "Ask the maximum points gained by shooting once",
         "image": "images/space_invaders_00006.png",
@@ -625,7 +625,7 @@
     },
     {
         "data_id": "space_invaders-fill-00049",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 9,
         "question_description": "Ask the maximum points gained by shooting twice",
         "image": "images/space_invaders_00006.png",
@@ -638,9 +638,9 @@
     },
     {
         "data_id": "space_invaders-fill-00050",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
-        "question_description": "Ask the number of enemies in a row",
+        "question_description": "Ask the number of enemies in a column",
         "image": "images/space_invaders_00007.png",
         "state": "states/space_invaders_00007.json",
         "plot_level": "Hard",
@@ -651,9 +651,9 @@
     },
     {
         "data_id": "space_invaders-mcq-00001",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
-        "question_description": "Ask the number of enemies in a row",
+        "question_description": "Ask the number of enemies in a column",
         "image": "images/space_invaders_00001.png",
         "state": "states/space_invaders_00001.json",
         "plot_level": "Easy",
@@ -674,9 +674,9 @@
     },
     {
         "data_id": "space_invaders-mcq-00002",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
-        "question_description": "Ask the number of enemies in a column",
+        "question_description": "Ask the number of enemies in a row",
         "image": "images/space_invaders_00001.png",
         "state": "states/space_invaders_00001.json",
         "plot_level": "Easy",
@@ -697,7 +697,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00003",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Ask the total number of enemies",
         "image": "images/space_invaders_00001.png",
@@ -720,7 +720,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00004",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 4,
         "question_description": "Ask the number of enemies with a specific color",
         "image": "images/space_invaders_00001.png",
@@ -743,7 +743,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00005",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 5,
         "question_description": "Ask the points gained by shooting once where the ship is",
         "image": "images/space_invaders_00001.png",
@@ -762,7 +762,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00006",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 6,
         "question_description": "Ask the points gained by moving to a given column and shooting once",
         "image": "images/space_invaders_00001.png",
@@ -781,7 +781,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00007",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 7,
         "question_description": "Ask the points gained by continually shooting where the ship is with the enemies keeping on moving",
         "image": "images/space_invaders_00001.png",
@@ -804,7 +804,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00008",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 8,
         "question_description": "Ask the maximum points gained by shooting once",
         "image": "images/space_invaders_00001.png",
@@ -827,7 +827,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00009",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 9,
         "question_description": "Ask the maximum points gained by shooting twice",
         "image": "images/space_invaders_00001.png",
@@ -850,9 +850,9 @@
     },
     {
         "data_id": "space_invaders-mcq-00010",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
-        "question_description": "Ask the number of enemies in a row",
+        "question_description": "Ask the number of enemies in a column",
         "image": "images/space_invaders_00002.png",
         "state": "states/space_invaders_00002.json",
         "plot_level": "Easy",
@@ -873,9 +873,9 @@
     },
     {
         "data_id": "space_invaders-mcq-00011",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
-        "question_description": "Ask the number of enemies in a column",
+        "question_description": "Ask the number of enemies in a row",
         "image": "images/space_invaders_00002.png",
         "state": "states/space_invaders_00002.json",
         "plot_level": "Easy",
@@ -896,7 +896,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00012",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Ask the total number of enemies",
         "image": "images/space_invaders_00002.png",
@@ -919,7 +919,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00013",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 4,
         "question_description": "Ask the number of enemies with a specific color",
         "image": "images/space_invaders_00002.png",
@@ -942,7 +942,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00014",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 5,
         "question_description": "Ask the points gained by shooting once where the ship is",
         "image": "images/space_invaders_00002.png",
@@ -961,7 +961,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00015",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 6,
         "question_description": "Ask the points gained by moving to a given column and shooting once",
         "image": "images/space_invaders_00002.png",
@@ -980,7 +980,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00016",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 7,
         "question_description": "Ask the points gained by continually shooting where the ship is with the enemies keeping on moving",
         "image": "images/space_invaders_00002.png",
@@ -1003,7 +1003,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00017",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 8,
         "question_description": "Ask the maximum points gained by shooting once",
         "image": "images/space_invaders_00002.png",
@@ -1026,7 +1026,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00018",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 9,
         "question_description": "Ask the maximum points gained by shooting twice",
         "image": "images/space_invaders_00002.png",
@@ -1049,9 +1049,9 @@
     },
     {
         "data_id": "space_invaders-mcq-00019",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
-        "question_description": "Ask the number of enemies in a row",
+        "question_description": "Ask the number of enemies in a column",
         "image": "images/space_invaders_00003.png",
         "state": "states/space_invaders_00003.json",
         "plot_level": "Easy",
@@ -1072,9 +1072,9 @@
     },
     {
         "data_id": "space_invaders-mcq-00020",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
-        "question_description": "Ask the number of enemies in a column",
+        "question_description": "Ask the number of enemies in a row",
         "image": "images/space_invaders_00003.png",
         "state": "states/space_invaders_00003.json",
         "plot_level": "Easy",
@@ -1095,7 +1095,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00021",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Ask the total number of enemies",
         "image": "images/space_invaders_00003.png",
@@ -1118,7 +1118,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00022",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 4,
         "question_description": "Ask the number of enemies with a specific color",
         "image": "images/space_invaders_00003.png",
@@ -1141,7 +1141,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00023",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 5,
         "question_description": "Ask the points gained by shooting once where the ship is",
         "image": "images/space_invaders_00003.png",
@@ -1160,7 +1160,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00024",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 6,
         "question_description": "Ask the points gained by moving to a given column and shooting once",
         "image": "images/space_invaders_00003.png",
@@ -1179,7 +1179,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00025",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 7,
         "question_description": "Ask the points gained by continually shooting where the ship is with the enemies keeping on moving",
         "image": "images/space_invaders_00003.png",
@@ -1202,9 +1202,9 @@
     },
     {
         "data_id": "space_invaders-mcq-00026",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
-        "question_description": "Ask the number of enemies in a row",
+        "question_description": "Ask the number of enemies in a column",
         "image": "images/space_invaders_00004.png",
         "state": "states/space_invaders_00004.json",
         "plot_level": "Medium",
@@ -1225,9 +1225,9 @@
     },
     {
         "data_id": "space_invaders-mcq-00027",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
-        "question_description": "Ask the number of enemies in a column",
+        "question_description": "Ask the number of enemies in a row",
         "image": "images/space_invaders_00004.png",
         "state": "states/space_invaders_00004.json",
         "plot_level": "Medium",
@@ -1248,7 +1248,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00028",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Ask the total number of enemies",
         "image": "images/space_invaders_00004.png",
@@ -1271,7 +1271,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00029",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 4,
         "question_description": "Ask the number of enemies with a specific color",
         "image": "images/space_invaders_00004.png",
@@ -1294,7 +1294,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00030",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 5,
         "question_description": "Ask the points gained by shooting once where the ship is",
         "image": "images/space_invaders_00004.png",
@@ -1313,7 +1313,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00031",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 6,
         "question_description": "Ask the points gained by moving to a given column and shooting once",
         "image": "images/space_invaders_00004.png",
@@ -1332,7 +1332,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00032",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 7,
         "question_description": "Ask the points gained by continually shooting where the ship is with the enemies keeping on moving",
         "image": "images/space_invaders_00004.png",
@@ -1355,7 +1355,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00033",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 8,
         "question_description": "Ask the maximum points gained by shooting once",
         "image": "images/space_invaders_00004.png",
@@ -1378,7 +1378,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00034",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 9,
         "question_description": "Ask the maximum points gained by shooting twice",
         "image": "images/space_invaders_00004.png",
@@ -1401,9 +1401,9 @@
     },
     {
         "data_id": "space_invaders-mcq-00035",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
-        "question_description": "Ask the number of enemies in a row",
+        "question_description": "Ask the number of enemies in a column",
         "image": "images/space_invaders_00005.png",
         "state": "states/space_invaders_00005.json",
         "plot_level": "Medium",
@@ -1424,9 +1424,9 @@
     },
     {
         "data_id": "space_invaders-mcq-00036",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
-        "question_description": "Ask the number of enemies in a column",
+        "question_description": "Ask the number of enemies in a row",
         "image": "images/space_invaders_00005.png",
         "state": "states/space_invaders_00005.json",
         "plot_level": "Medium",
@@ -1447,7 +1447,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00037",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Ask the total number of enemies",
         "image": "images/space_invaders_00005.png",
@@ -1470,7 +1470,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00038",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 4,
         "question_description": "Ask the number of enemies with a specific color",
         "image": "images/space_invaders_00005.png",
@@ -1493,7 +1493,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00039",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 5,
         "question_description": "Ask the points gained by shooting once where the ship is",
         "image": "images/space_invaders_00005.png",
@@ -1512,7 +1512,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00040",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 6,
         "question_description": "Ask the points gained by moving to a given column and shooting once",
         "image": "images/space_invaders_00005.png",
@@ -1531,9 +1531,9 @@
     },
     {
         "data_id": "space_invaders-mcq-00041",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
-        "question_description": "Ask the number of enemies in a row",
+        "question_description": "Ask the number of enemies in a column",
         "image": "images/space_invaders_00006.png",
         "state": "states/space_invaders_00006.json",
         "plot_level": "Hard",
@@ -1554,9 +1554,9 @@
     },
     {
         "data_id": "space_invaders-mcq-00042",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
-        "question_description": "Ask the number of enemies in a column",
+        "question_description": "Ask the number of enemies in a row",
         "image": "images/space_invaders_00006.png",
         "state": "states/space_invaders_00006.json",
         "plot_level": "Hard",
@@ -1577,7 +1577,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00043",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Ask the total number of enemies",
         "image": "images/space_invaders_00006.png",
@@ -1600,7 +1600,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00044",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 4,
         "question_description": "Ask the number of enemies with a specific color",
         "image": "images/space_invaders_00006.png",
@@ -1623,7 +1623,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00045",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 5,
         "question_description": "Ask the points gained by shooting once where the ship is",
         "image": "images/space_invaders_00006.png",
@@ -1642,7 +1642,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00046",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 6,
         "question_description": "Ask the points gained by moving to a given column and shooting once",
         "image": "images/space_invaders_00006.png",
@@ -1661,7 +1661,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00047",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 7,
         "question_description": "Ask the points gained by continually shooting where the ship is with the enemies keeping on moving",
         "image": "images/space_invaders_00006.png",
@@ -1684,7 +1684,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00048",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 8,
         "question_description": "Ask the maximum points gained by shooting once",
         "image": "images/space_invaders_00006.png",
@@ -1707,7 +1707,7 @@
     },
     {
         "data_id": "space_invaders-mcq-00049",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 9,
         "question_description": "Ask the maximum points gained by shooting twice",
         "image": "images/space_invaders_00006.png",
@@ -1730,9 +1730,9 @@
     },
     {
         "data_id": "space_invaders-mcq-00050",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
-        "question_description": "Ask the number of enemies in a row",
+        "question_description": "Ask the number of enemies in a column",
         "image": "images/space_invaders_00007.png",
         "state": "states/space_invaders_00007.json",
         "plot_level": "Hard",

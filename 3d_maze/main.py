@@ -686,11 +686,10 @@ Which combination of path choices leads to the goal?"""
         analysis += f"\nTherefore, the correct sequence is {correct_path_ordered}, that is {correct_path}, making the answer Option {correct_answer}."
         
         data = {
-            "qa_type": "TransitionPath",
+            "qa_type": "State Prediction",
             "question_description":"path_finding",
             "question_id": 0,
             "data_id": f"path-mcq-{index:05d}-path_finding",
-            "plot_id": f"path-plot-{index:05d}",
             "image": f"images/path-mcq-{index:05d}.png",
             "state": f"states/path-mcq-{index:05d}.json",
             "plot_level": get_plot_level(puzzle.cubes),
@@ -786,11 +785,10 @@ What is the correct sequence of numbered checkpoints when following the path fro
         analysis += f"\n\nTherefore, the correct sequence is {correct_sequence}, making the answer Option {correct_answer}."
         
         data = {
-            "qa_type": "TransitionPath",
+            "qa_type": "State Prediction",
             "question_description":"sequence_finding",
             "question_id": 1 ,
             "data_id": f"path-mcq-{index:05d}",
-            "plot_id": f"path-plot-{index:05d}",
             "image": f"images/path-mcq-{index:05d}.png",
             "state": f"states/path-mcq-{index:05d}.json",
             "plot_level": get_plot_level(puzzle.cubes),
@@ -866,11 +864,10 @@ What is the correct height relationship between the three numbered points? Use '
         analysis += f"\nTherefore, the correct height relationship is {correct_relation}, making the answer Option {correct_answer}."
         
         data = {
-            "qa_type": "StateInfo",
+            "qa_type": "Target Perception",
             "question_description":"height_comparison",
             "question_id": 2,
             "data_id": f"path-mcq-{index:05d}",
-            "plot_id": f"path-plot-{index:05d}",
             "image": f"images/path-mcq-{index:05d}.png",
             "state": f"states/path-mcq-{index:05d}.json",
             "plot_level": get_plot_level(puzzle.cubes),
@@ -991,11 +988,10 @@ What is the correct height relationship between the three numbered points? Use '
         analysis += f"\n\nTherefore, the blocks passed through on the main path are: {correct_answer}, making the answer Option {correct_option}."
         
         data = {
-            "qa_type": "TransitionPath",
+            "qa_type": "State Prediction",
             "question_description":"main_path",
             "question_id": 3,
             "data_id": f"path-mcq-{index:05d}",
-            "plot_id": f"path-plot-{index:05d}",
             "image": f"images/path-mcq-{index:05d}.png",
             "state": f"states/path-mcq-{index:05d}.json",
             "plot_level": get_plot_level(puzzle.cubes),

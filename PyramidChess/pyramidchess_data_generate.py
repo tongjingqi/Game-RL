@@ -101,42 +101,42 @@ def state_save(path,layers):
 def get_question_info(question_id):
     if question_id == 0:
         question_type = "mcq"
-        qa_type = "StateInfo"
-        description = "Choose a random coordinate and ask what status is the cooradinate"
+        qa_type = "Target Perception"
+        description = "Choose a random coordinate and ask what status is the coordinate"
         level = "Easy"
         return question_type,qa_type,level,description
     
     elif question_id == 1:
         question_type = "mcq"
-        qa_type = "ActionOutcome"
+        qa_type = "State Prediction"
         description = "Select a coordinate and determine whether a ball can be placed at this coordinate. If so, what would happen after the place of the ball."
         level = "Medium"
         return question_type,qa_type,level,description
     
     elif question_id == 2:
         question_type = "fill"
-        qa_type = "TransitionPath"
+        qa_type = "State Prediction"
         description = "Calculate how many steps (turns) are required for a ball to be placed at certain coordinate.(Including the step putting the ball at the cooradinate)"
         level = "Hard"
         return question_type,qa_type,level,description
     
     elif question_id == 3:
         question_type = "fill"
-        qa_type = "StrategyOptimization"
+        qa_type = "Strategy Optimization"
         description = "Give out the best position to put the ball at a certain point of a game."
         level = "Hard"
         return question_type,qa_type,level,description
     
     elif question_id == 4:
         question_type = "fill"
-        qa_type = "StateInfo"
+        qa_type = "Target Perception"
         description = "Calculate how many balls are there one the board."
         level = "Easy"
         return question_type,qa_type,level,description
     
     elif question_id == 5:
         question_type = "mcq"
-        qa_type = "StateInfo"
+        qa_type = "Target Perception"
         description = "Provide the higher level status of a coordinate: Is the coordinate legal? Does it contain a ball? Can the ball be taken? Can a ball be placed?"
         level = "Medium"
         return question_type,qa_type,level,description
