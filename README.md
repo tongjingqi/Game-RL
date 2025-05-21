@@ -1,12 +1,12 @@
 # Code2Logic: Game-Code-Driven Data Synthesis for Enhancing VLMs General Reasoning
 
-Code for the paper "Code2Logic: Game-Code-Driven Data Synthesis for Enhancing VLMs General Reasoning".
-
-[[🤗 GameQA-140K Dataset](https://huggingface.co/datasets/Gabriel166/GameQA-140K)]
+Code for the paper "[Code2Logic: Game-Code-Driven Data Synthesis for Enhancing VLMs General Reasoning](https://arxiv.org/abs/2505.13886)".
 
 This is the first work, to the best of our knowledge, that leverages ***game code*** to synthesize multimodal reasoning data for ***training*** VLMs. Furthermore, when trained solely with a GRPO strategy on **GameQA** (synthesized via our proposed **Code2Logic** approach), multiple cutting-edge open-source models exhibit significantly enhanced out-of-domain generalization.
 
-<div align=center><img src="./assets/categorized_30_games_images.png" alt="categorized_30_games_images" width="90%" /></div>
+[[📖 Paper](https://arxiv.org/abs/2505.13886)] [[🤗 GameQA-140K Dataset](https://huggingface.co/datasets/Gabriel166/GameQA-140K)]
+
+<div align=center><img src="./assets/categorized_30_games_images.png" alt="categorized_30_games_images" width="100%" /></div>
 
 ## Introduction
 
@@ -16,13 +16,13 @@ Game code typically encodes sate transition logic and causal reasoning chains, a
 
 ### Code2Logic Approach
 
-<div align=center><img src="./assets/Code2Logic_approach.png" alt="Code2Logic_approach" width="75%" /></div>
+<div align=center><img src="./assets/Code2Logic_approach.png" alt="Code2Logic_approach" width="90%" /></div>
 
 For a selected game, the Code2Logic approach works as follows. We construct game code using LLMs at first. Then, design and refine some QA templates with the help of LLM. Finally, prompt the LLM to construct data engine based on the game code. During code execution, data engine fills out the QA templates to generate massive data samples containing detailed reasoning processes.
 
 ### GameQA Dataset
 
-<div align=center><img src="./assets/4_game_example_samples.png" alt="4_game_example_samples" width="80%" /></div>
+<div align=center><img src="./assets/4_game_example_samples.png" alt="4_game_example_samples" width="90%" /></div>
 
 Our GameQA dataset transforms the game-playing tasks into Visual Question Answering format. It encompasses 30 different games classified into 4 categories based on the core capabilities required to solve game tasks, with 4 games from different categories and their example data samples illustrated in the image above. The data samples in GameQA are also reasonably graded (see [🤗 GameQA-140K](https://huggingface.co/datasets/Gabriel166/GameQA-140K)).
 
