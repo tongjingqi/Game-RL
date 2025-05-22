@@ -49,3 +49,8 @@ Feel free to use the code directly to generate more samples, or adapt it to prod
 - [ ] Build the project webpage.
 - [ ] Release code for training and evaluating VLMs with GameQA.
 
+## Acknowledgments
+
+*We would like to acknowledge the valuable efforts of the following individuals, whose work on the data synthesis and validation processes was of great importance to the development of this project:* (Sorted by last name, then first name)
+
+Ruifeng Chen, Yingqian Huang, Yutong Ke, Hengxi Lin, Yuanhao Ni, Qingyun Shi, Haitian Wang, Xiaoyong Wang, Yufei You, Juntao Zhang, Weixin Zhang, Yang Zhang
