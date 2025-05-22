@@ -41,3 +41,11 @@ Feel free to use the code directly to generate more samples, or adapt it to prod
 | :------------------ | :--------------------------------------: | :------------------------------: | :----------------------------------------------------: | :------------------------------------------------------: |
 | **In Domain** | [3D Maze](./3d_maze) <br> [Rubik's Cube](./rubiks_cube) <br> [3D Reconstruction](./3DReconstruction) | [Tangram](./tangram) <br> [Freecell](./freecell) <br> [Tetris](./tetris) <br> [Zuma](./zuma) <br/> [Spider Solitaire](./spider_solitaire) <br> [Color Hue](./hue) | [Langton's Ant](./langton_ant) <br> [2D Turing Machine](./2d_turing_machine) <br> [Word Search](./word_search) <br> [Tents](./tents) <br> [Rhythm Game](./rhythm_game) <br> [Star Battle](./star-battle) | [Sokoban](./sokoban) <br> [Maze](./maze) <br> [TicTacToe](./tictactoe) <br> [Ultra TicTacToe](./ultra_tictactoe) <br> [Space Invaders](./space_invaders) |
 | **Out of Domain** | [Pyramid Chess](./PyramidChess) <br> [Minecraft](./minecraft) | [Jewel2](./jewel2) <br> [Klondike](./klondike) | [Sudoku](./sudoku) <br> [Lifegame](./lifegame) <br> [Minesweeper](./minesweeper) | [Snake](./snake) <br> [Chess Ranger](./chess_ranger) <br> [Pacman](./pacman) |
+
+## 📌 Coming soon
+
+- [x] Release code used to generate samples for each game in GameQA.
+- [ ] Release the fine-tuned models (InternVL3-8b, Qwen2.5-VL-7b, LLaVA-OV-7b) using GRPO on GameQA.
+- [ ] Build the project webpage.
+- [ ] Release code for training and evaluating VLMs with GameQA.
+

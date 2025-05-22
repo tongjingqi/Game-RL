@@ -1,1 +1,2 @@
 pygame==2.6.1
+tqdm
