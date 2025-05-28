@@ -8,6 +8,14 @@ This is the first work, to the best of our knowledge, that leverages ***game cod
 
 <div align=center><img src="./assets/categorized_30_games_images.png" alt="categorized_30_games_images" width="100%" /></div>
 
+## News
+
+* We've open-sourced the three models trained with GRPO on GameQA on [Huggingface](https://huggingface.co/Code2Logic):
+  * [GameQA-InternVL3-8B](https://huggingface.co/Code2Logic/GameQA-InternVL3-8B)
+  * [GameQA-Qwen2.5-VL-7B](https://huggingface.co/Code2Logic/GameQA-Qwen2.5-VL-7B)
+  * [GameQA-LLaVA-OV-7B](https://huggingface.co/Code2Logic/GameQA-llava-onevision-qwen2-7b-ov-hf)
+
+
 ## Introduction
 
 Visual Language Models (VLMs) have achieved impressive progress in tasks such as image description and general visual question answering, yet their performance remains limited in complex visual tasks requiring multi-step reasoning. However, the scarcity of high-quality multimodal reasoning datasets hinders the improvement of reasoning capabilities in VLMs.
@@ -45,7 +53,7 @@ Feel free to use the code directly to generate more samples, or adapt it to prod
 ## 📌 Coming soon
 
 - [x] Release code used to generate samples for each game in GameQA.
-- [ ] Release the fine-tuned models (InternVL3-8b, Qwen2.5-VL-7b, LLaVA-OV-7b) using GRPO on GameQA.
+- [x] Release the fine-tuned models (InternVL3-8b, Qwen2.5-VL-7b, LLaVA-OV-7b) using GRPO on GameQA.
 - [ ] Build the project webpage.
 - [ ] Release code for training and evaluating VLMs with GameQA.
 
