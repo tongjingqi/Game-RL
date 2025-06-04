@@ -2,7 +2,7 @@
 
 Code for the paper "[Code2Logic: Game-Code-Driven Data Synthesis for Enhancing VLMs General Reasoning](https://arxiv.org/abs/2505.13886)".
 
-This is the first work, to the best of our knowledge, that leverages ***game code*** to synthesize multimodal reasoning data for ***training*** VLMs. Furthermore, when trained solely with a GRPO strategy on **GameQA** (synthesized via our proposed **Code2Logic** approach), multiple cutting-edge open-source models exhibit significantly enhanced out-of-domain generalization.
+This is the first work, to the best of our knowledge, that leverages ***game code*** to synthesize multimodal reasoning data for ***training*** VLMs. Furthermore, when trained with a GRPO strategy solely on **GameQA** (synthesized via our proposed **Code2Logic** approach), multiple cutting-edge open-source models exhibit significantly enhanced out-of-domain generalization.
 
 [[📖 Paper](https://arxiv.org/abs/2505.13886)] [🤗 [GameQA-140K Dataset](https://huggingface.co/datasets/Gabriel166/GameQA-140K)] [🤗 [GameQA-InternVL3-8B](https://huggingface.co/Code2Logic/GameQA-InternVL3-8B) ] [🤗 [GameQA-Qwen2.5-VL-7B](https://huggingface.co/Code2Logic/GameQA-Qwen2.5-VL-7B)] [🤗 [GameQA-LLaVA-OV-7B](https://huggingface.co/Code2Logic/GameQA-llava-onevision-qwen2-7b-ov-hf) ]
 
