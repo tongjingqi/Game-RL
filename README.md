@@ -4,16 +4,15 @@ Code for the paper "[Code2Logic: Game-Code-Driven Data Synthesis for Enhancing V
 
 This is the first work, to the best of our knowledge, that leverages ***game code*** to synthesize multimodal reasoning data for ***training*** VLMs. Furthermore, when trained with a GRPO strategy solely on **GameQA** (synthesized via our proposed **Code2Logic** approach), multiple cutting-edge open-source models exhibit significantly enhanced out-of-domain generalization.
 
-[[📖 Paper](https://arxiv.org/abs/2505.13886)] [🤗 [GameQA-140K Dataset](https://huggingface.co/datasets/Gabriel166/GameQA-140K)] [🤗 [GameQA-InternVL3-8B](https://huggingface.co/Code2Logic/GameQA-InternVL3-8B) ] [🤗 [GameQA-Qwen2.5-VL-7B](https://huggingface.co/Code2Logic/GameQA-Qwen2.5-VL-7B)] [🤗 [GameQA-LLaVA-OV-7B](https://huggingface.co/Code2Logic/GameQA-llava-onevision-qwen2-7b-ov-hf) ]
+[[📖 Paper](https://arxiv.org/abs/2505.13886)] [[🤗 GameQA-140K Dataset](https://huggingface.co/datasets/Gabriel166/GameQA-140K)] [[🤗 GameQA-InternVL3-8B](https://huggingface.co/Code2Logic/GameQA-InternVL3-8B) ] [[🤗 GameQA-Qwen2.5-VL-7B](https://huggingface.co/Code2Logic/GameQA-Qwen2.5-VL-7B)] [[🤗 GameQA-LLaVA-OV-7B](https://huggingface.co/Code2Logic/GameQA-llava-onevision-qwen2-7b-ov-hf) ]
 
 <div align=center><img src="./assets/categorized_30_games_images.png" alt="categorized_30_games_images" width="100%" /></div>
 
-## News
+## 💥 News
 
 * We've open-sourced the ***three*** models trained with GRPO on GameQA on [Huggingface](https://huggingface.co/Code2Logic).
 
-
-## Introduction
+## 👀 Introduction
 
 Visual Language Models (VLMs) have achieved impressive progress in tasks such as image description and general visual question answering, yet their performance remains limited in complex visual tasks requiring multi-step reasoning. However, the scarcity of high-quality multimodal reasoning datasets hinders the improvement of reasoning capabilities in VLMs.
 
@@ -23,7 +22,7 @@ Game code typically encodes sate transition logic and causal reasoning chains, a
 
 <div align=center><img src="./assets/Code2Logic_approach.png" alt="Code2Logic_approach" width="90%" /></div>
 
-For a selected game, the Code2Logic approach works as follows. We construct game code using LLMs at first. Then, design and refine some QA templates with the help of LLM. Finally, prompt the LLM to construct data engine based on the game code. During code execution, data engine fills out the QA templates to generate massive data samples containing detailed reasoning processes.
+For a selected game, the Code2Logic approach works as follows. We construct game code using LLMs at first. Then, design and refine some QA templates with the help of LLM. Finally, prompt the LLM to construct data engine based on the game code. During code execution, data engine fills out the QA templates to generate massive data samples containing correct and detailed reasoning processes.
 
 ### GameQA Dataset
 
@@ -42,9 +41,10 @@ The following steps will guide you on how to set up the environment, train, and 
     ```
 
 2.  **Download the Dataset**
-    Download the `GameQA-5K` dataset. Please ensure the dataset is placed in an appropriate location within the project, e.g., `Code2Logic/data/GameQA-5K/` .[🤗 GameQA-5K](https://huggingface.co/datasets/Code2Logic/GameQA-5K)
+    Download the `GameQA-5K` dataset. Please ensure the dataset is placed in an appropriate location within the project, e.g., `Code2Logic/data/GameQA-5K/` .[🤗 GameQA-5K](https://huggingface.co/datasets/Code2Logic/GameQA-5K) (To be updated soon.)
 
 3.  **Setup Environment**
+    
     ```bash
     # Install main dependencies 
     pip install vllm==7.3.0 flash-attn --no-build-isolation
@@ -54,7 +54,7 @@ The following steps will guide you on how to set up the environment, train, and 
     pip install -e .
     cd ..
     ```
-
+    
 4.  **Training and Evaluation**
 
     *   **Start the Reward Model**
@@ -86,7 +86,7 @@ The following steps will guide you on how to set up the environment, train, and 
 
         **Note on Evaluation Model**: The evaluation in the paper follows the use of the `qwen2.5-72b-awq` model. You can also configure the script to use other evaluation APIs or models as needed.
 
-## All Code for Generating GameQA samples
+## 🎮 All Code for Generating GameQA samples
 
 In this repository, we provide the code used to generate samples for each game in GameQA. There are 30 directories in total - one for each game.
 
@@ -97,19 +97,20 @@ Apart form the code, each game directory contains:
 
 Feel free to use the code directly to generate more samples, or adapt it to produce more types of training data for your specific requirements.
 
-|                     | 3D Spatial Perception and Understanding | Pattern Recognition and Matching | Multi-step Reasoning                                  | Strategic Planning                                      |
-| :------------------ | :--------------------------------------: | :------------------------------: | :----------------------------------------------------: | :------------------------------------------------------: |
-| **In Domain** | [3D Maze](./3d_maze) <br> [Rubik's Cube](./rubiks_cube) <br> [3D Reconstruction](./3DReconstruction) | [Tangram](./tangram) <br> [Freecell](./freecell) <br> [Tetris](./tetris) <br> [Zuma](./zuma) <br/> [Spider Solitaire](./spider_solitaire) <br> [Color Hue](./hue) | [Langton's Ant](./langton_ant) <br> [2D Turing Machine](./2d_turing_machine) <br> [Word Search](./word_search) <br> [Tents](./tents) <br> [Rhythm Game](./rhythm_game) <br> [Star Battle](./star-battle) | [Sokoban](./sokoban) <br> [Maze](./maze) <br> [TicTacToe](./tictactoe) <br> [Ultra TicTacToe](./ultra_tictactoe) <br> [Space Invaders](./space_invaders) |
-| **Out of Domain** | [Pyramid Chess](./PyramidChess) <br> [Minecraft](./minecraft) | [Jewel2](./jewel2) <br> [Klondike](./klondike) | [Sudoku](./sudoku) <br> [Lifegame](./lifegame) <br> [Minesweeper](./minesweeper) | [Snake](./snake) <br> [Chess Ranger](./chess_ranger) <br> [Pacman](./pacman) |
+|                   |           3D Spatial Perception and Understanding            |               Pattern Recognition and Matching               |                     Multi-step Reasoning                     |                      Strategic Planning                      |
+| :---------------- | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
+| **In Domain**     | [3D Maze](./src/3d_maze) <br> [Rubik's Cube](./src/rubiks_cube) <br> [3D Reconstruction](./src/3DReconstruction) | [Tangram](./src/tangram) <br> [Freecell](./src/freecell) <br> [Tetris](./src/tetris) <br> [Zuma](./src/zuma) <br/> [Spider Solitaire](./src/spider_solitaire) <br> [Color Hue](./src/hue) | [Langton's Ant](./src/langton_ant) <br> [2D Turing Machine](./src/2d_turing_machine) <br> [Word Search](./src/word_search) <br> [Tents](./src/tents) <br> [Rhythm Game](./src/rhythm_game) <br> [Star Battle](./src/star-battle) | [Sokoban](./src/sokoban) <br> [Maze](./src/maze) <br> [TicTacToe](./src/tictactoe) <br> [Ultra TicTacToe](./src/ultra_tictactoe) <br> [Space Invaders](./src/space_invaders) |
+| **Out of Domain** | [Pyramid Chess](./src/PyramidChess) <br> [Minecraft](./src/minecraft) |    [Jewel2](./src/jewel2) <br> [Klondike](./src/klondike)    | [Sudoku](./src/sudoku) <br> [Lifegame](./src/lifegame) <br> [Minesweeper](./src/minesweeper) | [Snake](./src/snake) <br> [Chess Ranger](./src/chess_ranger) <br> [Pacman](./src/pacman) |
 
 ## 📌 Coming soon
 
 - [x] Release code used to generate samples for each game in GameQA.
 - [x] Release the fine-tuned models (InternVL3-8b, Qwen2.5-VL-7b, LLaVA-OV-7b) using GRPO on GameQA.
-- [ ] Build the project webpage.
 - [x] Release code for training and evaluating VLMs with GameQA.
+- [ ] [🤗 GameQA-5K](https://huggingface.co/datasets/Code2Logic/GameQA-5K).
+- [ ] The project webpage.
 
-## Acknowledgments
+## 🤝 Acknowledgments
 
 *We would like to acknowledge the valuable efforts of the following individuals, whose work on the data synthesis and validation processes was of great importance to the development of this project:* (Sorted by last name, then first name)
 
@@ -119,9 +120,11 @@ Ruifeng Chen, Yingqian Huang, Yutong Ke, Hengxi Lin, Yuanhao Ni, Qingyun Shi, Ha
 
 Our work also builds upon or makes use of the **ModelScope Swift (ms-swift)** framework, an excellent toolkit for efficient large model training and inference. We express our sincere gratitude to the developers of ms-swift for their support and contributions to the community.
 
-*   **ms-swift Project:** [https://github.com/modelscope/ms-swift.git](https://github.com/modelscope/ms-swift.git)
+*   **ms-swift Project:** [https://github.com/modelscope/ms-swift.git](https://github.com/modelscope/ms-swift.git)	
 
-If you find our work (Code2Logic) useful in your research, please consider citing our paper:
+## 🔎 Citation
+
+If you find our work (Code2Logic) useful in your research, please consider citing our paper and ms-swift's:
 
 ```bibtex
 @misc{tong2025code2logicgamecodedrivendatasynthesis,
@@ -143,3 +146,4 @@ If you find our work (Code2Logic) useful in your research, please consider citin
       primaryClass={cs.CL},
       url={https://arxiv.org/abs/2408.05517},
 }
+```

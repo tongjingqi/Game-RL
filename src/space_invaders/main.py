@@ -17,8 +17,8 @@ import os
 import argparse
 
 tasks = [
-    (1, 'Ask the number of enemies in a row', gen_num_enemies_on_col_qa),
-    (2, 'Ask the number of enemies in a column', gen_num_enemies_on_row_qa),
+    (1, 'Ask the number of enemies in a column', gen_num_enemies_on_col_qa),
+    (2, 'Ask the number of enemies in a row', gen_num_enemies_on_row_qa),
     (3, 'Ask the total number of enemies', gen_total_num_enemies_qa),
     (4, 'Ask the number of enemies with a specific color', gen_num_color_enemies_qa),
     (5, 'Ask the points gained by shooting once where the ship is', gen_shoot_here_gain_points_qa),
