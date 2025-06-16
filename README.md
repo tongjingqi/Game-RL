@@ -4,13 +4,14 @@ Code for the paper "[Code2Logic: Game-Code-Driven Data Synthesis for Enhancing V
 
 This is the first work, to the best of our knowledge, that leverages ***game code*** to synthesize multimodal reasoning data for ***training*** VLMs. Furthermore, when trained with a GRPO strategy solely on **GameQA** (synthesized via our proposed **Code2Logic** approach), multiple cutting-edge open-source models exhibit significantly enhanced out-of-domain generalization.
 
-[[📖 Paper](https://arxiv.org/abs/2505.13886)] [[🤗 GameQA-140K Dataset](https://huggingface.co/datasets/Gabriel166/GameQA-140K)] [[🤗 GameQA-InternVL3-8B](https://huggingface.co/Code2Logic/GameQA-InternVL3-8B) ] [[🤗 GameQA-Qwen2.5-VL-7B](https://huggingface.co/Code2Logic/GameQA-Qwen2.5-VL-7B)] [[🤗 GameQA-LLaVA-OV-7B](https://huggingface.co/Code2Logic/GameQA-llava-onevision-qwen2-7b-ov-hf) ]
+[[📖 Paper](https://arxiv.org/abs/2505.13886)] [[🤗 GameQA-140K Dataset](https://huggingface.co/datasets/Gabriel166/GameQA-140K)] [[🤗 GameQA-5K Dataset](https://huggingface.co/datasets/Code2Logic/GameQA-5K)] [[🤗 GameQA-InternVL3-8B](https://huggingface.co/Code2Logic/GameQA-InternVL3-8B) ] [[🤗 GameQA-Qwen2.5-VL-7B](https://huggingface.co/Code2Logic/GameQA-Qwen2.5-VL-7B)] [[🤗 GameQA-LLaVA-OV-7B](https://huggingface.co/Code2Logic/GameQA-llava-onevision-qwen2-7b-ov-hf) ]
 
 <div align=center><img src="./assets/categorized_30_games_images.png" alt="categorized_30_games_images" width="100%" /></div>
 
 ## 💥 News
 
 * We've open-sourced the ***three*** models trained with GRPO on GameQA on [Huggingface](https://huggingface.co/Code2Logic).
+* We've released the [5k samples](https://huggingface.co/datasets/Code2Logic/GameQA-5K) from the complete dataset used in our work for GRPO training of the models.
 
 ## 👀 Introduction
 
@@ -41,7 +42,7 @@ The following steps will guide you on how to set up the environment, train, and 
     ```
 
 2.  **Download the Dataset**
-    Download the `GameQA-5K` dataset. Please ensure the dataset is placed in an appropriate location within the project, e.g., `Code2Logic/data/GameQA-5K/` .[🤗 GameQA-5K](https://huggingface.co/datasets/Code2Logic/GameQA-5K) (To be updated soon.)
+    Download the [🤗 GameQA-5K](https://huggingface.co/datasets/Code2Logic/GameQA-5K) dataset. Please ensure the dataset is placed in an appropriate location within the project, e.g., `Code2Logic/data/GameQA-5K/`.
 
 3.  **Setup Environment**
     
@@ -59,32 +60,35 @@ The following steps will guide you on how to set up the environment, train, and 
 
     *   **Start the Reward Model**
         First, you need to start the reward model API. Execute the following in the `Code2Logic` root directory:
+        
         ```bash
         bash scripts/reward_api.sh
         ```
         Ensure this service starts successfully and runs in the background.
-
+        
     *   **Start Training**
         After the reward model is running, you can begin training the Qwen2.5-VL model. Execute the following in the `Code2Logic` root directory:
         ```bash
         bash scripts/train_qwen2_5vl.sh
         ```
-
+    
     *   **Model Inference**
         Once training is complete, perform inference with your model to generate predictions. Execute the following in the `Code2Logic` root directory:
         ```bash
         bash scripts/infer.sh
         ```
         This will typically output a JSON file containing the model's predictions.
-
+    
     *   **Evaluate Results**
         Use the `eval.sh` script to evaluate the JSON file output by `infer.sh`. Execute the following in the `Code2Logic` root directory:
         ```bash
         bash scripts/eval.sh path/to/your/inference_output.json
         ```
         *(Please replace `path/to/your/inference_output.json` with the actual path to your inference output file.)*
-
+    
         **Note on Evaluation Model**: The evaluation in the paper follows the use of the `qwen2.5-72b-awq` model. You can also configure the script to use other evaluation APIs or models as needed.
+        
+        > *In our work, the inference and evaluation configurations were unified across both the original open-source models and our trained models.*
 
 ## 🎮 All Code for Generating GameQA samples
 
@@ -107,7 +111,7 @@ Feel free to use the code directly to generate more samples, or adapt it to prod
 - [x] Release code used to generate samples for each game in GameQA.
 - [x] Release the fine-tuned models (InternVL3-8b, Qwen2.5-VL-7b, LLaVA-OV-7b) using GRPO on GameQA.
 - [x] Release code for training and evaluating VLMs with GameQA.
-- [ ] [🤗 GameQA-5K](https://huggingface.co/datasets/Code2Logic/GameQA-5K).
+- [x] Release [🤗 GameQA-5K](https://huggingface.co/datasets/Code2Logic/GameQA-5K) (used in our work for GRPO training of the models).
 - [ ] The project webpage.
 
 ## 🤝 Acknowledgments
