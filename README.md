@@ -48,7 +48,8 @@ The following steps will guide you on how to set up the environment, train, and 
     
     ```bash
     # Install main dependencies 
-    pip install vllm==0.7.3 flash-attn --no-build-isolation
+    pip install vllm==0.7.3
+    pip install flash-attn --no-build-isolation
     
     # Install ms-swift 
     cd ms-swift
