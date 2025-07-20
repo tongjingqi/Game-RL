@@ -4,7 +4,7 @@ Code for the paper "[Code2Logic: Game-Code-Driven Data Synthesis for Enhancing V
 
 This is the first work, to the best of our knowledge, that leverages ***game code*** to synthesize multimodal reasoning data for ***training*** VLMs. Furthermore, when trained with a GRPO strategy solely on **GameQA** (synthesized via our proposed **Code2Logic** approach), multiple cutting-edge open-source models exhibit significantly enhanced out-of-domain generalization.
 
-[[📖 Paper](https://arxiv.org/abs/2505.13886)] [[🤗 GameQA-140K Dataset](https://huggingface.co/datasets/Gabriel166/GameQA-140K)] [[🤗 GameQA-5K Dataset](https://huggingface.co/datasets/Code2Logic/GameQA-5K)] [[🤗 GameQA-InternVL3-8B](https://huggingface.co/Code2Logic/GameQA-InternVL3-8B) ] [[🤗 GameQA-Qwen2.5-VL-7B](https://huggingface.co/Code2Logic/GameQA-Qwen2.5-VL-7B)] [[🤗 GameQA-LLaVA-OV-7B](https://huggingface.co/Code2Logic/GameQA-llava-onevision-qwen2-7b-ov-hf) ]
+[[📖 Paper](https://arxiv.org/abs/2505.13886)] [[🤗 GameQA-140K Dataset](https://huggingface.co/datasets/Gabriel166/GameQA-140K)] [[🤗 GameQA-5K Dataset](https://huggingface.co/datasets/Code2Logic/GameQA-5K)] [[🤗 GameQA-InternVL3-8B](https://huggingface.co/Code2Logic/GameQA-InternVL3-8B) ] [[🤗 GameQA-InternVL2.5-8B](https://huggingface.co/Code2Logic/GameQA-InternVL2.5-8B) ] [[🤗 GameQA-Qwen2.5-VL-7B](https://huggingface.co/Code2Logic/GameQA-Qwen2.5-VL-7B)] [[🤗 GameQA-LLaVA-OV-7B](https://huggingface.co/Code2Logic/GameQA-llava-onevision-qwen2-7b-ov-hf) ]
 
 <div align=center><img src="./assets/categorized_30_games_images.png" alt="categorized_30_games_images" width="100%" /></div>
 
@@ -93,14 +93,15 @@ The following steps will guide you on how to set up the environment, train, and 
 
 ## 🎮 All Code for Generating GameQA samples
 
-In this repository, we provide the code used to generate samples for each game in GameQA. There are 30 directories in total - one for each game.
+In this repository, we also provide the code used to generate samples for each game in GameQA - see the [src/](./src) directory. There are 30 directories in total - one for each game.
 
 Apart form the code, each game directory contains:
 
 1. A README file describing the game tasks and code execution instructions
 2. A subdirectory with example samples
 
-Feel free to use the code directly to generate more samples, or adapt it to produce more types of training data for your specific requirements.
+> 😎 Feel free to use the code directly to generate more samples, or adapt it to produce more types of training data for your specific requirements.
+>
 
 |                   |           3D Spatial Perception and Understanding            |               Pattern Recognition and Matching               |                     Multi-step Reasoning                     |                      Strategic Planning                      |
 | :---------------- | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
@@ -110,10 +111,9 @@ Feel free to use the code directly to generate more samples, or adapt it to prod
 ## 📌 Coming soon
 
 - [x] Release code used to generate samples for each game in GameQA.
-- [x] Release the fine-tuned models (InternVL3-8b, Qwen2.5-VL-7b, LLaVA-OV-7b) using GRPO on GameQA.
+- [x] Release the fine-tuned models (InternVL3-8b, InternVL2.5-8b, Qwen2.5-VL-7b, LLaVA-OV-7b) using GRPO on GameQA.
 - [x] Release code for training and evaluating VLMs with GameQA.
 - [x] Release [🤗 GameQA-5K](https://huggingface.co/datasets/Code2Logic/GameQA-5K) (used in our work for GRPO training of the models).
-- [ ] The project webpage.
 
 ## 🤝 Acknowledgments
 
