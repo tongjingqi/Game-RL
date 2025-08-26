@@ -8,11 +8,6 @@ This is the first work, to the best of our knowledge, that leverages ***game cod
 
 <div align=center><img src="./assets/categorized_30_games_images.png" alt="categorized_30_games_images" width="100%" /></div>
 
-## 💥 News
-
-* We've open-sourced the ***three*** models trained with GRPO on GameQA on [Huggingface](https://huggingface.co/Code2Logic).
-* We've released the [5k samples](https://huggingface.co/datasets/Code2Logic/GameQA-5K) from the complete dataset used in our work for GRPO training of the models.
-
 ## 👀 Introduction
 
 Visual Language Models (VLMs) have achieved impressive progress in tasks such as image description and general visual question answering, yet their performance remains limited in complex visual tasks requiring multi-step reasoning. However, the scarcity of high-quality multimodal reasoning datasets hinders the improvement of reasoning capabilities in VLMs.
