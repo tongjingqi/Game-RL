@@ -108,12 +108,6 @@ Apart form the code, each game directory contains:
 | **In Domain**     | [3D Maze](./src/3d_maze) <br> [Rubik's Cube](./src/rubiks_cube) <br> [3D Reconstruction](./src/3DReconstruction) | [Tangram](./src/tangram) <br> [Freecell](./src/freecell) <br> [Tetris](./src/tetris) <br> [Zuma](./src/zuma) <br/> [Spider Solitaire](./src/spider_solitaire) <br> [Color Hue](./src/hue) | [Langton's Ant](./src/langton_ant) <br> [2D Turing Machine](./src/2d_turing_machine) <br> [Word Search](./src/word_search) <br> [Tents](./src/tents) <br> [Rhythm Game](./src/rhythm_game) <br> [Star Battle](./src/star-battle) | [Sokoban](./src/sokoban) <br> [Maze](./src/maze) <br> [TicTacToe](./src/tictactoe) <br> [Ultra TicTacToe](./src/ultra_tictactoe) <br> [Space Invaders](./src/space_invaders) |
 | **Out of Domain** | [Pyramid Chess](./src/PyramidChess) <br> [Minecraft](./src/minecraft) |    [Jewel2](./src/jewel2) <br> [Klondike](./src/klondike)    | [Sudoku](./src/sudoku) <br> [Lifegame](./src/lifegame) <br> [Minesweeper](./src/minesweeper) | [Snake](./src/snake) <br> [Chess Ranger](./src/chess_ranger) <br> [Pacman](./src/pacman) |
 
-## 📌 Coming soon
-
-- [x] Release code used to generate samples for each game in GameQA.
-- [x] Release the fine-tuned models (InternVL3-8b, InternVL2.5-8b, Qwen2.5-VL-7b, LLaVA-OV-7b) using GRPO on GameQA.
-- [x] Release code for training and evaluating VLMs with GameQA.
-- [x] Release [🤗 GameQA-5K](https://huggingface.co/datasets/Code2Logic/GameQA-5K) (used in our work for GRPO training of the models).
 
 ## 🤝 Acknowledgments
 
