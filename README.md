@@ -11,10 +11,6 @@ This is the first work, to the best of our knowledge, that adapts ***game code**
 
 ## 👀 Introduction
 
-Visual Language Models (VLMs) have achieved impressive progress in tasks such as image description and general visual question answering, yet their performance remains limited in complex visual tasks requiring multi-step reasoning. However, the scarcity of high-quality multimodal reasoning datasets hinders the improvement of reasoning capabilities in VLMs.
-
-Game code typically encodes sate transition logic and causal reasoning chains, and can be efficiently generated with LLMs. Inspired by this, we leverage game code to generate multimodal reasoning data at scale. We propose the Code2Logic approach that systematically maps code semantics to multimodal reasoning logic, and construct the GameQA-140K dataset spanning 30 different games for training and evaluating VLMs.
-
 Real-world vision language reasoning scenarios often include diverse and complex tasks. However, vision language reinforcement learning has primarily focused on a narrow set of tasks (e.g. geometry or chart reasoning), limiting the improvement of Vision Language Models' (VLMs) general reasoning. Therefore, we propose a novel **Code2Logic** approach, using Large Language Models (LLMs) to synthesize new verifiable game reasoning tasks at scale via adapting game code. Using the Code2Logic, we developed the **GameQA** dataset to train and evaluate VLMs. GameQA is **verifiable** and **scalable**, offers **controllable difficulty gradation** and is **diverse** with **30 games** and **158 tasks**. Then we apply **Game-RL**, which is simple reinforcement learning on GameQA. Surprisingly, despite training solely on game tasks, VLMs demonstrated out of domain generalization, specifically Qwen2.5-VL-7B improving performance by **2.33%** across 7 diverse vision-language benchmarks.
 
 ### Code2Logic Approach
