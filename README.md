@@ -1,6 +1,6 @@
-# Game-RL: Synthesizing Verifiable Game Tasks at Scale to Boost VLMs General Reasoning
+# Game-RL: Synthesizing Multimodal Verifiable Game Data to Boost VLMs’ General Reasoning
 
-Code for the paper "[Game-RL: Synthesizing Verifiable Game Tasks at Scale to Boost VLMs General Reasoning](https://arxiv.org/abs/2505.13886)".
+Code for the paper "[Game-RL: Synthesizing Multimodal Verifiable Game Data to Boost VLMs’ General Reasoning](https://arxiv.org/abs/2505.13886)".
 
 This is the first work, to the best of our knowledge, that adapts ***game code*** to synthesize multimodal reasoning data for ***training*** VLMs. Furthermore, when when applied **Game-RL**, which is simple GRPO on **GameQA** (synthesized via our proposed **Code2Logic** approach), multiple cutting-edge open-source models exhibit significantly enhanced out-of-domain generalization.
 
