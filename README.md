@@ -109,6 +109,8 @@ Apart form the code, each game directory contains:
 
 Ruifeng Chen, Yingqian Huang, Yutong Ke, Hengxi Lin, Yuanhao Ni, Qingyun Shi, Haitian Wang, Xiaoyong Wang, Yufei You, Juntao Zhang, Weixin Zhang, Yang Zhang
 
+*We would like to acknowledge the valuable efforts of the following individuals from ByteDance, whose provide API for us to test models and give some technical instruction for us.
+Zhen Wang, Tao Liang, Zhihui Fei, Mingyang Wan, Guojun Ma
 ---
 
 Our work also builds upon or makes use of the **ModelScope Swift (ms-swift)** framework, an excellent toolkit for efficient large model training and inference. We express our sincere gratitude to the developers of ms-swift for their support and contributions to the community.
