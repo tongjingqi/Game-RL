@@ -117,7 +117,7 @@ Our work also builds upon or makes use of the **ModelScope Swift (ms-swift)** fr
 
 ## 🔎 Citation
 
-If you find our work (Code2Logic) useful in your research, please consider citing our paper and ms-swift's:
+If you find our work (Game-RL) useful in your research, please consider citing our paper and ms-swift's:
 
 ```bibtex
 @misc{tong2025code2logicgamecodedrivendatasynthesis,
