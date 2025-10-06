@@ -121,7 +121,7 @@ If you find our work (Code2Logic) useful in your research, please consider citin
 
 ```bibtex
 @misc{tong2025code2logicgamecodedrivendatasynthesis,
-      title={Code2Logic: Game-Code-Driven Data Synthesis for Enhancing VLMs General Reasoning}, 
+      title={Game-RL: Synthesizing Multimodal Verifiable Game Data to Boost VLMs’ General Reasoning}, 
       author={Jingqi Tong and Jixin Tang and Hangcheng Li and Yurong Mou and Ming Zhang and Jun Zhao and Yanbo Wen and Fan Song and Jiahao Zhan and Yuyang Lu and Chaoran Tao and Zhiyuan Guo and Jizhou Yu and Tianhao Cheng and Changhao Jiang and Zhen Wang and Tao Liang and Zhihui Fei and Mingyang Wan and Guojun Ma and Weifeng Ge and Guanhua Chen and Tao Gui and Xipeng Qiu and Qi Zhang and Xuanjing Huang},
       year={2025},
       eprint={2505.13886},
