@@ -1,6 +1,6 @@
 # Pyramid Chess
 ## Overview
-The PyramidChess Dataset is a specialized dataset derived from the 3D strategy game PyramidChess, designed to support research in computer vision, natural language processing, and game-state understanding. Each data entry represents a specific game scenario, captured as a 3D game-state image, accompanied by structured question-answer pairs. There are six specific questions span four distinct types (e.g., State Info, Action Outcome, Transition Path, and Strategy Optimization), each designed to probe strategic reasoning and spatial understanding.
+The PyramidChess Dataset is a specialized dataset derived from the 3D strategy game PyramidChess, designed to support research in computer vision, natural language processing, and game-state understanding. Each data entry represents a specific game scenario, captured as a 3D game-state image, accompanied by structured question-answer pairs. There are six specific questions spanning three distinct types (e.g., Target Perception, State Prediction, and Strategy Optimization), each designed to probe strategic reasoning and spatial understanding.
 
 In addition to the questions, the dataset provides detailed analyses and accurate answers, offering insights into the reasoning process behind each solution. By combining rich game-state imagery with comprehensive QA pairs and explanations, the PyramidChess Dataset serves as a tool for advancing AI research in spatial reasoning, strategy modeling, and explainable decision-making.
 
@@ -41,9 +41,9 @@ pyramidchess_data_generate (Dataset Generation)
 ```json
 {
     "0": [
-        ["P0","P0","P0"],
-        ["P1","--","P1"],
-        ["--","P1","P0"]
+        ["--","P0","--"],
+        ["P0","--","P1"],
+        ["--","P1","--"]
     ],
     "1": [
         ["--","--"],
@@ -61,36 +61,14 @@ pyramidchess_data_generate (Dataset Generation)
 
 ![board_00000](pyramidchess_dataset_example/images/board_00000.png)
 
-### data.json
-   ```json
-    {
-        "data_id": "pyramidchess-mcq-00000-StateInfo",
-        "qa_type": "StateInfo",
-        "question_id": 0,
-        "question_description": "Choose a random coordinate and ask what status is the cooradinate",
-        "image": "images/board_00000.png",
-        "state": "states/board_00000.json",
-        "plot_level": "Easy",
-        "qa_level": "Easy",
-        "question": "Pyramid Chess Rules:\n1.Players and Initial Setup:\nThe game is played between two players, designated as PLAYER_0 and PLAYER_1, each using balls of a distinct color from their color pool. Players take turns placing their balls on a square game board. The number of balls available to each player depends on the size of the board: on a 3x3 board, each player has 7 balls; on a 4x4 board, each has 15 balls; and on a 5x5 board, PLAYER_0 (the first player to place a ball) has 28 balls, while PLAYER_1 has 27 balls.\n2.Placing Balls and Creating New Slots:\nAt the start of the game, the lowest level of the board (Level 0) is completely open and balls can be placed in any available slot on this level. After a ball is placed in a slot, that slot is no longer available for placing another ball. A ball can only be placed on the upper level if it is supported by a fully completed 2x2 block of balls on the level directly beneath. All four slots in the 2x2 block must be filled for the upper ball to be placed.\n3.Take-back mechnism:\nIf a player places a ball that completes a 2x2 block of the same color (all four balls belonging to that player), they may return up to two balls from the block to their color pool. A ball can only be removed if it does not have another ball directly above it, as removing a \"base\" ball would collapse the pyramid. Returning a ball reopens the slot it occupied, allowing it to be used for future placements, but the rule requiring a full 2x2 block as a base for placing balls on upper levels still applies.\n4.Winning the Game:\nThe game ends when one player successfully places the last ball on top of the pyramid. The player who place the ball on the top of the pyramid wins.\n\nQuestion: What is the status of the ball on Level 0, which has coordinate ([0, 2])?\nOptions:\n1. PLAYER_0\n2. PLAYER_1\n3. Empty\n4. Index out of bound\n",
-        "answer": 2,
-        "analysis": "From the image provided, we can observe the layout of the pyramid across its levels. Based on level 0's grid (specifically at coordinate [0, 2]), the ball is red, which corresponds to PLAYER_1.",
-        "options": [
-            "PLAYER_0",
-            "PLAYER_1",
-            "Empty",
-            "Index out of bound"
-        ]
-    }
-   ```
-
+### [data.json](pyramidchess_dataset_example/data.json)
 
 ## Supported Question Types 
 
-    1. Choose a random coordinate and ask what status is the coordinate. （question_id:0）
-   ```json
+1. Choose a random coordinate and ask what status is the coordinate. （question_id:0）
+    ```json
     {
-        "qa_type": "StateInfo",
+        "qa_type": "TargetPerception",
         "qa_level": "Easy",
         "question": " What is the status of the ball on Level 0, which has coordinate ([0, 0])?\n
                         Options:\n1. PLAYER_0\n2. PLAYER_1\n3. Empty\n4. Index out of bound\n",
@@ -109,7 +87,7 @@ pyramidchess_data_generate (Dataset Generation)
 
    ```json
    {    
-        "qa_type": "ActionOutcome",
+        "qa_type": "StatePrediction",
         "qa_level": "Medium",
         "question": "Can a ball be placed at coordinate [1, 0] on Level 0? If placed, what would be the outcome\n
         Options:\n1. Can place and no balls taken\n2. Can place and then balls can be taken\n3. Cannot place, position already occupied\n4. Cannot place, ball not ready below\n",
@@ -128,7 +106,7 @@ pyramidchess_data_generate (Dataset Generation)
 
    ```json
    {
-        "qa_type": "TransitionPath",
+        "qa_type": "StatePrediction",
         "qa_level": "Hard",
         "question": "How many steps (turns) are required for a ball to be placed at coordinate [0, 0] on Level 2? (including the turn placing the ball)",
         "answer": "It needs 12 step(s).",
@@ -152,7 +130,7 @@ pyramidchess_data_generate (Dataset Generation)
 
    ```json
    {    
-        "qa_type": "StateInfo",
+        "qa_type": "TargetPerception",
         "qa_level": "Easy",
         "question": "How many balls are there on the board in the image. ",
         "answer": "There are 13 balls.",
@@ -164,7 +142,7 @@ pyramidchess_data_generate (Dataset Generation)
 
    ```json
    {
-        "qa_type": "StateInfo",
+        "qa_type": "TargetPerception",
         "qa_level": "Medium",
         "question": "What is the status of the ball on Level 0, which has coordinate ([0, 2])?\nIs the coordinate legal? Does it contain a ball? Can the ball be taken(has no ball directly above it)? Can a ball be placed?Options:\n1. The coordinate is out of bound\n2. It contain a ball and the ball can't be taken\n3. It contain a ball and can be taken\n4. It doesn't contain a ball and a ball can't be taken 5.It doesn't contain a ball and a ball can be taken\n",
         "answer": 2,

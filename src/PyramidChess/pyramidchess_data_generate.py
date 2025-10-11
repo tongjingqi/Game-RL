@@ -101,49 +101,74 @@ def state_save(path,layers):
 def get_question_info(question_id):
     if question_id == 0:
         question_type = "mcq"
-        qa_type = "Target Perception"
-        description = "Choose a random coordinate and ask what status is the coordinate"
+        qa_type = "TargetPerception"
+        description = "Choose a random coordinate and ask what status is the cooradinate"
         level = "Easy"
         return question_type,qa_type,level,description
     
     elif question_id == 1:
         question_type = "mcq"
-        qa_type = "State Prediction"
+        qa_type = "StatePrediction"
         description = "Select a coordinate and determine whether a ball can be placed at this coordinate. If so, what would happen after the place of the ball."
         level = "Medium"
         return question_type,qa_type,level,description
     
     elif question_id == 2:
         question_type = "fill"
-        qa_type = "State Prediction"
+        qa_type = "StatePrediction"
         description = "Calculate how many steps (turns) are required for a ball to be placed at certain coordinate.(Including the step putting the ball at the cooradinate)"
         level = "Hard"
         return question_type,qa_type,level,description
     
     elif question_id == 3:
         question_type = "fill"
-        qa_type = "Strategy Optimization"
+        qa_type = "StrategyOptimization"
         description = "Give out the best position to put the ball at a certain point of a game."
         level = "Hard"
         return question_type,qa_type,level,description
     
     elif question_id == 4:
         question_type = "fill"
-        qa_type = "Target Perception"
+        qa_type = "TargetPerception"
         description = "Calculate how many balls are there one the board."
         level = "Easy"
         return question_type,qa_type,level,description
     
     elif question_id == 5:
         question_type = "mcq"
-        qa_type = "Target Perception"
+        qa_type = "TargetPerception"
         description = "Provide the higher level status of a coordinate: Is the coordinate legal? Does it contain a ball? Can the ball be taken? Can a ball be placed?"
         level = "Medium"
         return question_type,qa_type,level,description
     
     else:
         raise ValueError(f"Question_id:{question_id} unsupported")
-   
+    
+# def convert_dict_to_str(data):
+#     """
+#     将字典转换为字符串
+#     """
+#     output_lines = []
+#     # 遍历字典，按数字顺序排序
+#     for level_key in sorted(data, key=int):
+#         output_lines.append(f"Level {level_key}:")
+#         # 遍历该level下的每一行，行号作为坐标
+#         for row_index, row in enumerate(data[level_key]):
+#             # 替换 P0 和 P1
+#             new_row = []
+#             for value in row:
+#                 if value == "P0":
+#                     new_row.append("Blue")
+#                 elif value == "P1":
+#                     new_row.append("Red")
+#                 else:
+#                     new_row.append(value)
+#             # 将行坐标和转换后的行拼接起来，后面加个逗号（如示例所示）
+#             output_lines.append(f"Row{row_index} {new_row},")
+#         # 每个Level后增加一个空行
+#         output_lines.append("")
+    return "\n".join(output_lines)
+  
 def question_generate(question_id,board,param_list=None): 
     # with open("rule.txt", "r", encoding="utf-8") as file:
     #     rule = file.read()
@@ -162,10 +187,13 @@ def question_generate(question_id,board,param_list=None):
     )
     options = None
     length = len(board.Board)
+    # board_dict = board.board_dict()
+    # image_str = "Blue ball:PLAYER_0\nRed ball:PLAYER_1\n"+convert_dict_to_str(board_dict)
     analysis = f"From the image provided, we can recognize that the board is a {length}x{length} board."
     if question_id == 0:
         # 随机选择一个坐标，生成问题
         out_of_bound_flag = 0
+        out_of_bound_info = 0
         position_table = board.all_pos()
 
         # 检查 position_table 是否为空
@@ -389,6 +417,7 @@ def question_generate(question_id,board,param_list=None):
         turn = param_list[1]
         take_pos = param_list[2]
         take_pos = [item.Position for item in take_pos]
+        take_pos.append(take_point.Position)
         turn_flag = random.choice([0, 1])
         if turn_flag == 1:
             turn = (turn + 1) % 2    
@@ -405,7 +434,7 @@ def question_generate(question_id,board,param_list=None):
                 "To maximize the winning chance, one must try his best to form a 2x2 block of his color for the take-back mechanism. "
                 "So that he avoid losing balls in his turn and therefore minimize the chance of running out of balls first."
                 "Blocking the opponents chance to form 2x2 block of his color also increase the oppotunity of winning."
-                f"From the image provided, now is the {PLAYER[turn]}'s turn, who uses the {COLOR[turn]} ball. Putting a {COLOR[turn]} ball at {take_point.Position} at Level {take_point.Level} stop the other player {PLAYER[other_turn]} to form 2x2 block of {COLOR[other_turn]} at {take_pos}."
+                f"From the question, now is the {PLAYER[turn]}'s turn, who uses the {COLOR[turn]} ball. Putting a {COLOR[turn]} ball at {take_point.Position} at Level {take_point.Level} stop the other player {PLAYER[other_turn]} to form 2x2 block of {COLOR[other_turn]} at {take_pos}."
                 f"So the answer is Putting a ball at {take_point.Position} at level {take_point.Level}."
             )
         else:
@@ -413,7 +442,7 @@ def question_generate(question_id,board,param_list=None):
                 "To maximize the winning chance, one must try his best to form a 2x2 block of his color for the take-back mechanism. "
                 "So that he avoid losing balls in his turn and therefore minimize the chance of running out of balls first."
                 "Blocking the opponents chance to form 2x2 block of his color also increase the oppotunity of winning."
-                f"From the image provided,now is the {PLAYER[turn]}'s turn, who uses the {COLOR[turn]} ball. Putting a {COLOR[turn]} ball at {take_point.Position} at Level {take_point.Level} form 2x2 block of {COLOR[turn]} at {take_pos},which avoid losing a ball for {PLAYER[turn]} in this turn."
+                f"From the question, now is the {PLAYER[turn]}'s turn, who uses the {COLOR[turn]} ball. Putting a {COLOR[turn]} ball at {take_point.Position} at Level {take_point.Level} form 2x2 block of {COLOR[turn]} at {take_pos},which avoid losing a ball for {PLAYER[turn]} in this turn."
                 f"So the answer is Putting a ball at {take_point.Position} at level {take_point.Level}."
             )
         return question, answer, analysis, options           
@@ -457,6 +486,7 @@ def question_generate(question_id,board,param_list=None):
     elif question_id == 5:
         # 随机选择一个坐标，生成问题
         out_of_bound_flag = 0
+        out_of_bound_info = 0
         position_table = board.all_pos()
 
         # 检查 position_table 是否为空

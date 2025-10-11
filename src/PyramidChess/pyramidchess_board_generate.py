@@ -319,37 +319,198 @@ class Pyramid_Chess_Random_Generate():
                 break   
         return self.Chess_Board
     
-    def generate_stop_at_take(self,pr_info):
-        turn = 0
-        # self.Chess_Board.print_board_2D()
-        max_turn_num = min(self.Max_turn,self.Num_turns)
-        while(turn < max_turn_num):
-            put_pos = self.Chess_Board.find_all_legal()
-            index = random.randint(0,len(put_pos)-1)
-            put_pos[index].put(self.Turn)
-            if pr_info:
-                print(put_pos[index].Level,put_pos[index].Position)
-            self.Balls[self.Turn] -= 1
+    # def generate_stop_at_take(self,pr_info):
+    #     turn = 0
+    #     # self.Chess_Board.print_board_2D()
+    #     max_turn_num = min(self.Max_turn,self.Num_turns)
+    #     while(turn < max_turn_num):
+    #         put_pos = self.Chess_Board.find_all_legal()
+    #         index = random.randint(0,len(put_pos)-1)
+    #         put_pos[index].put(self.Turn)
+    #         if pr_info:
+    #             print(put_pos[index].Level,put_pos[index].Position)
+    #         self.Balls[self.Turn] -= 1
             
-            num_take = 0
-            take_pos = self.Chess_Board.take_put_check(stop_mode = True)
-            if not take_pos == []:
-                put_pos[index].take()
-                take_point =  put_pos[index]  
+    #         num_take = 0
+    #         take_pos = self.Chess_Board.take_put_check(stop_mode = True)
+    #         if not take_pos == []:
+    #             put_pos[index].take()
+    #             take_point =  put_pos[index]  
+    #             break
+    #         self.Chess_Board.counter += 1
+            
+    #         if(self.win_check() != -1):
+    #             self.refresh() 
+    #             turn = 0
+    #             continue
+    #         self.change_turn()
+    #         turn += 1
+    #         # self.Chess_Board.print_board_2D()
+    #         if(turn == self.Max_turn):
+    #             self.refresh() 
+    #             turn = 0
+    #     return self.Chess_Board,take_point,self.Turn,take_pos
+    
+    def generate_stop_at_take(self, pr_info):
+        """
+        生成只有第一层的棋盘，确保只有一个2x2区域为三个同色球+一个空位，
+        其他2x2区域都不是这种情况
+        """
+        # 重置棋盘到初始状态
+        self.refresh()
+        
+        # 只在第一层（Level 0）放置球
+        level_0_size = self.Level  # Level 0 是 Level x Level 的网格
+        
+        # 生成所有可能的2x2区域位置
+        possible_2x2_regions = []
+        for i in range(level_0_size - 1):
+            for j in range(level_0_size - 1):
+                possible_2x2_regions.append([(i, j), (i, j+1), (i+1, j), (i+1, j+1)])
+        
+        if not possible_2x2_regions:
+            raise ValueError("Board too small to have 2x2 regions")
+        
+        # 步骤1：先随机生成一个棋盘，确保没有任何"三同色+一空位"的2x2区域
+        max_setup_attempts = 100
+        setup_success = False
+        
+        for setup_attempt in range(max_setup_attempts):
+            # 重置棋盘
+            self.refresh()
+            
+            # 随机决定要放置多少个球
+            total_positions = level_0_size * level_0_size
+            num_balls_to_place = random.randint(total_positions // 3, 2 * total_positions // 3)
+            
+            # 随机选择位置放置球
+            all_positions = [(i, j) for i in range(level_0_size) for j in range(level_0_size)]
+            positions_to_fill = random.sample(all_positions, num_balls_to_place)
+            
+            # 随机分配颜色
+            for pos in positions_to_fill:
+                row, col = pos
+                grid_index = row * level_0_size + col
+                color = random.choice([PLAYER_0, PLAYER_1])
+                self.Chess_Board.Board[0][grid_index].put(color)
+            
+            # 检查是否有任何2x2区域为"三同色+一空位"
+            def has_three_same_one_empty(region):
+                colors = []
+                empty_count = 0
+                for pos in region:
+                    row, col = pos
+                    grid_index = row * level_0_size + col
+                    if self.Chess_Board.Board[0][grid_index].Available:
+                        empty_count += 1
+                    else:
+                        colors.append(self.Chess_Board.Board[0][grid_index].Color)
+                
+                return empty_count == 1 and len(colors) == 3 and colors[0] == colors[1] == colors[2]
+            
+            # 检查所有2x2区域
+            has_invalid_pattern = False
+            for region in possible_2x2_regions:
+                if has_three_same_one_empty(region):
+                    has_invalid_pattern = True
+                    break
+            
+            if not has_invalid_pattern:
+                setup_success = True
                 break
-            self.Chess_Board.counter += 1
+        
+        if not setup_success:
+            if pr_info:
+                print("Warning: Could not generate initial valid configuration")
+            # 如果无法生成，使用最小配置
+            self.refresh()
+        
+        # 步骤2：随机选择一个2x2区域，将其修改为"三同色+一空位"
+        target_region = random.choice(possible_2x2_regions)
+        target_color = random.choice([PLAYER_0, PLAYER_1])
+        empty_pos = random.choice(target_region)
+        
+        # 清空目标区域
+        for pos in target_region:
+            row, col = pos
+            grid_index = row * level_0_size + col
+            if not self.Chess_Board.Board[0][grid_index].Available:
+                self.Chess_Board.Board[0][grid_index].take()
+        
+        # 在目标区域放置三个同色球，保留一个空位
+        for pos in target_region:
+            if pos != empty_pos:
+                row, col = pos
+                grid_index = row * level_0_size + col
+                self.Chess_Board.Board[0][grid_index].put(target_color)
+        
+        # 步骤3：检查并修正相邻区域，确保它们不是"三同色+一空位"
+        def get_adjacent_regions(target_region):
+            """获取与目标区域相邻的所有2x2区域"""
+            adjacent_regions = []
+            target_positions = set(target_region)
             
-            if(self.win_check() != -1):
-                self.refresh() 
-                turn = 0
-                continue
-            self.change_turn()
-            turn += 1
-            # self.Chess_Board.print_board_2D()
-            if(turn == self.Max_turn):
-                self.refresh() 
-                turn = 0
-        return self.Chess_Board,take_point,self.Turn,take_pos
+            for region in possible_2x2_regions:
+                if region == target_region:
+                    continue
+                region_positions = set(region)
+                # 如果两个区域有共同位置，则它们相邻
+                if target_positions & region_positions:
+                    adjacent_regions.append(region)
+            
+            return adjacent_regions
+        
+        adjacent_regions = get_adjacent_regions(target_region)
+        
+        # 修正相邻区域
+        for adj_region in adjacent_regions:
+            if has_three_same_one_empty(adj_region):
+                # 找到空位和同色球
+                empty_positions = []
+                filled_positions = []
+                colors = []
+                
+                for pos in adj_region:
+                    row, col = pos
+                    grid_index = row * level_0_size + col
+                    if self.Chess_Board.Board[0][grid_index].Available:
+                        empty_positions.append(pos)
+                    else:
+                        filled_positions.append(pos)
+                        colors.append(self.Chess_Board.Board[0][grid_index].Color)
+                
+                # 如果是三同色+一空位，则修改其中一个球的颜色
+                if len(empty_positions) == 1 and len(set(colors)) == 1:
+                    # 选择一个不与目标区域重叠的位置来修改
+                    pos_to_change = None
+                    for pos in filled_positions:
+                        if pos not in target_region:
+                            pos_to_change = pos
+                            break
+                    
+                    if pos_to_change:
+                        row, col = pos_to_change
+                        grid_index = row * level_0_size + col
+                        # 取出球并放置不同颜色的球
+                        self.Chess_Board.Board[0][grid_index].take()
+                        new_color = PLAYER_1 if colors[0] == PLAYER_0 else PLAYER_0
+                        self.Chess_Board.Board[0][grid_index].put(new_color)
+        
+        # 返回结果
+        take_point = None
+        row, col = empty_pos
+        grid_index = row * level_0_size + col
+        take_point = self.Chess_Board.Board[0][grid_index]
+        
+        # 构造take_pos列表（目标区域中已放置的球）
+        take_pos = []
+        for pos in target_region:
+            if pos != empty_pos:
+                row, col = pos
+                grid_index = row * level_0_size + col
+                take_pos.append(self.Chess_Board.Board[0][grid_index])
+        
+        return self.Chess_Board, take_point, target_color, take_pos
 
 def board_generate(plot_level="Medium",pr_info=False,max_turn=None):
     chess = Pyramid_Chess_Random_Generate(rand_turn_num=True,plot_level=plot_level,max_turn=max_turn)
@@ -446,8 +607,7 @@ def count_ball(board_dict):
     
     return balls_list, total_count
 
-def test():
-    board = board_generate(plot_level="Hard",pr_info=True)
+    
+if __name__ == "__main__":
+    board,_,_,_ = board_generate_stop_at_take(pr_info=True)
     board.print_board_2D()
-    
-    
