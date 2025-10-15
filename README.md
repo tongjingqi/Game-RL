@@ -4,7 +4,6 @@ Code for the paper "[Game-RL: Synthesizing Multimodal Verifiable Game Data to Bo
 
 This is the first work, to the best of our knowledge, that adapts ***game code*** to synthesize multimodal reasoning data for ***training*** VLMs. Furthermore, when we applied **Game-RL**, which is simple GRPO on **GameQA** (synthesized via our proposed **Code2Logic** approach), multiple cutting-edge open-source models exhibit significantly enhanced out-of-domain generalization.
 
-
 [[📖 Paper](https://arxiv.org/abs/2505.13886)] [[🤗 GameQA-140K Dataset](https://huggingface.co/datasets/Gabriel166/GameQA-140K)] [[🤗 GameQA-5K Dataset](https://huggingface.co/datasets/Code2Logic/GameQA-5K)] [[🤗 Game-RL-InternVL3-8B](https://huggingface.co/Code2Logic/Game-RL-InternVL3-8B) ] [[🤗 Game-RL-InternVL2.5-8B](https://huggingface.co/Code2Logic/Game-RL-InternVL2.5-8B) ] [[🤗 Game-RL-Qwen2.5-VL-7B](https://huggingface.co/Code2Logic/Game-RL-Qwen2.5-VL-7B)] [[🤗 Game-RL-LLaVA-OV-7B](https://huggingface.co/Code2Logic/Game-RL-LLaVA-OV-7B) ]
 
 <div align=center><img src="./assets/categorized_30_games_images.png" alt="categorized_30_games_images" width="100%" /></div>
@@ -17,26 +16,27 @@ Vision-language reinforcement learning (RL) has primarily focused on narrow doma
 
 <div align=center><img src="./assets/Code2Logic_approach.png" alt="Code2Logic_approach" width="90%" /></div>
 
-For a selected game, the Code2Logic approach works as follows. We construct game code using LLMs at first. Then, design and refine some QA templates with the help of LLM. Finally, prompt the LLM to construct data engine based on the game code. During code execution, data engine fills out the QA templates to generate massive data samples containing correct and detailed reasoning processes.
+The Code2Logic approach involves three main steps: (1) using LLMs to construct game code of the selected game (*Sokoban*). (2) LLM-assisted design of the task templates including question and analysis templates based on the generated game code. Each task template condenses one type of reasoning pattern in the game. (3) Using LLMs to construct a data engine that directly reuses the core game code from the first step, including functions like `move`. (4) After these main steps, the data engine is executed to fill in the task templates developed in Step 2 and generate data samples, as illustrated in the "Final Result" Section.
 
 ### GameQA Dataset
 
 <div align=center><img src="./assets/4_game_example_samples.png" alt="4_game_example_samples" width="90%" /></div>
 
-Our GameQA dataset transforms the game-playing tasks into Visual Question Answering format. It encompasses 30 different games classified into 4 categories based on the core capabilities required to solve game tasks, with 4 games from different categories and their example data samples illustrated in the image above. The data samples in GameQA are also reasonably graded (see [🤗 GameQA-140K](https://huggingface.co/datasets/Gabriel166/GameQA-140K)).
+Our GameQA dataset provides diverse verifiable game tasks along with controllable difficulty, extending RL training scenarios for VLMs to the domain of video games. It encompasses 30 different games classified into 4 categories based on the core capabilities required to solve game tasks, with 4 games from different categories and their example data samples illustrated in the image above. The GameQA data samples are also reasonably graded by difficulty (see [🤗 GameQA-140K](https://huggingface.co/datasets/Gabriel166/GameQA-140K)).
 
 ## 🚀 How to Use
 
 The following steps will guide you on how to set up the environment, train, and evaluate the models.
 
 1.  **Clone the Repository**
+    
     ```bash
-    git clone https://github.com/tongjingqi/Code2Logic.git
-    cd Code2Logic
+    git clone https://github.com/tongjingqi/Game-RL.git
+    cd Game-RL
     ```
-
+    
 2.  **Download the Dataset**
-    Download the [🤗 GameQA-5K](https://huggingface.co/datasets/Code2Logic/GameQA-5K) dataset. Please ensure the dataset is placed in an appropriate location within the project, e.g., `Code2Logic/data/GameQA-5K/`.
+    Download the [🤗 GameQA-5K](https://huggingface.co/datasets/Code2Logic/GameQA-5K) dataset. Please ensure the dataset is placed in an appropriate location within the project, e.g., `Game-RL/data/GameQA-5K/`.
 
 3.  **Setup Environment**
     
@@ -54,7 +54,7 @@ The following steps will guide you on how to set up the environment, train, and 
 4.  **Training and Evaluation**
 
     *   **Start the Reward Model**
-        First, you need to start the reward model API. Execute the following in the `Code2Logic` root directory:
+        First, you need to start the reward model API. Execute the following in the `Game-RL` root directory:
         
         ```bash
         bash scripts/reward_api.sh
@@ -62,25 +62,28 @@ The following steps will guide you on how to set up the environment, train, and 
         Ensure this service starts successfully and runs in the background.
         
     *   **Start Training**
-        After the reward model is running, you can begin training the Qwen2.5-VL model. Execute the following in the `Code2Logic` root directory:
+        After the reward model is running, you can begin training the Qwen2.5-VL model. Execute the following in the `Game-RL` root directory:
+        
         ```bash
         bash scripts/train_qwen2_5vl.sh
         ```
-    
+        
     *   **Model Inference**
-        Once training is complete, perform inference with your model to generate predictions. Execute the following in the `Code2Logic` root directory:
+        Once training is complete, perform inference with your model to generate predictions. Execute the following in the `Game-RL` root directory:
+        
         ```bash
         bash scripts/infer.sh
         ```
         This will typically output a JSON file containing the model's predictions.
-    
+        
     *   **Evaluate Results**
-        Use the `eval.sh` script to evaluate the JSON file output by `infer.sh`. Execute the following in the `Code2Logic` root directory:
+        Use the `eval.sh` script to evaluate the JSON file output by `infer.sh`. Execute the following in the `Game-RL` root directory:
+        
         ```bash
         bash scripts/eval.sh path/to/your/inference_output.json
         ```
         *(Please replace `path/to/your/inference_output.json` with the actual path to your inference output file.)*
-    
+        
         **Note on Evaluation Model**: The evaluation in the paper follows the use of the `qwen2.5-72b-awq` model. You can also configure the script to use other evaluation APIs or models as needed.
         
         > *In our work, the inference and evaluation configurations were unified across both the original open-source models and our trained models.*
