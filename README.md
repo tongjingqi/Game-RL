@@ -4,7 +4,9 @@ Code for the paper "[Game-RL: Synthesizing Multimodal Verifiable Game Data to Bo
 
 This is the first work, to the best of our knowledge, that adapts ***game code*** to synthesize multimodal reasoning data for ***training*** VLMs. Furthermore, when we applied **Game-RL**, which is simple GRPO on **GameQA** (synthesized via our proposed **Code2Logic** approach), multiple cutting-edge open-source models exhibit significantly enhanced out-of-domain generalization.
 
-[[📖 Paper](https://arxiv.org/abs/2505.13886)] [[🤗 GameQA-140K Dataset](https://huggingface.co/datasets/Gabriel166/GameQA-140K)] [[🤗 GameQA-5K Dataset](https://huggingface.co/datasets/Code2Logic/GameQA-5K)] [[🤗 Game-RL-InternVL3-8B](https://huggingface.co/Code2Logic/Game-RL-InternVL3-8B) ] [[🤗 Game-RL-InternVL2.5-8B](https://huggingface.co/Code2Logic/Game-RL-InternVL2.5-8B) ] [[🤗 Game-RL-Qwen2.5-VL-7B](https://huggingface.co/Code2Logic/Game-RL-Qwen2.5-VL-7B)] [[🤗 Game-RL-LLaVA-OV-7B](https://huggingface.co/Code2Logic/Game-RL-LLaVA-OV-7B) ]
+[[📖 Paper](https://arxiv.org/abs/2505.13886)] [[🤗 GameQA-140K Dataset](https://huggingface.co/datasets/Gabriel166/GameQA-140K)] [[🤗 GameQA-5K Dataset](https://huggingface.co/datasets/Code2Logic/GameQA-5K)]
+
+[[🤗 Game-RL-InternVL3-8B](https://huggingface.co/Code2Logic/Game-RL-InternVL3-8B) ] [[🤗 Game-RL-InternVL2.5-8B](https://huggingface.co/Code2Logic/Game-RL-InternVL2.5-8B) ] [[🤗 Game-RL-Qwen2.5-VL-7B](https://huggingface.co/Code2Logic/Game-RL-Qwen2.5-VL-7B)] [[🤗 Game-RL-LLaVA-OV-7B](https://huggingface.co/Code2Logic/Game-RL-LLaVA-OV-7B) ]
 
 <div align=center><img src="./assets/categorized_30_games_images.png" alt="categorized_30_games_images" width="100%" /></div>
 
@@ -16,13 +18,20 @@ Vision-language reinforcement learning (RL) has primarily focused on narrow doma
 
 <div align=center><img src="./assets/Code2Logic_approach.png" alt="Code2Logic_approach" width="90%" /></div>
 
-The Code2Logic approach involves three main steps: (1) using LLMs to construct game code of the selected game (*Sokoban*). (2) LLM-assisted design of the task templates including question and analysis templates based on the generated game code. Each task template condenses one type of reasoning pattern in the game. (3) Using LLMs to construct a data engine that directly reuses the core game code from the first step, including functions like `move`. (4) After these main steps, the data engine is executed to fill in the task templates developed in Step 2 and generate data samples, as illustrated in the "Final Result" Section.
+The Code2Logic approach involves three main steps:
+1. using LLMs to construct game code of the selected game (*Sokoban*).
+2. LLM-assisted design of the task templates including question and analysis templates based on the generated game code. Each task template condenses one type of reasoning pattern in the game.
+3. Using LLMs to construct a data engine that directly reuses the core game code from the first step, including functions like `move`.
+* After these main steps, the data engine is executed to fill in the task templates developed in Step 2 and generate data samples, as illustrated in the "Final Result" Section.
 
 ### GameQA Dataset
 
 <div align=center><img src="./assets/4_game_example_samples.png" alt="4_game_example_samples" width="90%" /></div>
 
-Our GameQA dataset provides diverse verifiable game tasks along with controllable difficulty, extending RL training scenarios for VLMs to the domain of video games. It encompasses 30 different games classified into 4 categories based on the core capabilities required to solve game tasks, with 4 games from different categories and their example data samples illustrated in the image above. The GameQA data samples are also reasonably graded by difficulty (see [🤗 GameQA-140K](https://huggingface.co/datasets/Gabriel166/GameQA-140K)).
+Our GameQA dataset provides diverse verifiable game tasks along with controllable difficulty, extending RL training scenarios for VLMs to the domain of video games.
+* It encompasses 30 different games classified into 4 categories based on the core capabilities required to solve game tasks.
+* Four games from different categories and their example data samples are illustrated in the image above.
+* The GameQA data samples are also reasonably graded by difficulty (see [🤗 GameQA-140K](https://huggingface.co/datasets/Gabriel166/GameQA-140K)).
 
 ## 🚀 How to Use
 
