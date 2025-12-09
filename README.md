@@ -137,7 +137,7 @@ If you find our work (Game-RL) useful, we would appreciate it if you could cite 
 
 ```bibtex
 @misc{gamerl2025,
-    title={Game-RL: Synthesizing Multimodal Verifiable Game Data to Boost VLMs’ General Reasoning},
+    title={Game-RL: Synthesizing Multimodal Verifiable Game Data to Boost VLMs' General Reasoning},
     author={Jingqi Tong and Jixin Tang and Hangcheng Li and Yurong Mou and Ming Zhang and Jun Zhao and Yanbo Wen and Fan Song and Jiahao Zhan and Yuyang Lu and Chaoran Tao and Zhiyuan Guo and Jizhou Yu and Tianhao Cheng and Changhao Jiang and Zhiheng Xi and Zhangyue Yin and Yining Zheng and Weifeng Ge and Guanhua Chen and Tao Gui and Xipeng Qiu and Qi Zhang and Xuanjing Huang},
     year={2025},
     howpublished={\url{https://github.com/tongjingqi/Game-RL/blob/main/Game-RL.pdf}},
