@@ -1,10 +1,10 @@
 # Game-RL: Synthesizing Multimodal Verifiable Game Data to Boost VLMs’ General Reasoning
 
-Code for the paper "[Game-RL: Synthesizing Multimodal Verifiable Game Data to Boost VLMs’ General Reasoning]([https://arxiv.org/abs/2505.13886](https://github.com/tongjingqi/Game-RL/blob/main/2505.13886v6.pdf))".
+Code for the paper "[Game-RL: Synthesizing Multimodal Verifiable Game Data to Boost VLMs’ General Reasoning](https://arxiv.org/abs/2505.13886](https://github.com/tongjingqi/Game-RL/blob/main/2505.13886v6.pdf))".
 
 This is the first work, to the best of our knowledge, that adapts ***game code*** to synthesize multimodal reasoning data for ***training*** VLMs. Furthermore, when we applied **Game-RL**, which is simple GRPO on **GameQA** (synthesized via our proposed **Code2Logic** approach), multiple cutting-edge open-source models exhibit significantly enhanced out-of-domain generalization.
 
-[[📖 Paper]([https://arxiv.org/abs/2505.13886](https://github.com/tongjingqi/Game-RL/blob/main/2505.13886v6.pdf))] [[🤗 GameQA-140K Dataset](https://huggingface.co/datasets/Gabriel166/GameQA-140K)] [[🤗 GameQA-5K Dataset](https://huggingface.co/datasets/Code2Logic/GameQA-5K)]
+[[📖 Paper](https://arxiv.org/abs/2505.13886](https://github.com/tongjingqi/Game-RL/blob/main/2505.13886v6.pdf))] [[🤗 GameQA-140K Dataset](https://huggingface.co/datasets/Gabriel166/GameQA-140K)] [[🤗 GameQA-5K Dataset](https://huggingface.co/datasets/Code2Logic/GameQA-5K)]
 
 [[🤗 Game-RL-InternVL3-8B](https://huggingface.co/Code2Logic/Game-RL-InternVL3-8B) ] [[🤗 Game-RL-InternVL2.5-8B](https://huggingface.co/Code2Logic/Game-RL-InternVL2.5-8B) ] [[🤗 Game-RL-Qwen2.5-VL-7B](https://huggingface.co/Code2Logic/Game-RL-Qwen2.5-VL-7B)] [[🤗 Game-RL-LLaVA-OV-7B](https://huggingface.co/Code2Logic/Game-RL-LLaVA-OV-7B) ]
 
