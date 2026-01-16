@@ -4,11 +4,20 @@ Code for the paper "[Game-RL: Synthesizing Multimodal Verifiable Game Data to Bo
 
 This is the first work, to the best of our knowledge, that adapts ***game code*** to synthesize multimodal reasoning data for ***training*** VLMs. Furthermore, when we applied **Game-RL**, which is simple GRPO on **GameQA** (synthesized via our proposed **Code2Logic** approach), multiple cutting-edge open-source models exhibit significantly enhanced out-of-domain generalization.
 
-[[📖 Paper](https://arxiv.org/abs/2505.13886)] [[🤗 GameQA-140K Dataset](https://huggingface.co/datasets/Gabriel166/GameQA-140K)] [[🤗 GameQA-5K Dataset](https://huggingface.co/datasets/Code2Logic/GameQA-5K)]
+[ [📖 Paper](https://arxiv.org/abs/2505.13886) ] [[🤗 GameQA-140K Dataset](https://huggingface.co/datasets/Code2Logic/GameQA-140K) ] [[🤗 GameQA-5K Dataset](https://huggingface.co/datasets/OpenMOSS-Team/GameQA-5K) ] [[🤗 GameQA-text Dataset](https://huggingface.co/datasets/OpenMOSS-Team/GameQA-text) ]
 
-[[🤗 Game-RL-InternVL3-8B](https://huggingface.co/Code2Logic/Game-RL-InternVL3-8B) ] [[🤗 Game-RL-InternVL2.5-8B](https://huggingface.co/Code2Logic/Game-RL-InternVL2.5-8B) ] [[🤗 Game-RL-Qwen2.5-VL-7B](https://huggingface.co/Code2Logic/Game-RL-Qwen2.5-VL-7B)] [[🤗 Game-RL-LLaVA-OV-7B](https://huggingface.co/Code2Logic/Game-RL-LLaVA-OV-7B) ]
+[[🤗 Game-RL-InternVL3-8B Model](https://huggingface.co/OpenMOSS-Team/Game-RL-InternVL3-8B) ] [[🤗 Game-RL-InternVL2.5-8B Model](https://huggingface.co/OpenMOSS-Team/Game-RL-InternVL2.5-8B) ]
+
+[[🤗 Game-RL-Qwen2.5-VL-7B Model](https://huggingface.co/OpenMOSS-Team/Game-RL-Qwen2.5-VL-7B) ] [[🤗 Game-RL-LLaVA-OV-7B Model](https://huggingface.co/OpenMOSS-Team/Game-RL-LLaVA-OV-7B) ]
 
 <div align=center><img src="./assets/categorized_30_games_images.png" alt="categorized_30_games_images" width="100%" /></div>
+
+## 🎊 News
+
+Please give us a star ⭐ if you find this work helpful.
+
+* [2025/11] 🔥**DeepWisdom** uses the maze-like games in our GameQA dataset in the [VR-Bench](https://github.com/FoundationAgents/VR-Bench) benchmark, which evaluates video models' reasoning.
+* [2025/11] 🔥**Shanghai Innovation Institute** uses the games in our GameQA dataset for image editing reasoning tasks ("game-world scenarios"), developing the [UniREditBench](https://maplebb.github.io/UniREditBench/) benchmark and the [UniREdit-Data-100K](https://huggingface.co/datasets/maplebb/UniREdit-Data-100K) training data.
 
 ## 👀 Introduction
 
@@ -45,7 +54,7 @@ The following steps will guide you on how to set up the environment, train, and 
     ```
     
 2.  **Download the Dataset**
-    Download the [🤗 GameQA-5K](https://huggingface.co/datasets/Code2Logic/GameQA-5K) dataset. Please ensure the dataset is placed in an appropriate location within the project, e.g., `Game-RL/data/GameQA-5K/`.
+    Download the [🤗 GameQA-5K](https://huggingface.co/datasets/OpenMOSS-Team/GameQA-5K) dataset. Please ensure the dataset is placed in an appropriate location within the project, e.g., `Game-RL/data/GameQA-5K/`.
 
 3.  **Setup Environment**
     
@@ -121,7 +130,7 @@ Apart form the code, each game directory contains:
 
 Ruifeng Chen, Yingqian Huang, Yutong Ke, Hengxi Lin, Yuanhao Ni, Qingyun Shi, Haitian Wang, Xiaoyong Wang, Yufei You, Juntao Zhang, Weixin Zhang, Yang Zhang
 
-*We would like to acknowledge the valuable efforts of the following individuals from ByteDance, whose provide API for us to test models and give some technical instruction for us.*
+*We would like to acknowledge the valuable efforts of the following individuals from ByteDance, who provide API for us to test models and give some technical instruction for us.*
 
 Zhen Wang, Tao Liang, Zhihui Fei, Mingyang Wan, Guojun Ma
 
