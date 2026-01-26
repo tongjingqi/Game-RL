@@ -16,6 +16,7 @@ This is the first work, to the best of our knowledge, that adapts ***game code**
 
 Please give us a star ⭐ if you find this work helpful.
 
+* [2026/01] 🔥🔥Our work has been accepted by **ICLR 2026**! 🎉🎉🎉
 * [2025/11] 🔥**DeepWisdom** uses the maze-like games in our GameQA dataset in the [VR-Bench](https://github.com/FoundationAgents/VR-Bench) benchmark, which evaluates video models' reasoning.
 * [2025/11] 🔥**Shanghai Innovation Institute** uses the games in our GameQA dataset for image editing reasoning tasks ("game-world scenarios"), developing the [UniREditBench](https://maplebb.github.io/UniREditBench/) benchmark and the [UniREdit-Data-100K](https://huggingface.co/datasets/maplebb/UniREdit-Data-100K) training data.
 
