@@ -1,8 +1,8 @@
-# Game-RL: Synthesizing Multimodal Verifiable Game Data to Boost VLMs' General Reasoning
+# [ICLR 2026] Game-RL: Synthesizing Multimodal Verifiable Game Data to Boost VLMs' General Reasoning
 
 Code for the paper "[Game-RL: Synthesizing Multimodal Verifiable Game Data to Boost VLMs' General Reasoning](https://arxiv.org/abs/2505.13886)".
 
-This is the first work, to the best of our knowledge, that adapts ***game code*** to synthesize multimodal reasoning data for ***training*** VLMs. Furthermore, when we applied **Game-RL**, which is simple GRPO on **GameQA** (synthesized via our proposed **Code2Logic** approach), multiple cutting-edge open-source models exhibit significantly enhanced out-of-domain generalization.
+This is the first work, to the best of our knowledge, that adapts ***game code*** to synthesize multimodal reasoning data for ***training*** VLMs. Furthermore, when we applied **Game-RL**, which is simple GRPO on **GameQA** (synthesized via our **Code2Logic** approach), multiple cutting-edge open-source VLMs exhibit significantly enhanced out-of-domain generalization.
 
 [ [📖 Paper](https://arxiv.org/abs/2505.13886) ] [[🤗 GameQA-140K Dataset](https://huggingface.co/datasets/Code2Logic/GameQA-140K) ] [[🤗 GameQA-5K Dataset](https://huggingface.co/datasets/OpenMOSS-Team/GameQA-5K) ] [[🤗 GameQA-text Dataset](https://huggingface.co/datasets/OpenMOSS-Team/GameQA-text) ]
 
@@ -14,12 +14,13 @@ This is the first work, to the best of our knowledge, that adapts ***game code**
 
 ## 🎊 News
 
-Please give us a star ⭐ if you find this work helpful.
-
-* [2026/01] 🔥**THUML and ByteDance Seed** uses our Sokoban code for the synthesis of the Sokoban task samples in [VisWorld-Eval](https://thuml.github.io/Reasoning-Visual-World/) (and the training data).
-* [2026/01] 🔥🔥Our work has been accepted by **ICLR 2026**! 🎉🎉🎉
+* [2026/01] 🔥**Shanghai AI Lab** uses our GameQA-140K dataset at scale in the [MMFineReason](https://mmfinereason.github.io/) dataset, which accounts for **87.65%** of its "Puzzle/Game" samples.
+* [2026/01] 🔥**THUML and ByteDance Seed** use our Sokoban code for the synthesis of the Sokoban task samples in [VisWorld-Eval](https://thuml.github.io/Reasoning-Visual-World/) (and the training data).
+* [2026/01] 🔥🔥*Our work has been accepted by* **ICLR 2026**! 🎉🎉🎉
 * [2025/11] 🔥**DeepWisdom** uses the maze-like games in our GameQA dataset in the [VR-Bench](https://github.com/FoundationAgents/VR-Bench) benchmark, which evaluates video models' reasoning.
 * [2025/11] 🔥**Shanghai Innovation Institute** uses the games in our GameQA dataset for image editing reasoning tasks ("game-world scenarios"), developing the [UniREditBench](https://maplebb.github.io/UniREditBench/) benchmark and the [UniREdit-Data-100K](https://huggingface.co/datasets/maplebb/UniREdit-Data-100K) training data.
+
+Please give us a star ⭐ if you find this work helpful.
 
 ## 👀 Introduction
 
@@ -132,7 +133,7 @@ Apart form the code, each game directory contains:
 
 Ruifeng Chen, Yingqian Huang, Yutong Ke, Hengxi Lin, Yuanhao Ni, Qingyun Shi, Haitian Wang, Xiaoyong Wang, Yufei You, Juntao Zhang, Weixin Zhang, Yang Zhang
 
-*We would like to acknowledge the valuable efforts of the following individuals from ByteDance, who provide API for us to test models and give some technical instruction for us.*
+*We would like to acknowledge the valuable efforts of the following individuals from ByteDance, who provide API for us to test models and give us some technical instructions.*
 
 Zhen Wang, Tao Liang, Zhihui Fei, Mingyang Wan, Guojun Ma
 
