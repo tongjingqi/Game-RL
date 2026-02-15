@@ -90,8 +90,8 @@ The Minesweeper VQA dataset supports three levels of difficulty, each with diffe
    - **Options**:
      - A. The game will end because the cell contains a mine.
      - B. The cell will reveal an empty area, and adjacent cells will also be revealed.
-     - C. The cell will reveal a number.
-     - D. Nothing will happen because the cell is flagged.
+     - C. The cell will reveal the number {value1}.
+     - D. Undecidable. It may contain a mine or not.
 
 2. **Best Next Move**
    - *Example*: **What is the best next move at (3, 4)?**

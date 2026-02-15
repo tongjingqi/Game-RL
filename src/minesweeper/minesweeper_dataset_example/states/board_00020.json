@@ -5,84 +5,84 @@
     "mine_board": [
         [
             0,
-            0,
             1,
             "M",
-            1
-        ],
-        [
-            0,
-            0,
             2,
-            3,
-            3
-        ],
-        [
-            0,
-            0,
-            1,
-            "M",
             "M"
         ],
         [
-            0,
             1,
-            3,
-            4,
-            3
+            2,
+            1,
+            2,
+            1
         ],
         [
+            "M",
+            2,
             0,
-            1,
+            0,
+            0
+        ],
+        [
             "M",
+            3,
+            0,
+            0,
+            0
+        ],
+        [
             "M",
-            1
+            2,
+            0,
+            0,
+            0
         ]
     ],
     "revealed": [
         [
-            true,
-            true,
-            true,
+            false,
+            false,
+            false,
             false,
             false
         ],
         [
-            true,
-            true,
-            true,
             false,
-            false
+            true,
+            true,
+            true,
+            true
         ],
         [
-            true,
-            true,
-            true,
             false,
-            false
+            true,
+            true,
+            true,
+            true
         ],
         [
-            true,
-            true,
-            true,
             false,
-            false
+            true,
+            true,
+            true,
+            true
         ],
         [
+            false,
             true,
             true,
-            false,
-            false,
-            false
+            true,
+            true
         ]
     ],
     "flagged": [
         [
             false,
             false,
-            false,
             true,
-            false
+            false,
+            true
         ],
         [
             false,
@@ -92,23 +92,23 @@
             false
         ],
         [
-            false,
-            false,
-            false,
             true,
-            false
-        ],
-        [
-            false,
             false,
             false,
             false,
             false
         ],
         [
-            false,
-            false,
             true,
+            false,
+            false,
+            false,
+            false
+        ],
+        [
+            false,
+            false,
+            false,
             false,
             false
         ]

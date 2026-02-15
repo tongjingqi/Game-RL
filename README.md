@@ -2,9 +2,9 @@
 
 Code for the paper "[Game-RL: Synthesizing Multimodal Verifiable Game Data to Boost VLMs' General Reasoning](https://arxiv.org/abs/2505.13886)".
 
-This is the first work, to the best of our knowledge, that adapts ***game code*** to synthesize multimodal reasoning data for ***training*** VLMs. Furthermore, when we applied **Game-RL**, which is simple GRPO on **GameQA** (synthesized via our **Code2Logic** approach), multiple cutting-edge open-source VLMs exhibit significantly enhanced out-of-domain generalization.
+This is the first work, to the best of our knowledge, that adapts game code to synthesize **multimodal game data** for ***training*** VLMs. Furthermore, when we apply **Game-RL**, which is simple GRPO on **GameQA** (synthesized via our **Code2Logic** approach), multiple cutting-edge open-source VLMs exhibit significantly enhanced out-of-domain generalization.
 
-[ [📖 Paper](https://arxiv.org/abs/2505.13886) ] [[🤗 GameQA-140K Dataset](https://huggingface.co/datasets/Code2Logic/GameQA-140K) ] [[🤗 GameQA-5K Dataset](https://huggingface.co/datasets/OpenMOSS-Team/GameQA-5K) ] [[🤗 GameQA-text Dataset](https://huggingface.co/datasets/OpenMOSS-Team/GameQA-text) ]
+[ [📖 Paper](https://arxiv.org/abs/2505.13886) ] [[🤗 GameQA-140K Dataset](https://huggingface.co/datasets/OpenMOSS-Team/GameQA-140K) ] [[🤗 GameQA-5K Dataset](https://huggingface.co/datasets/OpenMOSS-Team/GameQA-5K) ] [[🤗 GameQA-text Dataset](https://huggingface.co/datasets/OpenMOSS-Team/GameQA-text) ]
 
 [[🤗 Game-RL-InternVL3-8B Model](https://huggingface.co/OpenMOSS-Team/Game-RL-InternVL3-8B) ] [[🤗 Game-RL-InternVL2.5-8B Model](https://huggingface.co/OpenMOSS-Team/Game-RL-InternVL2.5-8B) ]
 

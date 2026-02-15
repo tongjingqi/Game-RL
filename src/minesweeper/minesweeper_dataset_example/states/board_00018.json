@@ -4,52 +4,52 @@
     "mines": 8,
     "mine_board": [
         [
+            0,
             1,
-            1,
-            0,
-            0,
-            0,
-            0
-        ],
-        [
-            "M",
-            3,
             1,
             2,
             2,
             2
         ],
         [
+            0,
+            1,
             "M",
-            4,
-            "M",
-            2,
+            3,
             "M",
             "M"
         ],
         [
+            1,
+            2,
+            3,
             "M",
             4,
-            2,
-            2,
-            2,
             2
         ],
         [
-            2,
             "M",
             2,
-            1,
-            0,
+            3,
+            "M",
+            2,
             0
         ],
         [
-            1,
             2,
             "M",
+            2,
+            1,
+            2,
+            1
+        ],
+        [
+            1,
+            1,
             1,
             0,
-            0
+            1,
+            "M"
         ]
     ],
     "revealed": [
@@ -81,25 +81,25 @@
             false,
             false,
             false,
-            true,
-            true,
-            true
+            false,
+            false,
+            false
         ],
         [
             false,
             false,
-            false,
             true,
             true,
-            true
+            true,
+            false
         ],
         [
             false,
             false,
-            false,
             true,
             true,
-            true
+            true,
+            false
         ]
     ],
     "flagged": [
@@ -122,34 +122,34 @@
         [
             false,
             false,
-            true,
+            false,
+            false,
+            false,
+            false
+        ],
+        [
+            false,
+            false,
             false,
             true,
+            false,
+            false
+        ],
+        [
+            false,
+            true,
+            false,
+            false,
+            false,
+            false
+        ],
+        [
+            false,
+            false,
+            false,
+            false,
+            false,
             true
-        ],
-        [
-            false,
-            false,
-            false,
-            false,
-            false,
-            false
-        ],
-        [
-            false,
-            false,
-            false,
-            false,
-            false,
-            false
-        ],
-        [
-            false,
-            false,
-            true,
-            false,
-            false,
-            false
         ]
     ],
     "first_click": false

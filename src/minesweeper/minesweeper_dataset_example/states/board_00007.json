@@ -4,9 +4,15 @@
     "mines": 3,
     "mine_board": [
         [
-            0,
-            0,
-            0,
+            2,
+            "M",
+            1,
+            0
+        ],
+        [
+            "M",
+            2,
+            1,
             0
         ],
         [
@@ -16,28 +22,16 @@
             0
         ],
         [
+            1,
             "M",
-            "M",
-            2,
-            1
-        ],
-        [
-            2,
-            3,
-            "M",
-            1
+            1,
+            0
         ]
     ],
     "revealed": [
         [
-            true,
-            true,
-            true,
-            true
-        ],
-        [
-            true,
-            true,
+            false,
+            false,
             true,
             true
         ],
@@ -50,25 +44,19 @@
         [
             false,
             false,
+            true,
+            true
+        ],
+        [
             false,
-            false
+            false,
+            true,
+            true
         ]
     ],
     "flagged": [
         [
             false,
-            false,
-            false,
-            false
-        ],
-        [
-            false,
-            false,
-            false,
-            false
-        ],
-        [
-            true,
             true,
             false,
             false
@@ -76,6 +64,18 @@
         [
             false,
             false,
+            false,
+            false
+        ],
+        [
+            false,
+            false,
+            false,
+            false
+        ],
+        [
+            false,
+            true,
             false,
             false
         ]

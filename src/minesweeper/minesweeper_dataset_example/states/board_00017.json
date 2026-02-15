@@ -4,38 +4,38 @@
     "mines": 5,
     "mine_board": [
         [
-            1,
-            "M",
             "M",
             2,
-            "M"
-        ],
-        [
-            1,
-            2,
-            3,
-            3,
-            2
-        ],
-        [
             0,
+            0,
+            0
+        ],
+        [
+            "M",
+            3,
             1,
+            1,
+            1
+        ],
+        [
+            "M",
+            3,
             2,
             "M",
             1
         ],
         [
-            0,
-            1,
+            2,
             "M",
             2,
+            1,
             1
         ],
         [
+            1,
+            1,
+            1,
             0,
-            1,
-            1,
-            1,
             0
         ]
     ],
@@ -48,44 +48,37 @@
             false
         ],
         [
-            true,
-            true,
+            false,
+            false,
             false,
             false,
             false
         ],
         [
-            true,
-            true,
+            false,
+            false,
             false,
             false,
             false
         ],
         [
-            true,
-            true,
             false,
             false,
-            false
+            true,
+            true,
+            true
         ],
         [
-            true,
-            true,
             false,
             false,
-            false
+            true,
+            true,
+            true
         ]
     ],
     "flagged": [
         [
             false,
-            true,
-            true,
-            false,
-            false
-        ],
-        [
-            false,
             false,
             false,
             false,
@@ -101,7 +94,14 @@
         [
             false,
             false,
+            false,
             true,
+            false
+        ],
+        [
+            false,
+            true,
+            false,
             false,
             false
         ],

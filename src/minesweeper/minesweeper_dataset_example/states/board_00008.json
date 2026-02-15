@@ -4,43 +4,57 @@
     "mines": 5,
     "mine_board": [
         [
-            1,
-            "M",
-            "M",
-            3,
-            "M"
-        ],
-        [
-            2,
-            3,
-            2,
-            3,
-            "M"
-        ],
-        [
-            "M",
-            1,
             0,
+            0,
+            0,
+            0,
+            0
+        ],
+        [
+            2,
+            2,
+            1,
             1,
             1
         ],
         [
+            "M",
+            "M",
             1,
             1,
-            0,
-            0,
-            0
+            "M"
         ],
         [
-            0,
-            0,
-            0,
-            0,
-            0
+            3,
+            3,
+            2,
+            2,
+            2
+        ],
+        [
+            "M",
+            1,
+            1,
+            "M",
+            1
         ]
     ],
     "revealed": [
         [
+            true,
+            true,
+            true,
+            true,
+            true
+        ],
+        [
+            true,
+            true,
+            true,
+            true,
+            true
+        ],
+        [
             false,
             false,
             false,
@@ -49,51 +63,37 @@
         ],
         [
             false,
-            true,
-            true,
-            true,
+            false,
+            false,
+            false,
             false
         ],
         [
             false,
-            true,
-            true,
-            true,
-            true
-        ],
-        [
-            true,
-            true,
-            true,
-            true,
-            true
-        ],
-        [
-            true,
-            true,
-            true,
-            true,
-            true
+            false,
+            false,
+            false,
+            false
         ]
     ],
     "flagged": [
         [
             false,
-            true,
-            true,
             false,
-            true
+            false,
+            false,
+            false
         ],
         [
             false,
             false,
             false,
             false,
-            true
+            false
         ],
         [
-            false,
-            false,
+            true,
+            true,
             false,
             false,
             false

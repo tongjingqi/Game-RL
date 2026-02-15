@@ -5,38 +5,38 @@
     "mine_board": [
         [
             0,
+            0,
+            1,
             2,
-            "M",
-            2,
-            0
+            2
         ],
         [
             0,
+            1,
             2,
             "M",
-            2,
-            0
+            "M"
         ],
         [
+            1,
             2,
+            "M",
+            3,
+            2
+        ],
+        [
+            "M",
             3,
             2,
-            1,
+            2,
             0
         ],
         [
-            "M",
-            "M",
-            2,
             1,
-            1
-        ],
-        [
-            2,
-            2,
             2,
             "M",
-            1
+            1,
+            0
         ]
     ],
     "revealed": [
@@ -44,29 +44,8 @@
             false,
             false,
             false,
-            true,
-            true
-        ],
-        [
             false,
-            false,
-            false,
-            true,
-            true
-        ],
-        [
-            false,
-            false,
-            false,
-            true,
-            true
-        ],
-        [
-            false,
-            false,
-            false,
-            true,
-            true
+            false
         ],
         [
             false,
@@ -74,12 +53,47 @@
             false,
             false,
             false
+        ],
+        [
+            false,
+            false,
+            false,
+            true,
+            true
+        ],
+        [
+            false,
+            false,
+            false,
+            true,
+            true
+        ],
+        [
+            false,
+            false,
+            false,
+            true,
+            true
         ]
     ],
     "flagged": [
         [
             false,
             false,
+            false,
+            false,
+            false
+        ],
+        [
+            false,
+            false,
+            false,
+            true,
+            true
+        ],
+        [
+            false,
+            false,
             true,
             false,
             false
@@ -87,28 +101,14 @@
         [
             false,
             false,
+            false,
+            false,
+            false
+        ],
+        [
+            false,
+            false,
             true,
-            false,
-            false
-        ],
-        [
-            false,
-            false,
-            false,
-            false,
-            false
-        ],
-        [
-            false,
-            false,
-            false,
-            false,
-            false
-        ],
-        [
-            false,
-            false,
-            false,
             false,
             false
         ]

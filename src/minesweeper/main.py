@@ -92,7 +92,7 @@ def main():
             state_path = os.path.join(output_state_dir, state_filename)
             game.save_state(filename=state_filename, directory=output_state_dir)
 
-            for j in range(0, 10):   # Each image generates 10 questions
+            for j in range(0, 6):   # Each image generates 6 questions
                 # Generate question and answer
                 qa_type, qa_level, question, question_id, question_description, answer, analysis, options = generate_question_and_answer(game, j, plot_level)
 
