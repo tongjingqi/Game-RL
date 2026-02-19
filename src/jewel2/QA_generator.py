@@ -360,13 +360,16 @@ def generate_jewel2_QA(level: Level, num: int, size: int) -> Tuple[str, str, str
             options = [
                 "A. Nothing will happen because the clear does not meet elimination conditions.",
                 f"B. Trigger a special element, total cleared becomes {current_cleared + random.randint(1, 5)}.",
-                f"C. Perform elimination, eliminate {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}.",
-                f"D. Perform elimination, eliminate {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}."
-                f"E. Perform elimination, eliminate {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}.",
-                f"F. Perform elimination, eliminate {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}.",
-                f"G. Perform elimination, eliminate {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}.",
-                f"H. Perform elimination, eliminate {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}.",
             ]
+            used_cleared = set()
+            for option in ['C', 'D', 'E', 'F', 'G', 'H']:
+                while True:
+                    cleared_value = random.randint(1, 9)
+                    if cleared_value not in used_cleared and cleared_value != cleared:
+                        used_cleared.add(cleared_value)
+                        break
+                total_cleared = current_cleared + cleared_value
+                options.append(f"{option}. Perform elimination, eliminate {cleared_value} elements, total cleared becomes {total_cleared}.")
             answer = 'A'
             analysis = (
                 f"Attempting to clear the element at position ({x},{y}) did not meet the elimination conditions, so no elements were cleared."
@@ -391,13 +394,16 @@ def generate_jewel2_QA(level: Level, num: int, size: int) -> Tuple[str, str, str
                 options = [
                     "A. Nothing will happen because the clear does not meet elimination conditions.",
                     f"B. Trigger a special element, total cleared becomes {new_total_cleared}.",
-                    f"C. Perform elimination, eliminate {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}.",
-                    f"D. Perform elimination, eliminate {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}."
-                    f"E. Perform elimination, eliminate {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}.",
-                    f"F. Perform elimination, eliminate {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}.",
-                    f"G. Perform elimination, eliminate {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}.",
-                    f"H. Perform elimination, eliminate {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}."
                 ]
+                used_cleared = set()
+                for option in ['C', 'D', 'E', 'F', 'G', 'H']:
+                    while True:
+                        cleared_value = random.randint(1, 9)
+                        if cleared_value != cleared and cleared_value not in used_cleared:
+                            used_cleared.add(cleared_value)
+                            break
+                    total_cleared = current_cleared + cleared_value
+                    options.append(f"{option}. Perform elimination, eliminate {cleared_value} elements, total cleared becomes {total_cleared}.")
                 answer = 'B'
                 analysis = (
                     f"Clearing the special element '{target}' at position ({x},{y}) triggered its ability, resulting in the elimination of additional elements. "
@@ -411,13 +417,15 @@ def generate_jewel2_QA(level: Level, num: int, size: int) -> Tuple[str, str, str
                     f"B. Trigger a special element, total cleared becomes {new_total_cleared}.",
                 ]
                 # Generate random distractor options that are not equal to the correct value
+                unused_random = set()
                 for option in ['C', 'D', 'E', 'F', 'G', 'H']:
                     while True:
                         random_value = random.randint(1, 9)
-                        if random_value != cleared:  # Ensure the value is not equal to the correct one
+                        if random_value != cleared and random_value not in unused_random:  # Ensure the value is not equal to the correct one
+                            unused_random.add(random_value)
                             break
                     options.append(f"{option}. Perform elimination, eliminate {random_value} elements, total cleared becomes {current_cleared + random_value}.")
-                
+                    
                 # Insert the correct answer in the correct location
                 correct_option_index = ['C', 'D', 'E', 'F', 'G', 'H'].index(correct_option)
                 options[correct_option_index + 2] = f"{correct_option}. Perform elimination, eliminate {cleared} elements, total cleared becomes {new_total_cleared}."
@@ -470,13 +478,16 @@ def generate_jewel2_QA(level: Level, num: int, size: int) -> Tuple[str, str, str
             options = [
                 "A. Nothing will happen because the swap does not meet elimination conditions.",
                 "B. Cannot perform swap because one of the elements is special.",
-                f"C. After swap, elimination occurs, clearing {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}.",
-                f"D. After swap, elimination occurs, clearing {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}.",
-                f"E. After swap, elimination occurs, clearing {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}.",
-                f"F. After swap, elimination occurs, clearing {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}.",
-                f"G. After swap, elimination occurs, clearing {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}.",
-                f"H. After swap, elimination occurs, clearing {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}.",
             ]
+            used_cleared = set()
+            for option in ['C', 'D', 'E', 'F', 'G', 'H']:
+                while True:
+                    cleared_value = random.randint(1, 9)
+                    if cleared_value not in used_cleared and cleared_value != cleared_after_swap:
+                        used_cleared.add(cleared_value)
+                        break
+                total_cleared = current_cleared + cleared_value
+                options.append(f"{option}. After swap, elimination occurs, clearing {cleared_value} elements, total cleared becomes {total_cleared}.")
             answer = 'A'
             analysis = (
                 f"Attempting to swap the element at position ({x},{y}) in the '{pos}' direction goes out of the board's boundaries. "
@@ -487,13 +498,16 @@ def generate_jewel2_QA(level: Level, num: int, size: int) -> Tuple[str, str, str
             options = [
                 "A. Nothing will happen because the swap does not meet elimination conditions.",
                 "B. Cannot perform swap because one of the elements is special.",
-                f"C. After swap, elimination occurs, clearing {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}.",
-                f"D. After swap, elimination occurs, clearing {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}.",
-                f"E. After swap, elimination occurs, clearing {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}.",
-                f"F. After swap, elimination occurs, clearing {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}.",
-                f"G. After swap, elimination occurs, clearing {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}.",
-                f"H. After swap, elimination occurs, clearing {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}.",
             ]
+            used_cleared = set()
+            for option in ['C', 'D', 'E', 'F', 'G', 'H']:
+                while True:
+                    cleared_value = random.randint(1, 9)
+                    if cleared_value not in used_cleared and cleared_value != cleared_after_swap:
+                        used_cleared.add(cleared_value)
+                        break
+                total_cleared = current_cleared + cleared_value
+                options.append(f"{option}. After swap, elimination occurs, clearing {cleared_value} elements, total cleared becomes {total_cleared}.")
             answer = 'B'
             analysis = (
                 f"Swapping involves special elements '{elem1}' or '{elem2}', which is not allowed. "
@@ -508,10 +522,12 @@ def generate_jewel2_QA(level: Level, num: int, size: int) -> Tuple[str, str, str
                     f"B. Cannot perform swap because one of the elements is special.",
                 ]
                 # Generate random distractor options that are not equal to the correct value
+                used_random = set()
                 for option in ['C', 'D', 'E', 'F', 'G', 'H']:
                     while True:
                         random_value = random.randint(1, 9)
-                        if random_value != cleared_after_swap:  # Ensure the value is not equal to the correct one
+                        if random_value != cleared_after_swap and random_value not in used_random:  # Ensure the value is not equal to the correct one
+                            used_random.add(random_value)
                             break
                     options.append(f"{option}. After swap, elimination occurs, clearing {random_value} elements, total cleared becomes {current_cleared + random_value}.")
 
@@ -528,14 +544,17 @@ def generate_jewel2_QA(level: Level, num: int, size: int) -> Tuple[str, str, str
                 # Swap did not result in elimination
                 options = [
                     "A. Nothing will happen because the swap does not meet elimination conditions.",
-                    f"B. Cannot perform swap because one of the elements is special.",
-                    f"C. After swap, elimination occurs, clearing {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}.",
-                    f"D. After swap, elimination occurs, clearing {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}.",
-                    f"E. After swap, elimination occurs, clearing {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}.",
-                    f"F. After swap, elimination occurs, clearing {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}.",
-                    f"G. After swap, elimination occurs, clearing {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}.",
-                    f"H. After swap, elimination occurs, clearing {random.randint(1, 5)} elements, total cleared becomes {current_cleared + random.randint(1, 5)}.",
+                    "B. Cannot perform swap because one of the elements is special.",
                 ]
+                used_cleared = set()
+                for option in ['C', 'D', 'E', 'F', 'G', 'H']:
+                    while True:
+                        cleared_value = random.randint(1, 9)
+                        if cleared_value not in used_cleared and cleared_value != cleared_after_swap:
+                            used_cleared.add(cleared_value)
+                            break
+                    total_cleared = current_cleared + cleared_value
+                    options.append(f"{option}. After swap, elimination occurs, clearing {cleared_value} elements, total cleared becomes {total_cleared}.")
                 answer = 'A'
                 analysis = (
                     f"Swapping the elements at position ({x},{y}) with ({nx},{ny}) in the '{pos}' direction did not create any valid elimination conditions. "

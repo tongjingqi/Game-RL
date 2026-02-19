@@ -2,7 +2,7 @@
 
 Code for the paper "[Game-RL: Synthesizing Multimodal Verifiable Game Data to Boost VLMs' General Reasoning](https://arxiv.org/abs/2505.13886)".
 
-This is the first work, to the best of our knowledge, that adapts game code to synthesize **multimodal game data** for ***training*** VLMs. Furthermore, when we apply **Game-RL**, which is simple GRPO on **GameQA** (synthesized via our **Code2Logic** approach), multiple cutting-edge open-source VLMs exhibit significantly enhanced out-of-domain generalization.
+This is the first work, to the best of our knowledge, that adapts game code to synthesize **multimodal game data** for ***training*** VLMs. Furthermore, when we apply **Game-RL**, which is simple GRPO on **GameQA** (synthesized via our **Code2Logic** approach), multiple cutting-edge open-source VLMs exhibit significantly enhanced out-of-domain generalization. Furthermore, game data provides improvements comparable to general multimodal reasoning datasets (e.g. geometry/chart). More importantly, scaling up game diversity or game data volume consistently improves VLMs' generalizable reasoning capabilities. Our findings highlight scaling reinforcement learning in game environments as a promising direction for enhancing generalizable multimodal reasoning in foundation models.
 
 [ [📖 Paper](https://arxiv.org/abs/2505.13886) ] [[🤗 GameQA-140K Dataset](https://huggingface.co/datasets/OpenMOSS-Team/GameQA-140K) ] [[🤗 GameQA-5K Dataset](https://huggingface.co/datasets/OpenMOSS-Team/GameQA-5K) ] [[🤗 GameQA-text Dataset](https://huggingface.co/datasets/OpenMOSS-Team/GameQA-text) ]
 
@@ -24,14 +24,14 @@ Please give us a star ⭐ if you find this work helpful.
 
 ## 👀 Introduction
 
-Vision-language reinforcement learning (RL) has primarily focused on narrow domains (e.g. geometry or chart reasoning). This leaves broader training scenarios and resources underexplored, limiting the exploration and learning of Vision Language Models (VLMs) through RL. We find video games inherently provide rich visual elements and mechanics that are easy to verify. To fully use the multimodal and verifiable reward in video games, we propose Game-RL, constructing diverse game tasks for RL training to boost VLMs general reasoning ability. To obtain training data, we propose Code2Logic, a novel approach that adapts game code to synthesize game reasoning task data, thus obtaining the GameQA dataset of 30 games and 158 tasks with controllable difficulty gradation. Unexpectedly, RL training solely on GameQA enables multiple VLMs to achieve performance improvements across 7 diverse vision-language benchmarks, demonstrating the value of Game-RL for enhancing VLMs' general reasoning. Furthermore, this suggests that video games may serve as valuable scenarios and resources to boost general reasoning abilities.
+Vision-language reinforcement learning (RL) has primarily focused on narrow domains (e.g. geometry or chart reasoning). This leaves broader training scenarios and resources underexplored, limiting the exploration and learning of Vision Language Models (VLMs) through RL. We find video games inherently provide rich visual elements and mechanics that are easy to verify. To fully use the multimodal and verifiable reward in video games, we propose Game-RL, constructing diverse game tasks for RL training to boost VLMs' general reasoning ability. To obtain training data, we propose Code2Logic, a novel approach that adapts game code to synthesize game reasoning task data, thus obtaining the GameQA dataset of 30 games and 158 tasks with controllable difficulty gradation. Unexpectedly, RL training solely on GameQA enables multiple VLMs to achieve performance improvements across 7 diverse vision-language benchmarks, demonstrating the value of Game-RL for enhancing VLMs' general reasoning. Furthermore, this suggests that video games may serve as valuable scenarios and resources to boost general reasoning abilities.
 
 ### Code2Logic Approach
 
 <div align=center><img src="./assets/Code2Logic_approach.png" alt="Code2Logic_approach" width="90%" /></div>
 
 The Code2Logic approach involves three main steps:
-1. using LLMs to construct game code of the selected game (*Sokoban*).
+1. Using LLMs to construct game code of the selected game (*Sokoban*).
 2. LLM-assisted design of the task templates including question and analysis templates based on the generated game code. Each task template condenses one type of reasoning pattern in the game.
 3. Using LLMs to construct a data engine that directly reuses the core game code from the first step, including functions like `move`.
 * After these main steps, the data engine is executed to fill in the task templates developed in Step 2 and generate data samples, as illustrated in the "Final Result" Section.
@@ -113,7 +113,7 @@ The following steps will guide you on how to set up the environment, train, and 
 
 In this repository, we also provide the code used to generate samples for each game in GameQA - see the [src/](./src) directory. There are 30 directories in total - one for each game.
 
-Apart form the code, each game directory contains:
+Apart from the code, each game directory contains:
 
 1. A README file describing the game tasks and code execution instructions
 2. A subdirectory with example samples
@@ -133,7 +133,7 @@ Apart form the code, each game directory contains:
 
 Ruifeng Chen, Yingqian Huang, Yutong Ke, Hengxi Lin, Yuanhao Ni, Qingyun Shi, Haitian Wang, Xiaoyong Wang, Yufei You, Juntao Zhang, Weixin Zhang, Yang Zhang
 
-*We would like to acknowledge the valuable efforts of the following individuals from ByteDance, who provide API for us to test models and give us some technical instructions.*
+*We would like to acknowledge the valuable efforts of the following individuals from ByteDance, who provide API access for us to test models and give us some technical instructions.*
 
 Zhen Wang, Tao Liang, Zhihui Fei, Mingyang Wan, Guojun Ma
 
