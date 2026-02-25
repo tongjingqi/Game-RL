@@ -67,7 +67,7 @@ Based on Qwen2.5-VL-7B, we applied the same training method on 5k GameQA samples
 
   <div align=center><img src="./assets/Scaling_Effect_game_diversity.png" alt="Scaling_Effect_game_diversity" width="45%" /></div>
 
-* **Data Volume:** Model's performance score demonstrates a overall upward trend on 7 general vision benchmarks as the amount of training data increases, indicating scaling up training game data volume effectively enhances the VLM's general reasoning abilities.
+* **Data Volume:** Model's performance score demonstrates an overall upward trend on 7 general vision benchmarks as the amount of training data increases, indicating scaling up training game data volume effectively enhances the VLM's generalizable reasoning abilities.
 
   <div align=center><img src="./assets/Scaling_Effect_data_volume.png" alt="Scaling_Effect_data_volume" width="90%" /></div>
 
