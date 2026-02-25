@@ -1,8 +1,8 @@
 # [ICLR 2026] Game-RL: Synthesizing Multimodal Verifiable Game Data to Boost VLMs' General Reasoning
 
-Code for the paper "[Game-RL: Synthesizing Multimodal Verifiable Game Data to Boost VLMs' General Reasoning](https://arxiv.org/abs/2505.13886)".
+The official repository for paper "[Game-RL: Synthesizing Multimodal Verifiable Game Data to Boost VLMs' General Reasoning](https://arxiv.org/abs/2505.13886)".
 
-This is the first work, to the best of our knowledge, that adapts game code to synthesize **multimodal game data** for ***training*** VLMs. Furthermore, when we apply **Game-RL**, which is simple GRPO on **GameQA** (synthesized via our **Code2Logic** approach), multiple cutting-edge open-source VLMs exhibit significantly enhanced out-of-domain generalization. Furthermore, game data provides improvements comparable to general multimodal reasoning datasets (e.g. geometry/chart). More importantly, scaling up game diversity or game data volume consistently improves VLMs' generalizable reasoning capabilities. Our findings highlight scaling reinforcement learning in game environments as a promising direction for enhancing generalizable multimodal reasoning in foundation models.
+This is the first work, to the best of our knowledge, that adapts game code to synthesize **multimodal game data** for ***training*** VLMs. When we apply **Game-RL**, which is simple GRPO on **GameQA** (synthesized via our **Code2Logic** approach), multiple cutting-edge open-source VLMs **exhibit out-of-domain generalization**. Remarkably, game data provides improvements comparable to general multimodal reasoning datasets (e.g. geometry/chart). More importantly, scaling up game diversity or game data volume consistently improves VLMs' generalizable reasoning capabilities. Our findings highlight scaling reinforcement learning in game environments as a promising direction for enhancing generalizable multimodal reasoning in foundation models.
 
 [ [📖 Paper](https://arxiv.org/abs/2505.13886) ] [[🤗 GameQA-140K Dataset](https://huggingface.co/datasets/OpenMOSS-Team/GameQA-140K) ] [[🤗 GameQA-5K Dataset](https://huggingface.co/datasets/OpenMOSS-Team/GameQA-5K) ] [[🤗 GameQA-text Dataset](https://huggingface.co/datasets/OpenMOSS-Team/GameQA-text) ]
 
@@ -24,7 +24,7 @@ Please give us a star ⭐ if you find this work helpful.
 
 ## 👀 Introduction
 
-Vision-language reinforcement learning (RL) has primarily focused on narrow domains (e.g. geometry or chart reasoning). This leaves broader training scenarios and resources underexplored, limiting the exploration and learning of Vision Language Models (VLMs) through RL. We find video games inherently provide rich visual elements and mechanics that are easy to verify. To fully use the multimodal and verifiable reward in video games, we propose Game-RL, constructing diverse game tasks for RL training to boost VLMs' general reasoning ability. To obtain training data, we propose Code2Logic, a novel approach that adapts game code to synthesize game reasoning task data, thus obtaining the GameQA dataset of 30 games and 158 tasks with controllable difficulty gradation. Unexpectedly, RL training solely on GameQA enables multiple VLMs to achieve performance improvements across 7 diverse vision-language benchmarks, demonstrating the value of Game-RL for enhancing VLMs' general reasoning. Furthermore, this suggests that video games may serve as valuable scenarios and resources to boost general reasoning abilities.
+Vision-language reinforcement learning (RL) has primarily focused on narrow domains (e.g. geometry or chart reasoning). This leaves broader training scenarios and resources underexplored, limiting the exploration and learning of Vision Language Models (VLMs) through RL. We find video games inherently provide rich visual elements and mechanics that are easy to verify. To fully leverage the multimodal and verifiable rewards in video games, we propose Game-RL, constructing diverse game tasks for RL training to boost VLMs’ general reasoning ability. To obtain training data, we propose Code2Logic, a novel approach that adapts game code to synthesize reasoning data with unlimited examples and controllable difficulty gradation, thus obtaining the GameQA dataset of 30 games and 158 verifiable tasks. Remarkably, RL training solely on GameQA enables multiple VLMs to generalize across 7 diverse out-of-domain vision-language benchmarks, demonstrating the value of Game-RL for enhancing VLMs’ general reasoning. Furthermore, game data provides improvements comparable to general multimodal reasoning datasets (e.g. geometry/chart). More importantly, scaling up game diversity or game data volume consistently improves VLMs' generalizable reasoning capabilities. Our findings highlight scaling reinforcement learning in game environments as a promising direction for enhancing generalizable multimodal reasoning in foundation models.
 
 ### Code2Logic Approach
 
@@ -44,6 +44,32 @@ Our GameQA dataset provides diverse verifiable game tasks along with controllabl
 * It encompasses 30 different games classified into 4 categories based on the core capabilities required to solve game tasks.
 * Four games from different categories and their example data samples are illustrated in the image above.
 * The GameQA data samples are also reasonably graded by difficulty (see [🤗 GameQA-140K](https://huggingface.co/datasets/Gabriel166/GameQA-140K)).
+
+### Key Findings
+
+#### 😎 Game-RL leads to generalizable multimodal reasoning improvements
+
+**RL Training solely on game data** (GameQA) enables three VLMs (Qwen2.5-VL, InternVL2.5, InternVL3) to achieve consistent performance improvements across 7 diverse vision reasoning benchmarks, **demonstrating strong out-of-domain generalization**. These results suggest that the models have successfully learned **transferable visual understanding and reasoning abilities** through Game-RL.
+
+<div align=center><img src="./assets/evaluation_results_on_general_vision_benchmarks.png" alt="evaluation_results_on_general_vision_benchmarks" width="90%" /></div>
+
+#### 💪 Game data is competitive to geometry datasets 
+
+Based on Qwen2.5-VL-7B, we applied the same training method on 5k GameQA samples, 8k samples from MAVIS, 8k Multimodal-Open-R1 samples, 8k MultiMath samples respectively, to conduct comparative training.
+
+ **The GameQA-trained model is competitive compared to its counterparts trained on geometry or function data**, where general vision benchmarks would be considered in-domain. These results suggest that **GameQA enables stronger out-of-domain generalization**, even when using less data from a mismatched domain.
+
+<div align=center><img src="./assets/GameQA_generalizes_better.png" alt="GameQA_generalizes_better" width="90%" /></div>
+
+#### 📈 Scaling Effects: Game Diversity & Data Volume
+
+* **Game Diversity:** Scaling up game diversity (e.g., 4 games → 20 games) makes better generalization, enabling the model to acquire more robust visual understanding and reasoning abilities.
+
+  <div align=center><img src="./assets/Scaling_Effect_game_diversity.png" alt="Scaling_Effect_game_diversity" width="45%" /></div>
+
+* **Data Volume:** Model's performance score demonstrates a overall upward trend on 7 general vision benchmarks as the amount of training data increases, indicating scaling up training game data volume effectively enhances the VLM's general reasoning abilities.
+
+  <div align=center><img src="./assets/Scaling_Effect_data_volume.png" alt="Scaling_Effect_data_volume" width="90%" /></div>
 
 ## 🚀 How to Use
 
@@ -109,7 +135,7 @@ The following steps will guide you on how to set up the environment, train, and 
         
         > *In our work, the inference and evaluation configurations were unified across both the original open-source models and our trained models.*
 
-## 🎮 All Code for Generating GameQA samples
+## 🎮 Code for Generating GameQA Data
 
 In this repository, we also provide the code used to generate samples for each game in GameQA - see the [src/](./src) directory. There are 30 directories in total - one for each game.
 
