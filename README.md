@@ -4,16 +4,17 @@ The official repository for paper "[Game-RL: Synthesizing Multimodal Verifiable 
 
 This is the first work, to the best of our knowledge, that adapts game code to synthesize **multimodal game data** for ***training*** VLMs. When we apply **Game-RL**, which is simple GRPO on **GameQA** (synthesized via our **Code2Logic** approach), multiple cutting-edge open-source VLMs **exhibit out-of-domain generalization**. Remarkably, game data provides improvements comparable to general multimodal reasoning datasets (e.g. geometry/chart). More importantly, scaling up game diversity or game data volume consistently improves VLMs' generalizable reasoning capabilities. Our findings highlight scaling reinforcement learning in game environments as a promising direction for enhancing generalizable multimodal reasoning in foundation models.
 
-[ [📖 Paper](https://arxiv.org/abs/2505.13886) ] [[🤗 GameQA-140K Dataset](https://huggingface.co/datasets/OpenMOSS-Team/GameQA-140K) ] [[🤗 GameQA-5K Dataset](https://huggingface.co/datasets/OpenMOSS-Team/GameQA-5K) ] [[🤗 GameQA-text Dataset](https://huggingface.co/datasets/OpenMOSS-Team/GameQA-text) ]
+[ [📖 Paper](https://arxiv.org/abs/2505.13886) ] [ [🔗 Project Website](https://iclr26-game-rl.github.io/) ]
 
-[[🤗 Game-RL-InternVL3-8B Model](https://huggingface.co/OpenMOSS-Team/Game-RL-InternVL3-8B) ] [[🤗 Game-RL-InternVL2.5-8B Model](https://huggingface.co/OpenMOSS-Team/Game-RL-InternVL2.5-8B) ]
+[[🤗 GameQA-140K Dataset](https://huggingface.co/datasets/OpenMOSS-Team/GameQA-140K) ] [[🤗 GameQA-5K Dataset](https://huggingface.co/datasets/OpenMOSS-Team/GameQA-5K) ] [[🤗 GameQA-text Dataset](https://huggingface.co/datasets/OpenMOSS-Team/GameQA-text) ]
 
-[[🤗 Game-RL-Qwen2.5-VL-7B Model](https://huggingface.co/OpenMOSS-Team/Game-RL-Qwen2.5-VL-7B) ] [[🤗 Game-RL-LLaVA-OV-7B Model](https://huggingface.co/OpenMOSS-Team/Game-RL-LLaVA-OV-7B) ]
+[[🤗 Game-RL-InternVL3-8B Model](https://huggingface.co/OpenMOSS-Team/Game-RL-InternVL3-8B) ] [[🤗 Game-RL-InternVL2.5-8B Model](https://huggingface.co/OpenMOSS-Team/Game-RL-InternVL2.5-8B) ] [[🤗 Game-RL-Qwen2.5-VL-7B Model](https://huggingface.co/OpenMOSS-Team/Game-RL-Qwen2.5-VL-7B) ] 
 
 <div align=center><img src="./assets/categorized_30_games_images.png" alt="categorized_30_games_images" width="100%" /></div>
 
 ## 🎊 News
 
+* [2026/02] 🔥**Alibaba Group and Shanghai Jiao Tong University** uses our GameQA-140K dataset in the [DeepVision-130K](https://huggingface.co/datasets/skylenage/DeepVision-103K/viewer/visual_logic) dataset.
 * [2026/01] 🔥**Shanghai AI Lab** uses our GameQA-140K dataset at scale in the [MMFineReason](https://mmfinereason.github.io/) dataset, which accounts for **87.65%** of its "Puzzle/Game" samples.
 * [2026/01] 🔥**THUML and ByteDance Seed** use our Sokoban code for the synthesis of the Sokoban task samples in [VisWorld-Eval](https://thuml.github.io/Reasoning-Visual-World/) (and the training data).
 * [2026/01] 🔥🔥*Our work has been accepted by* **ICLR 2026**! 🎉🎉🎉
