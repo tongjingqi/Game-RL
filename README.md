@@ -14,7 +14,7 @@ This is the first work, to the best of our knowledge, that adapts game code to s
 
 ## 🎊 News
 
-* [2026/02] 🔥**Alibaba Group and Shanghai Jiao Tong University** use our GameQA data in the [DeepVision-130K](https://huggingface.co/datasets/skylenage/DeepVision-103K/viewer/visual_logic) dataset.
+* [2026/02] 🔥**Alibaba Group and Shanghai Jiao Tong University** use our GameQA-140K dataset at scale in the [DeepVision-103K](https://huggingface.co/datasets/skylenage/DeepVision-103K#%F0%9F%99%8F-acknowledgements) dataset, which accounts for around 50% of its "visual logic problems".
 * [2026/01] 🔥**Shanghai AI Lab** uses our GameQA-140K dataset at scale in the [MMFineReason](https://mmfinereason.github.io/) dataset, which accounts for **87.65%** of its "Puzzle/Game" samples.
 * [2026/01] 🔥**THUML and ByteDance Seed** use our Sokoban code for the synthesis of the Sokoban task samples in [VisWorld-Eval](https://thuml.github.io/Reasoning-Visual-World/) (and the training data).
 * [2026/01] 🔥🔥*Our work has been accepted by* **ICLR 2026**! 🎉🎉🎉
