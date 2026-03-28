@@ -176,13 +176,10 @@ Our work also builds upon or makes use of the **ModelScope Swift (ms-swift)** fr
 If you find our work (Game-RL) useful, we would appreciate it if you could cite our work:
 
 ```bibtex
-@misc{tong2025gamerlsynthesizingmultimodalverifiable,
-      title={Game-RL: Synthesizing Multimodal Verifiable Game Data to Boost VLMs' General Reasoning}, 
-      author={Jingqi Tong and Jixin Tang and Hangcheng Li and Yurong Mou and Ming Zhang and Jun Zhao and Yanbo Wen and Fan Song and Jiahao Zhan and Yuyang Lu and Chaoran Tao and Zhiyuan Guo and Jizhou Yu and Tianhao Cheng and Zhiheng Xi and Changhao Jiang and Zhangyue Yin and Yining Zheng and Weifeng Ge and Guanhua Chen and Tao Gui and Xipeng Qiu and Qi Zhang and Xuanjing Huang},
-      year={2025},
-      eprint={2505.13886},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2505.13886}, 
+@article{tong2025game,
+  title={Game-RL: Synthesizing Multimodal Verifiable Game Data to Boost VLMs' General Reasoning},
+  author={Tong, Jingqi and Tang, Jixin and Li, Hangcheng and Mou, Yurong and Zhang, Ming and Zhao, Jun and Wen, Yanbo and Song, Fan and Zhan, Jiahao and Lu, Yuyang and others},
+  journal={arXiv preprint arXiv:2505.13886},
+  year={2025}
 }
 ```
