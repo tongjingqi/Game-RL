@@ -916,19 +916,19 @@ class ThreeDReconstructionQAGenerator:
                 game
             )
             question_id = 3
-            qa_type = 'ActionOutcome'
+            qa_type = 'State Prediction'
         elif question_type == 'transition_path':
             question_result = self.generate_transition_path_question(game_state, game)
             question_id = 4
-            qa_type = 'TransitionPath'
+            qa_type = 'State Prediction'
         elif question_type == 'strategy_optimization':
             question_result = self.generate_strategy_optimization_question(game_state, game)
             question_id = 5
-            qa_type = 'StrategyOptimization'
+            qa_type = 'Strategy Optimization'
         else:  # StateInfo类型
             question_result = self.generate_state_info_question(structure, game_state, game, force_type=question_type)
             question_id = question_result['question_id']
-            qa_type = 'StateInfo'
+            qa_type = 'Target Perception'
             
         # 设置问题难度
         if question_type in ['strategy_optimization', 'transition_path']:
@@ -1083,16 +1083,15 @@ class ThreeDReconstructionQAGenerator:
             'count': {'Easy': 0, 'Medium': 0, 'Hard': 0},
             'position': {'Easy': 0, 'Medium': 0, 'Hard': 0},
             'projection': {'Easy': 0, 'Medium': 0, 'Hard': 0},
-            'ActionOutcome': {'Easy': 0, 'Medium': 0, 'Hard': 0},
-            'TransitionPath': {'Easy': 0, 'Medium': 0, 'Hard': 0},
-            'StrategyOptimization': {'Easy': 0, 'Medium': 0, 'Hard': 0}
+            'State Prediction': {'Easy': 0, 'Medium': 0, 'Hard': 0},
+            'Strategy Optimization': {'Easy': 0, 'Medium': 0, 'Hard': 0}
         }
         
         for entry in self.dataset:
             qa_type = entry['qa_type']
             plot_level = entry['plot_level']
             
-            if qa_type == 'StateInfo':
+            if qa_type == 'Target Perception':
                 # 对StateInfo类型，根据question_id区分子类型
                 if entry['question_id'] == 0:
                     type_level_stats['count'][plot_level] += 1
@@ -1105,8 +1104,8 @@ class ThreeDReconstructionQAGenerator:
                 type_level_stats[qa_type][plot_level] += 1
             
         # 按照指定顺序打印统计信息
-        print_order = ['count', 'position', 'projection', 'ActionOutcome', 
-                      'TransitionPath', 'StrategyOptimization']
+        print_order = ['count', 'position', 'projection', 'State Prediction', 
+                  'Strategy Optimization']
         
         # 计算最长的类型名称长度（考虑StateInfo前缀）
         display_names = {

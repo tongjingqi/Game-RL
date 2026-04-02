@@ -16,7 +16,7 @@ public class GoalPosition extends BaseTemplate {
 
         super(maze, imageId);
 
-        qa_type = "StateInfo";
+        qa_type = "Target Perception";
 
         question_id = 2;
 

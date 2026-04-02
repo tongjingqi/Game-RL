@@ -34,10 +34,9 @@ def generate_vqa_entry(data_id, question_id, qa_level, image_path, state_path, p
 
 # Define a mapping between qa_type and difficulty level
 qa_type_difficulty_map = {
-    "StateInfo": "Easy",
-    "ActionOutcome": "Easy",
-    "TransitionPath": "Easy",
-    "StrategyOptimization": "Hard"
+    "Target Perception": "Easy",
+    "State Prediction": "Easy",
+    "Strategy Optimization": "Hard"
 }
 
 def main():

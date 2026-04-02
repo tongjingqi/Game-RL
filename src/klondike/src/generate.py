@@ -374,7 +374,7 @@ class KlondikeQAGenerator:
         analysis += f"So the correct option number is {correct_answer}."
         return {
             "data_id": f"klondike-mcq-{question_id}",
-            "qa_type": "StateInfo",
+            "qa_type": "Target Perception",
             "question_description": "Analyze the current state of the board and possible moves.",
             "plot_level": "Easy" if plot_level_card_count <= 19 else "Medium" if plot_level_card_count <= 23 else "Hard",
             "qa_level": "Medium",
@@ -554,7 +554,7 @@ class KlondikeQAGenerator:
 
         return {
             "data_id": f"klondike-mcq-{question_id}",
-            "qa_type": "StrategyOptimization",
+            "qa_type": "Strategy Optimization",
             "question_description": "Determine if the game has reached a state where no further moves are possible",
             "plot_level": "Easy" if plot_level_card_count <= 19 else "Medium" if plot_level_card_count <= 23 else "Hard",
             "qa_level": "Medium",
@@ -781,7 +781,7 @@ class KlondikeQAGenerator:
 
         return {
             "data_id": f"klondike-mcq-{question_id}",
-            "qa_type": "StrategyOptimization",
+            "qa_type": "Strategy Optimization",
             "question_description": "Evaluate the strategic effectiveness of possible moves",
             "plot_level": "Easy" if plot_level_card_count <= 19 else "Medium" if plot_level_card_count <= 23 else "Hard",
             "qa_level": "Hard",
@@ -870,7 +870,7 @@ def save_qa_to_json(qa_data: Dict, dataset_folder: str):
         
         return {
             "data_id": f"klondike-fill-{question_id}",
-            "qa_type": "ActionOutcome",
+            "qa_type": "State Prediction",
             "question_id": 2,
             "question_description": "Evaluate the validity of a specific card move between tableau piles",
             "plot_level": "Easy" if from_pile <= 4 and to_pile <= 4 else "Medium",
@@ -944,7 +944,7 @@ def save_qa_to_json(qa_data: Dict, dataset_folder: str):
 
         return {
             "data_id": f"klondike-fill-{question_id}",
-            "qa_type": "TransitionPath",
+            "qa_type": "State Prediction",
             "question_id": 3,
             "question_description": "Identify possible moves to foundation piles and their strategic implications",
             "plot_level": "Medium",

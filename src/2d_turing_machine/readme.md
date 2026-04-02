@@ -56,7 +56,7 @@ Here is an example of the generated Q&A entry in the `data.json` file:
     "image": "images\\00001.jpg",
     "state": "state\\00001.json",
     "plot_level": "Medium",
-    "qa_type": "ActionOutcome",
+    "qa_type": "State Prediction",
     "qa_level": "Medium",
     "question_id": 0,
     "question_description": "position",

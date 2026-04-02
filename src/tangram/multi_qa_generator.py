@@ -201,7 +201,7 @@ def generate_all_questions(generator: TengramGenerator, index: int,
             
             placement_qa = QAPair(
                 data_id=f"tengram-mcq-{index:05d}-placement",
-                qa_type="ActionOutcome",
+                qa_type="State Prediction",
                 question_id=5,
                 question_description="piece_placement",
                 image=image_path,

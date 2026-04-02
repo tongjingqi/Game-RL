@@ -41,11 +41,11 @@ pip install -r requirements.txt
 
 - Medium 难度：
   - Projection：检查当前结构的投影是否匹配目标视图
-  - ActionOutcome：预测添加指定体素后的投影矩阵
+  - State Prediction：预测添加指定体素后的投影矩阵
 
 - Hard 难度：
-  - StrategyOptimization：计算达到目标所需的最少体素数量
-  - TransitionPath：选择正确的体素添加序列以满足目标投影
+  - Strategy Optimization：计算达到目标所需的最少体素数量
+  - State Prediction：选择正确的体素添加序列以满足目标投影
 
 ### 2. 立体结构难度（plot_level）
 这是根据体素数量来定义的难度级别：
@@ -68,7 +68,7 @@ pip install -r requirements.txt
 生成器支持两种问题数量分配方式：
 
 1. 平均分配（默认）：
-   - 如果没有指定问题类型比例，则平均分配给 6 种问题类型
+   - 如果没有指定问题类型比例，则平均分配给 6 种内部问题模板（映射到 3 类 qa_type）
    - 例如：总数 100 个问题，每种类型约 16-17 个
    - 余数会从前往后依次分配给各类型
 
@@ -84,20 +84,17 @@ pip install -r requirements.txt
 
 ## 问题类型
 
-1. StateInfo 类型
+1. Target Perception 类型
    - Count：计算当前结构中的体素数量
    - Position：检查特定位置是否有体素
    - Projection：检查当前结构的投影是否匹配目标视图
 
-2. ActionOutcome 类型
-   - 预测在当前结构上添加指定体素后的投影矩阵（正视图或侧视图）
-   - 答案需要以3x3矩阵的形式给出投影模式
+2. State Prediction 类型
+   - 动作结果子类型：预测在当前结构上添加指定体素后的投影矩阵（正视图或侧视图）
+   - 转换路径子类型：从多个选项中选择正确的体素添加序列，使得能满足目标投影
+   - 两种子类型都考虑投影匹配与体素数量限制
 
-3. TransitionPath 类型
-   - 从多个选项中选择正确的体素添加序列，使得能满足目标投影
-   - 考虑连通性、投影匹配和体素数量限制
-
-4. StrategyOptimization 类型
+3. Strategy Optimization 类型
    - 计算达到目标所需的最少体素数量
    - 如果当前结构已满足目标投影，则返回 0
    - 否则返回达到目标所需的最少体素数量
@@ -210,7 +207,7 @@ reconstruction_dataset/
 
 每个问题条目包含以下字段：
 - data_id：数据标识符
-- qa_type：问题类型（StateInfo/ActionOutcome/StrategyOptimization/TransitionPath）
+- qa_type：问题类型（Target Perception/State Prediction/Strategy Optimization）
 - question_id：问题编号
 - question_description：问题类型描述
 - image：图片路径

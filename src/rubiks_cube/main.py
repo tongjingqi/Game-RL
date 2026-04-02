@@ -37,39 +37,37 @@ def get_question_type(question_id: int) -> str:
     """Map question ID to question type."""
     # All questions are mapped to one of four main types
     if question_id in [1, 5, 6]:  # face_recognition, color_count, face_solved
-        return "StateInfo"
+        return "Target Perception"
     elif question_id == 2:
-        return "ActionOutcome"
+        return "State Prediction"
     elif question_id == 3:
-        return "TransitionPath"
+        return "State Prediction"
     elif question_id == 4:
-        return "StrategyOptimization"
+        return "Strategy Optimization"
     
 def get_difficulty(qtype: str) -> str:
     """Return difficulty level for each question type."""
     difficulties = {
-        'StateInfo': 'Easy',
-        'ActionOutcome': 'Medium',
-        'TransitionPath': 'Hard',
-        'StrategyOptimization': 'Hard'
+        'Target Perception': 'Easy',
+        'State Prediction': 'Medium',
+        'Strategy Optimization': 'Hard'
     }
     return difficulties.get(qtype, 'Medium')
 
 def get_question_description(qtype: str, subtype: str = None) -> str:
     """Get description for each question type."""
     descriptions = {
-        'StateInfo': {
+        'Target Perception': {
             'face_recognition': "Identify colors on specific positions",
             'color_count': "Count specific colors on a face",
             
         },
-        'ActionOutcome': "Predict the cube state after performing specific moves",
-        'TransitionPath': "Find the sequence of moves between two cube states",
-        'StrategyOptimization': "Determine optimal move sequence to solve the cube"
+        'State Prediction': "Predict the cube state after performing specific moves",
+        'Strategy Optimization': "Determine optimal move sequence to solve the cube"
     }
     
-    if qtype == 'StateInfo' and subtype:
-        return descriptions['StateInfo'][subtype]
+    if qtype == 'Target Perception' and subtype:
+        return descriptions['Target Perception'][subtype]
     return descriptions.get(qtype, "")
 
 def get_subtype_for_question(question_id: int) -> str:
@@ -93,14 +91,16 @@ def generate_dataset(num_cubes: int, output_dir: str = "rubiks_cube_dataset"):
 
     # Mapping from question types to cube method names
     qa_mapping = {
-        'StateInfo': {
+        'Target Perception': {
             'face_recognition': 'face_recognition',
             'color_count': 'color_count',
             
         },
-        'ActionOutcome': 'move_prediction',
-        'TransitionPath': 'single_face_solve',
-        'StrategyOptimization': 'full_solve'
+        'State Prediction': {
+            2: 'move_prediction',
+            3: 'single_face_solve',
+        },
+        'Strategy Optimization': 'full_solve'
     }
 
     for cube_id in range(1, num_cubes + 1):
@@ -125,12 +125,17 @@ def generate_dataset(num_cubes: int, output_dir: str = "rubiks_cube_dataset"):
                 
                 try:
                     # Handle StateInfo questions differently as they have subtypes
-                    if qa_type == 'StateInfo':
+                    if qa_type == 'Target Perception':
                         subtype = get_subtype_for_question(question_id)
                         cube_qa_type = qa_mapping[qa_type][subtype]
                         description = get_question_description(qa_type, subtype)
                     else:
-                        if (qa_type=='TransitionPath'and plot_level==3) or (qa_type=='StrategyOptimization' and plot_level==3):
+                        if qa_type == 'State Prediction':
+                            if question_id == 3 and plot_level == 3:
+                                continue
+                            cube_qa_type = qa_mapping[qa_type][question_id]
+                            description = "Predict the cube state after performing specific moves" if question_id == 2 else "Find the sequence of moves between two cube states"
+                        elif qa_type == 'Strategy Optimization' and plot_level == 3:
                             continue
                         else:
                             cube_qa_type = qa_mapping[qa_type]

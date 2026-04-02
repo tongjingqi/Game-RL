@@ -5,8 +5,8 @@
 ## Features
 
 - **Multiple Question Types**: 
-  - StateInfo: Basic questions about current grid state
-  - ActionOutcome: Questions about next-step evolution
+  - Target Perception: Basic questions about current grid state
+  - State Prediction: Questions about next-step evolution
   - CellChangeCount: Questions about specific cell state changes
   - StabilitySteps: Questions about local region stability
 - **Dynamic Grid Sizes**: Supports different grid sizes (3x3, 4x4, 5x5) for varying difficulty levels
@@ -36,13 +36,13 @@ Conway's Game of Life follows these rules:
 
 ## Question Types in Detail
 
-### 1. StateInfo Questions
+### 1. Target Perception Questions
 - Difficulty Level: Easy
 - Tests basic state understanding
 - Counts current live cells
 - Example: "How many live cells are currently in the grid?"
 
-### 2. ActionOutcome Questions
+### 2. State Prediction Questions
 - Difficulty Level: Medium
 - Tests evolution rule understanding
 - Predicts next-step cell count

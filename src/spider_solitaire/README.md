@@ -82,7 +82,7 @@ The Spider Solitaire VQA dataset supports three levels of difficulty, each with 
 - **Hard**: 10 waste piles.
 
 ### Supported Question Types
-#### Questions about StateInfo Description
+#### Target Perception Questions
 1. **How many times can the stockpile still deal cards?**
    - **Type**: Fill in the blank
 
@@ -95,7 +95,7 @@ The Spider Solitaire VQA dataset supports three levels of difficulty, each with 
 4. **If I click the stockpile {num1} to deal cards twice, how many face-up cards will be in waste pile {num2}?**
    - **Type**: Fill in the blank
 
-#### Questions about ActionOutcome Description
+#### State Prediction Questions (Action-Outcome Subtype)
 1. **What will happen if I want to move the {num1}-th card of pile {num2} to pile {num3}?**
    - **Type**: Multiple choice
    - **Options**
@@ -105,7 +105,7 @@ The Spider Solitaire VQA dataset supports three levels of difficulty, each with 
      - D. The move cannot be made because the top card of the target pile does not have a rank equal to this card’s rank plus one.
      - E. The move cannot be made because the pile has too few cards, and this card does not exist.
 
-#### Question about TransitionPath Description
+#### State Prediction Questions (Transition Subtype)
 1. **What should I do if I want to reveal the first face-down card in waste pile {num}?**
    - **Type**: Multiple choice
    - **Options**
@@ -118,7 +118,7 @@ The Spider Solitaire VQA dataset supports three levels of difficulty, each with 
      - G. We should move the {num13}-th card of pile {num14} to pile {num15}.
      - H. We should move the {num16}-th card of pile {num17} to pile {num18}.
 
-#### Question About StrategyOptimization Description
+#### Strategy Optimization Questions
 1. **Based on the current board state, what is the optimal strategy we should adopt?**
    - **Type**: Multiple choice
    - **Options**

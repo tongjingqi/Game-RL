@@ -287,7 +287,7 @@ def generate_last_star_puzzle(num_puzzles,n,stars,grid_size,base_path):
         # 有合法解就求解
         puzzle_data={
             "data_id": f"star-battle-last_star-{plot_difficulty_map[puzzle.grid_size]}-{puzzles_generated+1:05d}",
-            "qa_type":"TransitionPath",
+            "qa_type":"State Prediction",
             "question_id":1,
             "question_description":f"We have a {puzzle.grid_size}x{puzzle.grid_size} grid. The grid is divided into {puzzle.n} regions.\nThe current grid already has {len(preplaced_stars)} stars placed.\nYour task is to find the location of the final star to complete the puzzle.",
             "image": f"images/board_last_star_{plot_difficulty_map[n]}_{puzzles_generated+1:05d}.png",
@@ -499,7 +499,7 @@ Now we have placed some stars in the grid.
             option_text+=(f"{idx+1}."+option+"\n")
         puzzle_data={
             "data_id": data_id,
-            "qa_type":"StateInfo",
+            "qa_type":"Target Perception",
             "question_id":2,
             "question_description":f"Given current state and an index of a region.You should idectify which cell provided in the options belongs the region.",
             "image": image,
@@ -547,7 +547,7 @@ Thus, the correct answer is: {correct_cell}.''',
         """
         puzzle_data_2={
             "data_id": f"star-battle-star_of_region-{plot_difficulty_map[n]}-{puzzles_generated+1:05d}",
-            "qa_type":"StateInfo",
+            "qa_type":"Target Perception",
             "question_id":2,
             "question_description":f"Given current state and an index of a region.You should idectify which cell provided in the options belongs the region.",
             "image": image,
@@ -608,7 +608,7 @@ Thus, the correct answer is: {correct_cell}.''',
         
         # 构造puzzle_data
         puzzle_data_2["qa_level"]=f"{qa_difficulty_map['star_of_region']}"
-        puzzle_data_2["qa_type"]=f"StateInfo"
+        puzzle_data_2["qa_type"]=f"Target Perception"
         puzzle_data_2["question_id"]=3
         puzzle_data_2["question_description"]=f"Given current state and a region,Your task is to indentify which cell provided by options belongs to this region and has been placed a star. "
         puzzle_data_2["question"]=question_base+f'''\nIn the current puzzle state, region {region_index_2} is associated with color {region_color_map[region_index_2]}. 
@@ -659,7 +659,7 @@ Please identify which of the following cells in this region that contains a star
 
         puzzle_data_3={
             "data_id": f"star-battle-valid_cell-{plot_difficulty_map[n]}-{puzzles_generated+1:05d}",
-            "qa_type":"StateInfo",
+            "qa_type":"Target Perception",
             "question_id":2,
             "question_description":f"Given current state and an index of a region.You should idectify which cell provided in the options belongs the region.",
             "image": image,
@@ -777,7 +777,7 @@ Please identify which of the following cells in this region that contains a star
             option_text_3+=(f"{idx+1}."+option+"\n")
         # 构造data
         puzzle_data_3["qa_level"]=qa_difficulty_map["valid_cells"]
-        puzzle_data_3["qa_type"]="StateInfo"
+        puzzle_data_3["qa_type"]="Target Perception"
         puzzle_data_3["question_id"]=4
         puzzle_data_3["question_description"]=f"Based on the current puzzle state, your task is to identify which of the following cells provided by the options can a star be placed in?"
         puzzle_data_3["answer"]=correct_answer_label

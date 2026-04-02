@@ -148,14 +148,14 @@ def generate_question_and_answer(game, num, plot_level):
 
     question_types = [
         # StateInfo questions
-        {"qa_type": "StateInfo", "template": "How many mines are currently flagged?", "difficulty": "Easy", "description": "Count flagged cells"},
-        {"qa_type": "StateInfo", "template": "How many mines are left to be found?", "difficulty": "Easy", "description": "Calculate remaining mines"},
-        {"qa_type": "StateInfo", "template": "How many cells have been revealed?", "difficulty": "Easy", "description": "Count revealed cells"},
-        {"qa_type": "StateInfo", "template": "What is the state of the cell at ({row},{col})? (revealed number, hidden, flagged as mine)", "difficulty": "Easy", "description": "Check cell state"},
+        {"qa_type": "Target Perception", "template": "How many mines are currently flagged?", "difficulty": "Easy", "description": "Count flagged cells"},
+        {"qa_type": "Target Perception", "template": "How many mines are left to be found?", "difficulty": "Easy", "description": "Calculate remaining mines"},
+        {"qa_type": "Target Perception", "template": "How many cells have been revealed?", "difficulty": "Easy", "description": "Count revealed cells"},
+        {"qa_type": "Target Perception", "template": "What is the state of the cell at ({row},{col})? (revealed number, hidden, flagged as mine)", "difficulty": "Easy", "description": "Check cell state"},
 
         # StrategyOptimization questions
-        {"qa_type": "StrategyOptimization", "template": "What will happen if the player reveals the cell at ({row},{col})?", "difficulty": "Hard", "description": "Predict cell reveal outcome"},
-        {"qa_type": "StrategyOptimization", "template": "What is the best next move at ({row},{col})?", "difficulty": "Hard", "description": "Determine optimal move"},
+        {"qa_type": "Strategy Optimization", "template": "What will happen if the player reveals the cell at ({row},{col})?", "difficulty": "Hard", "description": "Predict cell reveal outcome"},
+        {"qa_type": "Strategy Optimization", "template": "What is the best next move at ({row},{col})?", "difficulty": "Hard", "description": "Determine optimal move"},
     ]
 
     # Select the question based on num

@@ -7,7 +7,7 @@ from game_logic import PacManGame
 from image_generator import PacManImageGenerator, generate_game_image
 from QA_generator import generate_pacman_QA
 
-VALID_QA_TYPES = {"StateInfo", "ActionOutcome", "TransitionPath", "StrategyOptimization"}
+VALID_QA_TYPES = {"Target Perception", "State Prediction", "Strategy Optimization"}
 
 # Generate a valid path using BFS
 def generate_valid_path(game, start, max_length):

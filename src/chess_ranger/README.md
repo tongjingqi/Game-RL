@@ -18,7 +18,7 @@ In Chess Ranger, the game is played on an 8x8 chessboard, where the rows are num
 ```json
 {
         "data_id": "chess-ranger-001-answer_question",
-        "qa_type": "TransitionPath",
+        "qa_type": "State Prediction",
         "question_id": 1,
         "question_description": "Asking for the number of moves to solve the puzzle",
         "image": "images/board_001.png",
@@ -40,7 +40,7 @@ In Chess Ranger, the game is played on an 8x8 chessboard, where the rows are num
     },
     {
         "data_id": "chess-ranger-002-count_piece_question",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Asking how many pieces of a specific type are on the board",
         "image": "images/board_002.png",
@@ -53,7 +53,7 @@ In Chess Ranger, the game is played on an 8x8 chessboard, where the rows are num
     },
     {
         "data_id": "chess-ranger-003-find_pieces",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Asking for the location of all pieces of a specific type",
         "image": "images/board_003.png",
@@ -66,7 +66,7 @@ In Chess Ranger, the game is played on an 8x8 chessboard, where the rows are num
     },
     {
         "data_id": "chess-ranger-004-pos_question",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 4,
         "question_description": "Asking for a piece located at a specific square",
         "image": "images/board_004.png",
@@ -88,7 +88,7 @@ In Chess Ranger, the game is played on an 8x8 chessboard, where the rows are num
     },
     {
         "data_id": "chess-ranger-005-predict_state",
-        "qa_type": "ActionOutcome",
+        "qa_type": "State Prediction",
         "question_id": 5,
         "question_description": "Asking for the next move that can lead to solving the puzzle",
         "image": "images/board_005.png",

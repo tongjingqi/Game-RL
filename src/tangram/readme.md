@@ -71,7 +71,7 @@ The generated dataset is stored in `data.json` within the specified output direc
 Each dictionary in the dataset has the following keys:
 
 *   **`data_id` (str):** Unique identifier for the data point.
-*   **`qa_type` (str):** Type of question (e.g., "StateInfo", "ActionOutcome", "TransitionPath").
+*   **`qa_type` (str):** Type of question (e.g., "Target Perception", "State Prediction", "Strategy Optimization").
 *   **`question_id` (int):**  ID of the question type (1 for count, 2 for rotation, 3 for area, 4 for adjacency, 5 for placement).
 *   **`question_description` (str):**  Textual description of the question type (e.g., "piece_count", "piece_rotation", "piece_area", "piece_adjacency", "piece_placement").
 *   **`image` (str):** Path to the generated puzzle image (PNG file).

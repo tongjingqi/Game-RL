@@ -39,12 +39,12 @@ tictactoe_dataset/
 
 The dataset includes questions categorized into the following types:
 
-1. **StateInfo**: Questions about the current state of the board.
+1. **Target Perception**: Questions about the current state of the board.
    - Example: *"What is the color of the block at row 0, column 1?"*
-2. **ActionOutcome**: Questions about the outcome of a specific move.
+2. **State Prediction**: Questions about the outcome of a specific move.
    - Example: *"What is the optimal move for the current player?"*
-3. **TransitionPath**: Questions about the path to transition from one state to another.
-   - Example: *"If the current player moves to row 1, column 0, what is the opponent's optimal move?"*
+3. **Strategy Optimization**: Questions about selecting the best long-term move.
+    - Example: *"What is the best move to maximize the chance of winning from this board state?"*
 
 ## How to Use
 
@@ -83,7 +83,7 @@ python main.py --num 100
 The `mcq_dataset.json` file contains the following fields for each question:
 
 - `data_id`: Unique identifier for the question.
-- `qa_type`: Type of question (`StateInfo`, `ActionOutcome`, `TransitionPath`).
+- `qa_type`: Type of question (`Target Perception`, `State Prediction`, `Strategy Optimization`).
 - `question_id`: Number for qa_type.
 - `question_description`: Description of the question type.
 - `image`: Path to the corresponding board image.
@@ -99,8 +99,8 @@ The `mcq_dataset.json` file contains the following fields for each question:
 
 ```json
     {
-        "data_id": "tictactoe-mcq-6-TransitionPath",
-        "qa_type": "TransitionPath",
+        "data_id": "tictactoe-mcq-6-State Prediction",
+        "qa_type": "State Prediction",
         "question_id": 3,
         "question_description": "Questions about the path to transition from one state to another.",
         "image": "images/board_6.png",

@@ -68,7 +68,7 @@ pyramidchess_data_generate (Dataset Generation)
 1. Choose a random coordinate and ask what status is the coordinate. （question_id:0）
     ```json
     {
-        "qa_type": "TargetPerception",
+        "qa_type": "Target Perception",
         "qa_level": "Easy",
         "question": " What is the status of the ball on Level 0, which has coordinate ([0, 0])?\n
                         Options:\n1. PLAYER_0\n2. PLAYER_1\n3. Empty\n4. Index out of bound\n",
@@ -87,7 +87,7 @@ pyramidchess_data_generate (Dataset Generation)
 
    ```json
    {    
-        "qa_type": "StatePrediction",
+        "qa_type": "State Prediction",
         "qa_level": "Medium",
         "question": "Can a ball be placed at coordinate [1, 0] on Level 0? If placed, what would be the outcome\n
         Options:\n1. Can place and no balls taken\n2. Can place and then balls can be taken\n3. Cannot place, position already occupied\n4. Cannot place, ball not ready below\n",
@@ -106,7 +106,7 @@ pyramidchess_data_generate (Dataset Generation)
 
    ```json
    {
-        "qa_type": "StatePrediction",
+        "qa_type": "State Prediction",
         "qa_level": "Hard",
         "question": "How many steps (turns) are required for a ball to be placed at coordinate [0, 0] on Level 2? (including the turn placing the ball)",
         "answer": "It needs 12 step(s).",
@@ -118,7 +118,7 @@ pyramidchess_data_generate (Dataset Generation)
 
    ```json
    {
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "qa_level": "Hard",
         "question": "It is PLAYER_0's turn Now.What is the best coordinate to put a ball in order to maximize the opportunity of winning.",
         "answer": "The best coordinate is (0, [4, 2])",
@@ -130,7 +130,7 @@ pyramidchess_data_generate (Dataset Generation)
 
    ```json
    {    
-        "qa_type": "TargetPerception",
+        "qa_type": "Target Perception",
         "qa_level": "Easy",
         "question": "How many balls are there on the board in the image. ",
         "answer": "There are 13 balls.",
@@ -142,7 +142,7 @@ pyramidchess_data_generate (Dataset Generation)
 
    ```json
    {
-        "qa_type": "TargetPerception",
+        "qa_type": "Target Perception",
         "qa_level": "Medium",
         "question": "What is the status of the ball on Level 0, which has coordinate ([0, 2])?\nIs the coordinate legal? Does it contain a ball? Can the ball be taken(has no ball directly above it)? Can a ball be placed?Options:\n1. The coordinate is out of bound\n2. It contain a ball and the ball can't be taken\n3. It contain a ball and can be taken\n4. It doesn't contain a ball and a ball can't be taken 5.It doesn't contain a ball and a ball can be taken\n",
         "answer": 2,

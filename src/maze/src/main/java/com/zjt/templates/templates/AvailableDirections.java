@@ -17,7 +17,7 @@ public class AvailableDirections extends BaseTemplate {
 
         data_id = "maze_" + String.format("%05d", imageId) + "_" + String.format("%02d", question_id);
 
-        qa_type = "StateInfo";
+        qa_type = "Target Perception";
 
         question_description = "Ask for the available directions to move are currently.";
 

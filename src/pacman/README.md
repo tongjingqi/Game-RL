@@ -73,7 +73,7 @@ The Pacman VQA dataset supports three levels of difficulty, each with different 
 - **Hard**: 20*20 board.
 
 ### Supported Question Types
-#### Questions about StateInfo Description
+#### Target Perception Questions
 1. **What is Pac-Man's position and direction?**
    - **Type**: Multiple choice
    - **Options**
@@ -96,7 +96,7 @@ The Pacman VQA dataset supports three levels of difficulty, each with different 
      - B. Blinky is closer to Pac-Man
      - C. Both ghosts are equidistant from Pac-Man
 
-#### Questions about ActionOutcome Description
+#### State Prediction Questions (Action-Outcome Subtype)
 1. **Assuming the ghosts don't move, how many beans can Pac-Man eat if it moves in its current direction until hitting a wall?**
    - **Type**: Fill in the blank
 
@@ -128,7 +128,7 @@ The Pacman VQA dataset supports three levels of difficulty, each with different 
      - C. Yes. Blinky's direction changes to {direction3}
      - D. Yes. Blinky's direction changes to {direction4}
 
-#### Question about TransitionPath Description
+#### State Prediction Questions (Transition Subtype)
 1. **If Pac-Man stays still, where will Pinky move in the next turn?**
    - **Type**: Multiple choice
    - **Options**
@@ -145,7 +145,7 @@ The Pacman VQA dataset supports three levels of difficulty, each with different 
      - C. Blinky will move one step {direction3}
      - D. Blinky will move one step {direction4}
 
-#### Question About StrategyOptimization Description
+#### Strategy Optimization Questions
 1. **If Pac-Man and both ghosts move one step at a time, in which direction should Pac-Man move continuously until hitting a wall to eat the most beans without being caught by a ghost?**
    - **Type**: Multiple choice
    - **Options**

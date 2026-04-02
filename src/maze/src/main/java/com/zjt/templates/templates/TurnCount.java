@@ -17,7 +17,7 @@ public class TurnCount extends BaseTemplate {
 
         data_id = "maze_" + String.format("%05d", imageId) + "_" + String.format("%02d", question_id);
 
-        qa_type = "TransitionPath";
+        qa_type = "State Prediction";
 
         question += "Find the path to the finish and count the number of turns it takes to get there. You only need to provide one number.";
 

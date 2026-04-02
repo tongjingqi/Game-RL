@@ -37,14 +37,14 @@ tetris_dataset/
 
 ## Supported Question Types
 
-### 1. State Information (StateInfo)
+### 1. Target Perception
 - Empty cell counting in specified rows
 - Active Tetromino shape recognition
 
-### 2. Action Outcome (ActionOutcome)
+### 2. State Prediction
 - Collision timesteps prediction after one-step movements
 
-### 3. Strategy Optimization (StrategyOptimization)
+### 3. Strategy Optimization
 - Maximum clearable rows optimization
 
 ## Usage
@@ -100,4 +100,4 @@ GRID_SIZES = [8, 12, 16]  # Modify this list to change available grid sizes
 
 ### Question Type Distribution
 
-The dataset is evenly split between four question types (`QA_TYPE_NUMS = 4`). You can adjust this distribution by modifying the chunk size calculation in the `generate_datasets` function.
+The dataset is evenly split between three question types (`QA_TYPE_NUMS = 3`). You can adjust this distribution by modifying the chunk size calculation in the `generate_datasets` function.

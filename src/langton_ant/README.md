@@ -51,11 +51,11 @@ The generator creates three types of output:
 ## Supported Question Types
 
 ### By Type Category
-1. **StateInfo**:
+1. **Target Perception**:
    - Current position and direction of the ant
    - Difficulty: Easy
 
-2. **ActionOutcome**:
+2. **State Prediction**:
    - Predict ant's position and direction after several steps
    - Predict cell color changes after several steps
    - Difficulty: Medium to Hard

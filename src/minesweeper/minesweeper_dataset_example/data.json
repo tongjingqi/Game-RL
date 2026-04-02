@@ -1,7 +1,7 @@
 [
     {
         "data_id": "minesweeper-train-00001-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00001.png",
@@ -14,7 +14,7 @@
     },
     {
         "data_id": "minesweeper-train-00001-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00001.png",
@@ -27,7 +27,7 @@
     },
     {
         "data_id": "minesweeper-train-00001-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00001.png",
@@ -40,7 +40,7 @@
     },
     {
         "data_id": "minesweeper-train-00001-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00001.png",
@@ -59,7 +59,7 @@
     },
     {
         "data_id": "minesweeper-train-00001-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00001.png",
@@ -78,7 +78,7 @@
     },
     {
         "data_id": "minesweeper-train-00001-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00001.png",
@@ -99,7 +99,7 @@
     },
     {
         "data_id": "minesweeper-train-00002-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00002.png",
@@ -112,7 +112,7 @@
     },
     {
         "data_id": "minesweeper-train-00002-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00002.png",
@@ -125,7 +125,7 @@
     },
     {
         "data_id": "minesweeper-train-00002-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00002.png",
@@ -138,7 +138,7 @@
     },
     {
         "data_id": "minesweeper-train-00002-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00002.png",
@@ -157,7 +157,7 @@
     },
     {
         "data_id": "minesweeper-train-00002-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00002.png",
@@ -176,7 +176,7 @@
     },
     {
         "data_id": "minesweeper-train-00002-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00002.png",
@@ -197,7 +197,7 @@
     },
     {
         "data_id": "minesweeper-train-00003-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00003.png",
@@ -210,7 +210,7 @@
     },
     {
         "data_id": "minesweeper-train-00003-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00003.png",
@@ -223,7 +223,7 @@
     },
     {
         "data_id": "minesweeper-train-00003-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00003.png",
@@ -236,7 +236,7 @@
     },
     {
         "data_id": "minesweeper-train-00003-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00003.png",
@@ -255,7 +255,7 @@
     },
     {
         "data_id": "minesweeper-train-00003-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00003.png",
@@ -274,7 +274,7 @@
     },
     {
         "data_id": "minesweeper-train-00003-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00003.png",
@@ -295,7 +295,7 @@
     },
     {
         "data_id": "minesweeper-train-00004-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00004.png",
@@ -308,7 +308,7 @@
     },
     {
         "data_id": "minesweeper-train-00004-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00004.png",
@@ -321,7 +321,7 @@
     },
     {
         "data_id": "minesweeper-train-00004-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00004.png",
@@ -334,7 +334,7 @@
     },
     {
         "data_id": "minesweeper-train-00004-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00004.png",
@@ -353,7 +353,7 @@
     },
     {
         "data_id": "minesweeper-train-00004-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00004.png",
@@ -372,7 +372,7 @@
     },
     {
         "data_id": "minesweeper-train-00004-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00004.png",
@@ -393,7 +393,7 @@
     },
     {
         "data_id": "minesweeper-train-00005-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00005.png",
@@ -406,7 +406,7 @@
     },
     {
         "data_id": "minesweeper-train-00005-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00005.png",
@@ -419,7 +419,7 @@
     },
     {
         "data_id": "minesweeper-train-00005-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00005.png",
@@ -432,7 +432,7 @@
     },
     {
         "data_id": "minesweeper-train-00005-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00005.png",
@@ -451,7 +451,7 @@
     },
     {
         "data_id": "minesweeper-train-00005-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00005.png",
@@ -470,7 +470,7 @@
     },
     {
         "data_id": "minesweeper-train-00005-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00005.png",
@@ -491,7 +491,7 @@
     },
     {
         "data_id": "minesweeper-train-00006-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00006.png",
@@ -504,7 +504,7 @@
     },
     {
         "data_id": "minesweeper-train-00006-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00006.png",
@@ -517,7 +517,7 @@
     },
     {
         "data_id": "minesweeper-train-00006-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00006.png",
@@ -530,7 +530,7 @@
     },
     {
         "data_id": "minesweeper-train-00006-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00006.png",
@@ -549,7 +549,7 @@
     },
     {
         "data_id": "minesweeper-train-00006-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00006.png",
@@ -568,7 +568,7 @@
     },
     {
         "data_id": "minesweeper-train-00006-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00006.png",
@@ -589,7 +589,7 @@
     },
     {
         "data_id": "minesweeper-train-00007-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00007.png",
@@ -602,7 +602,7 @@
     },
     {
         "data_id": "minesweeper-train-00007-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00007.png",
@@ -615,7 +615,7 @@
     },
     {
         "data_id": "minesweeper-train-00007-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00007.png",
@@ -628,7 +628,7 @@
     },
     {
         "data_id": "minesweeper-train-00007-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00007.png",
@@ -647,7 +647,7 @@
     },
     {
         "data_id": "minesweeper-train-00007-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00007.png",
@@ -666,7 +666,7 @@
     },
     {
         "data_id": "minesweeper-train-00007-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00007.png",
@@ -687,7 +687,7 @@
     },
     {
         "data_id": "minesweeper-train-00008-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00008.png",
@@ -700,7 +700,7 @@
     },
     {
         "data_id": "minesweeper-train-00008-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00008.png",
@@ -713,7 +713,7 @@
     },
     {
         "data_id": "minesweeper-train-00008-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00008.png",
@@ -726,7 +726,7 @@
     },
     {
         "data_id": "minesweeper-train-00008-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00008.png",
@@ -745,7 +745,7 @@
     },
     {
         "data_id": "minesweeper-train-00008-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00008.png",
@@ -764,7 +764,7 @@
     },
     {
         "data_id": "minesweeper-train-00008-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00008.png",
@@ -785,7 +785,7 @@
     },
     {
         "data_id": "minesweeper-train-00009-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00009.png",
@@ -798,7 +798,7 @@
     },
     {
         "data_id": "minesweeper-train-00009-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00009.png",
@@ -811,7 +811,7 @@
     },
     {
         "data_id": "minesweeper-train-00009-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00009.png",
@@ -824,7 +824,7 @@
     },
     {
         "data_id": "minesweeper-train-00009-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00009.png",
@@ -843,7 +843,7 @@
     },
     {
         "data_id": "minesweeper-train-00009-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00009.png",
@@ -862,7 +862,7 @@
     },
     {
         "data_id": "minesweeper-train-00009-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00009.png",
@@ -883,7 +883,7 @@
     },
     {
         "data_id": "minesweeper-train-00010-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00010.png",
@@ -896,7 +896,7 @@
     },
     {
         "data_id": "minesweeper-train-00010-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00010.png",
@@ -909,7 +909,7 @@
     },
     {
         "data_id": "minesweeper-train-00010-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00010.png",
@@ -922,7 +922,7 @@
     },
     {
         "data_id": "minesweeper-train-00010-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00010.png",
@@ -941,7 +941,7 @@
     },
     {
         "data_id": "minesweeper-train-00010-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00010.png",
@@ -960,7 +960,7 @@
     },
     {
         "data_id": "minesweeper-train-00010-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00010.png",
@@ -981,7 +981,7 @@
     },
     {
         "data_id": "minesweeper-train-00011-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00011.png",
@@ -994,7 +994,7 @@
     },
     {
         "data_id": "minesweeper-train-00011-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00011.png",
@@ -1007,7 +1007,7 @@
     },
     {
         "data_id": "minesweeper-train-00011-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00011.png",
@@ -1020,7 +1020,7 @@
     },
     {
         "data_id": "minesweeper-train-00011-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00011.png",
@@ -1039,7 +1039,7 @@
     },
     {
         "data_id": "minesweeper-train-00011-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00011.png",
@@ -1058,7 +1058,7 @@
     },
     {
         "data_id": "minesweeper-train-00011-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00011.png",
@@ -1079,7 +1079,7 @@
     },
     {
         "data_id": "minesweeper-train-00012-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00012.png",
@@ -1092,7 +1092,7 @@
     },
     {
         "data_id": "minesweeper-train-00012-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00012.png",
@@ -1105,7 +1105,7 @@
     },
     {
         "data_id": "minesweeper-train-00012-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00012.png",
@@ -1118,7 +1118,7 @@
     },
     {
         "data_id": "minesweeper-train-00012-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00012.png",
@@ -1137,7 +1137,7 @@
     },
     {
         "data_id": "minesweeper-train-00012-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00012.png",
@@ -1156,7 +1156,7 @@
     },
     {
         "data_id": "minesweeper-train-00012-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00012.png",
@@ -1177,7 +1177,7 @@
     },
     {
         "data_id": "minesweeper-train-00013-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00013.png",
@@ -1190,7 +1190,7 @@
     },
     {
         "data_id": "minesweeper-train-00013-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00013.png",
@@ -1203,7 +1203,7 @@
     },
     {
         "data_id": "minesweeper-train-00013-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00013.png",
@@ -1216,7 +1216,7 @@
     },
     {
         "data_id": "minesweeper-train-00013-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00013.png",
@@ -1235,7 +1235,7 @@
     },
     {
         "data_id": "minesweeper-train-00013-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00013.png",
@@ -1254,7 +1254,7 @@
     },
     {
         "data_id": "minesweeper-train-00013-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00013.png",
@@ -1275,7 +1275,7 @@
     },
     {
         "data_id": "minesweeper-train-00014-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00014.png",
@@ -1288,7 +1288,7 @@
     },
     {
         "data_id": "minesweeper-train-00014-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00014.png",
@@ -1301,7 +1301,7 @@
     },
     {
         "data_id": "minesweeper-train-00014-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00014.png",
@@ -1314,7 +1314,7 @@
     },
     {
         "data_id": "minesweeper-train-00014-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00014.png",
@@ -1333,7 +1333,7 @@
     },
     {
         "data_id": "minesweeper-train-00014-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00014.png",
@@ -1352,7 +1352,7 @@
     },
     {
         "data_id": "minesweeper-train-00014-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00014.png",
@@ -1373,7 +1373,7 @@
     },
     {
         "data_id": "minesweeper-train-00015-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00015.png",
@@ -1386,7 +1386,7 @@
     },
     {
         "data_id": "minesweeper-train-00015-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00015.png",
@@ -1399,7 +1399,7 @@
     },
     {
         "data_id": "minesweeper-train-00015-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00015.png",
@@ -1412,7 +1412,7 @@
     },
     {
         "data_id": "minesweeper-train-00015-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00015.png",
@@ -1431,7 +1431,7 @@
     },
     {
         "data_id": "minesweeper-train-00015-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00015.png",
@@ -1450,7 +1450,7 @@
     },
     {
         "data_id": "minesweeper-train-00015-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00015.png",
@@ -1471,7 +1471,7 @@
     },
     {
         "data_id": "minesweeper-train-00016-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00016.png",
@@ -1484,7 +1484,7 @@
     },
     {
         "data_id": "minesweeper-train-00016-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00016.png",
@@ -1497,7 +1497,7 @@
     },
     {
         "data_id": "minesweeper-train-00016-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00016.png",
@@ -1510,7 +1510,7 @@
     },
     {
         "data_id": "minesweeper-train-00016-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00016.png",
@@ -1529,7 +1529,7 @@
     },
     {
         "data_id": "minesweeper-train-00016-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00016.png",
@@ -1548,7 +1548,7 @@
     },
     {
         "data_id": "minesweeper-train-00016-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00016.png",
@@ -1569,7 +1569,7 @@
     },
     {
         "data_id": "minesweeper-train-00017-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00017.png",
@@ -1582,7 +1582,7 @@
     },
     {
         "data_id": "minesweeper-train-00017-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00017.png",
@@ -1595,7 +1595,7 @@
     },
     {
         "data_id": "minesweeper-train-00017-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00017.png",
@@ -1608,7 +1608,7 @@
     },
     {
         "data_id": "minesweeper-train-00017-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00017.png",
@@ -1627,7 +1627,7 @@
     },
     {
         "data_id": "minesweeper-train-00017-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00017.png",
@@ -1646,7 +1646,7 @@
     },
     {
         "data_id": "minesweeper-train-00017-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00017.png",
@@ -1667,7 +1667,7 @@
     },
     {
         "data_id": "minesweeper-train-00018-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00018.png",
@@ -1680,7 +1680,7 @@
     },
     {
         "data_id": "minesweeper-train-00018-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00018.png",
@@ -1693,7 +1693,7 @@
     },
     {
         "data_id": "minesweeper-train-00018-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00018.png",
@@ -1706,7 +1706,7 @@
     },
     {
         "data_id": "minesweeper-train-00018-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00018.png",
@@ -1725,7 +1725,7 @@
     },
     {
         "data_id": "minesweeper-train-00018-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00018.png",
@@ -1744,7 +1744,7 @@
     },
     {
         "data_id": "minesweeper-train-00018-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00018.png",
@@ -1765,7 +1765,7 @@
     },
     {
         "data_id": "minesweeper-train-00019-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00019.png",
@@ -1778,7 +1778,7 @@
     },
     {
         "data_id": "minesweeper-train-00019-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00019.png",
@@ -1791,7 +1791,7 @@
     },
     {
         "data_id": "minesweeper-train-00019-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00019.png",
@@ -1804,7 +1804,7 @@
     },
     {
         "data_id": "minesweeper-train-00019-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00019.png",
@@ -1823,7 +1823,7 @@
     },
     {
         "data_id": "minesweeper-train-00019-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00019.png",
@@ -1842,7 +1842,7 @@
     },
     {
         "data_id": "minesweeper-train-00019-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00019.png",
@@ -1863,7 +1863,7 @@
     },
     {
         "data_id": "minesweeper-train-00020-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00020.png",
@@ -1876,7 +1876,7 @@
     },
     {
         "data_id": "minesweeper-train-00020-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00020.png",
@@ -1889,7 +1889,7 @@
     },
     {
         "data_id": "minesweeper-train-00020-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00020.png",
@@ -1902,7 +1902,7 @@
     },
     {
         "data_id": "minesweeper-train-00020-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00020.png",
@@ -1921,7 +1921,7 @@
     },
     {
         "data_id": "minesweeper-train-00020-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00020.png",
@@ -1940,7 +1940,7 @@
     },
     {
         "data_id": "minesweeper-train-00020-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00020.png",
@@ -1961,7 +1961,7 @@
     },
     {
         "data_id": "minesweeper-train-00021-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00021.png",
@@ -1974,7 +1974,7 @@
     },
     {
         "data_id": "minesweeper-train-00021-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00021.png",
@@ -1987,7 +1987,7 @@
     },
     {
         "data_id": "minesweeper-train-00021-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00021.png",
@@ -2000,7 +2000,7 @@
     },
     {
         "data_id": "minesweeper-train-00021-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00021.png",
@@ -2019,7 +2019,7 @@
     },
     {
         "data_id": "minesweeper-train-00021-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00021.png",
@@ -2038,7 +2038,7 @@
     },
     {
         "data_id": "minesweeper-train-00021-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00021.png",
@@ -2059,7 +2059,7 @@
     },
     {
         "data_id": "minesweeper-train-00022-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00022.png",
@@ -2072,7 +2072,7 @@
     },
     {
         "data_id": "minesweeper-train-00022-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00022.png",
@@ -2085,7 +2085,7 @@
     },
     {
         "data_id": "minesweeper-train-00022-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00022.png",
@@ -2098,7 +2098,7 @@
     },
     {
         "data_id": "minesweeper-train-00022-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00022.png",
@@ -2117,7 +2117,7 @@
     },
     {
         "data_id": "minesweeper-train-00022-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00022.png",
@@ -2136,7 +2136,7 @@
     },
     {
         "data_id": "minesweeper-train-00022-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00022.png",
@@ -2157,7 +2157,7 @@
     },
     {
         "data_id": "minesweeper-train-00023-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00023.png",
@@ -2170,7 +2170,7 @@
     },
     {
         "data_id": "minesweeper-train-00023-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00023.png",
@@ -2183,7 +2183,7 @@
     },
     {
         "data_id": "minesweeper-train-00023-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00023.png",
@@ -2196,7 +2196,7 @@
     },
     {
         "data_id": "minesweeper-train-00023-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00023.png",
@@ -2215,7 +2215,7 @@
     },
     {
         "data_id": "minesweeper-train-00023-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00023.png",
@@ -2234,7 +2234,7 @@
     },
     {
         "data_id": "minesweeper-train-00023-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00023.png",
@@ -2255,7 +2255,7 @@
     },
     {
         "data_id": "minesweeper-train-00024-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00024.png",
@@ -2268,7 +2268,7 @@
     },
     {
         "data_id": "minesweeper-train-00024-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00024.png",
@@ -2281,7 +2281,7 @@
     },
     {
         "data_id": "minesweeper-train-00024-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00024.png",
@@ -2294,7 +2294,7 @@
     },
     {
         "data_id": "minesweeper-train-00024-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00024.png",
@@ -2313,7 +2313,7 @@
     },
     {
         "data_id": "minesweeper-train-00024-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00024.png",
@@ -2332,7 +2332,7 @@
     },
     {
         "data_id": "minesweeper-train-00024-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00024.png",
@@ -2353,7 +2353,7 @@
     },
     {
         "data_id": "minesweeper-train-00025-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00025.png",
@@ -2366,7 +2366,7 @@
     },
     {
         "data_id": "minesweeper-train-00025-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00025.png",
@@ -2379,7 +2379,7 @@
     },
     {
         "data_id": "minesweeper-train-00025-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00025.png",
@@ -2392,7 +2392,7 @@
     },
     {
         "data_id": "minesweeper-train-00025-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00025.png",
@@ -2411,7 +2411,7 @@
     },
     {
         "data_id": "minesweeper-train-00025-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00025.png",
@@ -2430,7 +2430,7 @@
     },
     {
         "data_id": "minesweeper-train-00025-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00025.png",
@@ -2451,7 +2451,7 @@
     },
     {
         "data_id": "minesweeper-train-00026-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00026.png",
@@ -2464,7 +2464,7 @@
     },
     {
         "data_id": "minesweeper-train-00026-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00026.png",
@@ -2477,7 +2477,7 @@
     },
     {
         "data_id": "minesweeper-train-00026-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00026.png",
@@ -2490,7 +2490,7 @@
     },
     {
         "data_id": "minesweeper-train-00026-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00026.png",
@@ -2509,7 +2509,7 @@
     },
     {
         "data_id": "minesweeper-train-00026-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00026.png",
@@ -2528,7 +2528,7 @@
     },
     {
         "data_id": "minesweeper-train-00026-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00026.png",
@@ -2549,7 +2549,7 @@
     },
     {
         "data_id": "minesweeper-train-00027-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00027.png",
@@ -2562,7 +2562,7 @@
     },
     {
         "data_id": "minesweeper-train-00027-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00027.png",
@@ -2575,7 +2575,7 @@
     },
     {
         "data_id": "minesweeper-train-00027-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00027.png",
@@ -2588,7 +2588,7 @@
     },
     {
         "data_id": "minesweeper-train-00027-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00027.png",
@@ -2607,7 +2607,7 @@
     },
     {
         "data_id": "minesweeper-train-00027-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00027.png",
@@ -2626,7 +2626,7 @@
     },
     {
         "data_id": "minesweeper-train-00027-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00027.png",
@@ -2647,7 +2647,7 @@
     },
     {
         "data_id": "minesweeper-train-00028-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00028.png",
@@ -2660,7 +2660,7 @@
     },
     {
         "data_id": "minesweeper-train-00028-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00028.png",
@@ -2673,7 +2673,7 @@
     },
     {
         "data_id": "minesweeper-train-00028-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00028.png",
@@ -2686,7 +2686,7 @@
     },
     {
         "data_id": "minesweeper-train-00028-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00028.png",
@@ -2705,7 +2705,7 @@
     },
     {
         "data_id": "minesweeper-train-00028-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00028.png",
@@ -2724,7 +2724,7 @@
     },
     {
         "data_id": "minesweeper-train-00028-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00028.png",
@@ -2745,7 +2745,7 @@
     },
     {
         "data_id": "minesweeper-train-00029-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00029.png",
@@ -2758,7 +2758,7 @@
     },
     {
         "data_id": "minesweeper-train-00029-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00029.png",
@@ -2771,7 +2771,7 @@
     },
     {
         "data_id": "minesweeper-train-00029-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00029.png",
@@ -2784,7 +2784,7 @@
     },
     {
         "data_id": "minesweeper-train-00029-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00029.png",
@@ -2803,7 +2803,7 @@
     },
     {
         "data_id": "minesweeper-train-00029-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00029.png",
@@ -2822,7 +2822,7 @@
     },
     {
         "data_id": "minesweeper-train-00029-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00029.png",
@@ -2843,7 +2843,7 @@
     },
     {
         "data_id": "minesweeper-train-00030-0",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 0,
         "question_description": "Count flagged cells",
         "image": "images/board_00030.png",
@@ -2856,7 +2856,7 @@
     },
     {
         "data_id": "minesweeper-train-00030-1",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 1,
         "question_description": "Calculate remaining mines",
         "image": "images/board_00030.png",
@@ -2869,7 +2869,7 @@
     },
     {
         "data_id": "minesweeper-train-00030-2",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 2,
         "question_description": "Count revealed cells",
         "image": "images/board_00030.png",
@@ -2882,7 +2882,7 @@
     },
     {
         "data_id": "minesweeper-train-00030-3",
-        "qa_type": "StateInfo",
+        "qa_type": "Target Perception",
         "question_id": 3,
         "question_description": "Check cell state",
         "image": "images/board_00030.png",
@@ -2901,7 +2901,7 @@
     },
     {
         "data_id": "minesweeper-train-00030-4",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 4,
         "question_description": "Predict cell reveal outcome",
         "image": "images/board_00030.png",
@@ -2920,7 +2920,7 @@
     },
     {
         "data_id": "minesweeper-train-00030-5",
-        "qa_type": "StrategyOptimization",
+        "qa_type": "Strategy Optimization",
         "question_id": 5,
         "question_description": "Determine optimal move",
         "image": "images/board_00030.png",

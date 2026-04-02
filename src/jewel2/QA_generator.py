@@ -5,7 +5,7 @@ from typing import Tuple, List, Optional
 from level import Level
 from chessboard import Chessboard
 
-VALID_QA_TYPES = {"StateInfo", "ActionOutcome", "TransitionPath", "StrategyOptimization"}
+VALID_QA_TYPES = {"Target Perception", "State Prediction", "Strategy Optimization"}
 
 common_elements = ['A', 'B', 'C', 'D', 'E']
 special_elements = ['a', 'b', 'c', 'd', 'e', '+', '|']
@@ -193,25 +193,25 @@ def generate_jewel2_QA(level: Level, num: int, size: int) -> Tuple[str, str, str
     # Define question types with VALID_QA_TYPES
     question_types = [
         # 0: StateInfo
-        {"qa_type": "StateInfo", "template": "How many '{element}' elements are currently on the board?", "difficulty": "Easy", "is_mcq": False, "description": "Count specific element"},
+        {"qa_type": "Target Perception", "template": "How many '{element}' elements are currently on the board?", "difficulty": "Easy", "is_mcq": False, "description": "Count specific element"},
         
         # 1: StateInfo - Multiple Choice
-        {"qa_type": "StateInfo", "template": "Which of the following positions does element '{element}' reside in?", "difficulty": "Easy", "is_mcq": True, "description": "Identify element position"},
+        {"qa_type": "Target Perception", "template": "Which of the following positions does element '{element}' reside in?", "difficulty": "Easy", "is_mcq": True, "description": "Identify element position"},
         
         # 2: ActionOutcome
-        {"qa_type": "StateInfo", "template": "How many special elements (a, b, c, d, e, +, |) are there on the board?", "difficulty": "Easy", "is_mcq": False, "description": "Count special elements"},
+        {"qa_type": "Target Perception", "template": "How many special elements (a, b, c, d, e, +, |) are there on the board?", "difficulty": "Easy", "is_mcq": False, "description": "Count special elements"},
         
         # 3: ActionOutcome - Reasoning
-        {"qa_type": "ActionOutcome", "template": "What will happen if you execute clear {x} {y}?", "difficulty": "Medium", "is_mcq": True, "description": "Simulate clear operation"},
+        {"qa_type": "State Prediction", "template": "What will happen if you execute clear {x} {y}?", "difficulty": "Medium", "is_mcq": True, "description": "Simulate clear operation"},
         
         # 4: TransitionPath - Reasoning
-        {"qa_type": "ActionOutcome", "template": "What will happen if you execute swap {x} {y} {pos}?", "difficulty": "Medium", "is_mcq": True, "description": "Simulate swap operation"},
+        {"qa_type": "State Prediction", "template": "What will happen if you execute swap {x} {y} {pos}?", "difficulty": "Medium", "is_mcq": True, "description": "Simulate swap operation"},
         
         # 5: StrategyOptimization - Fill in the blank
-        {"qa_type": "ActionOutcome", "template": "How many elements will be eliminated at least after performing {command1} followed by {command2}?", "difficulty": "Hard", "is_mcq": False, "description": "Simulate command sequence"},
+        {"qa_type": "State Prediction", "template": "How many elements will be eliminated at least after performing {command1} followed by {command2}?", "difficulty": "Hard", "is_mcq": False, "description": "Simulate command sequence"},
         
         # 6: StrategyOptimization - Fill in the blank
-        {"qa_type": "StrategyOptimization", "template": "What command will result in the maximum number of elements being cleared in a single move?", "difficulty": "Hard", "is_mcq": False, "description": "Optimize command choice"},
+        {"qa_type": "Strategy Optimization", "template": "What command will result in the maximum number of elements being cleared in a single move?", "difficulty": "Hard", "is_mcq": False, "description": "Optimize command choice"},
     ]
     
     # Select question based on num
@@ -249,7 +249,7 @@ def generate_jewel2_QA(level: Level, num: int, size: int) -> Tuple[str, str, str
     options = None
     
     # Handle each question type accordingly
-    if qa_type == "StateInfo" and "How many '{element}' elements are currently on the board?" in question_template:
+    if qa_type == "Target Perception" and "How many '{element}' elements are currently on the board?" in question_template:
         # Question Type 0
         element = random.choice(common_elements)
         # Find positions and count of the specified element
@@ -264,7 +264,7 @@ def generate_jewel2_QA(level: Level, num: int, size: int) -> Tuple[str, str, str
             f"So there are  **{count}** '{element}' in total.\n\n"
         )
     
-    elif qa_type == "StateInfo" and "Which of the following positions does element '{element}' reside in?" in question_template:
+    elif qa_type == "Target Perception" and "Which of the following positions does element '{element}' reside in?" in question_template:
         while True:
             # Randomly select an element from the common elements
             element = random.choice(common_elements)
@@ -312,7 +312,7 @@ def generate_jewel2_QA(level: Level, num: int, size: int) -> Tuple[str, str, str
             f"Option {correct_answer_letter} refers to position {correct_position}, where the '{element}' element resides."
         )
     
-    elif qa_type == "StateInfo" and "How many special elements (a, b, c, d, e, +, |) are there on the board?" in question_template:
+    elif qa_type == "Target Perception" and "How many special elements (a, b, c, d, e, +, |) are there on the board?" in question_template:
         # Question Type 2
         # Find positions and count of all special elements
         special_positions = {elem: [] for elem in special_elements}  # Dictionary to store positions for each special element
@@ -333,7 +333,7 @@ def generate_jewel2_QA(level: Level, num: int, size: int) -> Tuple[str, str, str
             f"So there are **{count}** special element in total."
         )
     
-    elif qa_type == "ActionOutcome" and "What will happen if you execute clear {x} {y}?" in question_template:
+    elif qa_type == "State Prediction" and "What will happen if you execute clear {x} {y}?" in question_template:
         # Question Type 3
         # 75% chance to use valid position
         if random.random() < 0.75:
@@ -442,7 +442,7 @@ def generate_jewel2_QA(level: Level, num: int, size: int) -> Tuple[str, str, str
         
         question += "\n\n**Options:**\n" + "\n".join(options)
     
-    elif qa_type == "ActionOutcome" and "What will happen if you execute swap {x} {y} {pos}?" in question_template:
+    elif qa_type == "State Prediction" and "What will happen if you execute swap {x} {y} {pos}?" in question_template:
         # Question Type 4
         # 75% chance to use valid position
         if random.random() < 0.75:
@@ -566,7 +566,7 @@ def generate_jewel2_QA(level: Level, num: int, size: int) -> Tuple[str, str, str
 
         question += "\n\n**Options:**\n" + "\n".join(options)
 
-    elif qa_type == "ActionOutcome" and "How many elements will be eliminated at least after performing" in question_template:
+    elif qa_type == "State Prediction" and "How many elements will be eliminated at least after performing" in question_template:
         # Question Type 5
         # Select two random commands and execute them to count total cleared elements
         possible_commands = []
@@ -622,7 +622,7 @@ def generate_jewel2_QA(level: Level, num: int, size: int) -> Tuple[str, str, str
         # No options for fill-in-the-blank
         options = None
 
-    elif qa_type == "StrategyOptimization" and "What command will result in the maximum number of elements being cleared in a single move?" in question_template:
+    elif qa_type == "Strategy Optimization" and "What command will result in the maximum number of elements being cleared in a single move?" in question_template:
         # Question Type 6
         question = question_prompt + f"\n\n**Question:** {question_template}"
 

@@ -5,7 +5,7 @@ import copy
 from typing import Tuple, List, Optional
 from game_logic import PacManGame
 
-VALID_QA_TYPES = {"StateInfo", "ActionOutcome", "TransitionPath", "StrategyOptimization"}
+VALID_QA_TYPES = {"Target Perception", "State Prediction", "Strategy Optimization"}
 
 directions = ["UP", "DOWN", "RIGHT", "LEFT"]
 
@@ -864,34 +864,34 @@ def generate_pacman_QA(game: PacManGame, num: int, size: int) -> Tuple[str, str,
     # Define question types with VALID_QA_TYPES
     question_types = [
         # 0: StateInfo
-        {"qa_type": "StateInfo", "template": "What is Pac-Man's position and direction?", "difficulty": "Easy", "is_mcq": False, "description": "Identify Pacman location"},
+        {"qa_type": "Target Perception", "template": "What is Pac-Man's position and direction?", "difficulty": "Easy", "is_mcq": False, "description": "Identify Pacman location"},
         
         # 1: StateInfo
-        {"qa_type": "StateInfo", "template": "Now how many beans are visible there in the 5 by 5 grid around the Pac-man center?", "difficulty": "Easy", "is_mcq": False, "description": "Count Pacman's surrounding beans"},
+        {"qa_type": "Target Perception", "template": "Now how many beans are visible there in the 5 by 5 grid around the Pac-man center?", "difficulty": "Easy", "is_mcq": False, "description": "Count Pacman's surrounding beans"},
         
         # 2: StateInfo - Multiple choice
-        {"qa_type": "StateInfo", "template": "Which ghost is closer to Pac-Man, Pinky or Blinky?", "difficulty": "Easy", "is_mcq": True, "description": "Identify the closest ghost"},
+        {"qa_type": "Target Perception", "template": "Which ghost is closer to Pac-Man, Pinky or Blinky?", "difficulty": "Easy", "is_mcq": True, "description": "Identify the closest ghost"},
 
         # 3: ActionOutcome
-        {"qa_type": "ActionOutcome", "template": "Assuming the ghosts don't move, how many beans can Pac-Man eat if it moves in its current direction until hitting a wall?", "difficulty": "Easy", "is_mcq": False, "description": "Count beans in Pacman's path"},
+        {"qa_type": "State Prediction", "template": "Assuming the ghosts don't move, how many beans can Pac-Man eat if it moves in its current direction until hitting a wall?", "difficulty": "Easy", "is_mcq": False, "description": "Count beans in Pacman's path"},
         
         # 4: ActionOutcome - Multiple choice
-        {"qa_type": "ActionOutcome", "template": "Assuming Pac-Man and both ghosts move one step at a time, what would happen if Pac-Man moves {direction1} {num1} times, then {direction2} {num2} times?", "difficulty": "Hard", "is_mcq": True, "description": "Predict Pacman's movement result"},
+        {"qa_type": "State Prediction", "template": "Assuming Pac-Man and both ghosts move one step at a time, what would happen if Pac-Man moves {direction1} {num1} times, then {direction2} {num2} times?", "difficulty": "Hard", "is_mcq": True, "description": "Predict Pacman's movement result"},
 
         # 5: ActionOutcome - Multiple choice
-        {"qa_type": "ActionOutcome", "template": "Assuming Pinky doesn't move, if Pac-Man moves {direction0} {num1} times, will Pinky's next movement direction change?", "difficulty": "Medium", "is_mcq": True, "description": "Predict change in Pinky's movement"},
+        {"qa_type": "State Prediction", "template": "Assuming Pinky doesn't move, if Pac-Man moves {direction0} {num1} times, will Pinky's next movement direction change?", "difficulty": "Medium", "is_mcq": True, "description": "Predict change in Pinky's movement"},
 
         # 6: ActionOutcome - Multiple choice
-        {"qa_type": "ActionOutcome", "template": "Assuming Blinky doesn't move, if Pac-Man moves {direction0} {num1} times, will Blinky's next movement direction change?", "difficulty": "Medium", "is_mcq": True, "description": "Predict change in Blinky's movement"},
+        {"qa_type": "State Prediction", "template": "Assuming Blinky doesn't move, if Pac-Man moves {direction0} {num1} times, will Blinky's next movement direction change?", "difficulty": "Medium", "is_mcq": True, "description": "Predict change in Blinky's movement"},
 
         # 7: TransitionPath - Multiple choice
-        {"qa_type": "TransitionPath", "template": "If Pac-Man stays still, where will Pinky move in the next turn?", "difficulty": "Medium", "is_mcq": True, "description": "Infer Pinky's next move"},
+        {"qa_type": "State Prediction", "template": "If Pac-Man stays still, where will Pinky move in the next turn?", "difficulty": "Medium", "is_mcq": True, "description": "Infer Pinky's next move"},
         
         # 8: TransitionPath - Multiple choice
-        {"qa_type": "TransitionPath", "template": "If Pac-Man stays still, where will Blinky move in the next turn?", "difficulty": "Medium", "is_mcq": True, "description": "Infer Blinky's next move"},
+        {"qa_type": "State Prediction", "template": "If Pac-Man stays still, where will Blinky move in the next turn?", "difficulty": "Medium", "is_mcq": True, "description": "Infer Blinky's next move"},
 
         # 9: StrategyOptimization - Multiple choice
-        {"qa_type": "StrategyOptimization", "template": "If Pac-Man and both ghosts move one step at a time, in which direction should Pac-Man move continuously until hitting a wall to eat the most beans without being caught by a ghost? (When moving in more than one direction is optimal, the priority order is UP > DOWN > LEFT > RIGHT)", "difficulty": "Hard", "is_mcq": True, "description": "Judge Pacman's optimal movement"},
+        {"qa_type": "Strategy Optimization", "template": "If Pac-Man and both ghosts move one step at a time, in which direction should Pac-Man move continuously until hitting a wall to eat the most beans without being caught by a ghost? (When moving in more than one direction is optimal, the priority order is UP > DOWN > LEFT > RIGHT)", "difficulty": "Hard", "is_mcq": True, "description": "Judge Pacman's optimal movement"},
         
     ]
         

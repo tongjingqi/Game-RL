@@ -14,7 +14,7 @@ public class PlayerPosition extends BaseTemplate {
 
         super(maze, imageId);
 
-        qa_type = "StateInfo";
+        qa_type = "Target Perception";
 
         question_id = 1;
 

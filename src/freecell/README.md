@@ -36,7 +36,7 @@ Each puzzle is stored in JSON format with the following structure:
 {
     "data_id": "free_cell-card_after_move-1-00001",
     "plot_level": 1,
-    "qa_type": "ActionOutcome",
+    "qa_type": "State Prediction",
     "question_id": 4,
     "question_description": "Given a particular game state...",
     "image": "path/to/image.png",

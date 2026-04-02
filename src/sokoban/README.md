@@ -66,20 +66,18 @@ dataset = generate_dataset(num_boards=3)
 
 ### Question Types
 
-1. **ActionOutcome** (Medium Difficulty)
-   - Player position prediction after moves
-   - Box position prediction after moves
-
-2. **StrategyOptimization** (Hard Difficulty)
-   - Minimum moves calculation
-   - Solution path finding
-
-3. **StateInfo** (Easy Difficulty)
+1. **Target Perception** (Easy Difficulty)
    - Current player position identification
    - Manhattan distance calculations
 
-4. **TransitionPath** (Hard Difficulty)
+2. **State Prediction** (Medium/Hard Difficulty)
+   - Player position prediction after moves
+   - Box position prediction after moves
    - Optimal move sequence determination
+
+3. **Strategy Optimization** (Hard Difficulty)
+   - Minimum moves calculation
+   - Solution path finding
 
 ## Board Representation
 
@@ -104,7 +102,7 @@ Generated datasets include the following information for each puzzle:
     "state": "states/board_00001.json",
     "plot_level": "Easy/Medium/Hard",
     "qa_level": "Easy/Medium/Hard",
-    "qa_type": "ActionOutcome/StrategyOptimization/StateInfo/TransitionPath",
+   "qa_type": "Target Perception/State Prediction/Strategy Optimization",
     "question_id": 1,
     "question_description": "Description of the question type",
     "question": "Generated question text",

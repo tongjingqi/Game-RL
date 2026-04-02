@@ -16,7 +16,7 @@ public class PositionAfterMoving extends BaseTemplate {
 
         super(maze, imageId);
 
-        qa_type = "ActionOutcome";
+        qa_type = "State Prediction";
 
         question_id = 6;
 

@@ -76,21 +76,23 @@ def generate_dataset(num_boards: int, output_dir: str = "sokoban_dataset"):
                     
                     # 设置问题类型
                     question_type_mapping = {
-                        'ActionOutcome': ['next_position', 'box_position'],
-                        'StrategyOptimization': ['steps_to_target'],
-                        'StateInfo': ['state_info_player', 'state_info_distance'],
-                        'TransitionPath': ['transition_path']
+                        'State Prediction': ['next_position', 'box_position'],
+                        'Strategy Optimization': ['steps_to_target'],
+                        'Target Perception': ['state_info_player', 'state_info_distance'],
                     }
                     
                     # 选择合适的内部类型
-                    if qa_type == 'ActionOutcome':
-                        internal_type = question_type_mapping[qa_type][question_id - 1]
-                    elif qa_type == 'StrategyOptimization':
+                    if qa_type == 'State Prediction':
+                        if question_id in [1, 2]:
+                            internal_type = question_type_mapping[qa_type][question_id - 1]
+                        else:
+                            internal_type = 'transition_path'
+                    elif qa_type == 'Strategy Optimization':
                         internal_type = question_type_mapping[qa_type][0]
-                    elif qa_type == 'StateInfo':
+                    elif qa_type == 'Target Perception':
                         internal_type = question_type_mapping[qa_type][question_id - 4]
-                    else:  # TransitionPath
-                        internal_type = question_type_mapping[qa_type][0]
+                    else:
+                        internal_type = 'transition_path'
                     
                     board.question_types = [internal_type]
                     
@@ -155,22 +157,21 @@ def generate_dataset(num_boards: int, output_dir: str = "sokoban_dataset"):
 def get_question_type(question_id: int) -> str:
     """Map question ID to question type."""
     type_mapping = {
-        1: 'ActionOutcome',
-        2: 'ActionOutcome',
-        3: 'StrategyOptimization',
-        4: 'StateInfo',
-        5: 'StateInfo',
-        6: 'TransitionPath'
+        1: 'State Prediction',
+        2: 'State Prediction',
+        3: 'Strategy Optimization',
+        4: 'Target Perception',
+        5: 'Target Perception',
+        6: 'State Prediction'
     }
-    return type_mapping.get(question_id, 'ActionOutcome')
+    return type_mapping.get(question_id, 'State Prediction')
 
 def get_difficulty(qtype: str) -> str:
     """Return difficulty level for each question type."""
     difficulties = {
-        'ActionOutcome': 'Medium',
-        'StrategyOptimization': 'Hard', 
-        'StateInfo': 'Easy',
-        'TransitionPath': 'Hard'
+        'State Prediction': 'Medium',
+        'Strategy Optimization': 'Hard',
+        'Target Perception': 'Easy',
     }
     return difficulties.get(qtype, 'Medium')
 

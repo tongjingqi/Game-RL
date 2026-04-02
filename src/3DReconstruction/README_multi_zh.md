@@ -44,7 +44,7 @@ pip install -r requirements.txt
 多问题生成器的工作流程：
 
 1. 首先生成指定数量的游戏状态（每个状态包含一张图片和一个状态文件）
-2. 对每个游戏状态生成所有6种类型的问题（填空题和选择题）
+2. 对每个游戏状态生成全部6种问题模板（映射到3类 qa_type，含填空题和选择题）
 3. 最终数据集中的问答对数量 = 游戏状态数量 × 6
 
 ## 难度说明
@@ -55,8 +55,8 @@ pip install -r requirements.txt
 根据问题类型固定的难度级别：
 
 - Easy 难度：计数(Count)和位置检查(Position)问题
-- Medium 难度：投影检查(Projection)和动作结果(ActionOutcome)问题
-- Hard 难度：策略优化(StrategyOptimization)和转换路径(TransitionPath)问题
+- Medium 难度：投影检查(Projection)和动作结果(State Prediction)问题
+- Hard 难度：策略优化(Strategy Optimization)和转换路径(State Prediction)问题
 
 ### 2. 立体结构难度（plot_level）
 根据体素数量定义的难度级别：
@@ -124,7 +124,7 @@ reconstruction_dataset/
 
 每个问题条目包含以下字段：
 - data_id：数据标识符（格式：reconstruction_state_XXXXX_qa_TYPE_YYYYY）
-- qa_type：问题类型（StateInfo/ActionOutcome/StrategyOptimization/TransitionPath）
+- qa_type：问题类型（Target Perception/State Prediction/Strategy Optimization）
 - question_id：问题编号
 - question_description：问题类型描述
 - image：图片路径

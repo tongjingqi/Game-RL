@@ -25,12 +25,12 @@ GRID_SETTINGS = {
 
 # Question type settings with fixed difficulty levels
 QUESTION_SETTINGS = {
-    "StateInfo": {
+    "Target Perception": {
         "qa_level": "Easy",
         "question_id": 1,
         "question_description": "Questions about counting the current number of live cells in the grid"
     },
-    "ActionOutcome": {
+    "State Prediction": {
         "qa_level": "Medium",
         "question_id": 2,
         "question_description": "Questions about predicting the number of live cells after 1 iteration"
@@ -1581,7 +1581,7 @@ def generate_state_info_question(grid: List[List[int]], data_id: int, plot_level
         return {
             "data_id": f"lifegame-mcq-{data_id:05d}-state",
             "qa_type": "Target Perception",
-            **QUESTION_SETTINGS["StateInfo"],
+            **QUESTION_SETTINGS["Target Perception"],
             "plot_level": plot_level,
             "question": question_text,
             "answer": correct_letter,
@@ -1589,7 +1589,7 @@ def generate_state_info_question(grid: List[List[int]], data_id: int, plot_level
             "options": formatted_options
         }
     except Exception as e:
-        print(f"Error (StateInfo): {str(e)}")
+        print(f"Error (Target Perception): {str(e)}")
         return None
 
 def generate_action_outcome_question(grid: List[List[int]], data_id: int, plot_level: str) -> Dict[str, Any]:
@@ -1626,7 +1626,7 @@ def generate_action_outcome_question(grid: List[List[int]], data_id: int, plot_l
         return {
             "data_id": f"lifegame-mcq-{data_id:05d}-action",
             "qa_type": "State Prediction",
-            **QUESTION_SETTINGS["ActionOutcome"],
+            **QUESTION_SETTINGS["State Prediction"],
             "plot_level": plot_level,
             "question": question_text,
             "answer": correct_letter,
@@ -1634,7 +1634,7 @@ def generate_action_outcome_question(grid: List[List[int]], data_id: int, plot_l
             "options": formatted_options
         }
     except Exception as e:
-        print(f"Error (ActionOutcome): {str(e)}")
+        print(f"Error (State Prediction): {str(e)}")
         return None
 
 def generate_cell_change_question(grid: List[List[int]], data_id: int, plot_level: str) -> Dict[str, Any]:
@@ -1932,8 +1932,8 @@ class DatasetGenerator:
             # 2. 生成问题
             start_time = time.time()
             question_generators = {
-                "StateInfo": generate_state_info_question,
-                "ActionOutcome": generate_action_outcome_question,
+                "Target Perception": generate_state_info_question,
+                "State Prediction": generate_action_outcome_question,
                 "CellChangeCount": generate_cell_change_question,
                 "StabilitySteps": generate_stability_question
             }

@@ -41,11 +41,11 @@ This is a fixed difficulty level based on question type:
 
 - Medium:
   - Projection: Check if the current structure's projections match the target views
-  - ActionOutcome: Predict the projection matrix after adding specified voxels
+  - State Prediction: Predict the projection matrix after adding specified voxels
 
 - Hard:
-  - StrategyOptimization: Calculate the minimum number of voxels needed to achieve the target
-  - TransitionPath: Choose the correct sequence of voxel additions to satisfy target projections
+  - Strategy Optimization: Calculate the minimum number of voxels needed to achieve the target
+  - State Prediction: Choose the correct sequence of voxel additions to satisfy target projections
 
 ### 2. Structure Difficulty (plot_level)
 This is defined by the number of voxels:
@@ -68,7 +68,7 @@ You can set the structure difficulty (plot_level) distribution ratio using the -
 The generator supports two ways of distributing questions:
 
 1. Equal Distribution (default):
-   - If no question type ratios are specified, questions are equally distributed among 6 types
+   - If no question type ratios are specified, questions are equally distributed among 6 internal templates (mapped to 3 qa_type categories)
    - Example: For 100 questions, about 16-17 questions per type
    - Remainders are distributed from first to last type
 
@@ -84,20 +84,17 @@ Note:
 
 ## Question Types
 
-1. StateInfo Type
+1. Target Perception Type
    - Count: Calculate number of voxels in current structure
    - Position: Check if specific position has a voxel
    - Projection: Check if current structure's projections match target views
 
-2. ActionOutcome Type
-   - Predict the projection matrix (front view or side view) after adding specified voxels to the current structure
-   - Answer should be written as a 3x3 matrix showing the projection pattern
+2. State Prediction Type
+   - Action-outcome subtype: Predict the projection matrix (front view or side view) after adding specified voxels to the current structure
+   - Transition subtype: Choose the correct voxel addition sequence from options to satisfy target projections
+   - Both subtypes consider projection matching and voxel constraints
 
-3. TransitionPath Type
-   - Choose correct voxel addition sequence from options to satisfy target projections
-   - Considers connectivity, projection matching, and voxel limit constraints
-
-4. StrategyOptimization Type
+3. Strategy Optimization Type
    - Calculate minimum voxels needed to achieve target
    - Returns 0 if current structure already matches target projections
    - Otherwise returns minimum voxels needed to reach target
@@ -210,7 +207,7 @@ reconstruction_dataset/
 
 Each question entry contains the following fields:
 - data_id: Data identifier
-- qa_type: Question type (StateInfo/ActionOutcome/StrategyOptimization/TransitionPath)
+- qa_type: Question type (Target Perception/State Prediction/Strategy Optimization)
 - question_id: Question number
 - question_description: Question type description
 - image: Image path

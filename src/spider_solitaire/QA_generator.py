@@ -4,7 +4,7 @@ from typing import Tuple, List, Optional
 import model
 from model import Stack, SelectableStack, OneWayStack, Card, Model
 
-VALID_QA_TYPES = {"StateInfo", "ActionOutcome", "TransitionPath", "StrategyOptimization"}
+VALID_QA_TYPES = {"Target Perception", "State Prediction", "Strategy Optimization"}
 
 question_prompt = """
 Spider Solitaire
@@ -128,25 +128,25 @@ def generate_spider_QA(model_instance: model.Model, num: int, num_waste: int) ->
     # Define question types with VALID_QA_TYPES
     question_types = [
         # 0: StateInfo
-        {"qa_type": "StateInfo", "template": "How many times can the stockpile still deal cards?", "difficulty": "Easy", "is_mcq": False, "description": "Remaining deals in the stockpile"},
+        {"qa_type": "Target Perception", "template": "How many times can the stockpile still deal cards?", "difficulty": "Easy", "is_mcq": False, "description": "Remaining deals in the stockpile"},
         
         # 1: StateInfo
-        {"qa_type": "StateInfo", "template": "Which card is on the top of waste pile {num}?", "difficulty": "Easy", "is_mcq": False, "description": "Identify a card of a waste pile"},
+        {"qa_type": "Target Perception", "template": "Which card is on the top of waste pile {num}?", "difficulty": "Easy", "is_mcq": False, "description": "Identify a card of a waste pile"},
         
         # 2: StateInfo
-        {"qa_type": "StateInfo", "template": "How many face-down cards are currently in all waste piles?", "difficulty": "Easy", "is_mcq": False, "description": "Count face-down cards in all waste piles"},
+        {"qa_type": "Target Perception", "template": "How many face-down cards are currently in all waste piles?", "difficulty": "Easy", "is_mcq": False, "description": "Count face-down cards in all waste piles"},
         
         # 3: StateInfo
-        {"qa_type": "StateInfo", "template": "If I click the stockpile for {num1} times, how many face-up cards will be in waste pile {num2}?", "difficulty": "Easy", "is_mcq": False, "description": "Simulate click stockpile"},
+        {"qa_type": "Target Perception", "template": "If I click the stockpile for {num1} times, how many face-up cards will be in waste pile {num2}?", "difficulty": "Easy", "is_mcq": False, "description": "Simulate click stockpile"},
         
         # 4: ActionOutcome - Multiple choice
-        {"qa_type": "ActionOutcome", "template": "What will happen if I want to move the number {num1} card of pile {num2} to pile {num3}?", "difficulty": "Medium", "is_mcq": True, "description": "Predict card move result"},
+        {"qa_type": "State Prediction", "template": "What will happen if I want to move the number {num1} card of pile {num2} to pile {num3}?", "difficulty": "Medium", "is_mcq": True, "description": "Predict card move result"},
         
         # 5: TransitionPath - Multiple choice
-        {"qa_type": "TransitionPath", "template": "What should I do if I want to reveal the first face-down card in waste pile {num}?", "difficulty": "Hard", "is_mcq": True, "description": "Reveal face-down card strategy"},
+        {"qa_type": "State Prediction", "template": "What should I do if I want to reveal the first face-down card in waste pile {num}?", "difficulty": "Hard", "is_mcq": True, "description": "Reveal face-down card strategy"},
         
         # 6: StrategyOptimization - Multiple choice
-        {"qa_type": "StrategyOptimization", "template": "Based on the current board state, what is the optimal strategy we should adopt?", "difficulty": "Hard", "is_mcq": True, "description": "Optimal card move selection"}
+        {"qa_type": "Strategy Optimization", "template": "Based on the current board state, what is the optimal strategy we should adopt?", "difficulty": "Hard", "is_mcq": True, "description": "Optimal card move selection"}
     ]
     
     # Select question based on num
@@ -184,7 +184,7 @@ def generate_spider_QA(model_instance: model.Model, num: int, num_waste: int) ->
     options = None
     
     # Handle each question type accordingly
-    if qa_type == "StateInfo":
+    if qa_type == "Target Perception":
         if "How many times can the stockpile still deal cards?" in question_template:
             # Question Type 0
             question = f"{question_prompt}\n\n**Question:** {question_template}"
@@ -247,7 +247,7 @@ def generate_spider_QA(model_instance: model.Model, num: int, num_waste: int) ->
             )
             options = None  # Fill in the blank
     
-    elif qa_type == "ActionOutcome":
+    elif qa_type == "State Prediction" and "What will happen if I want to move the number {num1} card of pile {num2} to pile {num3}?" in question_template:
         # Question Type: "What will happen if I want to move the number {num1} card of pile {num2} to pile {num3}?" (Multiple choice)
         # {num1}: card index in the pile (0-based)
         # {num2}: source pile index
@@ -428,7 +428,7 @@ def generate_spider_QA(model_instance: model.Model, num: int, num_waste: int) ->
 
         answer = correct_option  # The correct option letter
 
-    elif qa_type == "TransitionPath":
+    elif qa_type == "State Prediction" and "What should I do if I want to reveal the first face-down card in waste pile {num}?" in question_template:
         # Question Type 5
         # "What should I do if I want to reveal the first face-down card in waste pile {num}?" (Multiple choice)
         
@@ -561,7 +561,7 @@ def generate_spider_QA(model_instance: model.Model, num: int, num_waste: int) ->
             # Assign the correct answer
             answer = correct_option
     
-    elif qa_type == "StrategyOptimization":
+    elif qa_type == "Strategy Optimization":
         # Question Type 6
         # "Based on the current board state, what is the optimal strategy we should adopt?" (Multiple choice)
         

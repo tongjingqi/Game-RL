@@ -41,18 +41,16 @@ Generated dataset includes:
 
 ## Supported Question Types
 
-### StateInfo (Easy)
+### Target Perception (Easy)
 - Face recognition: Identify colors at specific positions
 - Color counting: Count specific colors on faces
 - Pattern matching: Identify patterns (diagonal, cross, L-shape, etc.)
 
-### ActionOutcome (Medium)
+### State Prediction (Medium/Hard)
 - Move prediction: Predict cube state after move sequences
-
-### TransitionPath (Hard)
 - Single face solving: Find optimal moves to solve one face
 
-### StrategyOptimization (Hard)
+### Strategy Optimization (Hard)
 - Full cube solving: Determine optimal solution sequence
 
 ## Usage
@@ -83,10 +81,9 @@ plot_level = cube_id % 2 + 1
 
 # Question types and difficulty
 difficulties = {
-    'StateInfo': 'Easy',
-    'ActionOutcome': 'Medium',
-    'TransitionPath': 'Hard',
-    'StrategyOptimization': 'Hard'
+    'Target Perception': 'Easy',
+  'State Prediction': 'Medium/Hard',
+    'Strategy Optimization': 'Hard'
 }
 ```
 

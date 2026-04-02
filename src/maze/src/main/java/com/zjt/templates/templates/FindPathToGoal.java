@@ -16,7 +16,7 @@ public class FindPathToGoal extends BaseTemplate {
 
         this.data_id = "maze_" + String.format("%05d", imageId) + "_" + String.format("%02d", question_id);
 
-        qa_type = "TransitionPath";
+        qa_type = "State Prediction";
 
         question_description = "Find the path to the goal";
 

@@ -39,20 +39,18 @@ The dataset consists of:
 
 ## Supported Question Types
 
-1. **StateInfo**: Questions about the current state of the puzzle.
+1. **Target Perception**: Questions about the current state of the puzzle.
    - How many tents are there in a randomly selected row?
    - Which of the following positions contains a tree?
 
-2. **ActionOutcome**: Questions regarding the outcome of potential actions.
+2. **State Prediction**: Questions regarding the outcome of potential actions.
    - How many tents are still missing in a randomly selected column?
    - How many tents are still missing in the entire puzzle?
    - Given the tree positions and considering only the second rule, how many positions in the entire grid are available to place tents (including both positions that are currently occupied by tents and positions that are currently empty)?
    - How many positions in the grid are available to place a new tent without breaking the game rules immediately (it does not have to be a part of a whole solution to the puzzle)?
    - Which of the following positions is allowed to place a new tent without breaking the game rules immediately (it does not have to be a part of a whole solution to the puzzle)?   
 
-3. **TransitionPath**: Not implemented in this version but can be considered for future expansions.
-
-4. **StrategyOptimization**: Not implemented in this version but can be considered for future expansions.
+3. **Strategy Optimization**: Not implemented in this version but can be considered for future expansions.
 
 
 ## How to Use

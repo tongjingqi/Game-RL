@@ -9,7 +9,7 @@ from level import Level
 from image_generator import generate_jewel2_image
 from QA_generator import generate_jewel2_QA
 
-VALID_QA_TYPES = {"StateInfo", "ActionOutcome", "TransitionPath", "StrategyOptimization"}
+VALID_QA_TYPES = {"Target Perception", "State Prediction", "Strategy Optimization"}
 
 def generate_vqa_entry(data_id, qa_type, question_id, question_description, image_path, state_path, plot_level, qa_level, question, answer, analysis, options=None):
     """
@@ -101,13 +101,13 @@ def main():
                 if qa_type not in VALID_QA_TYPES:
                     # Map or adjust qa_type to VALID_QA_TYPES
                     if qa_type == "Recognizing":
-                        qa_type_mapped = "StateInfo"
-                    elif qa_type == "Reasoning":
-                        qa_type_mapped = "ActionOutcome"
+                        qa_type_mapped = "Target Perception"
+                    elif qa_type in {"Reasoning", "ActionOutcome", "TransitionPath"}:
+                        qa_type_mapped = "State Prediction"
                     elif qa_type == "Strategy":
-                        qa_type_mapped = "StrategyOptimization"
+                        qa_type_mapped = "Strategy Optimization"
                     else:
-                        qa_type_mapped = "StateInfo"  # Default value
+                        qa_type_mapped = "Target Perception"  # Default value
                     qa_type = qa_type_mapped
 
                 # Generate unique data_id

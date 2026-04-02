@@ -15,7 +15,7 @@ This Sudoku variant uses **colors** instead of numbers. The game is played on a 
    {
     "data_id": "sudoku-00001",
     "question_id": 1,
-    "qa_type": "StateInfo",
+    "qa_type": "Target Perception",
     "question_description": "Check color state at position",
     "image": "images/board_00001.png",
     "state": "states/board_00001.json",
@@ -34,7 +34,7 @@ This Sudoku variant uses **colors** instead of numbers. The game is played on a 
    {
     "data_id": "sudoku-00004",
     "question_id": 2,
-    "qa_type": "StateInfo",
+    "qa_type": "Target Perception",
     "question_description": "Count occurrences of specific color",
     "image": "images/board_00004.png",
     "state": "states/board_00004.json",
@@ -53,7 +53,7 @@ This Sudoku variant uses **colors** instead of numbers. The game is played on a 
    {
     "data_id": "sudoku-00006",
     "question_id": 3,
-    "qa_type": "StrategyOptimization",
+    "qa_type": "Strategy Optimization",
     "question_description": "Analyze possible colors to fill",
     "image": "images/board_00006.png",
     "state": "states/board_00006.json",
@@ -72,7 +72,7 @@ This Sudoku variant uses **colors** instead of numbers. The game is played on a 
    {
     "data_id": "sudoku-00007",
     "question_id": 4,
-    "qa_type": "StateInfo",
+    "qa_type": "Target Perception",
     "question_description": "Count regions with empty cells exceeding threshold",
     "image": "images/board_00007.png",
     "state": "states/board_00007.json",
@@ -91,7 +91,7 @@ This Sudoku variant uses **colors** instead of numbers. The game is played on a 
    {
     "data_id": "sudoku-00010",
     "question_id": 5,
-    "qa_type": "ActionOutcome",
+    "qa_type": "State Prediction",
     "question_description": "Multi-step deductive reasoning with constraints analysis",
     "image": "images/board_00010.png",
     "state": "states/board_00010.json",

@@ -536,7 +536,7 @@ def generate_dataset(dataset_size: int = DATASET_SIZE, options_num: int = 8) -> 
                     
                     data_entry = {
                         "data_id": f"langton-fill-{data_id_counter:05d}",
-                        "qa_type": "ActionOutcome",
+                        "qa_type": "State Prediction",
                         "question_id": 3,
                         "question_description": "Count how many times a specific cell changes its color",
                         "image": f"images/{base_filename}.png",
