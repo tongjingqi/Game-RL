@@ -14,6 +14,7 @@ This is the first work, to the best of our knowledge, that adapts game code to s
 
 ## 🎊 News
 
+* [2026/04] 🔥**Princeton University** uses our GameQA dataset in their [Vero](https://arxiv.org/pdf/2604.04917) project.
 * [2026/03] 🔥**National University of Singapore** uses our games in the [Gym-V](https://arxiv.org/pdf/2603.15432) platform.
 * [2026/02] 🔥**Alibaba Group and Shanghai Jiao Tong University** use our GameQA-140K dataset at scale in the [DeepVision-103K](https://huggingface.co/datasets/skylenage/DeepVision-103K#%F0%9F%99%8F-acknowledgements) dataset, which accounts for around 50% of its "visual logic problems".
 * [2026/01] 🔥**Shanghai AI Lab** uses our GameQA-140K dataset at scale in the [MMFineReason](https://mmfinereason.github.io/) dataset, which accounts for **87.65%** of its "Puzzle/Game" samples.
