@@ -1,0 +1,459 @@
+{
+  "schema_version": "1.1",
+  "game": "3d_maze",
+  "question_description": "main_path",
+  "grid_size": {
+    "x": 8,
+    "y": 8,
+    "z": 7
+  },
+  "start_pos": {
+    "x": 7,
+    "y": 7,
+    "z": 0
+  },
+  "goal_pos": {
+    "x": 3,
+    "y": 1,
+    "z": 6
+  },
+  "cubes": [
+    {
+      "pos": {
+        "x": 7,
+        "y": 3,
+        "z": 0
+      },
+      "roles": [
+        "numbered_block"
+      ]
+    },
+    {
+      "pos": {
+        "x": 7,
+        "y": 4,
+        "z": 0
+      },
+      "roles": []
+    },
+    {
+      "pos": {
+        "x": 7,
+        "y": 5,
+        "z": 0
+      },
+      "roles": [
+        "main_path"
+      ]
+    },
+    {
+      "pos": {
+        "x": 7,
+        "y": 6,
+        "z": 0
+      },
+      "roles": [
+        "main_path"
+      ]
+    },
+    {
+      "pos": {
+        "x": 7,
+        "y": 7,
+        "z": 0
+      },
+      "roles": [
+        "main_path",
+        "start"
+      ]
+    },
+    {
+      "pos": {
+        "x": 5,
+        "y": 3,
+        "z": 3
+      },
+      "roles": [
+        "main_path"
+      ]
+    },
+    {
+      "pos": {
+        "x": 6,
+        "y": 3,
+        "z": 3
+      },
+      "roles": [
+        "main_path"
+      ]
+    },
+    {
+      "pos": {
+        "x": 7,
+        "y": 3,
+        "z": 3
+      },
+      "roles": [
+        "main_path"
+      ]
+    },
+    {
+      "pos": {
+        "x": 7,
+        "y": 4,
+        "z": 3
+      },
+      "roles": [
+        "main_path"
+      ]
+    },
+    {
+      "pos": {
+        "x": 5,
+        "y": 5,
+        "z": 3
+      },
+      "roles": []
+    },
+    {
+      "pos": {
+        "x": 6,
+        "y": 5,
+        "z": 3
+      },
+      "roles": []
+    },
+    {
+      "pos": {
+        "x": 7,
+        "y": 5,
+        "z": 3
+      },
+      "roles": [
+        "main_path"
+      ]
+    },
+    {
+      "pos": {
+        "x": 7,
+        "y": 7,
+        "z": 3
+      },
+      "roles": []
+    },
+    {
+      "pos": {
+        "x": 3,
+        "y": 1,
+        "z": 6
+      },
+      "roles": [
+        "goal",
+        "main_path"
+      ]
+    },
+    {
+      "pos": {
+        "x": 4,
+        "y": 1,
+        "z": 6
+      },
+      "roles": [
+        "main_path",
+        "numbered_block"
+      ]
+    },
+    {
+      "pos": {
+        "x": 5,
+        "y": 1,
+        "z": 6
+      },
+      "roles": [
+        "main_path"
+      ]
+    },
+    {
+      "pos": {
+        "x": 5,
+        "y": 2,
+        "z": 6
+      },
+      "roles": [
+        "main_path"
+      ]
+    },
+    {
+      "pos": {
+        "x": 3,
+        "y": 3,
+        "z": 6
+      },
+      "roles": []
+    },
+    {
+      "pos": {
+        "x": 4,
+        "y": 3,
+        "z": 6
+      },
+      "roles": []
+    },
+    {
+      "pos": {
+        "x": 5,
+        "y": 3,
+        "z": 6
+      },
+      "roles": [
+        "main_path"
+      ]
+    },
+    {
+      "pos": {
+        "x": 5,
+        "y": 5,
+        "z": 6
+      },
+      "roles": [
+        "numbered_block"
+      ]
+    }
+  ],
+  "main_path_segments": [
+    {
+      "start": {
+        "x": 7,
+        "y": 7,
+        "z": 0
+      },
+      "end": {
+        "x": 7,
+        "y": 5,
+        "z": 0
+      },
+      "type": "walk",
+      "direction": "left-forward"
+    },
+    {
+      "start": {
+        "x": 7,
+        "y": 5,
+        "z": 0
+      },
+      "end": {
+        "x": 7,
+        "y": 5,
+        "z": 3
+      },
+      "type": "ladder",
+      "direction": "up"
+    },
+    {
+      "start": {
+        "x": 7,
+        "y": 5,
+        "z": 3
+      },
+      "end": {
+        "x": 7,
+        "y": 3,
+        "z": 3
+      },
+      "type": "walk",
+      "direction": "left-forward"
+    },
+    {
+      "start": {
+        "x": 7,
+        "y": 3,
+        "z": 3
+      },
+      "end": {
+        "x": 5,
+        "y": 3,
+        "z": 3
+      },
+      "type": "walk",
+      "direction": "right-forward"
+    },
+    {
+      "start": {
+        "x": 5,
+        "y": 3,
+        "z": 3
+      },
+      "end": {
+        "x": 5,
+        "y": 3,
+        "z": 6
+      },
+      "type": "ladder",
+      "direction": "up"
+    },
+    {
+      "start": {
+        "x": 5,
+        "y": 3,
+        "z": 6
+      },
+      "end": {
+        "x": 5,
+        "y": 1,
+        "z": 6
+      },
+      "type": "walk",
+      "direction": "left-forward"
+    },
+    {
+      "start": {
+        "x": 5,
+        "y": 1,
+        "z": 6
+      },
+      "end": {
+        "x": 3,
+        "y": 1,
+        "z": 6
+      },
+      "type": "walk",
+      "direction": "right-forward"
+    }
+  ],
+  "main_path_ordered_cubes": [
+    {
+      "x": 7,
+      "y": 7,
+      "z": 0
+    },
+    {
+      "x": 7,
+      "y": 6,
+      "z": 0
+    },
+    {
+      "x": 7,
+      "y": 5,
+      "z": 0
+    },
+    {
+      "x": 7,
+      "y": 5,
+      "z": 3
+    },
+    {
+      "x": 7,
+      "y": 4,
+      "z": 3
+    },
+    {
+      "x": 7,
+      "y": 3,
+      "z": 3
+    },
+    {
+      "x": 6,
+      "y": 3,
+      "z": 3
+    },
+    {
+      "x": 5,
+      "y": 3,
+      "z": 3
+    },
+    {
+      "x": 5,
+      "y": 3,
+      "z": 6
+    },
+    {
+      "x": 5,
+      "y": 2,
+      "z": 6
+    },
+    {
+      "x": 5,
+      "y": 1,
+      "z": 6
+    },
+    {
+      "x": 4,
+      "y": 1,
+      "z": 6
+    },
+    {
+      "x": 3,
+      "y": 1,
+      "z": 6
+    }
+  ],
+  "ladders": [
+    {
+      "base_pos": {
+        "x": 7,
+        "y": 5,
+        "z": 0
+      },
+      "direction": "+x",
+      "height": 3
+    },
+    {
+      "base_pos": {
+        "x": 5,
+        "y": 3,
+        "z": 3
+      },
+      "direction": "+x",
+      "height": 3
+    },
+    {
+      "base_pos": {
+        "x": 7,
+        "y": 7,
+        "z": 0
+      },
+      "direction": "+x",
+      "height": 3
+    },
+    {
+      "base_pos": {
+        "x": 5,
+        "y": 5,
+        "z": 3
+      },
+      "direction": "+x",
+      "height": 3
+    }
+  ],
+  "sequence_points": [],
+  "numbered_markers": [
+    {
+      "label": 1,
+      "pos": {
+        "x": 5,
+        "y": 5,
+        "z": 6
+      },
+      "marker_type": "numbered_block"
+    },
+    {
+      "label": 2,
+      "pos": {
+        "x": 7,
+        "y": 3,
+        "z": 0
+      },
+      "marker_type": "numbered_block"
+    },
+    {
+      "label": 3,
+      "pos": {
+        "x": 4,
+        "y": 1,
+        "z": 6
+      },
+      "marker_type": "numbered_block"
+    }
+  ],
+  "branches": []
+}

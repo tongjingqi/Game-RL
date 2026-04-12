@@ -1,55 +1,55 @@
 # Rhythm Game
 
-## 代码使用
+## Code Usage
 
-可以在主函数中调整各个难度需要的图片数量
+You can adjust the number of images needed for each difficulty level in the main function.
 
-代码保存路径：`data.json`
+Code save path: `data.json`
 
-需要下载`pygame`模块
-
-
-
-## 游戏类型
-
-1. 全局信息可知
-
-2. 场景动态变化
-   1. 下落式音游，方块会随时间下落
-   2. 与传统音游的差异：添加玩家与场景的交互
+You need to install the `pygame` module.
 
 
 
-### 游戏描述
+## Game Type
 
-现在我给你一张图片，它展示了一份音乐游戏的截图，其中有各种颜色的操作块。在本游戏中，操作块会以1格/s的速度进行下落。同时，你可以选定某一列放置你的手指（在选定后不能移动手指），点击该列中下落到第1行的操作块以得分（当然你也可以选择不点击任何一列，这不会影响操作块的下落）。\n对于操作块，我们将其分为3类，包括单点块、反转块、和蛇块，具体如下：\n1. 单点块是黄色的，占据1格，点击可以获得10分。\n2. 反转块是绿色的，占据1格，点击可以获得15分。需要注意的是，在你点击反转块后，整个游戏的局面会**左右反转**，但是你的手指位置**不会**随之改变。\n3. 蛇块占据一列中连续的2格或更多格，它的第一格（称为蛇头块）是粉色的，最后一格（称为蛇尾块）是灰色的，中间的格子(称为蛇身块，如果有的话)是蓝色的。只有当你点击蛇块占据的**所有格子**后，你才能得分，得分值与蛇块的长度$l$(包括首尾)有关，具体得分为$l \cdot (2l + 7)$。\n现在我会给你一道有关该游戏的题目，请你从我给你的图片中提取信息，仔细思考、推理并进行作答：\n
+1. Global information is fully observable
 
-
-
-## 改变
-
-与传统音游的差异：**<u>需要加入决策点</u>**
-
-1. 调整玩家与游戏的交互：
-   1. 玩家的点击 -> **<u>选出一列点击</u>**
-   2. **<u>反转块的点击会左右翻转整个场景</u>**，可以在某些题目中添加难度
-      1. ps：点击反转块后，选择的列不反转，但是格子会反转
+2. The scene changes dynamically
+   1. A falling-note rhythm game, where blocks fall over time
+   2. Difference from traditional rhythm games: interaction between the player and the scene is added
 
 
 
-## 方块设置
+### Game Description
 
-|        |             描述              |           颜色           |        分值        |
-| :----: | :---------------------------: | :----------------------: | :----------------: |
-| 单点块 |             占1格             |           黄色           |         10         |
-| 反转块 | 占1格，点击会左右翻转整个场景 |           绿色           |         15         |
-|  蛇块  |   同一列上最长5格，最短2格    | 头粉色，尾灰色，中间蓝色 | $l \cdot (2l + 7)$ |
+Now I give you an image showing a screenshot of a rhythm game, with operation blocks of various colors. In this game, the operation blocks fall at a speed of 1 cell/s. At the same time, you may choose one column to place your finger on (and you cannot move your finger after choosing it), and click the operation blocks in that column when they fall to row 1 in order to score points. Of course, you may also choose not to click any column, which does not affect the falling of the operation blocks.\nWe divide the operation blocks into 3 categories: click blocks, reverse blocks, and snake blocks, as follows:\n1. Click blocks are yellow, occupy 1 cell, and give 10 points when clicked.\n2. Reverse blocks are green, occupy 1 cell, and give 15 points when clicked. Note that after you click a reverse block, the entire scene is **reversed left and right**, but your finger position **does not** change.\n3. A snake block occupies 2 or more consecutive cells in one column. Its first cell (called the snake head block) is pink, its last cell (called the snake tail block) is gray, and the middle cells (called snake body blocks, if any) are blue. Only when you click **all cells** occupied by the snake block can you score points. The score depends on the length $l$ of the snake block (including head and tail), and is specifically $l \cdot (2l + 7)$.\nNow I will give you a question about this game. Please extract information from the image, think carefully, reason, and answer:\n
 
 
 
-## 问题模板
+## Changes
 
-1. 当前图中某格属于哪种块
+Difference from traditional rhythm games: **<u>decision points need to be added</u>**
+
+1. Adjust the interaction between the player and the game:
+   1. The player's click -> **<u>choose one column to click</u>**
+   2. **<u>Clicking a reverse block flips the entire scene left and right</u>**, which can increase the difficulty in some questions
+      1. ps: after clicking a reverse block, the selected column does not flip, but the grid does flip
+
+
+
+## Block Settings
+
+|        |                    Description                    |              Color               |       Score        |
+| :----: | :-----------------------------------------------: | :------------------------------: | :----------------: |
+| Click Block |                   Occupies 1 cell                   |             Yellow              |         10         |
+| Reverse Block | Occupies 1 cell, clicking it flips the whole scene left and right |             Green               |         15         |
+|  Snake Block  | Occupies 2 to 5 consecutive cells in one column | Head pink, tail gray, body blue | $l \cdot (2l + 7)$ |
+
+
+
+## Question Templates
+
+1. Ask what type of block a certain cell belongs to in the current image
 
    ```json
    {
@@ -64,7 +64,7 @@
    }
    ```
 
-2. 当前图中被操作块占据的格子占比多少，答案保留3位小数（填空题）
+2. Ask what proportion of the current image is occupied by operation blocks, retaining 3 significant figures (fill-in-the-blank)
 
    ```json
    {
@@ -78,7 +78,7 @@
    }
    ```
 
-3. 在不选择任何一列点击的情况下，$k$秒后，以$(x_0, y_0)$为首（即最下端）的蛇块长度是多少（蛇块长度为2~5）
+3. Without selecting any column to click, after $k$ seconds, what is the length of the snake block headed by $(x_0, y_0)$ (that is, its lower end)? The snake length is 2 to 5.
 
    ```json
    {
@@ -93,7 +93,7 @@
    }
    ```
 
-4. 选择某列点击时最终得分多少
+4. Ask for the final score when choosing a certain column to click
 
    ```json
    {
@@ -108,7 +108,7 @@
    }
    ```
 
-5. 在反转块耗时2格时，选择某列点击最终得分多少
+5. When reversing the grid takes 1 second, ask for the final score when choosing a certain column to click
 
    ```json
    {
@@ -123,7 +123,7 @@
    }
    ```
 
-6. 选择哪列最终得分最高
+6. Ask which column gives the highest final score
 
    ```json
    {
@@ -138,7 +138,7 @@
    }
    ```
 
-7. 在反转块耗时2格时，选择哪列最终得分最高
+7. When reversing the grid takes 1 second, ask which column gives the highest final score
 
    ```json
    {
@@ -153,14 +153,14 @@
    }
    ```
 
-ps: 第6/7题可能会有多解
+ps: Questions 6 and 7 may have multiple correct answers.
 
 
 
-## 代码解释
+## Code Explanation
 
-1. 目前设置是3种块的总块数（并不是占用格数）是表格总格数的1/2，使得最终占用格数略多于总格数的1/2
-2. 3种操作块的比例可以自定义（目前单:反:蛇 = 7:4:3），但是蛇块的比例不宜过高，会使得占用格数过高
+1. The current setting is that the total number of blocks of the three types (not the number of occupied cells) is 1/2 of the total number of cells in the board, so the final number of occupied cells is slightly more than 1/2 of the total.
+2. The ratio of the three kinds of blocks can be customized (currently click:reverse:snake = 7:4:3), but the proportion of snake blocks should not be too high, otherwise too many cells will be occupied.
 3. ```json
    {
        "Easy": {
@@ -182,9 +182,9 @@ ps: 第6/7题可能会有多解
 
 
 
-## 数据部分展示
+## Data Display
 
-### 游戏描述
+### Game Description
 
 ```
 Now I'll give you a picture, which shows a screenshot of a rhythm game, in which there are operation blocks of various colors. In this game, the operation blocks will fall at a speed of 1 cell/second. At the same time, you can select a column to place your finger (you cannot move your finger after selecting it), and click the operation blocks in the column that fall to the first row to score points (of course, you can also choose not to click any column, which will not affect the falling of the operation blocks). \nFor the operation blocks, we divide them into 3 categories, including Click blocks, Reverse blocks, and Snake blocks, as follows: \n1. Click blocks are yellow, occupy 1 cell, and you can get 10 points by clicking them. \n2. Reverse blocks are green, occupy 1 cell, and you can get 15 points by clicking them. It should be noted that after you click the Reverse block, the entire game situation will **reverse left and right**, but your finger position **will not** change accordingly. \n3. A Snake block occupies 2 or more consecutive cells in a column, and its first cell (called Snake Head block) is pink, its last cell (called Snake Tail block) is grey, and the middle cells (called Snake Body blocks, if any) are blue. Only when you click on **all cells** occupied by the snake block can you score points. The score is related to the length $l$ (including the head and tail) of the snake block. The specific score is $l \cdot (2l + 7)$. \nNow I will give you a question about the game. Please extract information from the picture I give you, think carefully, reason and answer: \n

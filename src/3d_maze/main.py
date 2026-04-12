@@ -8,6 +8,9 @@ from mpl_toolkits.mplot3d import Axes3D
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 import os
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+EXAMPLE_OUTPUT_PATH = os.path.join(BASE_DIR, "3d_maze_dataset_example")
+
 @dataclass(frozen=True)  # Make the class immutable
 class Position:
     x: int
@@ -66,6 +69,124 @@ class SequencePoint:
 @dataclass
 class SequenceState(BasePuzzleState):
     sequence_points: List[SequencePoint]
+
+def position_to_dict(pos: Position) -> Dict[str, int]:
+    return {"x": pos.x, "y": pos.y, "z": pos.z}
+
+def serialize_path_segment(segment: PathSegment) -> Dict[str, object]:
+    return {
+        "start": position_to_dict(segment.start),
+        "end": position_to_dict(segment.end),
+        "type": segment.type,
+        "direction": get_segment_direction(segment)
+    }
+
+def serialize_ladder(ladder: Ladder) -> Dict[str, object]:
+    return {
+        "base_pos": position_to_dict(ladder.base_pos),
+        "direction": ladder.direction,
+        "height": ladder.height
+    }
+
+def serialize_sequence_point(point: SequencePoint) -> Dict[str, object]:
+    return {
+        "label": point.label,
+        "pos": position_to_dict(point.pos)
+    }
+
+def is_real_branch(branch: Branch) -> bool:
+    return bool(branch.paths.get('A')) and bool(branch.paths.get('B'))
+
+def serialize_numbered_marker(branch: Branch) -> Dict[str, object]:
+    return {
+        "label": branch.branch_id,
+        "pos": position_to_dict(branch.pos),
+        "marker_type": "branch_point" if is_real_branch(branch) else "numbered_block"
+    }
+
+def serialize_branch(branch: Branch) -> Dict[str, object]:
+    alt_path = branch.paths.get('B', [])
+    return {
+        "branch_id": branch.branch_id,
+        "pos": position_to_dict(branch.pos),
+        "main_path_direction": get_main_path_direction_at_position(branch.pos, branch.paths.get('A', [])),
+        "alternative_path": [serialize_path_segment(segment) for segment in alt_path],
+        "alternative_ordered_cubes": [position_to_dict(pos) for pos in get_ordered_path_cubes(alt_path)] if alt_path else []
+    }
+
+def build_cube_roles(puzzle) -> Dict[Position, Set[str]]:
+    cube_roles: Dict[Position, Set[str]] = {cube: set() for cube in puzzle.cubes}
+    cube_roles[puzzle.start_pos].add("start")
+    cube_roles[puzzle.goal_pos].add("goal")
+
+    for pos in get_ordered_path_cubes(puzzle.path):
+        cube_roles.setdefault(pos, set()).add("main_path")
+
+    if hasattr(puzzle, 'sequence_points'):
+        for point in puzzle.sequence_points:
+            cube_roles.setdefault(point.pos, set()).add("sequence_point")
+
+    if hasattr(puzzle, 'branches'):
+        for branch in puzzle.branches:
+            cube_roles.setdefault(branch.pos, set()).add("numbered_block")
+            if is_real_branch(branch):
+                cube_roles.setdefault(branch.pos, set()).add("branch_point")
+            for pos in get_ordered_path_cubes(branch.paths.get('B', [])):
+                cube_roles.setdefault(pos, set()).add("alternative_path")
+
+    return cube_roles
+
+def build_state_dict(puzzle, question_description: str) -> Dict[str, object]:
+    cube_roles = build_cube_roles(puzzle)
+    cubes = []
+    for cube in sorted(puzzle.cubes, key=lambda pos: (pos.z, pos.y, pos.x)):
+        cubes.append({
+            "pos": position_to_dict(cube),
+            "roles": sorted(cube_roles.get(cube, {"structure"}))
+        })
+
+    state = {
+        "schema_version": "1.1",
+        "game": "3d_maze",
+        "question_description": question_description,
+        "grid_size": {
+            "x": puzzle.grid_size[0],
+            "y": puzzle.grid_size[1],
+            "z": puzzle.grid_size[2]
+        },
+        "start_pos": position_to_dict(puzzle.start_pos),
+        "goal_pos": position_to_dict(puzzle.goal_pos),
+        "cubes": cubes,
+        "main_path_segments": [serialize_path_segment(segment) for segment in puzzle.path],
+        "main_path_ordered_cubes": [position_to_dict(pos) for pos in get_ordered_path_cubes(puzzle.path)],
+        "ladders": [serialize_ladder(ladder) for ladder in puzzle.ladders],
+        "sequence_points": [],
+        "numbered_markers": [],
+        "branches": []
+    }
+
+    if hasattr(puzzle, 'sequence_points'):
+        state["sequence_points"] = [
+            serialize_sequence_point(point)
+            for point in sorted(puzzle.sequence_points, key=lambda point: point.label)
+        ]
+
+    if hasattr(puzzle, 'branches'):
+        state["numbered_markers"] = [
+            serialize_numbered_marker(branch)
+            for branch in sorted(puzzle.branches, key=lambda branch: branch.branch_id)
+        ]
+        state["branches"] = [
+            serialize_branch(branch)
+            for branch in sorted(puzzle.branches, key=lambda branch: branch.branch_id)
+            if is_real_branch(branch)
+        ]
+
+    return state
+
+def write_state_json(puzzle, question_description: str, filename: str):
+    with open(filename, 'w', encoding='utf-8') as f:
+        json.dump(build_state_dict(puzzle, question_description), f, indent=2)
     
 def create_cube_verts(pos: Position, cubes: Set[Position]):
     """Create vertices for a cube at given position, omitting hidden faces"""
@@ -385,6 +506,23 @@ def get_path_direction(segment: PathSegment) -> str:
         return 'right-forward'  # or could be called 'straight'
     else:
         return '??'
+
+def get_main_path_direction_at_position(branch_pos: Position, path: List[PathSegment]) -> str:
+    """Get the main-path direction when the route passes through branch_pos."""
+    ordered_cubes = get_ordered_path_cubes(path)
+    for idx, pos in enumerate(ordered_cubes[:-1]):
+        if pos != branch_pos:
+            continue
+
+        next_pos = ordered_cubes[idx + 1]
+        if next_pos.z > pos.z:
+            return "up"
+        if next_pos.x != pos.x:
+            return "right-forward"
+        if next_pos.y != pos.y:
+            return "left-forward"
+
+    return "??"
     
 def get_branch_order(main_path: List[PathSegment], branches: List[Branch]) -> List[Branch]:
     """Get branches in the order they appear along the main path"""
@@ -577,42 +715,10 @@ class QAGenerator:
         # Get branches in order of appearance
         ordered_branches = get_branch_order(puzzle.all_paths, puzzle.branches)
         
-        def get_main_path_direction_at_branch(branch_pos: Position, path: List[PathSegment]) -> str:
-            """Get the direction of the main path at the branch position"""
-            current_segment = None
-            for segment in path:
-                if segment.start == branch_pos:
-                    current_segment = segment
-                    break
-                    
-                # For walking paths, check if branch is at intermediate position
-                if segment.type == 'walk':
-                    delta = Position(
-                        segment.end.x - segment.start.x,
-                        segment.end.y - segment.start.y,
-                        segment.end.z - segment.start.z
-                    )
-                    intermediate_pos = Position(
-                        segment.start.x + delta.x // 2,
-                        segment.start.y + delta.y // 2,
-                        segment.start.z
-                    )
-                    if intermediate_pos == branch_pos:
-                        # Find the next segment that continues from this position
-                        for next_segment in path:
-                            if next_segment.start == segment.end:
-                                current_segment = next_segment
-                                break
-                        break
-            
-            if current_segment:
-                return get_path_direction(current_segment)
-            return "??"
-
         # Create the correct path sequence with directional descriptions
         correct_path = ""
         for b in puzzle.branches:
-            main_direction = get_main_path_direction_at_branch(b.pos, b.paths['A'])
+            main_direction = get_main_path_direction_at_position(b.pos, b.paths['A'])
             alt_segment = b.paths['B'][0]  # Alternative path always starts at branch position
             alt_direction = get_path_direction(alt_segment)
             correct_path += f"{b.branch_id}-{main_direction}, "
@@ -621,7 +727,7 @@ class QAGenerator:
         # Create the correct path sequence with directional descriptions for ordered branches
         correct_path_ordered = ""
         for b in ordered_branches:
-            main_direction = get_main_path_direction_at_branch(b.pos, b.paths['A'])
+            main_direction = get_main_path_direction_at_position(b.pos, b.paths['A'])
             alt_segment = b.paths['B'][0]  # Alternative path always starts at branch position
             alt_direction = get_path_direction(alt_segment)
             correct_path_ordered += f"{b.branch_id}-{main_direction}, "
@@ -632,7 +738,7 @@ class QAGenerator:
         for i in range(8):
             path = ""
             for branch in puzzle.branches:
-                main_direction = get_main_path_direction_at_branch(branch.pos, branch.paths['A'])
+                main_direction = get_main_path_direction_at_position(branch.pos, branch.paths['A'])
                 alt_segment = branch.paths['B'][0]
                 alt_direction = get_path_direction(alt_segment)
                 chosen_direction = main_direction if (i & (1 << (branch.branch_id - 1))) else alt_direction
@@ -668,7 +774,7 @@ Which combination of path choices leads to the goal?"""
         
         analysis = f"{branch_order_desc}\n\nAnalyzing each branch point:\n"
         for b in ordered_branches:
-            main_direction = get_main_path_direction_at_branch(b.pos, b.paths['A'])
+            main_direction = get_main_path_direction_at_position(b.pos, b.paths['A'])
             alt_direction = get_path_direction(b.paths['B'][0])
             next_branch = None
             for i, next_b in enumerate(ordered_branches):
@@ -1019,6 +1125,7 @@ def generate_mixed_dataset(num_problems: int):
             qa_type = qa_types[i % len(qa_types)]
             data, puzzle = qa_generator.generate_qa_pair(i + 1, qa_type)
             draw_puzzle(puzzle, f"{outputPath}/images/path-mcq-{i+1:05d}.png")
+            write_state_json(puzzle, data["question_description"], f"{outputPath}/states/path-mcq-{i+1:05d}.json")
             dataset.append(data)
             i += 1
             count=0
@@ -1039,5 +1146,5 @@ def ensure_output_dirs():
     os.makedirs(f"{outputPath}/states", exist_ok=True)
 
 if __name__ == "__main__":
-    outputPath = "3d_maze_dataset"
+    outputPath = EXAMPLE_OUTPUT_PATH
     generate_mixed_dataset(15)

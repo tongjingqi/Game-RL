@@ -50,7 +50,7 @@ game_explanation = """Now I'll give you a picture, which shows a screenshot of a
 For the operation blocks, we divide them into 3 categories, including Click blocks, Reverse blocks, and Snake blocks, as follows: 
 1. Click blocks are yellow, occupy 1 cell, and you can get 10 points by clicking them. 
 2. Reverse blocks are green, occupy 1 cell, and you can get 15 points by clicking them. It should be noted that after you click the Reverse block, the entire game situation will **reverse left and right**, but your finger position **will not** change accordingly. 
-3. A Snake block occupies 2 or more consecutive cells in a column, and its first cell (called Snake Head block) is pink, its last cell (called Snake Tail block) is grey, and the middle cells (called Snake Body blocks, if any) are blue. Only when you click on **all cells** occupied by the snake block can you score points. The score is related to the length $l$ (including the head and tail) of the snake block. The specific score is $l \cdot (2l + 7)$. 
+3. A Snake block occupies 2 or more consecutive cells in a column, and its first cell (called Snake Head block) is pink, its last cell (called Snake Tail block) is grey, and the middle cells (called Snake Body blocks, if any) are blue. Only when you click on **all cells** occupied by the snake block can you score points. The score is related to the length $l$ (including the head and tail) of the snake block. The specific score is $l \\cdot (2l + 7)$. 
 Now I will give you a question about the game. Please extract information from the picture I give you, think carefully, reason and answer: 
 """
 
@@ -351,7 +351,7 @@ def generate_question_3(data_id, plot_id, image_filename, state_filename, game_s
         "qa_level": "Medium",
         "qa_type": "State Prediction",
         "question_id": 3,
-        "question_description": "Find the length of Snake block headed by a given coordinate after given sconds.",
+        "question_description": "Find the length of the snake block headed by a given coordinate after a given number of seconds.",
         "question": game_explanation + " Without selecting any column to click, what is the length of the snake block headed (which means being the lower end) by {head_position_after} after {time} second(s)? Options: {option_list}",
         "answer": "{option_number}",
         "analysis": "Because the blocks fall at the speed of 1 cell/second, before {time} second(s), the head cell of that Snake block should be at {head_position_before}. From the image we can see that the Snake block starts from {head_position_before} occupies {length} cells. So, the answer is {option_number}",
@@ -592,7 +592,7 @@ def generate_question_7(data_id, plot_id, image_filename, state_filename, game_s
         "qa_type": "Strategy Optimization",
         "question_id": 7,
         "question_description": "Find choosing which column to click can get the highest score when it takes 1 second to reverse the grid.",
-        "question": game_explanation + " Now it takes 1 second to reverse the grid, during which the blocks will still be falling, but you can't cilck them. Which column(s) should I choose to click to get the highest final score? Options: {option_list}",
+        "question": game_explanation + " Now it takes 1 second to reverse the grid, during which the blocks will still be falling, but you can't click them. Which column(s) should I choose to click to get the highest final score? Options: {option_list}",
         "answer": "{option_numbers}",
         "analysis": "{counting_procedure}We can see that when choosing column(s) {max_col}, the final point is the highest, being {max_point}. So, the answer is {option_numbers}",
         "options": []
