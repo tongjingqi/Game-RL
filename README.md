@@ -76,7 +76,7 @@ Based on Qwen2.5-VL-7B, we applied the same training method on 5k GameQA samples
 
 ## 🚀 How to Use
 
-The following steps will guide you on how to set up the environment, train, and evaluate the models.
+The following steps describe the training and evaluation workflow used in this repository. The shell scripts below are intended for a Linux environment with Bash, CUDA, and the corresponding Python dependencies installed. If you only want to generate game data samples, see the [Code for Generating GameQA Data](#-code-for-generating-gameqa-data) section below.
 
 1.  **Clone the Repository**
     
@@ -140,14 +140,14 @@ The following steps will guide you on how to set up the environment, train, and 
 
 ## 🎮 Code for Generating GameQA Data
 
-In this repository, we also provide the code used to generate samples for each game in GameQA - see the [src/](./src) directory. There are 30 directories in total - one for each game.
+In this repository, we also provide the code used to generate samples for each game in GameQA - see the [src/](./src) directory.
 
-Apart from the code, each game directory contains:
+There are 30 game directories in total. Apart from the code, each game directory usually contains:
 
-1. A README file describing the game tasks and code execution instructions
+1. Documentation describing the game tasks and execution instructions
 2. A subdirectory with example samples
 
-> 😎 Feel free to use the code directly to generate more samples, or adapt it to produce more types of training data for your specific requirements.
+> 😎 Feel free to use the code directly to generate more samples, or adapt it to produce more types of data for your specific requirements.
 >
 
 |                   |           3D Spatial Perception and Understanding            |               Pattern Recognition and Matching               |                     Multi-step Reasoning                     |                      Strategic Planning                      |
@@ -161,10 +161,6 @@ Apart from the code, each game directory contains:
 *We would like to acknowledge the valuable efforts of the following individuals, whose work on the data synthesis and validation processes was of great importance to the development of this project:* (Sorted by last name, then first name)
 
 Ruifeng Chen, Yingqian Huang, Yutong Ke, Hengxi Lin, Yuanhao Ni, Qingyun Shi, Haitian Wang, Xiaoyong Wang, Yufei You, Juntao Zhang, Weixin Zhang, Yang Zhang
-
-*We would like to acknowledge the valuable efforts of the following individuals from ByteDance, who provide API access for us to test models and give us some technical instructions.*
-
-Zhen Wang, Tao Liang, Zhihui Fei, Mingyang Wan, Guojun Ma
 
 ---
 
