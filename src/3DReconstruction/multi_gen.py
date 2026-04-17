@@ -61,7 +61,7 @@ def main():
         sys.exit(1)
     
     # 创建生成器实例
-    generator = MultiQuestionGenerator()
+    generator = MultiQuestionGenerator(output_dir=args.output)
     
     try:
         # 生成数据集

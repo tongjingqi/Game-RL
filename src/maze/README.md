@@ -6,6 +6,10 @@
 
 This is a Maze Q&A Generator. It generates mazes and corresponding Q&A datasets for different question types.
 
+An example game image:
+
+![example game image](maze_dataset_example/images/image_00001.png)
+
 **Rules:**
 
 1. This is a mini maze game. The player must navigate through the maze, avoid obstacles, and reach the goal to win.  

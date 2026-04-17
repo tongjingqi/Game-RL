@@ -2,6 +2,10 @@
 
 This project is a Q&A generator for color-based puzzles. It generates questions about color gradients and patterns on a grid, providing a variety of question types and difficulty levels.
 
+An example game image:
+
+![example game image](hue_dataset_example/images/color-mcq-00001.png)
+
 ## Features
 
 - **Color Matching Questions**: Identify the correct color for a specific cell.

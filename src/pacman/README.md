@@ -3,6 +3,10 @@
 ## Overview
 **Pacman VQA Dataset Generator** is a tool designed to simulate the classic game **Pacman** and generate a comprehensive Visual Question Answering (VQA) dataset. The generated VQA dataset includes game images, questions, answers, and detailed analyses, making it ideal for training and evaluating multimodal models in understanding and reasoning about complex game environments.
 
+An example game image:
+
+![example game image](pacman_dataset_example/images/image_00003.png)
+
 ## Game Rules
 ### Game Overview
 Pac-Man is a maze arcade game where the player controls Pac-Man to eat as many beans as possible while avoiding ghosts. If a ghost catches Pac-Man, the game ends.

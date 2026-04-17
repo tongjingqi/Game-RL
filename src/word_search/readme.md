@@ -2,6 +2,10 @@
 
 This project is a Word Search Q&A Generator that creates word search puzzles and generates various types of questions based on the puzzles. The questions can be used for educational purposes, quizzes, or games.
 
+An example game image:
+
+![example game image](word_search_dataset_example/images/word-mcq-00002.png)
+
 ## Features
 
 - **Grid Generation**: Generates a word search grid filled with random uppercase letters.

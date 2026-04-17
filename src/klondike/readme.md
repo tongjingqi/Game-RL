@@ -2,6 +2,10 @@
 
 This tool generates question-answer datasets based on Klondike Solitaire game states. It automatically creates screenshots, game states, and corresponding QA pairs for both multiple-choice and fill-in-the-blank questions.
 
+An example game image:
+
+![example game image](klondike_dataset_example/images/board_001_001.png)
+
 ## Quick Start
 
 ```bash

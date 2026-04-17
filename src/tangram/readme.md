@@ -4,6 +4,10 @@
 
 This Python script generates Tengram-like puzzles and accompanying question-answer pairs for different reasoning tasks.  It utilizes Voronoi diagrams to create puzzle pieces on a grid and then poses questions related to the puzzle state.
 
+An example game image:
+
+![example game image](tengram_dataset_example/images/tengram-mcq-00001.png)
+
 The script can generate puzzles with questions of the following types:
 
 *   **Counting Pieces:** Asks the user to count the number of pieces remaining on the main board after some pieces have been removed.

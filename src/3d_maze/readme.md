@@ -2,6 +2,10 @@
 
 This project contains a 3D maze puzzle generator written in Python. The generator creates puzzles with various types of questions, including path-finding, sequence-finding, height comparison, and main path identification.
 
+An example game image:
+
+![example game image](3d_maze_dataset_example/images/path-mcq-00001.png)
+
 ## Features
 
 - **Path-Finding Puzzles**: Generate puzzles where the player must find the correct path from start to goal.

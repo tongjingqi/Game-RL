@@ -214,4 +214,6 @@ Now I'll give you a picture, which shows a screenshot of a rhythm game, in which
 
 ### image
 
-![board_00001](old_data/images/board_00001.png)
+一个游戏示例图片：
+
+![游戏示例图片](rhythm_game_dataset_example/images/board_00002.png)

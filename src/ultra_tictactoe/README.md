@@ -37,7 +37,9 @@ pygame
 
 $3 \times 3 = 9$ Nine-grids
 
-![final_board](old_data/final_board.png)
+An example game image:
+
+![example game image](ultra_tictactoe_dataset_example/images/board_00002.png)
 
 ### Piece Placement Rules
 

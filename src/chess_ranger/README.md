@@ -3,6 +3,10 @@
 ## Game Rules
 In Chess Ranger, the game is played on an 8x8 chessboard, where the rows are numbered 1 to 8 from bottom to top, and columns are labeled a to h from left to right. The pieces move according to standard chess rules, and players can only capture pieces. The king can be captured as well. The goal is to end up with only one piece remaining on the board.
 
+An example game image:
+
+![example game image](chess_ranger_dataset_example/images/board_006.png)
+
 ## Problem Types
 - **Piece Count Question**: Asking how many pieces of a specific type are on the board.
 

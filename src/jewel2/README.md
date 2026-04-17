@@ -3,6 +3,10 @@
 ## Overview
 **Jewel2 VQA Dataset Generator** is a tool designed to simulate the classic game **Jewel2** and generate a comprehensive Visual Question Answering (VQA) dataset. It creates game images featuring various elements on the game board and the current total number of cleared elements. Based on these images, it generates different types of test questions. The generated VQA dataset includes game images, questions, answers, and detailed analyses, making it suitable for training multimodal models.
 
+An example game image:
+
+![example game image](jewel2_dataset_example/images/00003.png)
+
 ## Project Structure
 ```
 jewel2/

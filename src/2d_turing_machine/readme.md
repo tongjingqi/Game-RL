@@ -2,6 +2,10 @@
 
 This project generates a dataset of 2D Turing machine boards, along with questions and answers about the state of the machine after a given number of steps. The dataset includes images of the boards, JSON files describing the board states, and a JSON file containing the questions and answers.
 
+An example game image:
+
+![example game image](2d_turing_machine_dataset_example/images/00002.png)
+
 ## Features
 
 - Generates random 2D Turing machine boards with customizable sizes and states.

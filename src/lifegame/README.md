@@ -2,6 +2,10 @@
 
 **Game of Life Dataset Generator** is a Python script designed to generate a dataset of multiple-choice questions based on Conway's Game of Life. The generated dataset includes various question types testing understanding of cellular automaton dynamics, from basic state counting to complex pattern predictions. Each question comes with detailed analysis and visual aids.
 
+An example game image:
+
+![example game image](lifegame_dataset_example/images/board_000.png)
+
 ## Features
 
 - **Multiple Question Types**: 

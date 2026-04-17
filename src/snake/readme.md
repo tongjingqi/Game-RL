@@ -1,6 +1,10 @@
 # SNAKE
 This is a tool to simulate the classic game Snake and generate QA dataset, which contains images, questions and step-by-step CoT solutions.
 
+An example game image:
+
+![example game image](snake_dataset_example/images/snake_1.png)
+
 ## Rule
 10x10 grid map, where red represents food, yellow represents the snake's head, and blue represents the snake's body. The snake head cannot touch the map boundary or the snake's body, otherwise the game ends.
 

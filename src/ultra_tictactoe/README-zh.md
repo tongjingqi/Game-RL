@@ -37,7 +37,9 @@ pygame
 
 $3 \times 3 = 9$个九宫格
 
-![final_board](old_data/final_board.png)
+一个游戏示例图片：
+
+![游戏示例图片](ultra_tictactoe_dataset_example/images/board_00002.png)
 
 ### 落子规则
 

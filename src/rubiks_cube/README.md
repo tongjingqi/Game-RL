@@ -2,6 +2,10 @@
 
 **Rubik's Cube VQA Dataset Generator** is a tool that creates a comprehensive Visual Question Answering (VQA) dataset based on the Rubik's Cube puzzle. It generates both 3D and unfolded views of Rubik's cube states and creates diverse question types to test spatial reasoning, pattern recognition, and problem-solving skills. The dataset includes cube visualizations, state information, questions, answers, and detailed analyses.
 
+An example game image:
+
+![example game image](rubiks_cube_dataset_example/images/cube_00001.png)
+
 ## Features
 
 - **Dual Visualization**: Generates both 3D perspective views and unfolded 2D representations

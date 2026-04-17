@@ -4,6 +4,10 @@
 
 **Langton's Ant VQA Dataset Generator** is a tool designed to simulate the classic cellular automaton **Langton's Ant** and generate a comprehensive Visual Question Answering (VQA) dataset. It creates game board images featuring the ant's position, direction, and the current state of cells (black or white). Based on these images, it generates different types of questions about the current state and future states of the system. The generated VQA dataset includes game board images, questions, multiple-choice answers, and detailed step-by-step analyses, making it suitable for training multimodal models.
 
+An example game image:
+
+![example game image](langton_ant_dataset_example/images/board_002.png)
+
 ## Features
 
 - **Dynamic Grid Sizes**: Supports multiple grid sizes (5x5, 9x9, 13x13) corresponding to different difficulty levels

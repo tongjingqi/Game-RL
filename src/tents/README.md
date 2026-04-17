@@ -4,6 +4,10 @@
 
 **Tents Puzzle VQA Dataset Generator** is a tool designed to create a Visual Question Answering (VQA) dataset based on the Tents puzzle game. It generates random Tents puzzle instances and produces various types of questions related to the puzzles. The dataset includes game images, questions, answers, and detailed analyses, making it ideal for training multimodal models.
 
+An example game image:
+
+![example game image](tents_dataset_example/images/00002.png)
+
 ## Features
 
 - **Random Puzzle Generation**: Automatically creates Tents puzzle instances with configurable grid sizes and numbers of trees.

@@ -3,6 +3,10 @@ This project generates Star Battle puzzles, a logic puzzle where the goal is to 
 
 This repository provides a Python script that can generate puzzles of various grid sizes, save them in a specified format, and store the generated puzzles in directories. It also includes functionality to generate example puzzles and full datasets.
 
+An example game image:
+
+![example game image](star-battle_dataset_example/images/board_last_star_Medium_00001.png)
+
 ## Features
 Puzzle Generation: Creates Star Battle puzzles with customizable grid sizes (5x5, 6x6, 8x8) and star counts.
 

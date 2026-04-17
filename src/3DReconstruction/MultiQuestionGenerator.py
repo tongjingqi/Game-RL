@@ -12,12 +12,20 @@ class MultiQuestionGenerator:
     """
     生成器类，先生成游戏状态，然后对每个状态生成所有类型的问题
     """
-    def __init__(self):
+    def __init__(self, output_dir="reconstruction_dataset"):
         """初始化生成器"""
         self.dataset = []
         self.state_count = 0
         self.qa_count = 0
-        self.qa_generator = ThreeDReconstructionQAGenerator()
+        self.output_dir = output_dir
+        self.qa_generator = ThreeDReconstructionQAGenerator(output_dir=output_dir)
+
+    def _ensure_output_dirs(self):
+        os.makedirs(os.path.join(self.output_dir, "images"), exist_ok=True)
+        os.makedirs(os.path.join(self.output_dir, "states"), exist_ok=True)
+
+    def _output_path(self, relative_path):
+        return os.path.join(self.output_dir, relative_path)
         
     def generate_game_state(self, plot_level=None):
         """
@@ -57,8 +65,7 @@ class MultiQuestionGenerator:
                 structure = current_structure + new_voxels
         
         # 创建输出目录
-        os.makedirs("reconstruction_dataset/images", exist_ok=True)
-        os.makedirs("reconstruction_dataset/states", exist_ok=True)
+        self._ensure_output_dirs()
         
         # 生成文件名
         base_name = f"reconstruction_state_{self.state_count:05d}"
@@ -67,11 +74,11 @@ class MultiQuestionGenerator:
         
         # 保存可视化
         if structure_type == 'current':
-            game.visualize_structure(show_solution=False, name=f"reconstruction_dataset/{image_path}")
+            game.visualize_structure(show_solution=False, name=self._output_path(image_path))
         elif structure_type == 'solution':
-            game.visualize_structure(show_solution=True, name=f"reconstruction_dataset/{image_path}")
+            game.visualize_structure(show_solution=True, name=self._output_path(image_path))
         else:
-            game.visualize_structure(structure=structure, name=f"reconstruction_dataset/{image_path}")
+            game.visualize_structure(structure=structure, name=self._output_path(image_path))
             
         # 计算投影和剩余方块数
         target_yz_proj, target_xz_proj = game.get_projections(game_state['complete_solution']['positions'])
@@ -84,7 +91,7 @@ class MultiQuestionGenerator:
             'target_xz_projection': target_xz_proj.T.tolist(),  # 转置矩阵
             'remaining_voxels': remaining_voxels
         }
-        with open(f"reconstruction_dataset/{state_path}", 'w') as f:
+        with open(self._output_path(state_path), 'w') as f:
             json.dump(state_info, f, indent=2)
         
         # 返回游戏状态信息
@@ -216,8 +223,7 @@ class MultiQuestionGenerator:
         self.qa_count = 0
         
         # 创建输出目录
-        os.makedirs("reconstruction_dataset/images", exist_ok=True)
-        os.makedirs("reconstruction_dataset/states", exist_ok=True)
+        self._ensure_output_dirs()
         
         # 确定每种难度级别的状态数量
         level_counts = self._calculate_level_distribution(total_states, plot_level_ratios)
@@ -245,7 +251,7 @@ class MultiQuestionGenerator:
         
         # 保存数据集
         print("\n保存数据集...")
-        with open("reconstruction_dataset/data.json", "w") as f:
+        with open(self._output_path("data.json"), "w") as f:
             json.dump(self.dataset, f, indent=2)
         
         print(f"\n数据集生成完成！共生成 {total_states} 个游戏状态，{len(self.dataset)} 个问答对")
@@ -314,9 +320,8 @@ class MultiQuestionGenerator:
             'count': 'StateInfo - count',
             'position': 'StateInfo - position',
             'projection': 'StateInfo - projection',
-            'ActionOutcome': 'ActionOutcome',
-            'TransitionPath': 'TransitionPath',
-            'StrategyOptimization': 'StrategyOptimization'
+            'State Prediction': 'State Prediction',
+            'Strategy Optimization': 'Strategy Optimization'
         }
         max_type_len = max(len(display_names[qa_type]) for qa_type in print_order)
         
@@ -327,7 +332,7 @@ class MultiQuestionGenerator:
             display_name = display_names[qa_type]
             print(f"- {display_name:<{max_type_len}}: {stats['Easy']:>3}, {stats['Medium']:>3}, {stats['Hard']:>3} (total: {total:>3})")
         
-        print(f"\n文件保存在 reconstruction_dataset/ 目录下：")
+        print(f"\n文件保存在 {self.output_dir}/ 目录下：")
         print("- data.json          （数据集）")
         print("- images/            （可视化图片）")
         print("- states/            （状态文件）")

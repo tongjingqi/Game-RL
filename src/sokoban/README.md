@@ -2,6 +2,10 @@
 
 A Python-based tool for generating, analyzing, and creating educational content around Sokoban puzzles. The project includes functionality to generate random Sokoban boards, create visualizations, and generate various types of analytical questions about the puzzle states.
 
+An example game image:
+
+![example game image](sokoban_dataset_example/images/board_00001.png)
+
 ## Features
 
 - **Random Board Generation**: Create randomized Sokoban puzzles with configurable parameters

@@ -2,6 +2,10 @@
 
 This project generates FreeCell game state puzzles in JSON format. The dataset is used to create problem scenarios where players must analyze the game state and answer questions related to valid moves, future states, and game logic.
 
+An example game image:
+
+![example game image](freecell_dataset_example/images/state_analysis_Medium_00001.png)
+
 ## 📌 Features
 - **Generates FreeCell puzzles** with different problem types.
 - **Creates datasets** in a structured JSON format.

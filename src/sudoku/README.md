@@ -151,3 +151,8 @@ output_dir/
 python data_generator.py 5000 --output_dir my_dataset
 ```  
 Generates 5000 puzzles with all question types into `my_dataset`.
+```
+
+An example game image:
+
+![example game image](sudoku_dataset_example/images/board_00002.png)

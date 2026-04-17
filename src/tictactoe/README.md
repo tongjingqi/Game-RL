@@ -4,6 +4,10 @@
 
 The **Tic-Tac-Toe VQA Dataset Generator** is a tool designed to simulate the classic game of **Tic-Tac-Toe** and generate a comprehensive Visual Question Answering (VQA) dataset. This tool creates game images featuring various states of the Tic-Tac-Toe board and generates different types of questions based on these images. The generated VQA dataset includes game images, questions, answers, and detailed analyses, making it suitable for training multimodal models.
 
+An example game image:
+
+![example game image](tictactoe_dataset_example/images/board_6.png)
+
 ### Dataset Contents:
 
 - **Images**: Visual representations of the Tic-Tac-Toe board at different states.

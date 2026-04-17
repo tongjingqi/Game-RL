@@ -3,6 +3,10 @@
 ## Overview
 **Spider Solitaire VQA Dataset Generator** is a tool designed to simulate the classic card game **Spider Solitaire** and generate a comprehensive Visual Question Answering (VQA) dataset. The generated VQA dataset includes game images, questions, answers, and detailed analyses, making it ideal for training and evaluating multimodal models in understanding and reasoning about complex game environments.
 
+An example game image:
+
+![example game image](spider_solitaire_dataset_example/images/board_00002.png)
+
 ## Game Rules
 ### OBJECTIVE
 Spider is played with eight decks of 13 spade cards each, totaling 104 unique cards with multiple copies. The objective is to arrange each of the ten waste piles in sequence from the King down to the Ace. When a suit is arranged in sequence, it may be removed to a foundation pile. If all suits are moved to the foundations, the game is won.

@@ -2,6 +2,10 @@
 
 This project generates a visual question answering (VQA) dataset based on the classic game Space Invaders. The dataset consists of various game states and corresponding questions that test both perception and strategic reasoning abilities.
 
+An example game image:
+
+![example game image](space_invaders_dataset_example/images/space_invaders_00004.png)
+
 ## Quick Start
 
 ### Installation

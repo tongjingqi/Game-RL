@@ -2,6 +2,10 @@
 
 **Tetris VQA Dataset Generator** is a tool designed to simulate the classic game **Tetris** and generate a comprehensive Visual Question Answering (VQA) dataset. It creates game state images featuring various Tetris board configurations with active and placed tetrominoes. Based on these images, it generates different types of questions ranging from simple state recognition to complex strategy optimization. The generated VQA dataset includes game images, states, questions, answers, and detailed analyses, making it suitable for training multimodal models.
 
+An example game image:
+
+![example game image](tetris_dataset_example/images/tetris-00020.png)
+
 ## Features
 
 - **Dynamic Grid Sizes**: Supports multiple grid sizes (8x8, 12x12, 16x16) for varying difficulty levels

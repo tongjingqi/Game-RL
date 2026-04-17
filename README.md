@@ -1,8 +1,6 @@
 # [ICLR 2026] Game-RL: Synthesizing Multimodal Verifiable Game Data to Boost VLMs' General Reasoning
 
-Official repository for paper "[Game-RL: Synthesizing Multimodal Verifiable Game Data to Boost VLMs' General Reasoning](https://arxiv.org/abs/2505.13886)".
-
-This is the first work, to the best of our knowledge, that adapts game code to synthesize **multimodal game data** for ***training*** VLMs. When we apply **Game-RL**, which is simple GRPO on **GameQA** (synthesized via our **Code2Logic** approach), multiple cutting-edge open-source VLMs **exhibit out-of-domain generalization**. Remarkably, game data provides improvements comparable to general multimodal reasoning datasets (e.g. geometry/chart). More importantly, scaling up game diversity or game data volume consistently improves VLMs' generalizable reasoning capabilities. Our findings highlight scaling reinforcement learning in game environments as a promising direction for enhancing generalizable multimodal reasoning in foundation models.
+Official repository for paper "[Game-RL: Synthesizing Multimodal Verifiable Game Data to Boost VLMs' General Reasoning](https://arxiv.org/abs/2505.13886)". This is the first work, to the best of our knowledge, that adapts game code to synthesize **multimodal game data** for ***training*** VLMs. When we apply **Game-RL**, which is simple GRPO on **GameQA** (synthesized via our **Code2Logic** approach), multiple cutting-edge open-source VLMs **exhibit out-of-domain generalization**. Remarkably, game data provides improvements comparable to general multimodal reasoning datasets (e.g. geometry/chart). More importantly, scaling up game diversity or game data volume consistently improves VLMs' generalizable reasoning capabilities. Our findings highlight scaling reinforcement learning in game environments as a promising direction for enhancing generalizable multimodal reasoning in foundation models.
 
 [ [📖 Paper](https://arxiv.org/abs/2505.13886) ] [ [🔗 Project Website](https://iclr26-game-rl.github.io/) ]
 
@@ -14,13 +12,13 @@ This is the first work, to the best of our knowledge, that adapts game code to s
 
 ## 🎊 News
 
-* [2026/04] 🔥**Princeton University** uses our GameQA dataset in their [Vero](https://arxiv.org/pdf/2604.04917) project.
+* [2026/04] 🔥**Princeton University** uses our GameQA dataset in their [Vero](https://github.com/zlab-princeton/vero) project.
 * [2026/03] 🔥**National University of Singapore** uses our games in the [Gym-V](https://arxiv.org/pdf/2603.15432) platform.
 * [2026/02] 🔥**Alibaba Group and Shanghai Jiao Tong University** use our GameQA-140K dataset at scale in the [DeepVision-103K](https://huggingface.co/datasets/skylenage/DeepVision-103K#%F0%9F%99%8F-acknowledgements) dataset, which accounts for around 50% of its "visual logic problems".
 * [2026/01] 🔥**Shanghai AI Lab** uses our GameQA-140K dataset at scale in the [MMFineReason](https://mmfinereason.github.io/) dataset, which accounts for **87.65%** of its "Puzzle/Game" samples.
 * [2026/01] 🔥**THUML and ByteDance Seed** use our Sokoban code for the synthesis of the Sokoban task samples in [VisWorld-Eval](https://thuml.github.io/Reasoning-Visual-World/) (and the training data).
 * [2026/01] 🔥🔥*Our work has been accepted by* **ICLR 2026**! 🎉🎉🎉
-* [2025/11] 🔥**DeepWisdom** uses the maze-like games in our GameQA dataset in the [VR-Bench](https://github.com/FoundationAgents/VR-Bench) benchmark, which evaluates video models' reasoning.
+* [2025/11] 🔥**DeepWisdom and Tsinghua University** use the maze-like games in our GameQA dataset in the [VR-Bench](https://github.com/FoundationAgents/VR-Bench) benchmark, which evaluates video models' reasoning.
 * [2025/11] 🔥**Shanghai Innovation Institute** uses the games in our GameQA dataset for image editing reasoning tasks ("game-world scenarios"), developing the [UniREditBench](https://maplebb.github.io/UniREditBench/) benchmark and the [UniREdit-Data-100K](https://huggingface.co/datasets/maplebb/UniREdit-Data-100K) training data.
 
 Please give us a star ⭐ if you find this work helpful.

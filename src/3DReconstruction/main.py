@@ -89,7 +89,7 @@ def main():
         sys.exit(1)
     
     # 创建生成器实例
-    generator = ThreeDReconstructionQAGenerator()
+    generator = ThreeDReconstructionQAGenerator(output_dir=args.output)
     
     # 根据指定的具体问题类型调整比例
     if args.qa_types:

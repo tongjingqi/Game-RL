@@ -3,6 +3,10 @@
 ## Overview
 **Minesweeper VQA Dataset Generator** is a tool designed to simulate the classic game **Minesweeper** and generate a comprehensive Visual Question Answering (VQA) dataset. It creates game images with various configurations and size of the game board. Based on these images, it generates different types of questions about the game state and actions. The generated VQA dataset includes game images, questions, answers, and detailed analyses, making it suitable for training multimodal models.
 
+An example game image:
+
+![example game image](minesweeper_dataset_example/images/board_00002.png)
+
 ## Game Rules
 
 ### Elements
