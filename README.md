@@ -1,6 +1,6 @@
 # [ICLR 2026] Game-RL: Synthesizing Multimodal Verifiable Game Data to Boost VLMs' General Reasoning
 
-<div align=center><img src="./assets/game_rl_cover.png" alt="Game-RL cover" width="80%" /></div>
+<div align=center><img src="./assets/game_rl_cover.png" alt="Game-RL cover" width="100%" /></div>
 
 Official repository for paper "[Game-RL: Synthesizing Multimodal Verifiable Game Data to Boost VLMs' General Reasoning](https://arxiv.org/abs/2505.13886)". This is the first work, to the best of our knowledge, that adapts game code to synthesize **multimodal game data** for ***training*** VLMs. When we apply **Game-RL**, which is simple GRPO on **GameQA** (synthesized via our **Code2Logic** approach), multiple cutting-edge open-source VLMs **exhibit out-of-domain generalization**. Remarkably, game data provides improvements comparable to general multimodal reasoning datasets (e.g. geometry/chart). More importantly, scaling up game diversity or game data volume consistently improves VLMs' generalizable reasoning capabilities. Our findings highlight scaling reinforcement learning in game environments as a promising direction for enhancing generalizable multimodal reasoning in foundation models.
 
