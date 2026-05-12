@@ -4,7 +4,7 @@ import re
 
 def read_json(file_path):
     """Read and parse a JSON file."""
-    with open(file_path, 'r') as f:
+    with open(file_path, 'r', encoding='utf-8') as f:
         return json.load(f)
 
 def cube_state_to_text(state_data):
@@ -25,7 +25,7 @@ def cube_state_to_text(state_data):
     # Create a human-readable representation
     text = "RUBIK'S CUBE STATE DESCRIPTION:\n\n"
     text += "The Rubik's cube has six faces: Upper (U), Down (D), Left (L), Right (R), Front (F), and Back (B).\n"
-    text += "Each face is a 3x3 grid with coordinates (row, column) starting from (0,0) at the top-left.\n"
+    text += "Each face is a 3x3 grid using the same unfolded-view coordinates as the question: column numbers increase from left to right, and row numbers increase from bottom to top.\n"
     text += "The colors are represented as follows: " + ", ".join([f"{colors[i]}" for i in range(len(colors))]) + ".\n\n"
     
     # Dictionary mapping face abbreviations to full names
@@ -107,8 +107,8 @@ def process_dataset():
             print(f"Error processing entry {entry.get('data_id')}: {str(e)}")
     
     # Save the processed data
-    with open("data_text.json", "w") as f:
-        json.dump(processed_data, f, indent=4)
+    with open("data_text.json", "w", encoding='utf-8') as f:
+        json.dump(processed_data, f, indent=4, ensure_ascii=False)
     
     print(f"Successfully processed {len(processed_data)} entries. Saved to data_text.json")
 

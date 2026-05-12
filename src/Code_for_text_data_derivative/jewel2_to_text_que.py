@@ -3,7 +3,7 @@ import os
 
 def read_json(file_path):
     """Read and parse a JSON file."""
-    with open(file_path, 'r') as f:
+    with open(file_path, 'r', encoding='utf-8') as f:
         return json.load(f)
 
 def jewel2_state_to_text(state_data):
@@ -66,8 +66,8 @@ def process_dataset():
         except Exception as e:
             print(f"Error processing entry {entry.get('data_id')}: {str(e)}")
     
-    with open('data_text.json', 'w') as f:
-        json.dump(processed_data, f, indent=4)
+    with open('data_text.json', 'w', encoding='utf-8') as f:
+        json.dump(processed_data, f, indent=4, ensure_ascii=False)
 
     print(f"Successfully processed {len(processed_data)} entries. Saved to data_text.json")
 

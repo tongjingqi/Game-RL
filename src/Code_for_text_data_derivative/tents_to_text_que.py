@@ -1,6 +1,6 @@
 import json
 def read_json(file_path):
-    with open(file_path, 'r') as f:
+    with open(file_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
     return data
 data=read_json('data.json')
@@ -25,6 +25,6 @@ for line in data:
     'The blue numbers on the left of each row are (starting from row 0):' + str(row_tent_counts) + '\n' + line['question']
 
     del line['state']
-with open('data_text.json', 'w') as f:
-    json.dump(data, f, indent=4)
+with open('data_text.json', 'w', encoding='utf-8') as f:
+    json.dump(data, f, indent=4, ensure_ascii=False)
     

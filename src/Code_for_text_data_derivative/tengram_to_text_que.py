@@ -113,7 +113,7 @@ class TengramGenerator:
         return removed_grid
 import json
 def read_json(file_path):
-    with open(file_path, 'r') as f:
+    with open(file_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
     return data
 data=read_json('data.json')
@@ -131,6 +131,6 @@ for line in data:
     removed_grid=generator.get_removed_grid()
     removed_gridStr = '\n'.join([f'row {index}: ['+', '.join(map(str,row))+']' for index,row in enumerate(removed_grid)])
     line['question'] = 'Main Board:\n'+gridStr+'\nRemoved Pieces Board:\n'+removed_gridStr+'\n(Each number represents index of the piece the cell belongs to. 0 means this cell is empty, and same number means belong to same piece. Indexes are 0-based, row first)\n'+line['question']
-with open('data_text.json', 'w') as f:
-    json.dump(data, f, indent=4)
+with open('data_text.json', 'w', encoding='utf-8') as f:
+    json.dump(data, f, indent=4, ensure_ascii=False)
     

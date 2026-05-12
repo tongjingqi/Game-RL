@@ -7,23 +7,17 @@ color_mapping = {
     2: "red"
 }
 
-def grid_to_text(grid):
-    """将网格转换为文本表示形式"""
+def grid_to_table(grid):
+    """Convert the grid to a row-major symbolic table."""
     text_grid = []
     for row in grid:
-        # 将数字转换为字符表示
         text_row = ['#' if cell == 1 else '0' if cell == 0 else '&' for cell in row]
-        # 添加行注释
-        row_str = "['" + "', '".join(text_row) + "'], # Row" + str(len(text_grid))
-        text_grid.append(row_str)
-    
-    # 组合成完整的网格文本
-    grid_text = "grid = [\n    " + "\n    ".join(text_grid) + "\n]"
-    return grid_text
+        text_grid.append(text_row)
+    return text_grid
 
 def transform_grid_to_table(data_json_path):
     # Read the original data.json file
-    with open(data_json_path, 'r') as f:
+    with open(data_json_path, 'r', encoding='utf-8') as f:
         data_items = json.load(f)
     
     results = []
@@ -39,7 +33,7 @@ def transform_grid_to_table(data_json_path):
             continue
         
         # Read the state file
-        with open(state_path, 'r') as f:
+        with open(state_path, 'r', encoding='utf-8') as f:
             state_data = json.load(f)
         
         grid = state_data["grid"]
@@ -47,21 +41,21 @@ def transform_grid_to_table(data_json_path):
         cols = state_data["cols"]
 
         # 生成网格的文本表示
-        grid_text = grid_to_text(grid)        
+        grid_table = grid_to_table(grid)        
 
         # Create result object
         new_json = {
-            "grid_table": grid_text,
+            "grid_table": grid_table,
             "grid_rows": rows,
             "grid_cols": cols
         }
         
         item["question"] = """The grid image that you need is described in json format as follows:
         The json contains the following fields:
-        - grid_table: A 2d list of grid cells, where each cell has:
-          - row: The row index (0-based)
-          - col: The column index (0-based) 
-          - block_color: The color of the cell (0 for white, # for gray, & for red in the grid visualization)
+        - grid_table: A 2D row-major list of grid cells. The row index and column index are 0-based.
+          - "0" means a white empty cell.
+          - "#" means a gray cell occupied by a previously placed tetromino.
+          - "&" means a red cell occupied by the active falling tetromino.
         - grid_rows: Total number of rows in the grid
         - grid_cols: Total number of columns in the grid
         
@@ -76,8 +70,8 @@ def transform_grid_to_table(data_json_path):
 
 
 def save_results(results, output_path):
-    with open(output_path, 'w') as f:
-        json.dump(results, f, indent=2)
+    with open(output_path, 'w', encoding='utf-8') as f:
+        json.dump(results, f, indent=2, ensure_ascii=False)
 
 
 if __name__ == "__main__":

@@ -3,42 +3,45 @@ import os
 
 def read_json(file_path):
     """Read and parse a JSON file."""
-    with open(file_path, 'r') as f:
+    with open(file_path, 'r', encoding='utf-8') as f:
         return json.load(f)
     
 def pacman_state_to_text(state_data):
     """Convert pacman state data to a text description."""
     grid_size = state_data["grid_size"]
-    board = [['' for _ in range(grid_size)] for _ in range(grid_size)]
+    board = [['empty' for _ in range(grid_size)] for _ in range(grid_size)]
     walls = state_data["walls"]
     beans = state_data["beans"]
     pacman_position = state_data["pacman_position"]
     pacman_direction = state_data["direction"]
     ghosts = state_data["ghosts"]
-    for ghost in ghosts:
-        if ghost["name"] == "Blinky":
-            blinky = ghost
-        elif ghost["name"] == "Pinky":
-            pinky = ghost
 
-    board[pacman_position[0]][pacman_position[1]] = 'Pacman'
-    board[blinky["position"][0]][blinky["position"][1]] = 'Blinky'
-    board[pinky["position"][0]][pinky["position"][1]] = 'Pinky'
+    def place(position, label):
+        row, col = position
+        if board[row][col] == 'empty':
+            board[row][col] = label
+        else:
+            board[row][col] += f"+{label}"
 
     for wall in walls:
-        x, y = wall
-        board[x][y] = 'wall'
+        place(wall, 'wall')
     
     for bean in beans:
-        x, y = bean
-        board[x][y] = 'bean'
+        place(bean, 'bean')
+
+    for ghost in ghosts:
+        place(ghost["position"], ghost["name"])
+
+    place(pacman_position, 'Pacman')
 
     # Create a text representation of the grid
-    grid_text = "BOARD: " + '\n'.join([''.join(str(row)) for row in board])
+    grid_text = "BOARD:\n" + '\n'.join(
+        f"Row {row_idx}: {row}" for row_idx, row in enumerate(board)
+    ) + "\n"
     grid_text += "PACMAN DIRECTION: " + pacman_direction + "\n"
     grid_text += "PACMAN POSITION: " + str(pacman_position) + "\n"
-    grid_text += "BLINKY POSITION: " + str(blinky["position"]) + "\n"
-    grid_text += "PINKY POSITION: " + str(pinky["position"]) + "\n"
+    for ghost in ghosts:
+        grid_text += f"{ghost['name'].upper()} POSITION: {ghost['position']}\n"
     
     # Create a human-readable representation
     text = "PACMAN BOARD DESCRIPTION:\n\n"
@@ -49,6 +52,7 @@ def pacman_state_to_text(state_data):
     text += "  - 'Pinky' representing Pinky's position.\n"
     text += "  - 'wall' representing a wall.\n"
     text += "  - 'bean' representing a bean.\n\n"
+    text += "If multiple entities occupy the same cell, their labels are joined with '+'.\n\n"
     text += "The grid and positions are represented as follows:\n"
     text += " [ " + grid_text + " ] " + "\n\n"
     
@@ -72,7 +76,7 @@ def process_dataset():
             # Get state path and load state data
             state_path = entry["state"]
             if not state_path:
-                print(f"Warning: No state path found for entry {entry["data_id"]}")
+                print(f"Warning: No state path found for entry {entry['data_id']}")
                 continue
                 
             state_data = read_json(state_path)
@@ -95,8 +99,8 @@ def process_dataset():
         except Exception as e:
             print(f"Error processing entry {entry.get('data_id')}: {str(e)}")
     
-    with open('data_text.json', 'w') as f:
-        json.dump(processed_data, f, indent=4)
+    with open('data_text.json', 'w', encoding='utf-8') as f:
+        json.dump(processed_data, f, indent=4, ensure_ascii=False)
 
     print(f"Successfully processed {len(processed_data)} entries. Saved to data_text.json")
 

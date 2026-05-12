@@ -57,7 +57,7 @@ def convert_to_3d_array(voxel_positions):
 
 def transform_state_to_text(data_json_path):
     # Read the original data.json file
-    with open(data_json_path, 'r') as f:
+    with open(data_json_path, 'r', encoding='utf-8') as f:
         data_items = json.load(f)
     
     results = []
@@ -73,7 +73,7 @@ def transform_state_to_text(data_json_path):
             continue
         
         # Read the state file
-        with open(state_path, 'r') as f:
+        with open(state_path, 'r', encoding='utf-8') as f:
             state_data = json.load(f)
         
         # Extract state information
@@ -143,8 +143,8 @@ The specific state data:
     return results
 
 def save_results(results, output_path):
-    with open(output_path, 'w') as f:
-        json.dump(results, f, indent=2)
+    with open(output_path, 'w', encoding='utf-8') as f:
+        json.dump(results, f, indent=2, ensure_ascii=False)
 
 if __name__ == "__main__":
     data_json_path = "data.json"

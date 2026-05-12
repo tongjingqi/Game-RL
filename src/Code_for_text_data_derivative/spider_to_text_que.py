@@ -3,7 +3,7 @@ import os
 
 def read_json(file_path):
     """Read and parse a JSON file."""
-    with open(file_path, 'r') as f:
+    with open(file_path, 'r', encoding='utf-8') as f:
         return json.load(f)
     
 def spider_state_to_text(state_data):
@@ -39,7 +39,7 @@ def spider_state_to_text(state_data):
     text += "When a card is face down, you cannot see any of the information about it.\n\n"
     text += "The cards in stock piles are all face down. So they are not shown in the following statement.\n\n"
     text += "The foundation piles are initially empty, so they are also not shown in the following statement.\n\n"
-    text += "The states of cards in the stock piles are as follows:\n\n"
+    text += "The states of cards in the waste piles are as follows:\n\n"
     text += grid_text + "\n\n"
     
     return text
@@ -85,8 +85,8 @@ def process_dataset():
         except Exception as e:
             print(f"Error processing entry {entry.get('data_id')}: {str(e)}")
     
-    with open('data_text.json', 'w') as f:
-        json.dump(processed_data, f, indent=4)
+    with open('data_text.json', 'w', encoding='utf-8') as f:
+        json.dump(processed_data, f, indent=4, ensure_ascii=False)
 
     print(f"Successfully processed {len(processed_data)} entries. Saved to data_text.json")
 

@@ -3,7 +3,7 @@ import os
 
 def read_json(file_path):
     """Read and parse a JSON file."""
-    with open(file_path, 'r') as f:
+    with open(file_path, 'r', encoding='utf-8') as f:
         return json.load(f)
     
 def minesweeper_state_to_text(state_data):
@@ -14,17 +14,23 @@ def minesweeper_state_to_text(state_data):
     revealed = state_data["revealed"]
     flagged = state_data["flagged"]
 
+    display_board = []
     for i in range(rows):
+        display_row = []
         for j in range(cols):
-            if not revealed[i][j]:
-                mine_board[i][j] = str(mine_board[i][j])
-            elif flagged[i][j]:
-                mine_board[i][j] = 'F'
+            if flagged[i][j]:
+                display_row.append('F')
+            elif revealed[i][j]:
+                display_row.append(str(mine_board[i][j]))
             else:
-                mine_board[i][j] = '.'
+                display_row.append('.')
+        display_board.append(display_row)
     
     # Create a text representation of the grid
-    grid_text = '\n'.join([''.join(str(row)) for row in mine_board])
+    grid_text = '\n'.join(
+        f"Row {row_idx}: [" + ", ".join(row) + "]"
+        for row_idx, row in enumerate(display_board)
+    )
     
     # Create a human-readable representation
     text = "MINESWEEPER BOARD DESCRIPTION:\n\n"
@@ -79,8 +85,8 @@ def process_dataset():
         except Exception as e:
             print(f"Error processing entry {entry.get('data_id')}: {str(e)}")
     
-    with open('data_text.json', 'w') as f:
-        json.dump(processed_data, f, indent=4)
+    with open('data_text.json', 'w', encoding='utf-8') as f:
+        json.dump(processed_data, f, indent=4, ensure_ascii=False)
 
     print(f"Successfully processed {len(processed_data)} entries. Saved to data_text.json")
 
