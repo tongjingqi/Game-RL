@@ -23,7 +23,20 @@ For each game:
 * Executing the code will produce **`data.json`** containing the generated data samples, with the corresponding visual input images saved in the  **`images/`** directory.
 * Typically, **game state information (grid size, element positions, etc.) of the samples will simultaneously be saved in JSON** to the **`states/`** directory.
 
-For example, the structure of the [sudoku_dataset_example](./sudoku/sudoku_dataset_example) (under [the directory of Sudoku](./sudoku)) is as follows:
+### Text-Only Derivative Data
+
+Based on these saved state records, we also provide unified conversion code for deriving pure-text QA data from the visual GameQA samples. The converter is available at [Code_for_text_data_derivative](./Code_for_text_data_derivative), and each game README includes a text-only conversion command plus an example text-state fragment aligned with its example image.
+
+For a concrete conversion command:
+
+```bash
+python Code_for_text_data_derivative/convert_text_data.py \
+  --game sudoku \
+  --data sudoku/sudoku_dataset_example/data.json \
+  --output sudoku/sudoku_dataset_example/data_text.json
+```
+
+The structure of the [sudoku_dataset_example](./sudoku/sudoku_dataset_example) (under [the directory of Sudoku](./sudoku)) is as follows:
 
 ```bash
 .

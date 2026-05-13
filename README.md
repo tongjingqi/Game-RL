@@ -147,6 +147,8 @@ There are 30 game directories in total. Apart from the code, each game directory
 1. Documentation describing the game tasks and execution instructions
 2. A subdirectory with example samples
 
+We also provide unified text-conversion code for deriving pure-text QA data from the visual GameQA samples. The converters reuse the saved `states/*.json` files to describe each visible game state in text, and can be run via [`src/Code_for_text_data_derivative`](./src/Code_for_text_data_derivative). Each game README includes a text-only conversion command and an example text-state fragment aligned with its example image.
+
 > 😎 Feel free to use the code directly to generate more samples, or adapt it to produce more types of data for your specific requirements.
 >
 
