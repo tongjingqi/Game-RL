@@ -170,6 +170,32 @@ reconstruction_dataset/
 - `target_xz_projection`：侧视图目标投影矩阵
 - `remaining_voxels`：还可添加的体素数量
 
+## 纯文本 QA 数据转换
+
+如果需要把该游戏的多模态 QA 数据转换为纯文本版本，可以在仓库根目录运行统一转换脚本：
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game 3DReconstruction --data src/3DReconstruction/reconstruction_dataset_example/data.json --output src/3DReconstruction/reconstruction_dataset_example/data_text.json
+```
+
+转换脚本会读取每条数据对应的 `state` JSON，把可见游戏状态转换为文本并插入到原问题前面，默认输出的 `data_text.json` 不再保留 `image` 或 `state` 字段。
+
+下面的纯文本状态片段与本 README 开头展示的示意图片对应：
+
+```text
+3D RECONSTRUCTION STATE:
+Current voxel positions: [[2, 1, 1], [2, 2, 1]]
+Remaining voxels: 3
+Target YZ/front projection:
+Row 0: [1, 1, 1]
+Row 1: [0, 1, 0]
+Row 2: [0, 0, 0]
+Target XZ/side projection:
+Row 0: [0, 1, 1]
+Row 1: [0, 0, 1]
+Row 2: [0, 0, 0]
+```
+
 ## 注意事项
 
 1. `main.py` 支持自定义题型比例；`multi_gen.py` 固定为每个状态生成全部 6 种问题。

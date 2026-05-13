@@ -58,6 +58,25 @@ python gene_dataset.py
 
 如需调整生成规模，可直接修改 `gene_dataset.py` 里的 `dataset_size`。
 
+## 纯文本 QA 数据转换
+
+如果需要把该游戏的多模态 QA 数据转换为纯文本版本，可以在仓库根目录运行统一转换脚本：
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game zuma --data src/zuma/zuma_dataset_example/data.json --output src/zuma/zuma_dataset_example/data_text.json
+```
+
+转换脚本会读取每条数据对应的 `state` JSON，把可见游戏状态转换为文本并插入到原问题前面，默认输出的 `data_text.json` 不再保留 `image` 或 `state` 字段。
+
+下面的纯文本状态片段与本 README 开头展示的示意图片对应：
+
+```text
+ZUMA STATE:
+Track: {'plot_level': 'Medium', 'hole_position': {'x': -1.9336408014512254, 'y': -2.7464934542910426}}
+Balls on track: [{'position': {'x': 2.325093698074389, 'y': -5.6107475945526035}, 'color': 'green'}, {'position': {'x': 1.736756 ...
+Frog/shooter: {'position': {'x': 0.4042746249648226, 'y': -0.5988457693062086}, 'angle': -163, 'next_ball_color': 'green', 'afte ...
+```
+
 ## 输出内容
 
 - `images/*.png`：生成的游戏截图

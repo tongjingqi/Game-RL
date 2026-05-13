@@ -217,3 +217,35 @@ Now I'll give you a picture, which shows a screenshot of a rhythm game, in which
 一个游戏示例图片：
 
 ![游戏示例图片](rhythm_game_dataset_example/images/board_00002.png)
+
+## 纯文本 QA 数据转换
+
+如果需要把该游戏的多模态 QA 数据转换为纯文本版本，可以在仓库根目录运行统一转换脚本：
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game rhythm_game --data src/rhythm_game/rhythm_game_dataset_example/data.json --output src/rhythm_game/rhythm_game_dataset_example/data_text.json
+```
+
+转换脚本会读取每条数据对应的 `state` JSON，把可见游戏状态转换为文本并插入到原问题前面，默认输出的 `data_text.json` 不再保留 `image` 或 `state` 字段。
+
+下面的纯文本状态片段与本 README 开头展示的示意图片对应：
+
+```text
+RHYTHM GAME STATE:
+Grid size: 15 rows x 6 columns. Coordinates in the original task are 1-based.
+Blocked/colored cells: 65
+Grid entries are color/type labels, '.' means empty:
+Row 1: ['yellow', 'pink', 'green', 'yellow', 'pink', 'pink']
+Row 2: ['pink', 'blue', '.', 'green', 'blue', 'blue']
+Row 3: ['blue', 'grey', '.', '.', 'blue', 'grey']
+Row 4: ['grey', 'yellow', 'pink', 'yellow', 'grey', '.']
+Row 5: ['yellow', '.', 'grey', '.', 'yellow', 'yellow']
+Row 6: ['yellow', '.', '.', 'yellow', 'yellow', 'green']
+Row 7: ['pink', 'pink', '.', 'green', 'pink', 'yellow']
+Row 8: ['blue', 'grey', 'green', 'green', 'blue', 'pink']
+Row 9: ['blue', 'pink', 'pink', 'yellow', 'grey', 'grey']
+Row 10: ['grey', 'blue', 'grey', 'yellow', 'yellow', 'green']
+Row 11: ['yellow', 'grey', '.', 'green', 'green', 'yellow']
+Row 12: ['.', '.', 'yellow', '.', '.', 'yellow']
+...
+```

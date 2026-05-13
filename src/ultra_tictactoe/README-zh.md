@@ -250,3 +250,35 @@ $(i, j, row, col)$
     ]
 }
 ```
+
+## 纯文本 QA 数据转换
+
+如果需要把该游戏的多模态 QA 数据转换为纯文本版本，可以在仓库根目录运行统一转换脚本：
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game ultra_tictactoe --data src/ultra_tictactoe/ultra_tictactoe_dataset_example/data.json --output src/ultra_tictactoe/ultra_tictactoe_dataset_example/data_text.json
+```
+
+转换脚本会读取每条数据对应的 `state` JSON，把可见游戏状态转换为文本并插入到原问题前面，默认输出的 `data_text.json` 不再保留 `image` 或 `state` 字段。
+
+下面的纯文本状态片段与本 README 开头展示的示意图片对应：
+
+```text
+ULTRA TICTACTOE STATE:
+Ultra tic-tac-toe consists of 3x3 nine-grids; each nine-grid contains a 3x3 local board.
+Rows: 3, columns: 3
+Last step: [3, 3, 2, 1]
+Total placed pieces: 38
+Marked middle cells: 5
+Visible pieces:
+- nine_grid=(1, 1), local_position=(1, 3), player=X
+- nine_grid=(1, 1), local_position=(3, 1), player=O
+- nine_grid=(1, 1), local_position=(1, 1), player=O
+- nine_grid=(1, 1), local_position=(2, 1), player=O
+- nine_grid=(1, 1), local_position=(2, 2), player=O
+- nine_grid=(1, 2), local_position=(3, 2), player=X
+- nine_grid=(1, 2), local_position=(2, 1), player=X
+- nine_grid=(1, 2), local_position=(2, 2), player=X
+- nine_grid=(1, 2), local_position=(2, 3), player=O
+...
+```
