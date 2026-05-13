@@ -78,13 +78,19 @@ def text_3d_maze(state: dict[str, Any], item: dict[str, Any]) -> str:
 
 
 def text_3d_reconstruction(state: dict[str, Any], item: dict[str, Any]) -> str:
+    def projection_rows(projection: list[list[Any]]) -> str:
+        return "\n".join(
+            f"z={z_index} layer: {row}"
+            for z_index, row in enumerate(projection, start=1)
+        )
+
     body = (
         f"Current voxel positions: {state.get('voxel_positions', [])}\n"
         f"Remaining voxels: {state.get('remaining_voxels')}\n"
-        "Target YZ/front projection:\n"
-        f"{_rows_table(state.get('target_yz_projection', []))}\n"
-        "Target XZ/side projection:\n"
-        f"{_rows_table(state.get('target_xz_projection', []))}"
+        "Target YZ/front projection, listed from bottom z=1 to top z=3:\n"
+        f"{projection_rows(state.get('target_yz_projection', []))}\n"
+        "Target XZ/side projection, listed from bottom z=1 to top z=3:\n"
+        f"{projection_rows(state.get('target_xz_projection', []))}"
     )
     return _prefix("3D RECONSTRUCTION STATE:", body)
 
@@ -108,11 +114,22 @@ def text_freecell(state: dict[str, Any], item: dict[str, Any]) -> str:
 
 
 def text_hue(state: dict[str, Any], item: dict[str, Any]) -> str:
+    board = []
+    blank_positions = []
+    for row_idx, row in enumerate(state.get("board", [])):
+        rendered_row = []
+        for col_idx, cell in enumerate(row):
+            if cell == [0, 0, 0]:
+                rendered_row.append("blank")
+                blank_positions.append((row_idx + 1, col_idx + 1))
+            else:
+                rendered_row.append(cell)
+        board.append(rendered_row)
     lines = [
-        "Rows and columns are read from top-left with 0-based indexes unless the question states otherwise.",
-        "Visible color board as RGB triples:",
-        _rows_table(state.get("board", [])),
-        f"Removed/blank positions visible in the puzzle: {state.get('removed_positions', [])}",
+        "Rows and columns follow the displayed 1-based labels from the top-left.",
+        "Visible color board as RGB triples; blank means a visible empty/checkered cell, not black:",
+        _rows_table(board, row_start=1),
+        f"Blank positions visible in the puzzle: {blank_positions}",
         f"Cell labels: {state.get('cell_labels', {})}",
         f"Gradient information visible from the board: {state.get('gradient_info', {})}",
     ]
@@ -237,13 +254,19 @@ def text_pacman(state: dict[str, Any], item: dict[str, Any]) -> str:
     for r, c in state.get("beans", []):
         grid[r][c] = "o" if grid[r][c] == "." else grid[r][c] + "+o"
     pr, pc = state["pacman_position"]
-    grid[pr][pc] = "P" if grid[pr][pc] == "." else grid[pr][pc] + "+P"
+    grid[pr][pc] = "M" if grid[pr][pc] == "." else grid[pr][pc] + "+M"
+    ghost_positions = []
     for ghost in state.get("ghosts", []):
         gr, gc = ghost.get("position", ghost if isinstance(ghost, list) else (None, None))
         label = ghost.get("name", "Ghost")[0].upper() if isinstance(ghost, dict) else "G"
+        if isinstance(ghost, dict):
+            ghost_positions.append(f"{ghost.get('name', 'Ghost')} at row {gr}, column {gc}")
         grid[gr][gc] = label if grid[gr][gc] == "." else grid[gr][gc] + "+" + label
     body = (
-        "Grid: #=wall, o=bean, P=Pacman, uppercase letters=ghost colors. Multiple entities in one cell are joined with '+'.\n"
+        "Grid: #=wall, o=bean, M=Pacman. Ghosts use uppercase initials, e.g. P=Pinky and B=Blinky.\n"
+        "Multiple entities in one cell are joined with '+'.\n"
+        f"Pacman position: row {pr}, column {pc}\n"
+        f"Ghost positions: {ghost_positions}\n"
         f"Pacman direction: {state.get('direction')}\n"
         f"{_rows_table(grid)}"
     )
@@ -290,7 +313,7 @@ def text_rubiks_cube(state: dict[str, Any], item: dict[str, Any]) -> str:
 
 
 def text_snake(state: dict[str, Any], item: dict[str, Any]) -> str:
-    symbols = {0: ".", 1: "H", 2: "B", 3: "F"}
+    symbols = {0: ".", 1: "F", 2: "B", 3: "H"}
     body = (
         "Grid: .=empty, H=snake head, B=snake body, F=food. Coordinates use row and column from the top-left.\n"
         f"{_compact_grid(state.get('map', []), symbols)}"
@@ -316,13 +339,13 @@ def text_space_invaders(state: dict[str, Any], item: dict[str, Any]) -> str:
     cols = state.get("total_cols", state.get("enemy_cols", 0))
     grid = [["." for _ in range(cols)] for _ in range(rows)]
     for enemy in state.get("enemies", []):
-        x, y = int(enemy["x"]), int(enemy["y"])
-        r = y - 1 if y >= 1 else y
-        c = x - 1 if x >= 1 else x
+        # Space Invaders states use x for the displayed row and y for the displayed column.
+        r = int(enemy["x"]) - 1
+        c = int(enemy["y"]) - 1
         if 0 <= r < rows and 0 <= c < cols:
             grid[r][c] = enemy.get("color", "enemy")
     body = (
-        f"Enemy area: {rows} rows x {cols} columns. Ship column: {state.get('ship_col')}.\n"
+        f"Enemy area: rows 1-{rows}, columns 1-{cols}. Ship column: {state.get('ship_col')}.\n"
         "Grid entries are enemy colors; '.' means no enemy:\n"
         f"{_rows_table(grid, row_start=1)}"
     )
@@ -431,10 +454,10 @@ def text_ultra_tictactoe(state: dict[str, Any], item: dict[str, Any]) -> str:
 
 def text_word_search(state: dict[str, Any], item: dict[str, Any]) -> str:
     body = (
-        f"Grid size: {state.get('size')}.\n"
+        f"Grid size: {state.get('size')}. The displayed row labels are 1-based.\n"
         f"Question type: {state.get('question_type')}\n"
         "Letter grid:\n"
-        f"{_rows_table(state.get('grid', []))}"
+        f"{_rows_table(state.get('grid', []), row_start=1)}"
     )
     return _prefix("WORD SEARCH STATE:", body)
 

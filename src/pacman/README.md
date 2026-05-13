@@ -227,7 +227,10 @@ Example text state fragment:
 
 ```text
 PACMAN STATE:
-Grid: #=wall, o=bean, P=Pacman, uppercase letters=ghost colors. Multiple entities in one cell are joined with '+'.
+Grid: #=wall, o=bean, M=Pacman. Ghosts use uppercase initials, e.g. P=Pinky and B=Blinky.
+Multiple entities in one cell are joined with '+'.
+Pacman position: row 16, column 15
+Ghost positions: ['Pinky at row 8, column 1', 'Blinky at row 9, column 4']
 Pacman direction: UP
 Row 0: ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#']
 Row 1: ['#', 'o', 'o', 'o', 'o', 'o', '#', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', '#']
@@ -239,9 +242,6 @@ Row 6: ['#', 'o', '#', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o
 Row 7: ['#', 'o', '#', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', '#']
 Row 8: ['#', 'o+P', 'o', '#', 'o', 'o', 'o', 'o', 'o', 'o', '#', '#', 'o', 'o', 'o', 'o', 'o', '#']
 Row 9: ['#', 'o', 'o', 'o', 'o+B', 'o', 'o', '#', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', '#']
-Row 10: ['#', 'o', 'o', 'o', 'o', 'o', '.', 'o', 'o', '#', 'o', 'o', 'o', 'o', '#', 'o', '#', '#']
-Row 11: ['#', '#', '#', 'o', '#', 'o', '.', '.', '.', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', '#']
-Row 12: ['#', 'o', 'o', 'o', 'o', 'o', 'o', 'o', '.', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', '#']
 ...
 ```
 

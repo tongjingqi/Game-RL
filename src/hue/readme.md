@@ -63,15 +63,15 @@ Example text state fragment:
 
 ```text
 HUE PUZZLE STATE:
-Rows and columns are read from top-left with 0-based indexes unless the question states otherwise.
-Visible color board as RGB triples:
-Row 0: [[169, 234, 68], [115, 68, 222], [131, 108, 204], [148, 148, 187], [165, 188, 170], [182, 229, 153]]
-Row 1: [[182, 182, 110], [0, 0, 0], [136, 121, 207], [0, 0, 0], [0, 0, 0], [0, 0, 0]]
-Row 2: [[195, 130, 152], [0, 0, 0], [142, 135, 211], [0, 0, 0], [0, 0, 0], [0, 0, 0]]
-Row 3: [[208, 78, 194], [0, 0, 0], [148, 149, 215], [0, 0, 0], [0, 0, 0], [0, 0, 0]]
-Row 4: [[222, 27, 236], [0, 0, 0], [154, 163, 219], [0, 0, 0], [0, 0, 0], [0, 0, 0]]
-Row 5: [[0, 0, 0], [136, 208, 213], [160, 177, 223], [184, 146, 234], [209, 116, 245], [0, 0, 0]]
-Removed/blank positions visible in the puzzle: []
+Rows and columns follow the displayed 1-based labels from the top-left.
+Visible color board as RGB triples; blank means a visible empty/checkered cell, not black:
+Row 1: [[169, 234, 68], [115, 68, 222], [131, 108, 204], [148, 148, 187], [165, 188, 170], [182, 229, 153]]
+Row 2: [[182, 182, 110], 'blank', [136, 121, 207], 'blank', 'blank', 'blank']
+Row 3: [[195, 130, 152], 'blank', [142, 135, 211], 'blank', 'blank', 'blank']
+Row 4: [[208, 78, 194], 'blank', [148, 149, 215], 'blank', 'blank', 'blank']
+Row 5: [[222, 27, 236], 'blank', [154, 163, 219], 'blank', 'blank', 'blank']
+Row 6: ['blank', [136, 208, 213], [160, 177, 223], [184, 146, 234], [209, 116, 245], 'blank']
+Blank positions visible in the puzzle: [(2, 2), (2, 4), (2, 5), (2, 6), (3, 2), (3, 4), (3, 5), (3, 6), (4, 2), (4, 4), (4, 5), ...
 Cell labels: {}
 Gradient information visible from the board: [{'type': 'row', 'index': 5, 'direction': None, 'start_color': [136, 208, 213], 'en ...
 Hidden removed color answers are intentionally omitted.

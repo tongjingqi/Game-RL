@@ -46,9 +46,9 @@ Grid: .=empty, H=snake head, B=snake body, F=food. Coordinates use row and colum
 . . . . . . . . . .
 . . . . . . . . . .
 . . . . . . . . . .
-. . . . B F . . . .
+. . . . B H . . . .
 . . . . B B . . B .
 . . . . . B B B B .
 . . . . . . . B B .
-. . . . . . . . H .
+. . . . . . . . F .
 ```

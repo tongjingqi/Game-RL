@@ -185,15 +185,15 @@ python src/Code_for_text_data_derivative/convert_text_data.py --game 3DReconstru
 ```text
 3D RECONSTRUCTION STATE:
 Current voxel positions: [[2, 1, 1], [2, 2, 1]]
-Remaining voxels: 3
-Target YZ/front projection:
-Row 0: [1, 1, 1]
-Row 1: [0, 1, 0]
-Row 2: [0, 0, 0]
-Target XZ/side projection:
-Row 0: [0, 1, 1]
-Row 1: [0, 0, 1]
-Row 2: [0, 0, 0]
+Remaining voxels: 4
+Target YZ/front projection, listed from bottom z=1 to top z=3:
+z=1 layer: [1, 1, 1]
+z=2 layer: [0, 1, 0]
+z=3 layer: [0, 0, 0]
+Target XZ/side projection, listed from bottom z=1 to top z=3:
+z=1 layer: [0, 1, 1]
+z=2 layer: [0, 0, 1]
+z=3 layer: [0, 0, 0]
 ```
 
 ## 注意事项

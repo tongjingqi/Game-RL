@@ -97,12 +97,12 @@ Example text state fragment:
 
 ```text
 SPACE INVADERS STATE:
-Enemy area: 6 rows x 10 columns. Ship column: 1.
+Enemy area: rows 1-6, columns 1-10. Ship column: 1.
 Grid entries are enemy colors; '.' means no enemy:
-Row 1: ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.']
-Row 2: ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.']
-Row 3: ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.']
-Row 4: ['purple', 'blue', '.', '.', '.', '.', '.', '.', '.', '.']
-Row 5: ['purple', 'blue', 'green', 'green', '.', '.', '.', '.', '.', '.']
+Row 1: ['.', '.', '.', 'purple', 'purple', '.', 'purple', 'purple', 'purple', '.']
+Row 2: ['.', '.', '.', 'blue', 'blue', '.', 'blue', 'blue', 'blue', '.']
+Row 3: ['.', '.', '.', '.', 'green', '.', '.', 'green', 'green', '.']
+Row 4: ['.', '.', '.', '.', 'green', '.', '.', '.', '.', '.']
+Row 5: ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.']
 Row 6: ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.']
 ```

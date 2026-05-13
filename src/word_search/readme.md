@@ -79,16 +79,16 @@ Example text state fragment:
 
 ```text
 WORD SEARCH STATE:
-Grid size: 7.
+Grid size: 7. The displayed row labels are 1-based.
 Question type: cell_letter
 Letter grid:
-Row 0: ['D', 'T', 'X', 'I', 'P', 'A', 'Q']
-Row 1: ['C', 'X', 'X', 'Q', 'J', 'W', 'Q']
-Row 2: ['G', 'E', 'H', 'M', 'J', 'L', 'V']
-Row 3: ['P', 'N', 'T', 'U', 'F', 'B', 'R']
-Row 4: ['P', 'O', 'T', 'J', 'Y', 'T', 'G']
-Row 5: ['J', 'F', 'R', 'J', 'M', 'N', 'R']
-Row 6: ['J', 'V', 'V', 'H', 'C', 'L', 'W']
+Row 1: ['D', 'T', 'X', 'I', 'P', 'A', 'Q']
+Row 2: ['C', 'X', 'X', 'Q', 'J', 'W', 'Q']
+Row 3: ['G', 'E', 'H', 'M', 'J', 'L', 'V']
+Row 4: ['P', 'N', 'T', 'U', 'F', 'B', 'R']
+Row 5: ['P', 'O', 'T', 'J', 'Y', 'T', 'G']
+Row 6: ['J', 'F', 'R', 'J', 'M', 'N', 'R']
+Row 7: ['J', 'V', 'V', 'H', 'C', 'L', 'W']
 ```
 
 ## License
