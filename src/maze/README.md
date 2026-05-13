@@ -122,3 +122,33 @@ Each maze will generate all types of questions.
 
 This will generate 60 small mazes, 30 medium mazes, and 10 large mazes in the folder `maze_dataset`.
 
+## Text-Only QA Conversion
+
+To convert this game's multimodal QA data into a text-only version, run the unified converter from the repository root:
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game maze --data src/maze/maze_dataset_example/data.json --output src/maze/maze_dataset_example/data_text.json
+```
+
+The converter reads each entry's `state` JSON, prepends a textual description of the visible game state to the original question, and writes `data_text.json` without the `image` or `state` fields by default.
+
+Example text state fragment:
+
+```text
+MAZE STATE:
+Maze grid: #=wall, .=path, P=player, G=goal.
+Size: [11, 11]
+Player position: [9, 9]
+Goal position: [3, 1]
+# # # # # # # # # # #
+# . . . # . . . # . #
+# # # . # . # . # . #
+# G # . # . # . . . #
+# . # . # . # # # . #
+# . . . # . # . # . #
+# . # # # . # . # . #
+# . # . . . # . . . #
+# . # . # # # . # # #
+# . . . # . . . . P #
+# # # # # # # # # # #
+```

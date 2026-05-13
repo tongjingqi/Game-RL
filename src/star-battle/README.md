@@ -80,6 +80,31 @@ Puzzle images stored in images/.
 Puzzle state data in states/, where each JSON file contains the puzzle’s grid, regions, and star positions.
 JSONL files containing puzzle questions, answers, and analysis.
 
+## Text-Only QA Conversion
+
+To convert this game's multimodal QA data into a text-only version, run the unified converter from the repository root:
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game star-battle --data src/star-battle/star-battle_dataset_example/data.json --output src/star-battle/star-battle_dataset_example/data_text.json
+```
+
+The converter reads each entry's `state` JSON, prepends a textual description of the visible game state to the original question, and writes `data_text.json` without the `image` or `state` fields by default.
+
+Example text state fragment:
+
+```text
+STAR BATTLE STATE:
+Region grid; each number is a region index:
+Row 0: [[1, 2], [2, 2], [0, 2], [1, 3], [1, 1], [2, 1], [3, 2], [2, 3]]
+Row 1: [[1, 0], [2, 0], [0, 0], [3, 0], [0, 1], [3, 1], [4, 0]]
+Row 2: [[3, 4], [2, 4], [3, 5], [3, 3], [4, 4], [2, 5], [1, 4]]
+Row 3: [[5, 1], [4, 1], [5, 2], [5, 0], [4, 2], [5, 3], [4, 3]]
+Row 4: [[5, 5], [4, 5], [5, 4]]
+Row 5: [[0, 4], [0, 3], [0, 5], [1, 5]]
+Currently placed stars: [[0, 2], [1, 5], [3, 3], [4, 1], [5, 4]]
+Any hidden completed-board answer is intentionally omitted.
+```
+
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details
 

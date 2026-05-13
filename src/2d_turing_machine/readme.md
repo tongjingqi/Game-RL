@@ -71,6 +71,38 @@ Here is an example of the generated Q&A entry in the `data.json` file:
 }
 ```
 
+## Text-Only QA Conversion
+
+To convert this game's multimodal QA data into a text-only version, run the unified converter from the repository root:
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game 2d_turing_machine --data src/2d_turing_machine/2d_turing_machine_dataset_example/data.json --output src/2d_turing_machine/2d_turing_machine_dataset_example/data_text.json
+```
+
+The converter reads each entry's `state` JSON, prepends a textual description of the visible game state to the original question, and writes `data_text.json` without the `image` or `state` fields by default.
+
+Example text state fragment:
+
+```text
+2D TURING MACHINE STATE:
+Grid symbols:
+Row 0: [2, 4, 4]
+Row 1: [0, 1, 2]
+Row 2: [1, 0, 4]
+Row 3: [1, 2, 2]
+Row 4: [4, 4, 2]
+
+Head: {'x': 0, 'y': 2, 'state': 0}
+
+Transition rules:
+if state=0 and symbol=0: write 1, change to state 1, move direction 1
+if state=0 and symbol=1: write 4, change to state 1, move direction 1
+if state=0 and symbol=2: write 0, change to state 0, move direction 0
+if state=0 and symbol=3: write 1, change to state 0, move direction 1
+if state=0 and symbol=4: write 4, change to state 0, move direction 2
+...
+```
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

@@ -82,3 +82,27 @@ This will generate:
 ### Strategy Optimization
 1. Find maximum points possible from one shot
 2. Find maximum points possible from two shots
+
+## Text-Only QA Conversion
+
+To convert this game's multimodal QA data into a text-only version, run the unified converter from the repository root:
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game space_invaders --data src/space_invaders/space_invaders_dataset_example/data.json --output src/space_invaders/space_invaders_dataset_example/data_text.json
+```
+
+The converter reads each entry's `state` JSON, prepends a textual description of the visible game state to the original question, and writes `data_text.json` without the `image` or `state` fields by default.
+
+Example text state fragment:
+
+```text
+SPACE INVADERS STATE:
+Enemy area: 6 rows x 10 columns. Ship column: 1.
+Grid entries are enemy colors; '.' means no enemy:
+Row 1: ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.']
+Row 2: ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.']
+Row 3: ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.']
+Row 4: ['purple', 'blue', '.', '.', '.', '.', '.', '.', '.', '.']
+Row 5: ['purple', 'blue', 'green', 'green', '.', '.', '.', '.', '.', '.']
+Row 6: ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.']
+```

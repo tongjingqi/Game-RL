@@ -105,6 +105,23 @@ minecraft_dataset/
 └── states/
 ```
 
+## Text-Only QA Conversion
+
+To convert this game's multimodal QA data into a text-only version, run the unified converter from the repository root:
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game minecraft --data src/minecraft/minecraft_dataset_example/data.json --output src/minecraft/minecraft_dataset_example/data_text.json
+```
+
+The converter reads each entry's `state` JSON, prepends a textual description of the visible game state to the original question, and writes `data_text.json` without the `image` or `state` fields by default.
+
+Example text state fragment:
+
+```text
+MINECRAFT-LIKE SCENE STATE:
+Visible sceneries: ['diamond ore', 'ladder', 'pumpkin']
+```
+
 ## Notes
 
 - The generator uses `Ursina` screenshots, then resizes them with `utils/image_proc.py`.

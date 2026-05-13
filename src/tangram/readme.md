@@ -108,3 +108,27 @@ tengram_dataset/
 *   **`states/`:** Directory containing JSON files representing the state of each puzzle.
 *   **`data.json`:**  JSON file containing the dataset of question-answer pairs.
 
+## Text-Only QA Conversion
+
+To convert this game's multimodal QA data into a text-only version, run the unified converter from the repository root:
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game tangram --data src/tangram/tengram_dataset_example/data.json --output src/tangram/tengram_dataset_example/data_text.json
+```
+
+The converter reads each entry's `state` JSON, prepends a textual description of the visible game state to the original question, and writes `data_text.json` without the `image` or `state` fields by default.
+
+Example text state fragment:
+
+```text
+TANGRAM STATE:
+Tangram grid; entries identify visible piece occupancy:
+Row 0: [3, 3, 3, 6, 6, 7]
+Row 1: [1, 3, 3, 6, 6, 7]
+Row 2: [1, 3, 3, 6, 6, 7]
+Row 3: [1, 0, 3, 4, 4, 7]
+Row 4: [1, 0, 2, 4, 4, 8]
+Row 5: [1, 2, 2, 2, 8, 8]
+Configuration: {'grid_size': 6, 'num_seeds': 8, 'num_pieces_to_remove': 1}
+Removed pieces visible/asked about: [5]
+```

@@ -96,3 +96,34 @@ The dataset consists of:
 
 4. **Utilizing the Dataset**:
    - The generated datasets can be used for training and evaluating VQA models or for further analysis in related projects.
+
+## Text-Only QA Conversion
+
+To convert this game's multimodal QA data into a text-only version, run the unified converter from the repository root:
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game tents --data src/tents/tents_dataset_example/data.json --output src/tents/tents_dataset_example/data_text.json
+```
+
+The converter reads each entry's `state` JSON, prepends a textual description of the visible game state to the original question, and writes `data_text.json` without the `image` or `state` fields by default.
+
+Example text state fragment:
+
+```text
+TENTS STATE:
+Grid: R=tree, T=currently placed tent, .=empty.
+. . . . . . . . . .
+. . T R . R . . . .
+. . . . . . . . . .
+. . . . . R R . . .
+. T R . . . . . . .
+. . . . . R . . . .
+. T R R T . . . . .
+. . . . . . . . . .
+R . . . . R . . . .
+T . . . . T . . . .
+Row target tent counts: [0, 3, 0, 0, 2, 1, 2, 0, 0, 2]
+Column target tent counts: [1, 2, 1, 1, 2, 1, 2, 0, 0, 0]
+Tree positions: [[6, 2], [5, 5], [1, 5], [4, 2], [8, 0], [3, 6], [6, 3], [1, 3], [8, 5], [3, 5]]
+Current tent positions: [[9, 0], [1, 2], [6, 1], [6, 4], [9, 5], [4, 1]]
+```

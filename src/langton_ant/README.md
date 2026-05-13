@@ -136,6 +136,35 @@ foo/                 # Your current working directory
 - Each sample includes multiple questions of different types
 - Images are generated with clear visual indicators and coordinate systems
 
+## Text-Only QA Conversion
+
+To convert this game's multimodal QA data into a text-only version, run the unified converter from the repository root:
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game langton_ant --data src/langton_ant/langton_ant_dataset_example/data.json --output src/langton_ant/langton_ant_dataset_example/data_text.json
+```
+
+The converter reads each entry's `state` JSON, prepends a textual description of the visible game state to the original question, and writes `data_text.json` without the `image` or `state` fields by default.
+
+Example text state fragment:
+
+```text
+LANGTON ANT STATE:
+Grid cells: 0=white, 1=black. Coordinates use row and column from the top-left.
+Row 0: [0, 0, 0, 0, 1, 0, 0, 0, 0]
+Row 1: [0, 0, 0, 1, 1, 1, 0, 0, 0]
+Row 2: [0, 1, 0, 0, 1, 1, 1, 0, 1]
+Row 3: [1, 0, 1, 0, 0, 1, 0, 1, 0]
+Row 4: [1, 0, 0, 0, 0, 0, 1, 1, 0]
+Row 5: [0, 0, 1, 0, 1, 0, 0, 1, 0]
+Row 6: [0, 1, 1, 0, 0, 0, 0, 1, 0]
+Row 7: [0, 1, 1, 0, 0, 1, 0, 0, 0]
+Row 8: [1, 1, 1, 0, 0, 0, 0, 0, 0]
+
+Ant: {'x': 0, 'y': 4, 'direction': 'right'}
+Rules: on a white cell, turn right, flip the cell black, move forward; on a black cell, turn left, flip it white, move forward.
+```
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.

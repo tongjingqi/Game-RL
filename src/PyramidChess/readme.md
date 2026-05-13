@@ -188,3 +188,34 @@ run:
 `python main.py -n 1250 -q 0,4,5`
 `python main.py -n 3750 -i 1250 -q 1,2,3`
 
+## Text-Only QA Conversion
+
+To convert this game's multimodal QA data into a text-only version, run the unified converter from the repository root:
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game PyramidChess --data src/PyramidChess/pyramidchess_dataset_example/data.json --output src/PyramidChess/pyramidchess_dataset_example/data_text.json
+```
+
+The converter reads each entry's `state` JSON, prepends a textual description of the visible game state to the original question, and writes `data_text.json` without the `image` or `state` fields by default.
+
+Example text state fragment:
+
+```text
+PYRAMID CHESS STATE:
+{
+  "0": [
+    [
+      "P1",
+      "P0",
+      "P1"
+    ],
+    [
+      "P1",
+      "P1",
+      "P0"
+    ],
+    [
+      "P1",
+      "P0",
+...
+```

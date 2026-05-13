@@ -109,3 +109,25 @@ num_samples = 1000
   - References to state and image files
 - Image files show grid states with coordinate labels
 - State files contain raw grid data in JSON format
+
+## Text-Only QA Conversion
+
+To convert this game's multimodal QA data into a text-only version, run the unified converter from the repository root:
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game lifegame --data src/lifegame/lifegame_dataset_example/data.json --output src/lifegame/lifegame_dataset_example/data_text.json
+```
+
+The converter reads each entry's `state` JSON, prepends a textual description of the visible game state to the original question, and writes `data_text.json` without the `image` or `state` fields by default.
+
+Example text state fragment:
+
+```text
+LIFE GAME STATE:
+Grid cells: 1=alive, 0=dead. Coordinates use row and column from the top-left.
+Row 0: [0, 1, 0, 1]
+Row 1: [0, 0, 1, 0]
+Row 2: [0, 1, 0, 0]
+Row 3: [0, 1, 0, 0]
+Apply the standard Conway's Game of Life rules unless the question specifies otherwise.
+```

@@ -65,6 +65,32 @@ print(f"Generated {len(dataset)} problems")
 - `string`: For string operations.
 - `typing`: For type annotations.
 
+## Text-Only QA Conversion
+
+To convert this game's multimodal QA data into a text-only version, run the unified converter from the repository root:
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game word_search --data src/word_search/word_search_dataset_example/data.json --output src/word_search/word_search_dataset_example/data_text.json
+```
+
+The converter reads each entry's `state` JSON, prepends a textual description of the visible game state to the original question, and writes `data_text.json` without the `image` or `state` fields by default.
+
+Example text state fragment:
+
+```text
+WORD SEARCH STATE:
+Grid size: 7.
+Question type: cell_letter
+Letter grid:
+Row 0: ['D', 'T', 'X', 'I', 'P', 'A', 'Q']
+Row 1: ['C', 'X', 'X', 'Q', 'J', 'W', 'Q']
+Row 2: ['G', 'E', 'H', 'M', 'J', 'L', 'V']
+Row 3: ['P', 'N', 'T', 'U', 'F', 'B', 'R']
+Row 4: ['P', 'O', 'T', 'J', 'Y', 'T', 'G']
+Row 5: ['J', 'F', 'R', 'J', 'M', 'N', 'R']
+Row 6: ['J', 'V', 'V', 'H', 'C', 'L', 'W']
+```
+
 ## License
 
 This project is licensed under the MIT License.

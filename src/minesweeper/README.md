@@ -162,5 +162,28 @@ You can adjust the dataset generation parameters by modifying the `main.py` scri
     ]
     ```
 
+## Text-Only QA Conversion
+
+To convert this game's multimodal QA data into a text-only version, run the unified converter from the repository root:
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game minesweeper --data src/minesweeper/minesweeper_dataset_example/data.json --output src/minesweeper/minesweeper_dataset_example/data_text.json
+```
+
+The converter reads each entry's `state` JSON, prepends a textual description of the visible game state to the original question, and writes `data_text.json` without the `image` or `state` fields by default.
+
+Example text state fragment:
+
+```text
+MINESWEEPER VISIBLE STATE:
+Grid size: 5 rows x 5 columns.
+Cells: digit=visible clue, F=flagged, .=unrevealed. Hidden mines are not shown.
+Row 0: ['.', '.', 'F', '1', '0']
+Row 1: ['.', '.', '.', '2', '0']
+Row 2: ['.', '.', 'F', '2', '1']
+Row 3: ['.', '.', '.', '.', 'F']
+Row 4: ['.', '.', '.', '.', '.']
+```
+
 ## License
 This project is licensed under the [MIT License](LICENSE).

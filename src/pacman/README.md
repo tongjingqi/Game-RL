@@ -213,5 +213,37 @@ You can adjust the dataset generation parameters by modifying the `main.py` scri
     ]
     ```
 
+## Text-Only QA Conversion
+
+To convert this game's multimodal QA data into a text-only version, run the unified converter from the repository root:
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game pacman --data src/pacman/pacman_dataset_example/data.json --output src/pacman/pacman_dataset_example/data_text.json
+```
+
+The converter reads each entry's `state` JSON, prepends a textual description of the visible game state to the original question, and writes `data_text.json` without the `image` or `state` fields by default.
+
+Example text state fragment:
+
+```text
+PACMAN STATE:
+Grid: #=wall, o=bean, P=Pacman, uppercase letters=ghost colors. Multiple entities in one cell are joined with '+'.
+Pacman direction: UP
+Row 0: ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#']
+Row 1: ['#', 'o', 'o', 'o', 'o', 'o', '#', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', '#']
+Row 2: ['#', 'o', '#', '#', 'o', 'o', '#', '#', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', '#']
+Row 3: ['#', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', '#', 'o', 'o', 'o', '#', 'o', 'o', 'o', '#']
+Row 4: ['#', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', '#']
+Row 5: ['#', 'o', 'o', '#', 'o', 'o', 'o', '#', 'o', '#', 'o', 'o', 'o', 'o', 'o', 'o', '#', '#']
+Row 6: ['#', 'o', '#', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', '#']
+Row 7: ['#', 'o', '#', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', '#']
+Row 8: ['#', 'o+P', 'o', '#', 'o', 'o', 'o', 'o', 'o', 'o', '#', '#', 'o', 'o', 'o', 'o', 'o', '#']
+Row 9: ['#', 'o', 'o', 'o', 'o+B', 'o', 'o', '#', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', '#']
+Row 10: ['#', 'o', 'o', 'o', 'o', 'o', '.', 'o', 'o', '#', 'o', 'o', 'o', 'o', '#', 'o', '#', '#']
+Row 11: ['#', '#', '#', 'o', '#', 'o', '.', '.', '.', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', '#']
+Row 12: ['#', 'o', 'o', 'o', 'o', 'o', 'o', 'o', '.', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', '#']
+...
+```
+
 ## License
 This project is licensed under the [MIT License](LICENSE).

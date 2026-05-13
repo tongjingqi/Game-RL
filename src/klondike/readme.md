@@ -90,3 +90,30 @@ If the progress bar doesn't display correctly:
 ```bash
 pip install tqdm
 ```
+
+## Text-Only QA Conversion
+
+To convert this game's multimodal QA data into a text-only version, run the unified converter from the repository root:
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game klondike --data src/klondike/klondike_dataset_example/data.json --output src/klondike/klondike_dataset_example/data_text.json
+```
+
+The converter reads each entry's `state` JSON, prepends a textual description of the visible game state to the original question, and writes `data_text.json` without the `image` or `state` fields by default.
+
+Example text state fragment:
+
+```text
+KLONDIKE STATE:
+Draw/stock pile: 22 face-down cards.
+Waste/dump pile: []
+Foundation piles: [[], [], [], []]
+Tableau piles, left to right; '<Card Sprite...>' means a face-down card:
+Tableau 1: [<Card Sprite(in 1 groups)>, <Card Sprite(in 1 groups)>, <Card Sprite(in 1 groups)>, club 3, diamond 2]
+Tableau 2: [<Card Sprite(in 1 groups)>, heart 3, spade 2]
+Tableau 3: [<Card Sprite(in 1 groups)>, club 1]
+Tableau 4: [<Card Sprite(in 1 groups)>, club 7, heart 6, club 5, diamond 4]
+Tableau 5: [<Card Sprite(in 1 groups)>, spade 12, heart 11, spade 10]
+Tableau 6: [heart 8, spade 7]
+Tableau 7: [diamond 9, spade 8, heart 7, club 6, diamond 5, club 4, diamond 3, club 2, diamond 1]
+```

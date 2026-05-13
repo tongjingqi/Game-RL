@@ -197,5 +197,32 @@ This project utilizes code from the [rdasxy/spider_solitaire](https://github.com
 
 Special thanks to the contributors of the original repository for their work, which made this project possible.
 
+## Text-Only QA Conversion
+
+To convert this game's multimodal QA data into a text-only version, run the unified converter from the repository root:
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game spider_solitaire --data src/spider_solitaire/spider_solitaire_dataset_example/data.json --output src/spider_solitaire/spider_solitaire_dataset_example/data_text.json
+```
+
+The converter reads each entry's `state` JSON, prepends a textual description of the visible game state to the original question, and writes `data_text.json` without the `image` or `state` fields by default.
+
+Example text state fragment:
+
+```text
+SPIDER SOLITAIRE STATE:
+Stock pile count: 18; stock cards are face down and not individually shown.
+Waste/tableau piles:
+Pile 1: [{'code': 28, 'rank': 3, 'suit': 'spade', 'faceUp': False}, {'code': 46, 'rank': 8, 'suit': 'spade', 'faceUp': False}, { ...
+Pile 2: [{'code': 30, 'rank': 5, 'suit': 'spade', 'faceUp': False}, {'code': 75, 'rank': 11, 'suit': 'spade', 'faceUp': False}, ...
+Pile 3: [{'code': 54, 'rank': 3, 'suit': 'spade', 'faceUp': False}, {'code': 27, 'rank': 2, 'suit': 'spade', 'faceUp': False}, { ...
+Pile 4: [{'code': 31, 'rank': 6, 'suit': 'spade', 'faceUp': False}, {'code': 56, 'rank': 5, 'suit': 'spade', 'faceUp': False}, { ...
+Pile 5: [{'code': 3, 'rank': 4, 'suit': 'spade', 'faceUp': False}, {'code': 92, 'rank': 2, 'suit': 'spade', 'faceUp': False}, {' ...
+Pile 6: [{'code': 29, 'rank': 4, 'suit': 'spade', 'faceUp': False}, {'code': 67, 'rank': 3, 'suit': 'spade', 'faceUp': False}, { ...
+Pile 7: [{'code': 81, 'rank': 4, 'suit': 'spade', 'faceUp': False}, {'code': 82, 'rank': 5, 'suit': 'spade', 'faceUp': False}, { ...
+Pile 8: [{'code': 21, 'rank': 9, 'suit': 'spade', 'faceUp': False}, {'code': 11, 'rank': 12, 'suit': 'spade', 'faceUp': False}, ...
+Pile 9: [{'code': 59, 'rank': 8, 'suit': 'spade', 'faceUp': False}, {'code': 79, 'rank': 2, 'suit': 'spade', 'faceUp': False}, { ...
+```
+
 ## License
 This project is licensed under the [MIT License](LICENSE).

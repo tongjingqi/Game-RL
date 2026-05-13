@@ -140,6 +140,26 @@ The recommendations for the Tic-Tac-Toe analysis provided in the data are based 
 4. If the opponent can create a "double threat", block the corresponding position.
 5. Choose the first empty position from `(0, 0)` to `(2, 2)`.
 
+## Text-Only QA Conversion
+
+To convert this game's multimodal QA data into a text-only version, run the unified converter from the repository root:
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game tictactoe --data src/tictactoe/tictactoe_dataset_example/data.json --output src/tictactoe/tictactoe_dataset_example/data_text.json
+```
+
+The converter reads each entry's `state` JSON, prepends a textual description of the visible game state to the original question, and writes `data_text.json` without the `image` or `state` fields by default.
+
+Example text state fragment:
+
+```text
+TICTACTOE STATE:
+Board:
+Row 0: [' ', 'O', ' ']
+Row 1: [' ', ' ', ' ']
+Row 2: [' ', 'X', 'O']
+```
+
 ## License
 
 This project is licensed under the **MIT License**. See the [LICENSE](https://chat.deepseek.com/a/chat/s/LICENSE) file for more details.

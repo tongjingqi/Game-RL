@@ -139,6 +139,34 @@ output_dir/
   - 9x9 boards use `easy`, `medium`, or `hard`.  
 - **Problem Distribution**: Modify `question_types` in `generate_dataset()` to prioritize specific questions.
 
+## Text-Only QA Conversion
+
+To convert this game's multimodal QA data into a text-only version, run the unified converter from the repository root:
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game sudoku --data src/sudoku/sudoku_dataset_example/data.json --output src/sudoku/sudoku_dataset_example/data_text.json
+```
+
+The converter reads each entry's `state` JSON, prepends a textual description of the visible game state to the original question, and writes `data_text.json` without the `image` or `state` fields by default.
+
+Example text state fragment:
+
+```text
+SUDOKU STATE:
+Sudoku size: 9.
+Board, where '.' means empty:
+Row 0: [6, '.', 3, 1, 2, 5, 4, 7, 9]
+Row 1: [1, 2, 9, 3, 4, 7, 8, '.', 6]
+Row 2: [5, 4, 7, 6, 8, 9, 3, 2, 1]
+Row 3: [3, 7, 5, 2, 6, 4, 9, 1, 8]
+Row 4: [4, 9, 8, 5, 3, 1, '.', 6, 2]
+Row 5: [2, 1, 6, 7, 9, 8, 5, 4, '.']
+Row 6: ['.', '.', '.', '.', 1, 6, 2, 3, 7]
+Row 7: [7, 6, 2, 9, 5, 3, 1, 8, 4]
+Row 8: [8, 3, 1, 4, 7, 2, 6, 9, 5]
+Region/color information: ['#FF0000', '#00FF00', '#0000FF', '#FF00FF', '#FFFF00', '#00FFFF', '#696969', '#A020F0', '#228B22']
+```
+
 ## Notes
 - The generator may lag for large `num_samples` due to backtracking in puzzle generation.
 - If a puzzle cannot be solved, the generator falls back to simpler questions.

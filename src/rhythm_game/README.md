@@ -217,3 +217,35 @@ Now I'll give you a picture, which shows a screenshot of a rhythm game, in which
 An example game image:
 
 ![example game image](rhythm_game_dataset_example/images/board_00002.png)
+
+## Text-Only QA Conversion
+
+To convert this game's multimodal QA data into a text-only version, run the unified converter from the repository root:
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game rhythm_game --data src/rhythm_game/rhythm_game_dataset_example/data.json --output src/rhythm_game/rhythm_game_dataset_example/data_text.json
+```
+
+The converter reads each entry's `state` JSON, prepends a textual description of the visible game state to the original question, and writes `data_text.json` without the `image` or `state` fields by default.
+
+Example text state fragment:
+
+```text
+RHYTHM GAME STATE:
+Grid size: 15 rows x 6 columns. Coordinates in the original task are 1-based.
+Blocked/colored cells: 65
+Grid entries are color/type labels, '.' means empty:
+Row 1: ['yellow', 'pink', 'green', 'yellow', 'pink', 'pink']
+Row 2: ['pink', 'blue', '.', 'green', 'blue', 'blue']
+Row 3: ['blue', 'grey', '.', '.', 'blue', 'grey']
+Row 4: ['grey', 'yellow', 'pink', 'yellow', 'grey', '.']
+Row 5: ['yellow', '.', 'grey', '.', 'yellow', 'yellow']
+Row 6: ['yellow', '.', '.', 'yellow', 'yellow', 'green']
+Row 7: ['pink', 'pink', '.', 'green', 'pink', 'yellow']
+Row 8: ['blue', 'grey', 'green', 'green', 'blue', 'pink']
+Row 9: ['blue', 'pink', 'pink', 'yellow', 'grey', 'grey']
+Row 10: ['grey', 'blue', 'grey', 'yellow', 'yellow', 'green']
+Row 11: ['yellow', 'grey', '.', 'green', 'green', 'yellow']
+Row 12: ['.', '.', 'yellow', '.', '.', 'yellow']
+...
+```

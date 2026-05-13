@@ -63,3 +63,22 @@ To control dataset size, edit `dataset_size` in `gene_dataset.py`.
 - `images/*.png`: rendered game scenes
 - `states/*.json`: frog, track, hole, and marble positions/colors
 - `data.json`: generated QA records
+
+## Text-Only QA Conversion
+
+To convert this game's multimodal QA data into a text-only version, run the unified converter from the repository root:
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game zuma --data src/zuma/zuma_dataset_example/data.json --output src/zuma/zuma_dataset_example/data_text.json
+```
+
+The converter reads each entry's `state` JSON, prepends a textual description of the visible game state to the original question, and writes `data_text.json` without the `image` or `state` fields by default.
+
+Example text state fragment:
+
+```text
+ZUMA STATE:
+Track: {'plot_level': 'Medium', 'hole_position': {'x': -1.9336408014512254, 'y': -2.7464934542910426}}
+Balls on track: [{'position': {'x': 2.325093698074389, 'y': -5.6107475945526035}, 'color': 'green'}, {'position': {'x': 1.736756 ...
+Frog/shooter: {'position': {'x': 0.4042746249648226, 'y': -0.5988457693062086}, 'angle': -163, 'next_ball_color': 'green', 'afte ...
+```

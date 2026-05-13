@@ -73,3 +73,28 @@ freecell/
 
 ## 📜 License
 This project is licensed under the MIT License. Feel free to use and modify.
+
+## Text-Only QA Conversion
+
+To convert this game's multimodal QA data into a text-only version, run the unified converter from the repository root:
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game freecell --data src/freecell/freecell_dataset_example/data.json --output src/freecell/freecell_dataset_example/data_text.json
+```
+
+The converter reads each entry's `state` JSON, prepends a textual description of the visible game state to the original question, and writes `data_text.json` without the `image` or `state` fields by default.
+
+Example text state fragment:
+
+```text
+FREECELL STATE:
+Cascade piles:
+Cascade 0: ['6 ♥', 'J ♦', '10 ♦', 'J ♣', '2 ♠', '6 ♦', '8 ♠', 'Q ♠', '4 ♦']
+Cascade 1: ['4 ♥', '8 ♣', '7 ♣', '6 ♠', 'J ♥', 'K ♦', '5 ♣', '5 ♥', '9 ♠']
+Cascade 2: ['K ♣', '8 ♦', '5 ♦', '6 ♣', 'A ♠', 'Q ♥', 'K ♠', 'A ♥', '2 ♦']
+Cascade 3: ['4 ♠', '2 ♣', '4 ♣', '3 ♦', '5 ♠', 'K ♥', '10 ♥', '7 ♥', '7 ♦']
+Cascade 4: ['Q ♣', '7 ♠', '10 ♠', 'Q ♦', 'A ♣', '3 ♣', '10 ♣', 'A ♦']
+Cascade 5: ['J ♠', '9 ♦', '9 ♣', '9 ♥', '3 ♥', '8 ♥', '3 ♠', '2 ♥']
+Free cells: [None, None, None, None]
+Foundation piles: {'HEARTS': None, 'DIAMONDS': None, 'CLUBS': None, 'SPADES': None}
+```

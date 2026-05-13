@@ -116,6 +116,35 @@ Generated datasets include the following information for each puzzle:
 }
 ```
 
+## Text-Only QA Conversion
+
+To convert this game's multimodal QA data into a text-only version, run the unified converter from the repository root:
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game sokoban --data src/sokoban/sokoban_dataset_example/data.json --output src/sokoban/sokoban_dataset_example/data_text.json
+```
+
+The converter reads each entry's `state` JSON, prepends a textual description of the visible game state to the original question, and writes `data_text.json` without the `image` or `state` fields by default.
+
+Example text state fragment:
+
+```text
+SOKOBAN STATE:
+Grid: #=wall, .=empty, P=player, B=box, T=target, *=box on target, +=player on target.
+Grid size: {'width': 8, 'height': 8}
+# # # # # # # #
+# . # . . # . #
+# . . . . # . #
+# . . B . . . #
+# T . . . . . #
+# . # . # . . #
+# . # . . P . #
+# # # # # # # #
+Player: {'x': 5, 'y': 6}
+Boxes: [{'x': 3, 'y': 3}]
+Targets: [{'x': 1, 'y': 4}]
+```
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit pull requests.

@@ -91,6 +91,38 @@ difficulties = {
 }
 ```
 
+## Text-Only QA Conversion
+
+To convert this game's multimodal QA data into a text-only version, run the unified converter from the repository root:
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game rubiks_cube --data src/rubiks_cube/rubiks_cube_dataset_example/data.json --output src/rubiks_cube/rubiks_cube_dataset_example/data_text.json
+```
+
+The converter reads each entry's `state` JSON, prepends a textual description of the visible game state to the original question, and writes `data_text.json` without the `image` or `state` fields by default.
+
+Example text state fragment:
+
+```text
+RUBIK'S CUBE STATE:
+Each face is a 3x3 grid. Columns are read left to right and rows are read bottom to top when the question uses that convention.
+Color id mapping: {0: 'yellow', 1: 'white', 2: 'orange', 3: 'red', 4: 'blue', 5: 'green'}
+Face U:
+Row 0: ['yellow', 'yellow', 'yellow']
+Row 1: ['yellow', 'yellow', 'yellow']
+Row 2: ['white', 'white', 'white']
+Face D:
+Row 0: ['yellow', 'yellow', 'yellow']
+Row 1: ['white', 'white', 'white']
+Row 2: ['white', 'white', 'white']
+Face L:
+Row 0: ['orange', 'orange', 'red']
+Row 1: ['orange', 'orange', 'red']
+Row 2: ['orange', 'orange', 'red']
+Face R:
+...
+```
+
 ## License
 
 MIT License

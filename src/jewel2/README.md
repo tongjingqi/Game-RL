@@ -297,5 +297,29 @@ You can adjust the dataset generation parameters by modifying the `main.py` scri
     ```
   - You can modify the `size` values or add/remove difficulty levels as needed.
 
+## Text-Only QA Conversion
+
+To convert this game's multimodal QA data into a text-only version, run the unified converter from the repository root:
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game jewel2 --data src/jewel2/jewel2_dataset_example/data.json --output src/jewel2/jewel2_dataset_example/data_text.json
+```
+
+The converter reads each entry's `state` JSON, prepends a textual description of the visible game state to the original question, and writes `data_text.json` without the `image` or `state` fields by default.
+
+Example text state fragment:
+
+```text
+JEWEL2 STATE:
+Grid size: 5 rows x 5 columns.
+Board symbols/colors:
+Row 0: ['E', 'B', 'E', 'B', 'C']
+Row 1: ['D', 'D', 'E', 'D', 'A']
+Row 2: ['D', 'E', 'C', 'B', 'A']
+Row 3: ['A', 'B', 'A', 'C', 'D']
+Row 4: ['C', 'E', 'D', 'C', 'D']
+Total cleared so far: 83
+```
+
 ## License
 This project is licensed under the [MIT License](LICENSE).

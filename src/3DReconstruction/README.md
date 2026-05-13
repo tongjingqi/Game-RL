@@ -170,6 +170,32 @@ Each dataset entry contains:
 - `target_xz_projection`: target side-view projection matrix
 - `remaining_voxels`: how many voxels can still be added
 
+## Text-Only QA Conversion
+
+To convert this game's multimodal QA data into a text-only version, run the unified converter from the repository root:
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game 3DReconstruction --data src/3DReconstruction/reconstruction_dataset_example/data.json --output src/3DReconstruction/reconstruction_dataset_example/data_text.json
+```
+
+The converter reads each entry's `state` JSON, prepends a textual description of the visible game state to the original question, and writes `data_text.json` without the `image` or `state` fields by default.
+
+Example text state fragment:
+
+```text
+3D RECONSTRUCTION STATE:
+Current voxel positions: [[2, 1, 1], [2, 2, 1]]
+Remaining voxels: 3
+Target YZ/front projection:
+Row 0: [1, 1, 1]
+Row 1: [0, 1, 0]
+Row 2: [0, 0, 0]
+Target XZ/side projection:
+Row 0: [0, 1, 1]
+Row 1: [0, 0, 1]
+Row 2: [0, 0, 0]
+```
+
 ## Notes
 
 1. `main.py` supports custom question-type ratios, while `multi_gen.py` always generates all 6 question types for each state.

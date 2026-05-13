@@ -250,3 +250,35 @@ $(i, j, row, col)$
     ]
 }
 ```
+
+## Text-Only QA Conversion
+
+To convert this game's multimodal QA data into a text-only version, run the unified converter from the repository root:
+
+```bash
+python src/Code_for_text_data_derivative/convert_text_data.py --game ultra_tictactoe --data src/ultra_tictactoe/ultra_tictactoe_dataset_example/data.json --output src/ultra_tictactoe/ultra_tictactoe_dataset_example/data_text.json
+```
+
+The converter reads each entry's `state` JSON, prepends a textual description of the visible game state to the original question, and writes `data_text.json` without the `image` or `state` fields by default.
+
+Example text state fragment:
+
+```text
+ULTRA TICTACTOE STATE:
+Ultra tic-tac-toe consists of 3x3 nine-grids; each nine-grid contains a 3x3 local board.
+Rows: 3, columns: 3
+Last step: [3, 3, 2, 1]
+Total placed pieces: 38
+Marked middle cells: 5
+Visible pieces:
+- nine_grid=(1, 1), local_position=(1, 3), player=X
+- nine_grid=(1, 1), local_position=(3, 1), player=O
+- nine_grid=(1, 1), local_position=(1, 1), player=O
+- nine_grid=(1, 1), local_position=(2, 1), player=O
+- nine_grid=(1, 1), local_position=(2, 2), player=O
+- nine_grid=(1, 2), local_position=(3, 2), player=X
+- nine_grid=(1, 2), local_position=(2, 1), player=X
+- nine_grid=(1, 2), local_position=(2, 2), player=X
+- nine_grid=(1, 2), local_position=(2, 3), player=O
+...
+```
