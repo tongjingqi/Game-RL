@@ -1,4 +1,5 @@
 import random
+import heapq
 import numpy as np
 import matplotlib.pyplot as plt
 from typing import Dict, List, Tuple, Set
@@ -74,13 +75,17 @@ class Solution:
         # Define directions
         directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
         
-        # Queue format: (box_pos, player_pos, pushes, total_moves, moves_list)
-        queue = deque([(box_pos, player_pos, 0, 0, [])])
-        # Track visited states: (box_pos, player_pos)
-        visited = {(box_pos, player_pos)}
+        # Heap format: (total_moves, pushes, counter, box_pos, player_pos, moves_list).
+        # Moving the player to different push positions has variable cost, so a
+        # plain FIFO queue can return a solution that is not minimal in moves.
+        counter = 0
+        heap = [(0, 0, counter, box_pos, player_pos, [])]
+        best_moves = {(box_pos, player_pos): 0}
         
-        while queue:
-            box_pos, player_pos, pushes, total_moves, moves = queue.popleft()
+        while heap:
+            total_moves, pushes, _, box_pos, player_pos, moves = heapq.heappop(heap)
+            if total_moves != best_moves.get((box_pos, player_pos)):
+                continue
             
             if box_pos == target:
                 self.steps = moves
@@ -106,25 +111,24 @@ class Solution:
                 
                 if player_path:
                     next_state = (new_box_pos, box_pos)
-                    if next_state not in visited:
-                        visited.add(next_state)
+                    # Create moves for player walking
+                    new_moves = []
+                    curr_pos = player_pos
+                    for next_pos in player_path[1:]:  # Skip start position
+                        new_moves.append(Move(False, curr_pos, next_pos))
+                        curr_pos = next_pos
                         
-                        # Create moves for player walking
-                        new_moves = []
-                        curr_pos = player_pos
-                        for next_pos in player_path[1:]:  # Skip start position
-                            new_moves.append(Move(False, curr_pos, next_pos))
-                            curr_pos = next_pos
-                            
-                        # Add the push move
-                        new_moves.append(Move(True, push_pos, box_pos, 
-                                           box_start=box_pos, 
-                                           box_end=new_box_pos))
-                        
-                        queue.append((new_box_pos, box_pos, 
-                                    pushes + 1,
-                                    total_moves + len(new_moves),
-                                    moves + new_moves))
+                    # Add the push move
+                    new_moves.append(Move(True, push_pos, box_pos, 
+                                       box_start=box_pos, 
+                                       box_end=new_box_pos))
+
+                    new_total_moves = total_moves + len(new_moves)
+                    if new_total_moves < best_moves.get(next_state, float('inf')):
+                        best_moves[next_state] = new_total_moves
+                        counter += 1
+                        heapq.heappush(heap, (new_total_moves, pushes + 1, counter,
+                                              new_box_pos, box_pos, moves + new_moves))
                         
         return -1, -1
 

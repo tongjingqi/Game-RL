@@ -94,10 +94,15 @@ def generate_dataset(num_boards: int, output_dir: str = "sokoban_dataset"):
                     else:
                         internal_type = 'transition_path'
                     
-                    board.question_types = [internal_type]
+                    # Generate each question on an isolated board copy. The timeout
+                    # helper uses a background thread on Windows, so a timed-out
+                    # question can otherwise keep mutating the shared board and
+                    # corrupt later QA entries for the saved state.
+                    question_board = SokobanBoard(board.grid.copy(), board.player_x, board.player_y)
+                    question_board.question_types = [internal_type]
                     
                     try:
-                        q, analysis, opts, correct = generate_question_with_timeout(board, num_moves)
+                        q, analysis, opts, correct = generate_question_with_timeout(question_board, num_moves)
                     except TimeoutError:
                         logging.warning(f"Question generation timed out for board {board_id}, question {question_id}")
                         failed_questions.append({
