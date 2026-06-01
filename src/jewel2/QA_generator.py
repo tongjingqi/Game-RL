@@ -583,39 +583,39 @@ def generate_jewel2_QA(level: Level, num: int, size: int) -> Tuple[str, str, str
 
         simulated_level = copy.deepcopy(level)
         total_cleared = 0
+        cleared1 = 0
+        cleared2 = 0
 
         # Execute first command
+        score_before_command = simulated_level.chessboard.score
         if command1.startswith("clear"):
             _, x1, y1 = command1.split()
             cleared1 = simulated_level.chessboard.clear_chess(int(x1), int(y1))
-            simulated_level.total_cleared += cleared1
-            total_cleared += cleared1
         elif command1.startswith("swap"):
             _, x1, y1, pos1 = command1.split()
             success1 = simulated_level.chessboard.swap_chess(int(x1), int(y1), pos1)
             if success1:
-                cleared1 = simulated_level.chessboard.score - level.chessboard.score
-                simulated_level.total_cleared += cleared1
-                total_cleared += cleared1
+                cleared1 = simulated_level.chessboard.score - score_before_command
+        simulated_level.total_cleared += cleared1
+        total_cleared += cleared1
 
         # Execute second command
+        score_before_command = simulated_level.chessboard.score
         if command2.startswith("clear"):
             _, x2, y2 = command2.split()
             cleared2 = simulated_level.chessboard.clear_chess(int(x2), int(y2))
-            simulated_level.total_cleared += cleared2
-            total_cleared += cleared2
         elif command2.startswith("swap"):
             _, x2, y2, pos2 = command2.split()
             success2 = simulated_level.chessboard.swap_chess(int(x2), int(y2), pos2)
             if success2:
-                cleared2 = simulated_level.chessboard.score - level.chessboard.score
-                simulated_level.total_cleared += cleared2
-                total_cleared += cleared2
+                cleared2 = simulated_level.chessboard.score - score_before_command
+        simulated_level.total_cleared += cleared2
+        total_cleared += cleared2
 
         answer = str(total_cleared)
         analysis = (
-            f"Executing `{command1}` resulted in vertically/horizontally clearing {cleared1 if 'cleared1' in locals() else 0} elements, "
-            f"and executing `{command2}` resulted in vertically/horizontally clearing {cleared2 if 'cleared2' in locals() else 0} elements. "
+            f"Executing `{command1}` resulted in vertically/horizontally clearing {cleared1} elements, "
+            f"and executing `{command2}` resulted in vertically/horizontally clearing {cleared2} elements. "
             f"Overall, a total of {total_cleared} elements were cleared."
         )
         question = question_prompt + f"\n\n**Question:** {question_template.format(command1=command1, command2=command2)}"

@@ -441,6 +441,53 @@ def check_stability(grid: List[List[int]], max_steps: int = 30) -> int:
     
     return -1
 
+def extract_wrapped_region(grid: List[List[int]], start: Tuple[int, int],
+                         size: int = 3) -> List[List[int]]:
+    """Extract a wrapped square region from a grid."""
+    row_start, col_start = start
+    grid_size = len(grid)
+    return [
+        [
+            grid[(row_start + row) % grid_size][(col_start + col) % grid_size]
+            for col in range(size)
+        ]
+        for row in range(size)
+    ]
+
+def is_region_stable_state(region: List[List[int]]) -> bool:
+    """Return True when a region is unchanged by one local Game of Life step."""
+    size = len(region)
+    for row in range(size):
+        for col in range(size):
+            neighbors = count_neighbors(region, row, col)
+            if region[row][col] == 1:
+                if neighbors < 2 or neighbors > 3:
+                    return False
+            elif neighbors == 3:
+                return False
+    return True
+
+def compute_region_stability_steps(region: List[List[int]], max_steps: int = 20) -> int:
+    """
+    Compute stability for a local region treated as an independent Life system.
+
+    Stability follows the question definition: either a fixed state or the first
+    step whose local state repeats an earlier local state.
+    """
+    current_region = [row[:] for row in region]
+    history = []
+
+    for step in range(max_steps):
+        region_hash = tuple(tuple(row) for row in current_region)
+        if is_region_stable_state(current_region):
+            return step
+        if region_hash in history:
+            return step
+        history.append(region_hash)
+        current_region = update_grid(current_region)
+
+    return -1
+
 def init_grid_with_ratio(size: int, max_attempts: int = 20) -> Tuple[List[List[int]], bool]:
     """
     初始化满足活细胞比例要求的网格。
@@ -1282,23 +1329,25 @@ class GameAnalysisGenerator:
 
             return "\n".join(analysis)
         
-        # 2. 逐步分析演化过程
+        # 2. 逐步分析局部区域的独立演化过程
         current_step = 0
+        current_region = [row[:] for row in initial_region]
+        region_history = [tuple(tuple(row) for row in current_region)]
         while current_step < steps_to_stability:
             current_step += 1
             analysis.append(f"\n{'='*50}")
             analysis.append(f"\nStep {current_step}:")
             
-            # 2.1 分析全局演化
-            next_grid = update_grid(current_grid)
+            # 2.1 分析局部区域作为独立生命游戏的演化
+            next_region = update_grid(current_region)
             
-            # 收集整个棋盘的变化
-            global_changes = []
-            for row in range(grid_size):
-                for col in range(grid_size):
-                    if current_grid[row][col] != next_grid[row][col]:
-                        neighbors = count_neighbors(current_grid, row, col)
-                        current_state = current_grid[row][col]
+            # 收集局部区域内的变化
+            local_changes = []
+            for row in range(region_size):
+                for col in range(region_size):
+                    if current_region[row][col] != next_region[row][col]:
+                        neighbors = count_neighbors(current_region, row, col)
+                        current_state = current_region[row][col]
                         
                         reason = ""
                         if current_state == 1:  # 活细胞
@@ -1310,38 +1359,40 @@ class GameAnalysisGenerator:
                             if neighbors == 3:
                                 reason = "reproduction (exactly 3 live neighbors)"
                                 
-                        global_changes.append({
+                        local_changes.append({
                             "position": (row, col),
                             "from_state": current_state,
-                            "to_state": next_grid[row][col],
+                            "to_state": next_region[row][col],
                             "neighbors": neighbors,
                             "reason": reason
                         })
             
-            # 报告全局演化变化
-            if global_changes:
-                analysis.append("\nGlobal Evolution Changes:")
-                for change in global_changes:
+            # 报告局部区域演化变化
+            if local_changes:
+                analysis.append("\nLocal Region Evolution Changes:")
+                for change in local_changes:
                     row, col = change["position"]
                     from_state = "alive" if change["from_state"] == 1 else "dead"
                     to_state = "alive" if change["to_state"] == 1 else "dead"
-                    analysis.append(f"\nCell at global position ({row},{col}):")
+                    analysis.append(f"\nCell at local position ({row},{col}):")
                     analysis.append(f"- Changed from {from_state} to {to_state}")
                     analysis.append(f"- Reason: {change['reason']}")
             else:
-                analysis.append("\nNo cells changed in the global evolution.")
+                analysis.append("\nNo cells changed in the local region evolution.")
                 
-            # 显示全局演化后的状态
-            analysis.append("\nAfter global evolution:")
-            analysis.append(GameAnalysisGenerator.visualize_grid(next_grid, region_cells))
+            # 显示局部区域演化后的状态
+            analysis.append("\nAfter local region evolution:")
+            for row in next_region:
+                analysis.append(" ".join("1" if cell == 1 else "0" for cell in row))
             
             # 2.2 分析目标区域的局部稳定性
-            next_region = extract_region(next_grid, region_start)
-            current_region = next_region 
             analysis.append("\nLocal Stability Analysis (treating the region as an independent Game of Life):")
             
             # 分析区域内的状态
             unstable_cells = analyze_local_region(next_region)
+            next_region_state = tuple(tuple(row) for row in next_region)
+            has_repeating_pattern = next_region_state in region_history
+            current_region = next_region
             
             def generate_cell_analysis(cell: Dict[str, Any]) -> List[str]:
                 """生成单个细胞的分析文本"""
@@ -1365,7 +1416,11 @@ class GameAnalysisGenerator:
                 return analysis
 
             # 在分析局部稳定性时，替换原有的代码：
-            if unstable_cells:
+            if unstable_cells and has_repeating_pattern:
+                analysis.append("\nThe region has reached stability by entering a repeating pattern.")
+                analysis.append("This local region state has appeared before in the independent evolution history.")
+                analysis.append("Cells may still change in the next step, but the pattern is cyclic under the question definition.")
+            elif unstable_cells:
                 analysis.append("\nThe region is not yet stable. Here's why:")
                 for cell in unstable_cells:
                     analysis.extend(generate_cell_analysis(cell))
@@ -1441,7 +1496,10 @@ class GameAnalysisGenerator:
                 
                 analysis.extend(stable_analysis)
 
-            return "\n".join(analysis)
+            if not has_repeating_pattern:
+                region_history.append(next_region_state)
+
+        return "\n".join(analysis)
     @staticmethod
     def generate_cell_change_analysis(grid: List[List[int]], target_cell: Tuple[int, int], 
                                     iterations: int) -> str:
@@ -1763,67 +1821,10 @@ def generate_stability_question(grid: List[List[int]], data_id: int, plot_level:
         best_region = (row_start, col_start)
         
             
-        # 2. 计算该区域达到稳定的步数
-        row_start, col_start = best_region
-        current_grid = [row[:] for row in grid]
-        
-        def extract_region(grid: List[List[int]], start: Tuple[int, int]) -> List[List[int]]:
-            """从完整棋盘中提取目标区域"""
-            r_start, c_start = start
-            region = []
-            for i in range(region_size):
-                row = []
-                for j in range(region_size):
-                    actual_row = (r_start + i) % grid_size
-                    actual_col = (c_start + j) % grid_size
-                    row.append(grid[actual_row][actual_col])
-                region.append(row)
-            return region
-        
-        def is_region_stable(region: List[List[int]]) -> bool:
-            """检查区域是否达到稳定状态（作为独立的生命游戏）"""
-            for i in range(region_size):
-                for j in range(region_size):
-                    neighbors = 0
-                    for di in [-1, 0, 1]:
-                        for dj in [-1, 0, 1]:
-                            if di == 0 and dj == 0:
-                                continue
-                            ni = (i + di) % region_size
-                            nj = (j + dj) % region_size
-                            neighbors += region[ni][nj]
-                    
-                    # 检查是否会变化
-                    if region[i][j] == 1:  # 活细胞
-                        if neighbors < 2 or neighbors > 3:
-                            return False
-                    else:  # 死细胞
-                        if neighbors == 3:
-                            return False
-            return True
-        
-        # 模拟进化直到区域稳定或达到最大步数
+        # 2. 计算该区域达到稳定的步数：题干要求把3x3区域当作独立系统
         max_steps = 20
-        steps_to_stability = -1
-        history = []  # 记录区域历史状态
-        
-        for step in range(max_steps):
-            current_region = extract_region(current_grid, best_region)
-            region_hash = tuple(map(tuple, current_region))
-            
-            # 检查是否达到稳定
-            if is_region_stable(current_region):
-                steps_to_stability = step
-                break
-                
-            # 检查是否出现循环
-            if region_hash in history:
-                # cycle_start = history.index(region_hash)
-                steps_to_stability = step
-                break
-                
-            history.append(region_hash)
-            current_grid = update_grid(current_grid)
+        initial_region = extract_wrapped_region(grid, best_region, region_size)
+        steps_to_stability = compute_region_stability_steps(initial_region, max_steps)
         
         if steps_to_stability == -1:
             print("Failed to reach stability within maximum steps")

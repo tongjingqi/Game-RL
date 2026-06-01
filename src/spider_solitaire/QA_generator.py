@@ -587,6 +587,7 @@ def generate_spider_QA(model_instance: model.Model, num: int, num_waste: int) ->
                     sequence = waste_pile[-13:]
                     if model_instance.is_complete_sequence(sequence):
                         can_move_complete_sequences = True
+                        source_pile_index = w_index
                         target_foundation_index = f_index
                         break
             if can_move_complete_sequences:
@@ -612,7 +613,7 @@ def generate_spider_QA(model_instance: model.Model, num: int, num_waste: int) ->
             correct_option = "H"
             analysis = (
                 "There are complete sequences available to move to the foundation piles. "
-                "Moving them will help progress towards winning the game."
+                f"The complete sequence is in pile {source_pile_index}, and moving it will help progress towards winning the game."
             )
             
             
@@ -625,7 +626,7 @@ def generate_spider_QA(model_instance: model.Model, num: int, num_waste: int) ->
                 f"E. We should move the {random.randint(1, 5)}-th card of pile {random.randint(0, num_waste - 1)} to pile {random.randint(0, num_waste - 1)}.",
                 f"F. We should move the {random.randint(1, 5)}-th card of pile {random.randint(0, num_waste - 1)} to pile {random.randint(0, num_waste - 1)}.",
                 f"G. No cards can be moved; we should click the stockpile to deal cards.",
-                f"H. We should move cards from pile {target_foundation_index} to the foundation piles.",
+                f"H. We should move cards from pile {source_pile_index} to the foundation piles.",
             ]
 
         elif can_form_descending_same_suit:

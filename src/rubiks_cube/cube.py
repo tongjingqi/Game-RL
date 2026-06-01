@@ -479,7 +479,7 @@ class RubiksCube:
             if current_color != new_color:
                 analysis_steps.append(
                 f"Step {i}: After move {move}.\n"
-                f"- This move {self._explain_move_effect(move,face1)},\n"
+                f"- This move {self._explain_move_effect(move,target_face)},\n"
                 f"- Changed color at position ({pos_x}, {pos_y}) from {current_color} to {new_color};\n"
             )
             else:

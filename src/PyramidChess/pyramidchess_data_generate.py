@@ -514,7 +514,7 @@ def question_generate(question_id,board,param_list=None):
             f"\nQuestion: What is the status of the ball on Level {level}, "
             f"which has coordinate ({position})?\n"
             f"Is the coordinate legal? Does it contain a ball? Can the ball be taken(has no ball directly above it)? Can a ball be placed?"
-            "Options:\n1. The coordinate is out of bound\n2. It contain a ball and the ball can't be taken\n3. It contain a ball and can be taken\n4. It doesn't contain a ball and a ball can't be put here\n5.It doesn't contain a ball and a ball can be put here\n"
+            "Options:\n1. The coordinate is out of bound\n2. It contain a ball and the ball can't be taken\n3. It contain a ball and can be taken\n4. It doesn't contain a ball and a ball can be put here\n5.It doesn't contain a ball and a ball can't be put here\n"
         )
 
         if out_of_bound_flag == 1:

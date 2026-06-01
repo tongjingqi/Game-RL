@@ -42,6 +42,10 @@ string_to_suit_map={
     "Club":"♣",
     "Spade":"♠"
 }
+
+def format_card_option(card):
+    return f"({suit_to_string_map[card.suit.value]}, {value_map[card.value]})"
+
 def generate_dataset(num_puzzles,base_path):
     # 创建目录
     os.makedirs(base_path,exist_ok=True)
@@ -122,8 +126,9 @@ def generate_state_analysis_dataset(num_puzzles,base_path,cascade_number):
         """
         生成第三类问题的数据
         """
-        puzzle_data_3=generate_state_after_move_dataset(game=game,generated_number=puzzles_generated,image_file=image_file,state_file=state_file,plot_level=plot_level)    
-        card_after_move_data.append(puzzle_data_3)
+        puzzle_data_3=generate_state_after_move_dataset(game=game,generated_number=puzzles_generated,image_file=image_file,state_file=state_file,plot_level=plot_level)
+        if puzzle_data_3 is not None:
+            card_after_move_data.append(puzzle_data_3)
         puzzles_generated+=1
     
     # # 保存生成的数据
@@ -167,16 +172,15 @@ def generate_specified_card_dataset(game:FreeCell,generated_number,image_file,st
 
     # Generate the question and options  构造四个选项
     options = []
-    correct_answer = f"({suit_to_string_map[selected_card.suit.value]}, {value_map[selected_card.value]})"
+    correct_answer = format_card_option(selected_card)
     options.append(correct_answer)
 
-    all_cards = [str(card) for pile in game.cascade_piles for card in pile]
+    all_cards = [card for pile in game.cascade_piles for card in pile]
     random.shuffle(all_cards)
     # 构造干扰选项
     while len(options) < 8:
         card = random.choice(all_cards)
-        value, suit = card[0:1].strip(), card[2:].strip()   # 这里的value是字符
-        option = f"({suit_to_string_map[suit]}, {value})"
+        option = format_card_option(card)
         if option not in options:
             # print(option)
             options.append(option)
@@ -465,11 +469,16 @@ def generate_state_after_move_dataset(game:FreeCell,generated_number,image_file,
     # 获取全部valid_moves
     valid_moves=game.get_valid_moves()
     
-    # 选择一个move
-    selected_move=random.choice(valid_moves)
+    # Select a move from a cascade pile whose post-move top card is defined.
+    cascade_moves = [
+        move for move in valid_moves
+        if move["from"].startswith("Cascade")
+        and len(game.cascade_piles[int(move["from"].split()[-1])]) >= 2
+    ]
+    if not cascade_moves:
+        return None
+    selected_move=random.choice(cascade_moves)
     cascade_index = int(selected_move['from'].split()[-1])
-    while not selected_move["from"].startswith('Cascade') :
-        selected_move=random.choice(valid_moves)
     selected_pile=game.cascade_piles[cascade_index]
 
     if "Foundation" in selected_move['to']:
@@ -478,18 +487,17 @@ def generate_state_after_move_dataset(game:FreeCell,generated_number,image_file,
 
     # 构造正确选项
     selected_card=game.cascade_piles[cascade_index][-2]
-    answer_text=f"({suit_to_string_map[selected_card.suit.value]}, {value_map[selected_card.value]})"
+    answer_text=format_card_option(selected_card)
     options=[answer_text]
     
 
     # 下面开始生成干扰选项
-    all_cards = [str(card) for pile in game.cascade_piles for card in pile]
+    all_cards = [card for pile in game.cascade_piles for card in pile]
     
     # 完全随机的牌
     while len(options) < 8:
         random_card = random.choice(all_cards)
-        value, suit = random_card[0:1].strip(), random_card[2:].strip()
-        option = f"({suit_to_string_map[suit]}, {value})"
+        option = format_card_option(random_card)
         if option not in options:
             options.append(option)
     random.shuffle(options)

@@ -344,11 +344,11 @@ def generate_qa(json_file: Union[str, None] = None) -> Dict[str, str]:
     frog_pos = frog["position"]
     angle = frog["angle"]
     
-    # 问题1/2
-    if np.random.randint(0, 1):
-        question1 = answer_question1(index, plot_level, frog)
-    else: 
-        question2 = answer_question2(index, plot_level, balls)
+    # 问题1
+    question1 = answer_question1(index, plot_level, frog)
+
+    # 问题2
+    question2 = answer_question2(index, plot_level, balls)
 
     # 问题3
     question3 = answer_question3(index, plot_level, frog_pos, balls)

@@ -55,6 +55,14 @@ class WordSearchGrid:
         self.grid = temp_grid
         return True
 
+    def copy_with_word(self, word: str, start_pos: GridPosition, direction: Tuple[int, int]):
+        copied = object.__new__(WordSearchGrid)
+        copied.size = self.size
+        copied.grid = [row[:] for row in self.grid]
+        if copied.insert_word(word, start_pos, direction):
+            return copied
+        return None
+
 class QuestionGenerator:
     with open('words.txt') as f:
         words = f.read().splitlines()
@@ -128,22 +136,11 @@ class QuestionGenerator:
 
     def generate_word_direction_question(self, grid: WordSearchGrid) -> Dict:
         # Place a word in the grid first
-        word = random.choice(self.words)
-        direction_name = random.choice(list(self.directions.keys()))
-        direction = self.directions[direction_name]
-        
-        # Find valid starting position
-        valid_starts = []
-        for i in range(grid.size):
-            for j in range(grid.size):
-                start_pos = GridPosition(i, j)
-                if self._can_place_word(grid, word, start_pos, direction):
-                    valid_starts.append(start_pos)
-        
-        if not valid_starts:
+        placement = self._find_unique_word_placement(grid)
+        if placement is None:
             return self.generate_cell_letter_question(grid)  # Fallback
-            
-        start_pos = random.choice(valid_starts)
+
+        word, start_pos, direction_name, direction = placement
         grid.insert_word(word, start_pos, direction)
         
         # Generate options
@@ -222,23 +219,12 @@ class QuestionGenerator:
 
     def generate_find_word_location_question(self, grid: WordSearchGrid) -> Dict:
         """Generate a question asking to find a word's location and direction without giving starting position."""
-        word = random.choice(self.words)
-        first_letter = word[0]
-        
-        # Place the word in the grid
-        valid_placements = []
-        for i in range(grid.size):
-            for j in range(grid.size):
-                start_pos = GridPosition(i, j)
-                for dir_name, direction in self.directions.items():
-                    if self._can_place_word(grid, word, start_pos, direction):
-                        valid_placements.append((start_pos, dir_name, direction))
-        
-        if not valid_placements:
+        placement = self._find_unique_word_placement(grid)
+        if placement is None:
             return self.generate_cell_letter_question(grid)  # Fallback
-            
-        # Choose a random valid placement
-        start_pos, direction_name, direction = random.choice(valid_placements)
+
+        word, start_pos, direction_name, direction = placement
+        first_letter = word[0]
         grid.insert_word(word, start_pos, direction)
         
         # Create combined position-direction options
@@ -365,6 +351,58 @@ class QuestionGenerator:
                 curr_pos.col + direction[1]
             )
         return True
+
+    def _find_word_matches(self, grid: WordSearchGrid, word: str) -> List[Tuple[GridPosition, str]]:
+        matches = []
+        for i in range(grid.size):
+            for j in range(grid.size):
+                start_pos = GridPosition(i, j)
+                for dir_name, direction in self.directions.items():
+                    curr_pos = start_pos
+                    matched = True
+                    for letter in word:
+                        if not (0 <= curr_pos.row < grid.size and 0 <= curr_pos.col < grid.size):
+                            matched = False
+                            break
+                        if grid.get_cell(curr_pos) != letter:
+                            matched = False
+                            break
+                        curr_pos = GridPosition(
+                            curr_pos.row + direction[0],
+                            curr_pos.col + direction[1]
+                        )
+                    if matched:
+                        matches.append((start_pos, dir_name))
+        return matches
+
+    def _find_unique_word_placement(self, grid: WordSearchGrid):
+        candidates = []
+        words = [word for word in self.words if len(word) <= grid.size]
+        random.shuffle(words)
+
+        for word in words:
+            for i in range(grid.size):
+                for j in range(grid.size):
+                    start_pos = GridPosition(i, j)
+                    directions = list(self.directions.items())
+                    random.shuffle(directions)
+                    for direction_name, direction in directions:
+                        candidate_grid = grid.copy_with_word(word, start_pos, direction)
+                        if candidate_grid is None:
+                            continue
+
+                        matches = self._find_word_matches(candidate_grid, word)
+                        if len(matches) != 1:
+                            continue
+
+                        match_pos, match_dir = matches[0]
+                        if match_pos == start_pos and match_dir == direction_name:
+                            candidates.append((word, start_pos, direction_name, direction))
+
+            if candidates:
+                return random.choice(candidates)
+
+        return None
 
 class ImageGenerator:
     def __init__(self, cell_size: int = 50, font_size: int = 32):

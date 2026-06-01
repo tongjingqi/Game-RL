@@ -109,7 +109,9 @@ class TicTacToe:
         if len(opponent_winning_moves) > 1:
             lines = [self.find_winning_line(pos, opponent) for pos in opponent_winning_moves]
             line_desc = [self.get_line_description(line) for line in lines]
-            return None, f"Current player is {player}, opponent is {opponent}. Opponent {opponent} has multiple winning moves on {', '.join(line_desc)}, cannot block all"
+            pos = empty_cells[0]
+            position = (pos // 3, pos % 3)
+            return pos, f"Current player is {player}, opponent is {opponent}. Opponent {opponent} has multiple winning moves on {', '.join(line_desc)}, so player {player} cannot block all of them. Following the fallback rule, player {player} chooses first available position {position}"
         elif len(opponent_winning_moves) == 1:
             pos = opponent_winning_moves[0]
             position = (pos // 3, pos % 3)

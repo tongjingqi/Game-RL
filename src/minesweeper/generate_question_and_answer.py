@@ -10,7 +10,7 @@ base_prompt = (
     "The numbers on the board indicate how many mines are adjacent to that cell, including diagonals. "
     "Cells marked with \"F\" (flagged) are identified as potential locations of mines based on logical deduction or prior knowledge. "
     "These flagged cells play a critical role in guiding your reasoning for answering the questions. "
-    "Cells with no numbers and no flags are safe and contain no adjacent mines.\n\n"
+    "Revealed cells with no numbers and no flags are safe and contain no adjacent mines.\n\n"
     "The board uses a coordinate system where the top-left cell corresponds to (0,0), and the rows and columns are numbered starting from 0.\n\n"
     "Please use the provided board configuration and logical reasoning to deduce the correct answers to the following questions:\n\n"
 )
@@ -73,7 +73,15 @@ def determine_cell_status(game, row, col):
             adj_neighbors = get_neighbors(nr, nc)
 
             flagged_count = sum(1 for ar, ac in adj_neighbors if game.flagged[ar][ac] or (ar, ac) in inferred_mines)
-            unrevealed_count = sum(1 for ar, ac in adj_neighbors if not game.revealed[ar][ac] and (ar, ac) not in inferred_mines and (ar, ac) not in inferred_safe)
+            unrevealed_count = sum(
+                1 for ar, ac in adj_neighbors
+                if (
+                    not game.revealed[ar][ac]
+                    and not game.flagged[ar][ac]
+                    and (ar, ac) not in inferred_mines
+                    and (ar, ac) not in inferred_safe
+                )
+            )
 
             remaining_mines = n - flagged_count
 
@@ -87,7 +95,7 @@ def determine_cell_status(game, row, col):
             if remaining_mines == unrevealed_count and unrevealed_count > 0:
                 path_log.append(f"Depth {depth}: Applying mine inference rule for cell ({nr},{nc}).")
                 for ar, ac in adj_neighbors:
-                    if not game.revealed[ar][ac] and (ar, ac) not in inferred_mines:
+                    if not game.revealed[ar][ac] and not game.flagged[ar][ac] and (ar, ac) not in inferred_mines:
                         if (ar, ac) in inferred_safe:
                             status = "uncertain"
                             path_log.append(f"Depth {depth}: Conflict detected for cell ({ar},{ac}) - already inferred safe.")
@@ -317,8 +325,8 @@ def generate_question_and_answer(game, num, plot_level):
                 f"so revealing it carries a risk of hitting a mine or safely revealing a number/empty area."
                 f"Therefore, the correct answer is Option D."
             )
-        elif game.mine_board[row][col] == 'M':
-            # If the cell is a mine, the answer is A
+        elif status == "must_be_mine":
+            # If visible logic proves the cell is a mine, the answer is A
             answer = "A"
             analysis = (
                 rule_explanation +
@@ -328,8 +336,8 @@ def generate_question_and_answer(game, num, plot_level):
                 f"Revealing it will cause the game to end."
                 f"Therefore, the correct answer is Option A."
             )
-        else:
-            # If the cell is not a mine, the answer depends on the actual_value
+        elif status == "must_be_safe":
+            # If visible logic proves the cell is safe, the reveal outcome depends on its number
             if actual_value == 0:
                 answer = "B"
                 analysis = (
@@ -348,6 +356,14 @@ def generate_question_and_answer(game, num, plot_level):
                     f"Detailed inference path: {' '.join(path_log)}"
                     f"Therefore, the correct answer is Option C."
                 )
+        else:
+            answer = "D"
+            analysis = (
+                rule_explanation +
+                f"The status of the cell at ({row},{col}) cannot be safely classified from the current visible board. "
+                f"Detailed inference path: {' '.join(path_log)} "
+                f"Therefore, the correct answer is Option D."
+            )
 
     
     elif "What is the best next move at ({row},{col})?" in question_template:
@@ -392,29 +408,16 @@ def generate_question_and_answer(game, num, plot_level):
             if is_boundary_cell:
                 break
 
-        # Generate the answer based on the board state
-        if game.mine_board[row][col] == 'M' and not game.flagged[row][col]:
-            # If the cell is a mine and not flagged, the best action is to flag it
-            answer = "A"
+        status, path_log = determine_cell_status(game, row, col)
+
+        # Generate the answer based only on visible state and logical inference
+        if game.flagged[row][col]:
+            # If the cell is flagged, select F
+            answer = "F"
             analysis = (
-                f"The cell at ({row},{col}) is a mine ('M'). Based on the surrounding cells, it is likely that this cell has not been flagged yet, which means the best move is to flag it as a mine (Option A). "
-                f"This prevents accidental revealing and helps the player avoid triggering the mine."
+                f"The cell at ({row},{col}) has already been flagged as a mine. "
+                f"Therefore, no further action is needed for this cell (Option F), as it has already been marked as containing a mine, and the player should not attempt to reveal it."
             )
-        elif not game.revealed[row][col] and not game.flagged[row][col]:
-            if is_boundary_cell:
-                # If the cell is on the boundary and not revealed, the best action is to reveal it
-                answer = "B"
-                analysis = (
-                    f"The cell at ({row},{col}) is not revealed yet and is on the boundary of the game area. "
-                    f"Based on the adjacent cells' states and the flags in place, the best move is to reveal this cell (Option B), as revealing boundary cells can often provide new information about nearby mines."
-                )
-            else:
-                # If the cell is not on the boundary and not revealed, skip this cell
-                answer = "D"
-                analysis = (
-                    f"The cell at ({row},{col}) is not revealed and not flagged, but it is not near any boundary cells with useful information. "
-                    f"In this case, it is better to skip this move and wait for further information (Option D), as revealing this cell may not provide significant new data."
-                )
         elif game.revealed[row][col] and game.mine_board[row][col] != 0:
             # If the cell is revealed and the number is not 0, analyze the adjacent cells
             answer = "C"
@@ -429,12 +432,26 @@ def generate_question_and_answer(game, num, plot_level):
                 f"The cell at ({row},{col}) has been revealed and shows a value of 0. This means that no mines are adjacent to it. "
                 f"Since no further action is required for this cell, the correct answer is Option E."
             )
-        elif game.flagged[row][col]:
-            # If the cell is flagged, select F
-            answer = "F"
+        elif status == "must_be_mine":
+            answer = "A"
             analysis = (
-                f"The cell at ({row},{col}) has already been flagged as a mine. "
-                f"Therefore, no further action is needed for this cell (Option F), as it has already been marked as containing a mine, and the player should not attempt to reveal it."
+                f"Based on visible revealed numbers and existing flags, the cell at ({row},{col}) is logically forced to be a mine. "
+                f"Detailed inference path: {' '.join(path_log)} "
+                f"The best move is to flag it as a mine (Option A)."
+            )
+        elif status == "must_be_safe":
+            answer = "B"
+            analysis = (
+                f"Based on visible revealed numbers and existing flags, the cell at ({row},{col}) is logically forced to be safe. "
+                f"Detailed inference path: {' '.join(path_log)} "
+                f"The best move is to reveal this cell (Option B)."
+            )
+        else:
+            answer = "D"
+            analysis = (
+                f"The cell at ({row},{col}) is hidden and not flagged, but the visible board does not logically prove whether it is a mine or safe. "
+                f"Detailed inference path: {' '.join(path_log)} "
+                f"In this case, it is better to skip this move and wait for more information (Option D)."
             )
 
     return qa_type, qa_level, question, question_id, question_description, answer, analysis, options
