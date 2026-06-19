@@ -1,17 +1,28 @@
 import random
 import json
 import os
+import shutil
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import numpy as np
 
-# 确保文件夹存在
-if not os.path.exists('tents_dataset'):
-    os.makedirs('tents_dataset')
-if not os.path.exists('tents_dataset/states'):
-    os.makedirs('tents_dataset/states')
-if not os.path.exists('tents_dataset/images'):
-    os.makedirs('tents_dataset/images')
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+OUTPUT_DIR = os.path.join(BASE_DIR, "tents_dataset")
+
+
+def dataset_path(*parts):
+    return os.path.join(OUTPUT_DIR, *parts)
+
+
+def ensure_output_dirs():
+    os.makedirs(dataset_path("states"), exist_ok=True)
+    os.makedirs(dataset_path("images"), exist_ok=True)
+
+
+def reset_output_dir():
+    if os.path.exists(OUTPUT_DIR):
+        shutil.rmtree(OUTPUT_DIR)
+    ensure_output_dirs()
 
 
 tents_description = f"This is a Tents puzzle. In this game, you will start with a grid that only marks the positions of the trees, the number of tents that should be in each row, and the number of tents that should be in each column. "\
@@ -48,7 +59,7 @@ def generate_tents_puzzle(grid_size, num_trees):
         # 随机放置树
         tree_positions = set()
         while len(tree_positions) < num_trees:
-            x, y = random.randint(0, width - 1), random.randint(0, height - 1)
+            x, y = random.randint(0, height - 1), random.randint(0, width - 1)
             if grid[x][y] == '' :
                 potential_positions = [(x+1, y), (x-1, y), (x, y+1), (x, y-1)]
                 for (tx, ty) in potential_positions:
@@ -127,8 +138,8 @@ def save_visualization(grid, row_tent_counts, col_tent_counts, puzzle_number):
         ax.axhline(x - 0.5, color='black', lw=1)
 
     # 加载树和帐篷图片
-    tree_img = mpimg.imread('tree.png')
-    tent_img = mpimg.imread('tent.png')
+    tree_img = mpimg.imread(os.path.join(BASE_DIR, 'tree.png'))
+    tent_img = mpimg.imread(os.path.join(BASE_DIR, 'tent.png'))
 
     # 反转图片（翻转180度）
     tree_img = np.flipud(np.fliplr(tree_img))  # 水平和垂直翻转树的图片
@@ -164,7 +175,7 @@ def save_visualization(grid, row_tent_counts, col_tent_counts, puzzle_number):
     ax.xaxis.set_ticks_position('top')
 
     # 保存为 PNG 格式，增加dpi值提高分辨率
-    plt.savefig(f'tents_dataset/images/{puzzle_number:05d}.png', dpi=100, bbox_inches='tight', pad_inches=0.1)
+    plt.savefig(dataset_path("images", f"{puzzle_number:05d}.png"), dpi=100, bbox_inches='tight', pad_inches=0.1)
     plt.close(fig)
 
 # 生成并保存谜面
@@ -175,7 +186,7 @@ def save_puzzle_to_json(grid_size, tree_positions, tent_positions, removed_tents
         'tent_positions': list(tent_positions),
         'removed_tents': list(removed_tents),
     }
-    with open(f'tents_dataset/states/{puzzle_number:05d}.json', 'w') as json_file:
+    with open(dataset_path("states", f"{puzzle_number:05d}.json"), 'w') as json_file:
         json.dump(puzzle_data, json_file, indent=4)
 
 # 辅助函数：检查该位置是否符合放置新帐篷的条件
@@ -283,7 +294,7 @@ def gen_num_tents_in_row_fill(grid, tent_positions, puzzle_number):
     }
 
     # 保存填空题到文件
-    path = 'tents_dataset/fill_dataset.json'
+    path = dataset_path('fill_dataset.json')
     save_data(question_data, path)
 
 
@@ -341,7 +352,7 @@ def gen_num_missing_tents_in_column_fill(grid, tent_positions, col_tent_counts, 
         }
 
     # 保存填空题到文件
-    path = 'tents_dataset/fill_dataset.json'
+    path = dataset_path('fill_dataset.json')
     save_data(question_data, path)
 
 # 整个网格缺少多少帐篷
@@ -381,7 +392,7 @@ def gen_num_missing_tents_in_grid_fill(grid, tent_positions, col_tent_counts, pu
     }
 
     # 保存填空题到文件
-    path = 'tents_dataset/fill_dataset.json'
+    path = dataset_path('fill_dataset.json')
     save_data(question_data, path)
 
 # 所有可能的帐篷位置
@@ -426,7 +437,7 @@ def gen_possible_tent_positions_fill(grid, tree_positions, puzzle_number):
     
     # 生成问题文本
     question = tents_description + \
-            f"Given the tree positions and considering only the first and the third rule, how many positions in the entire grid are available to place tents (including both positions that are currently occupied by tents and positions that are currently empty)?"
+            f"Given the tree positions and considering only that tents cannot be placed on tree cells and must be horizontally or vertically adjacent to at least one tree, how many positions in the entire grid are available to place tents (including both positions that are currently occupied by tents and positions that are currently empty)?"
 
     # 分析部分：列出所有可能放置帐篷的位置
     possible_positions_str = ', '.join([f"({x}, {y})" for (x, y) in sorted(possible_tent_positions)])
@@ -439,7 +450,7 @@ def gen_possible_tent_positions_fill(grid, tree_positions, puzzle_number):
         "data_id": f"tents-fill-{puzzle_number:05d}-possible-tent-positions",
         "qa_type": "State Prediction",  # 问题类型
         "question_id": 5,
-        "question_description": "Given the tree positions and considering only the second rule, how many positions in the entire grid are available to place tents (including those already occupied by tents)?",
+        "question_description": "Given the tree positions and considering only that tents cannot be placed on tree cells and must be horizontally or vertically adjacent to at least one tree, how many positions in the entire grid are available to place tents (including those already occupied by tents)?",
         "image": f"images/{puzzle_number:05d}.png",
         "state": f"states/{puzzle_number:05d}.json",
         "plot_level": generate_plot_level(len(grid[0]), len(grid)),  # 可以根据网格大小定义难度
@@ -450,7 +461,7 @@ def gen_possible_tent_positions_fill(grid, tree_positions, puzzle_number):
     }
     
     # 保存填空题到文件
-    path = 'tents_dataset/fill_dataset.json'
+    path = dataset_path('fill_dataset.json')
     save_data(question_data, path)
 
 # 生成“新帐篷位置”的填空题
@@ -494,7 +505,7 @@ def gen_new_tent_count_fill(grid, tent_positions, tree_positions, col_tent_count
     }
 
     # 保存填空题到文件
-    path = 'tents_dataset/fill_dataset.json'
+    path = dataset_path('fill_dataset.json')
     save_data(question_data, path)
 
 
@@ -508,7 +519,7 @@ def gen_tree_position_mcq(grid, tent_positions, tree_positions, puzzle_number, n
     options.append(correct_option)
     
     while len(options) < num_options:
-        random_position = (random.randint(0, len(grid[0]) - 1), random.randint(0, len(grid) - 1))
+        random_position = (random.randint(0, len(grid) - 1), random.randint(0, len(grid[0]) - 1))
         if random_position not in options and random_position not in tree_positions:
             options.append(random_position)
     
@@ -555,7 +566,7 @@ def gen_tree_position_mcq(grid, tent_positions, tree_positions, puzzle_number, n
     }
     
     # 保存单选题到文件
-    path = 'tents_dataset/mcq_dataset.json'
+    path = dataset_path('mcq_dataset.json')
     save_data(question_data, path)
 
 # 生成“以下x个位置中哪个位置上可以放置新帐篷”的单选题
@@ -569,7 +580,7 @@ def gen_new_tent_position_mcq(grid, tent_positions, tree_positions, col_tent_cou
     
     # 随机生成错误选项，确保选项中的位置符合上述条件
     while len(options) < num_options:
-        random_position = (random.randint(0, len(grid[0]) - 1), random.randint(0, len(grid) - 1))
+        random_position = (random.randint(0, len(grid) - 1), random.randint(0, len(grid[0]) - 1))
         is_valid, random_reason = is_valid_new_tent_position(random_position[0], random_position[1], grid, tree_positions, tent_positions, row_tent_counts, col_tent_counts)
         if ((random_position, random_reason) not in options) and not is_valid:
             options.append((random_position, random_reason))
@@ -615,7 +626,7 @@ def gen_new_tent_position_mcq(grid, tent_positions, tree_positions, col_tent_cou
     }
 
     # 保存单选题到文件
-    path = 'tents_dataset/mcq_dataset.json' 
+    path = dataset_path('mcq_dataset.json') 
     save_data(question_data, path)
 
 # 配置谜面大小、树的数量和生成谜面的数量
@@ -626,7 +637,8 @@ max_removed_tents_list = [2, 4, 7]  # 每次去掉的帐篷数量
 
 # 自动分配谜面编号并生成谜面
 def generate_and_save_puzzle(grid_size, num_trees, max_removed_tents):
-    puzzle_number = len(os.listdir('tents_dataset/states')) + 1
+    ensure_output_dirs()
+    puzzle_number = len(os.listdir(dataset_path('states'))) + 1
     grid, tree_positions, tent_positions, row_tent_counts, col_tent_counts = generate_tents_puzzle(grid_size, num_trees)
 
     # 移除一些帐篷
@@ -649,17 +661,30 @@ def generate_and_save_puzzle(grid_size, num_trees, max_removed_tents):
     print(f'Generated puzzle #{puzzle_number:05d}')
 
 
-# 生成并保存谜面
-for i in range(3):
-    for j in range(num_puzzles):
-        generate_and_save_puzzle(grid_size_list[i], num_trees_list[i], max_removed_tents_list[i])
+def generate_dataset(output_dir=None, puzzles_per_config=None, clean=True):
+    global OUTPUT_DIR
+    if output_dir is not None:
+        OUTPUT_DIR = os.path.abspath(output_dir)
+    if clean:
+        reset_output_dir()
+    else:
+        ensure_output_dirs()
 
-# 合并数据
-with open('tents_dataset/fill_dataset.json', 'r') as json_file:
-    fill_data = json.load(json_file)
-with open('tents_dataset/mcq_dataset.json', 'r') as json_file:
-    mcq_data = json.load(json_file)
+    puzzles_per_config = num_puzzles if puzzles_per_config is None else puzzles_per_config
+    for i in range(len(grid_size_list)):
+        for _ in range(puzzles_per_config):
+            generate_and_save_puzzle(grid_size_list[i], num_trees_list[i], max_removed_tents_list[i])
 
-data = fill_data + mcq_data
-with open('tents_dataset/data.json', 'w') as json_file:
-    json.dump(data, json_file, indent=4)
+    with open(dataset_path('fill_dataset.json'), 'r') as json_file:
+        fill_data = json.load(json_file)
+    with open(dataset_path('mcq_dataset.json'), 'r') as json_file:
+        mcq_data = json.load(json_file)
+
+    data = fill_data + mcq_data
+    with open(dataset_path('data.json'), 'w') as json_file:
+        json.dump(data, json_file, indent=4)
+    return data
+
+
+if __name__ == "__main__":
+    generate_dataset()

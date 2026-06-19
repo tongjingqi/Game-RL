@@ -3,6 +3,7 @@ import numpy as np
 from dataclasses import dataclass
 from typing import List, Tuple, Dict, Set, Optional
 import random
+import itertools
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
@@ -632,7 +633,12 @@ class PuzzleGenerator:
                       for selected_pos in selected_positions) and pos.x%2==1 and pos.y%2==1:
                 selected_positions.append(pos)
         
-        side_path_num = min(len(selected_positions), random.randint(*side_path_num))
+        min_side_path_num = side_path_num[0]
+        requested_side_path_num = random.randint(*side_path_num)
+        if len(selected_positions) < min(min_side_path_num, requested_side_path_num):
+            raise Exception("Cannot generate valid path")
+
+        side_path_num = min(len(selected_positions), requested_side_path_num)
         selected_positions, alters = selected_positions[:side_path_num], selected_positions[side_path_num:]
         
         # Generate branches
@@ -653,6 +659,9 @@ class PuzzleGenerator:
             
             branches.append(Branch(branch_pos, i, {'A': main_path, 'B': alt_path}))
             all_cubes.update(alt_cubes)
+
+        if len(branches) < min_side_path_num:
+            raise Exception("Cannot generate valid path")
         
         return PathFindingState(
             self.grid_size, all_cubes, self.start_pos, goal_pos,
@@ -685,6 +694,8 @@ class PuzzleGenerator:
         
         num_labels = random.randint(*label_num_range)
         sequence_points = self.choose_labeled_cubes(valid_positions, num_labels)
+        if len(sequence_points) < label_num_range[0]:
+            raise Exception("Cannot generate enough labeled points")
         
         return SequenceState(
             self.grid_size, main_cubes, self.start_pos, goal_pos,
@@ -714,40 +725,30 @@ class QAGenerator:
         
         # Get branches in order of appearance
         ordered_branches = get_branch_order(puzzle.all_paths, puzzle.branches)
+        if len(ordered_branches) != len(puzzle.branches):
+            raise Exception("Cannot generate unambiguous branch options")
         
-        # Create the correct path sequence with directional descriptions
-        correct_path = ""
-        for b in puzzle.branches:
-            main_direction = get_main_path_direction_at_position(b.pos, b.paths['A'])
-            alt_segment = b.paths['B'][0]  # Alternative path always starts at branch position
-            alt_direction = get_path_direction(alt_segment)
-            correct_path += f"{b.branch_id}-{main_direction}, "
-        correct_path = correct_path[:-2]  # Remove trailing comma and space
+        branch_directions = []
+        for branch in ordered_branches:
+            main_direction = get_main_path_direction_at_position(branch.pos, branch.paths['A'])
+            alt_direction = get_path_direction(branch.paths['B'][0])
+            if main_direction == "??" or alt_direction == "??" or main_direction == alt_direction:
+                raise Exception("Cannot generate unambiguous branch options")
+            branch_directions.append((branch, main_direction, alt_direction))
         
-        # Create the correct path sequence with directional descriptions for ordered branches
-        correct_path_ordered = ""
-        for b in ordered_branches:
-            main_direction = get_main_path_direction_at_position(b.pos, b.paths['A'])
-            alt_segment = b.paths['B'][0]  # Alternative path always starts at branch position
-            alt_direction = get_path_direction(alt_segment)
-            correct_path_ordered += f"{b.branch_id}-{main_direction}, "
-        correct_path_ordered = correct_path_ordered[:-2]  # Remove trailing comma and space
+        def format_path(choices):
+            return ", ".join(
+                f"{branch.branch_id}-{main_direction if use_main else alt_direction}"
+                for (branch, main_direction, alt_direction), use_main in zip(branch_directions, choices)
+            )
         
-        # Generate all possible combinations
-        options = []
-        for i in range(8):
-            path = ""
-            for branch in puzzle.branches:
-                main_direction = get_main_path_direction_at_position(branch.pos, branch.paths['A'])
-                alt_segment = branch.paths['B'][0]
-                alt_direction = get_path_direction(alt_segment)
-                chosen_direction = main_direction if (i & (1 << (branch.branch_id - 1))) else alt_direction
-                path += f"{branch.branch_id}-{chosen_direction}, "
-            options.append(path[:-2])
+        correct_path = format_path([True] * len(branch_directions))
+        correct_path_ordered = correct_path
         
-        # Ensure correct path is in options
-        if correct_path not in options:
-            options[0] = correct_path
+        # Enumerate the complete choice space for the generated branch count.
+        options = [format_path(choices) for choices in itertools.product([False, True], repeat=len(branch_directions))]
+        if len(set(options)) != len(options):
+            raise Exception("Cannot generate unambiguous branch options")
             
         random.shuffle(options)
         
@@ -774,8 +775,7 @@ Which combination of path choices leads to the goal?"""
         
         analysis = f"{branch_order_desc}\n\nAnalyzing each branch point:\n"
         for b in ordered_branches:
-            main_direction = get_main_path_direction_at_position(b.pos, b.paths['A'])
-            alt_direction = get_path_direction(b.paths['B'][0])
+            _, main_direction, alt_direction = next(item for item in branch_directions if item[0] == b)
             next_branch = None
             for i, next_b in enumerate(ordered_branches):
                 if next_b.branch_id == b.branch_id:
@@ -825,15 +825,21 @@ Which combination of path choices leads to the goal?"""
         
         correct_sequence = " -> ".join(sequence)
         
-        # Generate wrong options by shuffling middle numbers
+        # Generate wrong options by enumerating permutations; this avoids an
+        # infinite loop when too few unique checkpoint orders are possible.
         middle_numbers = sequence[1:-1]
-        options = [correct_sequence]
-        
-        while len(options) < 6:  # Generate 7 wrong options
-            random.shuffle(middle_numbers)
-            wrong_sequence = " -> ".join(["Start"] + middle_numbers + ["Goal"])
-            if wrong_sequence not in options:
-                options.append(wrong_sequence)
+        if len(middle_numbers) < 3:
+            raise Exception("Cannot generate enough unique options")
+
+        all_sequences = [
+            " -> ".join(["Start"] + list(order) + ["Goal"])
+            for order in itertools.permutations(middle_numbers)
+        ]
+        wrong_sequences = [option for option in all_sequences if option != correct_sequence]
+        if len(wrong_sequences) < 5:
+            raise Exception("Cannot generate enough unique options")
+
+        options = [correct_sequence] + random.sample(wrong_sequences, 5)
         
         random.shuffle(options)
         correct_answer = options.index(correct_sequence) + 1
@@ -910,6 +916,8 @@ What is the correct sequence of numbered checkpoints when following the path fro
     def _generate_height_comparison_qa(self, index: int):
         """Generate a height comparison question Q&A pair with corrected relation handling"""
         puzzle = self.puzzle_generator.generate_sequence_puzzle((3, 3))
+        if len(puzzle.sequence_points) != 3:
+            raise Exception("Cannot generate enough labeled points")
         
         # Get heights of comparison points
         heights = [(p.label, p.pos.z) for p in puzzle.sequence_points]
@@ -1130,7 +1138,7 @@ def generate_mixed_dataset(num_problems: int):
             i += 1
             count=0
         except Exception as e:
-            if str(e) != "Cannot generate valid path":
+            if not str(e).startswith("Cannot generate"):
                 raise e
             count+=1
             if count>10:

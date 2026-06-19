@@ -2,43 +2,43 @@
   "voxel_positions": [
     [
       2,
-      3,
+      2,
       1
     ]
   ],
   "target_yz_projection": [
     [
       0,
-      0,
-      1
-    ],
-    [
-      0,
-      0,
+      1,
       0
     ],
     [
       0,
+      1,
+      0
+    ],
+    [
       0,
+      1,
       0
     ]
   ],
   "target_xz_projection": [
     [
-      1,
+      0,
       1,
       0
     ],
     [
       0,
-      0,
-      0
+      1,
+      1
     ],
     [
       0,
-      0,
+      1,
       0
     ]
   ],
-  "remaining_voxels": 1
+  "remaining_voxels": 3
 }

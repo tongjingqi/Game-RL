@@ -15,16 +15,117 @@
   "goal_pos": {
     "x": 3,
     "y": 1,
-    "z": 6
+    "z": 0
   },
   "cubes": [
+    {
+      "pos": {
+        "x": 3,
+        "y": 1,
+        "z": 0
+      },
+      "roles": [
+        "goal",
+        "main_path"
+      ]
+    },
+    {
+      "pos": {
+        "x": 5,
+        "y": 1,
+        "z": 0
+      },
+      "roles": []
+    },
+    {
+      "pos": {
+        "x": 3,
+        "y": 2,
+        "z": 0
+      },
+      "roles": [
+        "main_path",
+        "numbered_block"
+      ]
+    },
+    {
+      "pos": {
+        "x": 5,
+        "y": 2,
+        "z": 0
+      },
+      "roles": []
+    },
+    {
+      "pos": {
+        "x": 3,
+        "y": 3,
+        "z": 0
+      },
+      "roles": [
+        "main_path"
+      ]
+    },
+    {
+      "pos": {
+        "x": 4,
+        "y": 3,
+        "z": 0
+      },
+      "roles": [
+        "main_path"
+      ]
+    },
+    {
+      "pos": {
+        "x": 5,
+        "y": 3,
+        "z": 0
+      },
+      "roles": [
+        "main_path"
+      ]
+    },
+    {
+      "pos": {
+        "x": 5,
+        "y": 4,
+        "z": 0
+      },
+      "roles": [
+        "main_path",
+        "numbered_block"
+      ]
+    },
+    {
+      "pos": {
+        "x": 5,
+        "y": 5,
+        "z": 0
+      },
+      "roles": [
+        "main_path"
+      ]
+    },
     {
       "pos": {
         "x": 7,
         "y": 5,
         "z": 0
       },
-      "roles": []
+      "roles": [
+        "numbered_block"
+      ]
+    },
+    {
+      "pos": {
+        "x": 5,
+        "y": 6,
+        "z": 0
+      },
+      "roles": [
+        "main_path"
+      ]
     },
     {
       "pos": {
@@ -33,6 +134,26 @@
         "z": 0
       },
       "roles": []
+    },
+    {
+      "pos": {
+        "x": 5,
+        "y": 7,
+        "z": 0
+      },
+      "roles": [
+        "main_path"
+      ]
+    },
+    {
+      "pos": {
+        "x": 6,
+        "y": 7,
+        "z": 0
+      },
+      "roles": [
+        "main_path"
+      ]
     },
     {
       "pos": {
@@ -47,16 +168,8 @@
     },
     {
       "pos": {
-        "x": 3,
-        "y": 3,
-        "z": 3
-      },
-      "roles": []
-    },
-    {
-      "pos": {
-        "x": 4,
-        "y": 3,
+        "x": 5,
+        "y": 1,
         "z": 3
       },
       "roles": []
@@ -64,181 +177,8 @@
     {
       "pos": {
         "x": 5,
-        "y": 3,
-        "z": 3
-      },
-      "roles": [
-        "main_path"
-      ]
-    },
-    {
-      "pos": {
-        "x": 6,
-        "y": 3,
-        "z": 3
-      },
-      "roles": [
-        "main_path"
-      ]
-    },
-    {
-      "pos": {
-        "x": 7,
-        "y": 3,
-        "z": 3
-      },
-      "roles": [
-        "main_path",
-        "numbered_block"
-      ]
-    },
-    {
-      "pos": {
-        "x": 7,
-        "y": 4,
-        "z": 3
-      },
-      "roles": [
-        "main_path"
-      ]
-    },
-    {
-      "pos": {
-        "x": 7,
-        "y": 5,
-        "z": 3
-      },
-      "roles": [
-        "main_path"
-      ]
-    },
-    {
-      "pos": {
-        "x": 7,
-        "y": 6,
-        "z": 3
-      },
-      "roles": [
-        "main_path",
-        "numbered_block"
-      ]
-    },
-    {
-      "pos": {
-        "x": 7,
         "y": 7,
         "z": 3
-      },
-      "roles": [
-        "main_path"
-      ]
-    },
-    {
-      "pos": {
-        "x": 3,
-        "y": 1,
-        "z": 6
-      },
-      "roles": [
-        "goal",
-        "main_path"
-      ]
-    },
-    {
-      "pos": {
-        "x": 4,
-        "y": 1,
-        "z": 6
-      },
-      "roles": [
-        "main_path"
-      ]
-    },
-    {
-      "pos": {
-        "x": 5,
-        "y": 1,
-        "z": 6
-      },
-      "roles": [
-        "main_path"
-      ]
-    },
-    {
-      "pos": {
-        "x": 5,
-        "y": 2,
-        "z": 6
-      },
-      "roles": [
-        "main_path"
-      ]
-    },
-    {
-      "pos": {
-        "x": 1,
-        "y": 3,
-        "z": 6
-      },
-      "roles": []
-    },
-    {
-      "pos": {
-        "x": 2,
-        "y": 3,
-        "z": 6
-      },
-      "roles": [
-        "numbered_block"
-      ]
-    },
-    {
-      "pos": {
-        "x": 3,
-        "y": 3,
-        "z": 6
-      },
-      "roles": []
-    },
-    {
-      "pos": {
-        "x": 4,
-        "y": 3,
-        "z": 6
-      },
-      "roles": []
-    },
-    {
-      "pos": {
-        "x": 5,
-        "y": 3,
-        "z": 6
-      },
-      "roles": [
-        "main_path"
-      ]
-    },
-    {
-      "pos": {
-        "x": 5,
-        "y": 5,
-        "z": 6
-      },
-      "roles": []
-    },
-    {
-      "pos": {
-        "x": 6,
-        "y": 5,
-        "z": 6
-      },
-      "roles": []
-    },
-    {
-      "pos": {
-        "x": 7,
-        "y": 5,
-        "z": 6
       },
       "roles": []
     }
@@ -251,51 +191,9 @@
         "z": 0
       },
       "end": {
-        "x": 7,
-        "y": 7,
-        "z": 3
-      },
-      "type": "ladder",
-      "direction": "up"
-    },
-    {
-      "start": {
-        "x": 7,
-        "y": 7,
-        "z": 3
-      },
-      "end": {
-        "x": 7,
-        "y": 5,
-        "z": 3
-      },
-      "type": "walk",
-      "direction": "left-forward"
-    },
-    {
-      "start": {
-        "x": 7,
-        "y": 5,
-        "z": 3
-      },
-      "end": {
-        "x": 7,
-        "y": 3,
-        "z": 3
-      },
-      "type": "walk",
-      "direction": "left-forward"
-    },
-    {
-      "start": {
-        "x": 7,
-        "y": 3,
-        "z": 3
-      },
-      "end": {
         "x": 5,
-        "y": 3,
-        "z": 3
+        "y": 7,
+        "z": 0
       },
       "type": "walk",
       "direction": "right-forward"
@@ -303,27 +201,13 @@
     {
       "start": {
         "x": 5,
-        "y": 3,
-        "z": 3
+        "y": 7,
+        "z": 0
       },
       "end": {
         "x": 5,
-        "y": 3,
-        "z": 6
-      },
-      "type": "ladder",
-      "direction": "up"
-    },
-    {
-      "start": {
-        "x": 5,
-        "y": 3,
-        "z": 6
-      },
-      "end": {
-        "x": 5,
-        "y": 1,
-        "z": 6
+        "y": 5,
+        "z": 0
       },
       "type": "walk",
       "direction": "left-forward"
@@ -331,16 +215,44 @@
     {
       "start": {
         "x": 5,
-        "y": 1,
-        "z": 6
+        "y": 5,
+        "z": 0
+      },
+      "end": {
+        "x": 5,
+        "y": 3,
+        "z": 0
+      },
+      "type": "walk",
+      "direction": "left-forward"
+    },
+    {
+      "start": {
+        "x": 5,
+        "y": 3,
+        "z": 0
+      },
+      "end": {
+        "x": 3,
+        "y": 3,
+        "z": 0
+      },
+      "type": "walk",
+      "direction": "right-forward"
+    },
+    {
+      "start": {
+        "x": 3,
+        "y": 3,
+        "z": 0
       },
       "end": {
         "x": 3,
         "y": 1,
-        "z": 6
+        "z": 0
       },
       "type": "walk",
-      "direction": "right-forward"
+      "direction": "left-forward"
     }
   ],
   "main_path_ordered_cubes": [
@@ -350,70 +262,60 @@
       "z": 0
     },
     {
-      "x": 7,
-      "y": 7,
-      "z": 3
-    },
-    {
-      "x": 7,
-      "y": 6,
-      "z": 3
-    },
-    {
-      "x": 7,
-      "y": 5,
-      "z": 3
-    },
-    {
-      "x": 7,
-      "y": 4,
-      "z": 3
-    },
-    {
-      "x": 7,
-      "y": 3,
-      "z": 3
-    },
-    {
       "x": 6,
-      "y": 3,
-      "z": 3
+      "y": 7,
+      "z": 0
+    },
+    {
+      "x": 5,
+      "y": 7,
+      "z": 0
+    },
+    {
+      "x": 5,
+      "y": 6,
+      "z": 0
+    },
+    {
+      "x": 5,
+      "y": 5,
+      "z": 0
+    },
+    {
+      "x": 5,
+      "y": 4,
+      "z": 0
     },
     {
       "x": 5,
       "y": 3,
-      "z": 3
-    },
-    {
-      "x": 5,
-      "y": 3,
-      "z": 6
-    },
-    {
-      "x": 5,
-      "y": 2,
-      "z": 6
-    },
-    {
-      "x": 5,
-      "y": 1,
-      "z": 6
+      "z": 0
     },
     {
       "x": 4,
-      "y": 1,
-      "z": 6
+      "y": 3,
+      "z": 0
+    },
+    {
+      "x": 3,
+      "y": 3,
+      "z": 0
+    },
+    {
+      "x": 3,
+      "y": 2,
+      "z": 0
     },
     {
       "x": 3,
       "y": 1,
-      "z": 6
+      "z": 0
     }
   ],
   "ladders": [
     {
       "base_pos": {
-        "x": 7,
+        "x": 5,
         "y": 7,
         "z": 0
       },
@@ -423,17 +325,8 @@
     {
       "base_pos": {
         "x": 5,
-        "y": 3,
-        "z": 3
-      },
-      "direction": "+x",
-      "height": 3
-    },
-    {
-      "base_pos": {
-        "x": 7,
-        "y": 5,
-        "z": 3
+        "y": 1,
+        "z": 0
       },
       "direction": "+x",
       "height": 3
@@ -445,26 +338,26 @@
       "label": 1,
       "pos": {
         "x": 7,
-        "y": 3,
-        "z": 3
+        "y": 5,
+        "z": 0
       },
       "marker_type": "numbered_block"
     },
     {
       "label": 2,
       "pos": {
-        "x": 7,
-        "y": 6,
-        "z": 3
+        "x": 5,
+        "y": 4,
+        "z": 0
       },
       "marker_type": "numbered_block"
     },
     {
       "label": 3,
       "pos": {
-        "x": 2,
-        "y": 3,
-        "z": 6
+        "x": 3,
+        "y": 2,
+        "z": 0
       },
       "marker_type": "numbered_block"
     }

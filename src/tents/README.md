@@ -50,7 +50,7 @@ The dataset consists of:
 2. **State Prediction**: Questions regarding the outcome of potential actions.
    - How many tents are still missing in a randomly selected column?
    - How many tents are still missing in the entire puzzle?
-   - Given the tree positions and considering only the second rule, how many positions in the entire grid are available to place tents (including both positions that are currently occupied by tents and positions that are currently empty)?
+   - Given the tree positions and considering only that tents cannot be placed on tree cells and must be horizontally or vertically adjacent to at least one tree, how many positions in the entire grid are available to place tents (including both positions that are currently occupied by tents and positions that are currently empty)?
    - How many positions in the grid are available to place a new tent without breaking the game rules immediately (it does not have to be a part of a whole solution to the puzzle)?
    - Which of the following positions is allowed to place a new tent without breaking the game rules immediately (it does not have to be a part of a whole solution to the puzzle)?   
 

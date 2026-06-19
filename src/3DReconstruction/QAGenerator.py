@@ -34,6 +34,26 @@ class ThreeDReconstructionQAGenerator:
 
     def _output_path(self, relative_path):
         return os.path.join(self.output_dir, relative_path)
+
+    def _order_addition_sequence(self, additions, current_voxels, game):
+        """Return additions in an order that is legal under the adjacency rule."""
+        remaining = set(tuple(pos) for pos in additions)
+        structure = set(tuple(pos) for pos in current_voxels)
+        ordered = []
+
+        while remaining:
+            placeable = sorted(
+                pos for pos in remaining
+                if set(game._get_adjacent_neighbors(pos)) & structure
+            )
+            if not placeable:
+                return None
+            next_pos = placeable[0]
+            ordered.append(next_pos)
+            remaining.remove(next_pos)
+            structure.add(next_pos)
+
+        return ordered
         
     def get_plot_level(self, voxel_count):
         """根据体素数量确定难度级别"""
@@ -477,15 +497,26 @@ class ThreeDReconstructionQAGenerator:
             if len(test_voxels) > remaining:
                 return False
             
-            # 2. 组合当前结构和新增体素
-            test_structure = current_voxels + test_voxels
-            
-            # 3. 检查是否连通
-            test_structure_set = set(tuple(pos) if isinstance(pos, list) else pos for pos in test_structure)
-            if not game._is_connected(test_structure_set):
+            # 2. 按选项顺序逐步放置，每一步都必须贴着已有结构
+            current_set = set(tuple(pos) if isinstance(pos, list) else pos for pos in current_voxels)
+            additions = []
+            for voxel in test_voxels:
+                voxel = tuple(voxel) if isinstance(voxel, list) else voxel
+                if voxel in current_set:
+                    return False
+                if not (set(game._get_adjacent_neighbors(voxel)) & current_set):
+                    return False
+                current_set.add(voxel)
+                additions.append(voxel)
+
+            # 3. 组合当前结构和新增体素
+            test_structure = list(current_set)
+
+            # 4. 检查最终结构是否连通
+            if not game._is_connected(current_set):
                 return False
             
-            # 4. 检查投影是否匹配
+            # 5. 检查投影是否匹配
             test_yz_proj, test_xz_proj = game.get_projections(test_structure)
             target_yz_proj, target_xz_proj = game.get_projections(target_voxels)
             
@@ -530,8 +561,12 @@ class ThreeDReconstructionQAGenerator:
         target_voxels = game_state['complete_solution']['positions']
         remaining = len(target_voxels) - len(current_voxels)
         
+        correct_sequence = self._order_addition_sequence(minimal_addition, current_voxels, game)
+        if correct_sequence is None:
+            raise ValueError("Minimal addition cannot be ordered as a legal placement sequence")
+
         # 正确选项
-        correct_option = f"Add voxels at positions: {sorted(minimal_addition)}"
+        correct_option = f"Add voxels in this order: {correct_sequence}"
         
         # 生成错误选项
         wrong_options = []
@@ -551,7 +586,7 @@ class ThreeDReconstructionQAGenerator:
             extra_count_range = min(27 - len(current_voxels), remaining + 10)
             target_count = remaining + random.randint(1, extra_count_range)
             _, extra_voxels = game.generate_random_connected_voxels(target_count)
-            option = f"Add voxels at positions: {sorted(extra_voxels)}"
+            option = f"Add voxels in this order: {extra_voxels}"
             
             if option not in used_options and not is_valid_solution(extra_voxels, current_voxels, target_voxels, remaining, check_both, check_zy):
                 wrong_options.append(option)
@@ -580,7 +615,7 @@ class ThreeDReconstructionQAGenerator:
                 available.remove(pos)
                 inner_attempts += 1
                 
-            option = f"Add voxels at positions: {sorted(disconnected_voxels)}"
+            option = f"Add voxels in this order: {disconnected_voxels}"
             
             if option not in used_options and not is_valid_solution(disconnected_voxels, current_voxels, target_voxels, remaining, check_both, check_zy):
                 wrong_options.append(option)
@@ -596,7 +631,7 @@ class ThreeDReconstructionQAGenerator:
         while invalid_count < 2 and attempts < MAX_ATTEMPTS and total_attempts < MAX_TOTAL_ATTEMPTS:
             target_count = random.randint(1, remaining)
             _, test_voxels = game.generate_random_connected_voxels(target_count)
-            option = f"Add voxels at positions: {sorted(test_voxels)}"
+            option = f"Add voxels in this order: {test_voxels}"
             
             if option not in used_options and not is_valid_solution(test_voxels, current_voxels, target_voxels, remaining, check_both, check_zy):
                 wrong_options.append(option)
@@ -615,7 +650,7 @@ class ThreeDReconstructionQAGenerator:
                 
             # 生成随机连通结构
             _, random_voxels = game.generate_random_connected_voxels(target_count)
-            option = f"Add voxels at positions: {sorted(random_voxels)}"
+            option = f"Add voxels in this order: {random_voxels}"
             
             if option not in used_options and not is_valid_solution(random_voxels, current_voxels, target_voxels, remaining, check_both, check_zy):
                 wrong_options.append(option)
@@ -638,7 +673,7 @@ class ThreeDReconstructionQAGenerator:
                         disconnected_voxels.append(pos)
                         available.remove(pos)
                     
-                    option = f"Add voxels at positions: {sorted(disconnected_voxels)}"
+                    option = f"Add voxels in this order: {disconnected_voxels}"
                     if option not in used_options:
                         wrong_options.append(option)
                         used_options.add(option)
@@ -667,12 +702,20 @@ class ThreeDReconstructionQAGenerator:
         )
         
         for i, option in enumerate(all_options, 1):
-            voxels_str = option.split(": ")[1]
+            voxels_str = option.split(": ", 1)[1]
             voxels = eval(voxels_str)  # 将字符串转换回列表
             
-            # 检查是否连通
-            test_structure = current_voxels + voxels
-            is_connected = game._is_connected(set(test_structure))
+            # 检查是否可以按顺序逐步添加并保持连通
+            step_structure = set(current_voxels)
+            is_sequence_valid = True
+            for voxel in voxels:
+                voxel = tuple(voxel) if isinstance(voxel, list) else voxel
+                if voxel in step_structure or not (set(game._get_adjacent_neighbors(voxel)) & step_structure):
+                    is_sequence_valid = False
+                    break
+                step_structure.add(voxel)
+            test_structure = list(step_structure)
+            is_connected = is_sequence_valid and game._is_connected(step_structure)
             
             # 检查投影是否匹配
             yz_proj, xz_proj = game.get_projections(test_structure)
@@ -682,9 +725,9 @@ class ThreeDReconstructionQAGenerator:
             
             analysis += f"Option {i}:\n"
             if not is_connected:
-                analysis += "- The added voxels are not all connected to the existing structure\n"
+                analysis += "- The added voxels cannot be placed in this order while staying adjacent to the existing structure\n"
             else:
-                analysis += "- The added voxels maintain connectivity\n"
+                analysis += "- The ordered additions maintain connectivity at every step\n"
                 
             if check_both:
                 if not (yz_match and xz_match):

@@ -15,36 +15,25 @@
   "goal_pos": {
     "x": 1,
     "y": 3,
-    "z": 6
+    "z": 0
   },
   "cubes": [
     {
       "pos": {
-        "x": 7,
-        "y": 7,
+        "x": 1,
+        "y": 3,
         "z": 0
       },
       "roles": [
-        "main_path",
-        "start"
-      ]
-    },
-    {
-      "pos": {
-        "x": 1,
-        "y": 7,
-        "z": 3
-      },
-      "roles": [
-        "main_path",
-        "sequence_point"
+        "goal",
+        "main_path"
       ]
     },
     {
       "pos": {
         "x": 2,
-        "y": 7,
-        "z": 3
+        "y": 3,
+        "z": 0
       },
       "roles": [
         "main_path"
@@ -53,8 +42,8 @@
     {
       "pos": {
         "x": 3,
-        "y": 7,
-        "z": 3
+        "y": 3,
+        "z": 0
       },
       "roles": [
         "main_path",
@@ -64,8 +53,8 @@
     {
       "pos": {
         "x": 4,
-        "y": 7,
-        "z": 3
+        "y": 3,
+        "z": 0
       },
       "roles": [
         "main_path"
@@ -74,8 +63,19 @@
     {
       "pos": {
         "x": 5,
-        "y": 7,
-        "z": 3
+        "y": 3,
+        "z": 0
+      },
+      "roles": [
+        "main_path",
+        "sequence_point"
+      ]
+    },
+    {
+      "pos": {
+        "x": 5,
+        "y": 4,
+        "z": 0
       },
       "roles": [
         "main_path"
@@ -83,9 +83,20 @@
     },
     {
       "pos": {
+        "x": 5,
+        "y": 5,
+        "z": 0
+      },
+      "roles": [
+        "main_path",
+        "sequence_point"
+      ]
+    },
+    {
+      "pos": {
         "x": 6,
-        "y": 7,
-        "z": 3
+        "y": 5,
+        "z": 0
       },
       "roles": [
         "main_path"
@@ -94,41 +105,8 @@
     {
       "pos": {
         "x": 7,
-        "y": 7,
-        "z": 3
-      },
-      "roles": [
-        "main_path",
-        "sequence_point"
-      ]
-    },
-    {
-      "pos": {
-        "x": 1,
-        "y": 3,
-        "z": 6
-      },
-      "roles": [
-        "goal",
-        "main_path"
-      ]
-    },
-    {
-      "pos": {
-        "x": 1,
-        "y": 4,
-        "z": 6
-      },
-      "roles": [
-        "main_path",
-        "sequence_point"
-      ]
-    },
-    {
-      "pos": {
-        "x": 1,
         "y": 5,
-        "z": 6
+        "z": 0
       },
       "roles": [
         "main_path"
@@ -136,22 +114,24 @@
     },
     {
       "pos": {
-        "x": 1,
+        "x": 7,
         "y": 6,
-        "z": 6
+        "z": 0
       },
       "roles": [
-        "main_path"
+        "main_path",
+        "sequence_point"
       ]
     },
     {
       "pos": {
-        "x": 1,
+        "x": 7,
         "y": 7,
-        "z": 6
+        "z": 0
       },
       "roles": [
-        "main_path"
+        "main_path",
+        "start"
       ]
     }
   ],
@@ -164,95 +144,67 @@
       },
       "end": {
         "x": 7,
-        "y": 7,
-        "z": 3
+        "y": 5,
+        "z": 0
       },
-      "type": "ladder",
-      "direction": "up"
+      "type": "walk",
+      "direction": "left-forward"
     },
     {
       "start": {
         "x": 7,
-        "y": 7,
-        "z": 3
-      },
-      "end": {
-        "x": 5,
-        "y": 7,
-        "z": 3
-      },
-      "type": "walk",
-      "direction": "right-forward"
-    },
-    {
-      "start": {
-        "x": 5,
-        "y": 7,
-        "z": 3
-      },
-      "end": {
-        "x": 3,
-        "y": 7,
-        "z": 3
-      },
-      "type": "walk",
-      "direction": "right-forward"
-    },
-    {
-      "start": {
-        "x": 3,
-        "y": 7,
-        "z": 3
-      },
-      "end": {
-        "x": 1,
-        "y": 7,
-        "z": 3
-      },
-      "type": "walk",
-      "direction": "right-forward"
-    },
-    {
-      "start": {
-        "x": 1,
-        "y": 7,
-        "z": 3
-      },
-      "end": {
-        "x": 1,
-        "y": 7,
-        "z": 6
-      },
-      "type": "ladder",
-      "direction": "up"
-    },
-    {
-      "start": {
-        "x": 1,
-        "y": 7,
-        "z": 6
-      },
-      "end": {
-        "x": 1,
         "y": 5,
-        "z": 6
+        "z": 0
+      },
+      "end": {
+        "x": 5,
+        "y": 5,
+        "z": 0
+      },
+      "type": "walk",
+      "direction": "right-forward"
+    },
+    {
+      "start": {
+        "x": 5,
+        "y": 5,
+        "z": 0
+      },
+      "end": {
+        "x": 5,
+        "y": 3,
+        "z": 0
       },
       "type": "walk",
       "direction": "left-forward"
     },
     {
       "start": {
-        "x": 1,
-        "y": 5,
-        "z": 6
+        "x": 5,
+        "y": 3,
+        "z": 0
+      },
+      "end": {
+        "x": 3,
+        "y": 3,
+        "z": 0
+      },
+      "type": "walk",
+      "direction": "right-forward"
+    },
+    {
+      "start": {
+        "x": 3,
+        "y": 3,
+        "z": 0
       },
       "end": {
         "x": 1,
         "y": 3,
-        "z": 6
+        "z": 0
       },
       "type": "walk",
-      "direction": "left-forward"
+      "direction": "right-forward"
     }
   ],
   "main_path_ordered_cubes": [
@@ -263,116 +215,87 @@
     },
     {
       "x": 7,
-      "y": 7,
-      "z": 3
+      "y": 6,
+      "z": 0
+    },
+    {
+      "x": 7,
+      "y": 5,
+      "z": 0
     },
     {
       "x": 6,
-      "y": 7,
-      "z": 3
+      "y": 5,
+      "z": 0
     },
     {
       "x": 5,
-      "y": 7,
-      "z": 3
+      "y": 5,
+      "z": 0
+    },
+    {
+      "x": 5,
+      "y": 4,
+      "z": 0
+    },
+    {
+      "x": 5,
+      "y": 3,
+      "z": 0
     },
     {
       "x": 4,
-      "y": 7,
-      "z": 3
+      "y": 3,
+      "z": 0
     },
     {
       "x": 3,
-      "y": 7,
-      "z": 3
+      "y": 3,
+      "z": 0
     },
     {
       "x": 2,
-      "y": 7,
-      "z": 3
-    },
-    {
-      "x": 1,
-      "y": 7,
-      "z": 3
-    },
-    {
-      "x": 1,
-      "y": 7,
-      "z": 6
-    },
-    {
-      "x": 1,
-      "y": 6,
-      "z": 6
-    },
-    {
-      "x": 1,
-      "y": 5,
-      "z": 6
-    },
-    {
-      "x": 1,
-      "y": 4,
-      "z": 6
+      "y": 3,
+      "z": 0
     },
     {
       "x": 1,
       "y": 3,
-      "z": 6
+      "z": 0
     }
   ],
-  "ladders": [
-    {
-      "base_pos": {
-        "x": 7,
-        "y": 7,
-        "z": 0
-      },
-      "direction": "+x",
-      "height": 3
-    },
-    {
-      "base_pos": {
-        "x": 1,
-        "y": 7,
-        "z": 3
-      },
-      "direction": "+x",
-      "height": 3
-    }
-  ],
+  "ladders": [],
   "sequence_points": [
     {
       "label": 1,
       "pos": {
-        "x": 3,
-        "y": 7,
-        "z": 3
+        "x": 5,
+        "y": 3,
+        "z": 0
       }
     },
     {
       "label": 2,
       "pos": {
-        "x": 1,
-        "y": 7,
-        "z": 3
+        "x": 3,
+        "y": 3,
+        "z": 0
       }
     },
     {
       "label": 3,
       "pos": {
-        "x": 1,
-        "y": 4,
-        "z": 6
+        "x": 7,
+        "y": 6,
+        "z": 0
       }
     },
     {
       "label": 4,
       "pos": {
-        "x": 7,
-        "y": 7,
-        "z": 3
+        "x": 5,
+        "y": 5,
+        "z": 0
       }
     }
   ],

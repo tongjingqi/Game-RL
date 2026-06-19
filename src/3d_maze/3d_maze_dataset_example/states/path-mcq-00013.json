@@ -14,34 +14,14 @@
   },
   "goal_pos": {
     "x": 3,
-    "y": 5,
+    "y": 1,
     "z": 6
   },
   "cubes": [
     {
       "pos": {
-        "x": 3,
-        "y": 5,
-        "z": 0
-      },
-      "roles": [
-        "alternative_path"
-      ]
-    },
-    {
-      "pos": {
-        "x": 4,
-        "y": 5,
-        "z": 0
-      },
-      "roles": [
-        "alternative_path"
-      ]
-    },
-    {
-      "pos": {
         "x": 5,
-        "y": 5,
+        "y": 7,
         "z": 0
       },
       "roles": [
@@ -51,34 +31,11 @@
     {
       "pos": {
         "x": 6,
-        "y": 5,
+        "y": 7,
         "z": 0
       },
       "roles": [
         "alternative_path"
-      ]
-    },
-    {
-      "pos": {
-        "x": 7,
-        "y": 5,
-        "z": 0
-      },
-      "roles": [
-        "alternative_path",
-        "branch_point",
-        "main_path",
-        "numbered_block"
-      ]
-    },
-    {
-      "pos": {
-        "x": 7,
-        "y": 6,
-        "z": 0
-      },
-      "roles": [
-        "main_path"
       ]
     },
     {
@@ -97,22 +54,22 @@
     },
     {
       "pos": {
-        "x": 5,
-        "y": 5,
+        "x": 7,
+        "y": 3,
         "z": 3
       },
       "roles": [
-        "alternative_path"
+        "main_path"
       ]
     },
     {
       "pos": {
-        "x": 6,
-        "y": 5,
+        "x": 7,
+        "y": 4,
         "z": 3
       },
       "roles": [
-        "alternative_path"
+        "main_path"
       ]
     },
     {
@@ -131,6 +88,46 @@
     {
       "pos": {
         "x": 7,
+        "y": 6,
+        "z": 3
+      },
+      "roles": [
+        "main_path"
+      ]
+    },
+    {
+      "pos": {
+        "x": 3,
+        "y": 7,
+        "z": 3
+      },
+      "roles": [
+        "alternative_path"
+      ]
+    },
+    {
+      "pos": {
+        "x": 4,
+        "y": 7,
+        "z": 3
+      },
+      "roles": [
+        "alternative_path"
+      ]
+    },
+    {
+      "pos": {
+        "x": 5,
+        "y": 7,
+        "z": 3
+      },
+      "roles": [
+        "alternative_path"
+      ]
+    },
+    {
+      "pos": {
+        "x": 6,
         "y": 7,
         "z": 3
       },
@@ -141,27 +138,20 @@
     {
       "pos": {
         "x": 7,
-        "y": 3,
-        "z": 6
+        "y": 7,
+        "z": 3
       },
       "roles": [
-        "alternative_path"
-      ]
-    },
-    {
-      "pos": {
-        "x": 7,
-        "y": 4,
-        "z": 6
-      },
-      "roles": [
-        "alternative_path"
+        "alternative_path",
+        "branch_point",
+        "main_path",
+        "numbered_block"
       ]
     },
     {
       "pos": {
         "x": 3,
-        "y": 5,
+        "y": 1,
         "z": 6
       },
       "roles": [
@@ -172,7 +162,57 @@
     {
       "pos": {
         "x": 4,
-        "y": 5,
+        "y": 1,
+        "z": 6
+      },
+      "roles": [
+        "main_path"
+      ]
+    },
+    {
+      "pos": {
+        "x": 5,
+        "y": 1,
+        "z": 6
+      },
+      "roles": [
+        "main_path"
+      ]
+    },
+    {
+      "pos": {
+        "x": 5,
+        "y": 2,
+        "z": 6
+      },
+      "roles": [
+        "main_path"
+      ]
+    },
+    {
+      "pos": {
+        "x": 5,
+        "y": 3,
+        "z": 6
+      },
+      "roles": [
+        "main_path"
+      ]
+    },
+    {
+      "pos": {
+        "x": 6,
+        "y": 3,
+        "z": 6
+      },
+      "roles": [
+        "main_path"
+      ]
+    },
+    {
+      "pos": {
+        "x": 7,
+        "y": 3,
         "z": 6
       },
       "roles": [
@@ -186,7 +226,7 @@
         "z": 6
       },
       "roles": [
-        "main_path"
+        "alternative_path"
       ]
     },
     {
@@ -196,7 +236,7 @@
         "z": 6
       },
       "roles": [
-        "main_path"
+        "alternative_path"
       ]
     },
     {
@@ -206,10 +246,7 @@
         "z": 6
       },
       "roles": [
-        "alternative_path",
-        "branch_point",
-        "main_path",
-        "numbered_block"
+        "alternative_path"
       ]
     }
   ],
@@ -222,8 +259,22 @@
       },
       "end": {
         "x": 7,
+        "y": 7,
+        "z": 3
+      },
+      "type": "ladder",
+      "direction": "up"
+    },
+    {
+      "start": {
+        "x": 7,
+        "y": 7,
+        "z": 3
+      },
+      "end": {
+        "x": 7,
         "y": 5,
-        "z": 0
+        "z": 3
       },
       "type": "walk",
       "direction": "left-forward"
@@ -232,25 +283,25 @@
       "start": {
         "x": 7,
         "y": 5,
-        "z": 0
+        "z": 3
       },
       "end": {
         "x": 7,
-        "y": 5,
+        "y": 3,
         "z": 3
       },
-      "type": "ladder",
-      "direction": "up"
+      "type": "walk",
+      "direction": "left-forward"
     },
     {
       "start": {
         "x": 7,
-        "y": 5,
+        "y": 3,
         "z": 3
       },
       "end": {
         "x": 7,
-        "y": 5,
+        "y": 3,
         "z": 6
       },
       "type": "ladder",
@@ -259,12 +310,12 @@
     {
       "start": {
         "x": 7,
-        "y": 5,
+        "y": 3,
         "z": 6
       },
       "end": {
         "x": 5,
-        "y": 5,
+        "y": 3,
         "z": 6
       },
       "type": "walk",
@@ -273,12 +324,26 @@
     {
       "start": {
         "x": 5,
-        "y": 5,
+        "y": 3,
+        "z": 6
+      },
+      "end": {
+        "x": 5,
+        "y": 1,
+        "z": 6
+      },
+      "type": "walk",
+      "direction": "left-forward"
+    },
+    {
+      "start": {
+        "x": 5,
+        "y": 1,
         "z": 6
       },
       "end": {
         "x": 3,
-        "y": 5,
+        "y": 1,
         "z": 6
       },
       "type": "walk",
@@ -293,13 +358,13 @@
     },
     {
       "x": 7,
-      "y": 6,
-      "z": 0
+      "y": 7,
+      "z": 3
     },
     {
       "x": 7,
-      "y": 5,
-      "z": 0
+      "y": 6,
+      "z": 3
     },
     {
       "x": 7,
@@ -308,27 +373,47 @@
     },
     {
       "x": 7,
-      "y": 5,
+      "y": 4,
+      "z": 3
+    },
+    {
+      "x": 7,
+      "y": 3,
+      "z": 3
+    },
+    {
+      "x": 7,
+      "y": 3,
       "z": 6
     },
     {
       "x": 6,
-      "y": 5,
+      "y": 3,
       "z": 6
     },
     {
       "x": 5,
-      "y": 5,
+      "y": 3,
+      "z": 6
+    },
+    {
+      "x": 5,
+      "y": 2,
+      "z": 6
+    },
+    {
+      "x": 5,
+      "y": 1,
       "z": 6
     },
     {
       "x": 4,
-      "y": 5,
+      "y": 1,
       "z": 6
     },
     {
       "x": 3,
-      "y": 5,
+      "y": 1,
       "z": 6
     }
   ],
@@ -336,8 +421,17 @@
     {
       "base_pos": {
         "x": 7,
-        "y": 5,
+        "y": 7,
         "z": 0
+      },
+      "direction": "+x",
+      "height": 3
+    },
+    {
+      "base_pos": {
+        "x": 7,
+        "y": 3,
+        "z": 3
       },
       "direction": "+x",
       "height": 3
@@ -350,15 +444,6 @@
       },
       "direction": "+x",
       "height": 3
-    },
-    {
-      "base_pos": {
-        "x": 7,
-        "y": 7,
-        "z": 0
-      },
-      "direction": "+x",
-      "height": 3
     }
   ],
   "sequence_points": [],
@@ -367,8 +452,8 @@
       "label": 1,
       "pos": {
         "x": 7,
-        "y": 5,
-        "z": 6
+        "y": 7,
+        "z": 0
       },
       "marker_type": "branch_point"
     },
@@ -386,16 +471,7 @@
       "pos": {
         "x": 7,
         "y": 7,
-        "z": 0
-      },
-      "marker_type": "branch_point"
-    },
-    {
-      "label": 4,
-      "pos": {
-        "x": 7,
-        "y": 5,
-        "z": 0
+        "z": 3
       },
       "marker_type": "branch_point"
     }
@@ -405,41 +481,41 @@
       "branch_id": 1,
       "pos": {
         "x": 7,
-        "y": 5,
-        "z": 6
+        "y": 7,
+        "z": 0
       },
-      "main_path_direction": "right-forward",
+      "main_path_direction": "up",
       "alternative_path": [
         {
           "start": {
             "x": 7,
-            "y": 5,
-            "z": 6
+            "y": 7,
+            "z": 0
           },
           "end": {
-            "x": 7,
-            "y": 3,
-            "z": 6
+            "x": 5,
+            "y": 7,
+            "z": 0
           },
           "type": "walk",
-          "direction": "left-forward"
+          "direction": "right-forward"
         }
       ],
       "alternative_ordered_cubes": [
         {
           "x": 7,
-          "y": 5,
-          "z": 6
+          "y": 7,
+          "z": 0
         },
         {
-          "x": 7,
-          "y": 4,
-          "z": 6
+          "x": 6,
+          "y": 7,
+          "z": 0
         },
         {
-          "x": 7,
-          "y": 3,
-          "z": 6
+          "x": 5,
+          "y": 7,
+          "z": 0
         }
       ]
     },
@@ -450,7 +526,7 @@
         "y": 5,
         "z": 3
       },
-      "main_path_direction": "up",
+      "main_path_direction": "left-forward",
       "alternative_path": [
         {
           "start": {
@@ -459,9 +535,23 @@
             "z": 3
           },
           "end": {
+            "x": 7,
+            "y": 5,
+            "z": 6
+          },
+          "type": "ladder",
+          "direction": "up"
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": 5,
+            "z": 6
+          },
+          "end": {
             "x": 5,
             "y": 5,
-            "z": 3
+            "z": 6
           },
           "type": "walk",
           "direction": "right-forward"
@@ -474,14 +564,19 @@
           "z": 3
         },
         {
+          "x": 7,
+          "y": 5,
+          "z": 6
+        },
+        {
           "x": 6,
           "y": 5,
-          "z": 3
+          "z": 6
         },
         {
           "x": 5,
           "y": 5,
-          "z": 3
+          "z": 6
         }
       ]
     },
@@ -490,7 +585,7 @@
       "pos": {
         "x": 7,
         "y": 7,
-        "z": 0
+        "z": 3
       },
       "main_path_direction": "left-forward",
       "alternative_path": [
@@ -498,93 +593,56 @@
           "start": {
             "x": 7,
             "y": 7,
-            "z": 0
+            "z": 3
           },
           "end": {
-            "x": 7,
+            "x": 5,
             "y": 7,
             "z": 3
           },
-          "type": "ladder",
-          "direction": "up"
+          "type": "walk",
+          "direction": "right-forward"
+        },
+        {
+          "start": {
+            "x": 5,
+            "y": 7,
+            "z": 3
+          },
+          "end": {
+            "x": 3,
+            "y": 7,
+            "z": 3
+          },
+          "type": "walk",
+          "direction": "right-forward"
         }
       ],
       "alternative_ordered_cubes": [
-        {
-          "x": 7,
-          "y": 7,
-          "z": 0
-        },
         {
           "x": 7,
           "y": 7,
           "z": 3
-        }
-      ]
-    },
-    {
-      "branch_id": 4,
-      "pos": {
-        "x": 7,
-        "y": 5,
-        "z": 0
-      },
-      "main_path_direction": "up",
-      "alternative_path": [
-        {
-          "start": {
-            "x": 7,
-            "y": 5,
-            "z": 0
-          },
-          "end": {
-            "x": 5,
-            "y": 5,
-            "z": 0
-          },
-          "type": "walk",
-          "direction": "right-forward"
-        },
-        {
-          "start": {
-            "x": 5,
-            "y": 5,
-            "z": 0
-          },
-          "end": {
-            "x": 3,
-            "y": 5,
-            "z": 0
-          },
-          "type": "walk",
-          "direction": "right-forward"
-        }
-      ],
-      "alternative_ordered_cubes": [
-        {
-          "x": 7,
-          "y": 5,
-          "z": 0
         },
         {
           "x": 6,
-          "y": 5,
-          "z": 0
+          "y": 7,
+          "z": 3
         },
         {
           "x": 5,
-          "y": 5,
-          "z": 0
+          "y": 7,
+          "z": 3
         },
         {
           "x": 4,
-          "y": 5,
-          "z": 0
+          "y": 7,
+          "z": 3
         },
         {
           "x": 3,
-          "y": 5,
-          "z": 0
+          "y": 7,
+          "z": 3
         }
       ]
     }

@@ -1,16 +1,16 @@
 {
   "voxel_positions": [
     [
-      2,
-      2,
+      3,
+      3,
       1
     ]
   ],
   "target_yz_projection": [
     [
-      1,
-      1,
-      0
+      0,
+      0,
+      1
     ],
     [
       0,
@@ -25,7 +25,7 @@
   ],
   "target_xz_projection": [
     [
-      0,
+      1,
       1,
       1
     ],

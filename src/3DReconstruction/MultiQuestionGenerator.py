@@ -44,25 +44,12 @@ class MultiQuestionGenerator:
         game_state = game.get_game_state()
         target_count = game_state['target_count']
         
-        # 随机选择要显示的结构类型
-        structure_type = random.choice(['current', 'solution', 'custom'])
-        
-        if structure_type == 'current':
-            structure = game_state['current_state']['positions']
-        elif structure_type == 'solution':
-            structure = game_state['complete_solution']['positions']
-        else:  # custom
-            # 计算还可以添加的最大体素数量
-            current_count = game_state['current_state']['count']
-            remaining_count = target_count - current_count
-            
-            if remaining_count <= 0:
-                # 如果没有剩余空间，就使用current状态
-                structure = game_state['current_state']['positions']
-            else:
-                # 在剩余空间内随机生成
-                current_structure, new_voxels = game.generate_random_connected_voxels(random.randint(1, remaining_count))
-                structure = current_structure + new_voxels
+        # Multi-question mode asks all six templates about one shared state.
+        # Action, transition, and optimization tasks are defined for an
+        # in-progress puzzle, so the saved image/state must be the current
+        # structure rather than a solved or arbitrary custom structure.
+        structure_type = 'current'
+        structure = game_state['current_state']['positions']
         
         # 创建输出目录
         self._ensure_output_dirs()
@@ -156,9 +143,8 @@ class MultiQuestionGenerator:
                 qa_level = "Medium"
                 qa_type = 'Target Perception'
             elif question_type == 'action_outcome':
-                # 对于action_outcome类型，必须使用当前状态而不是自定义状态
                 question_result = self.qa_generator.generate_action_outcome_question(
-                    game_state['current_state']['positions'],
+                    structure,
                     game_state['complete_solution']['positions'],
                     game
                 )
