@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GameQA Example Viewer</title>
+    <link rel="stylesheet" href="/static/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <p class="eyebrow">Game-RL</p>
+        <h1>GameQA Example Viewer</h1>
+      </div>
+      <div class="topbar-right">
+        <div class="stats" id="globalStats"></div>
+        <button id="themeToggle" type="button" class="theme-toggle" title="Toggle light / dark theme">☾</button>
+      </div>
+    </header>
+
+    <main class="app-shell">
+      <aside class="sidebar">
+        <div class="control-grid">
+          <label class="wide">
+            <span>Game</span>
+            <select id="gameSelect"></select>
+          </label>
+          <label class="wide">
+            <span>Task</span>
+            <select id="taskFilter"></select>
+          </label>
+          <label>
+            <span>Difficulty</span>
+            <select id="qaLevelFilter"></select>
+          </label>
+          <label>
+            <span>Plot level</span>
+            <select id="plotLevelFilter"></select>
+          </label>
+          <label class="wide">
+            <span>Search <kbd>/</kbd></span>
+            <input id="sampleSearch" type="search" placeholder="id, description, question, answer...">
+          </label>
+        </div>
+        <div class="game-note" id="gameNote"></div>
+        <div class="list-header">
+          <span id="listCount"></span>
+          <button id="resetFilters" type="button" hidden>Reset filters</button>
+        </div>
+        <div class="sample-list" id="sampleList"></div>
+        <div class="sidebar-footer">
+          <span><kbd>←</kbd><kbd>→</kbd> navigate</span>
+          <span><kbd>/</kbd> search</span>
+          <span><kbd>Esc</kbd> close zoom</span>
+        </div>
+      </aside>
+
+      <section class="workspace">
+        <section class="image-panel">
+          <div class="panel-heading">
+            <div class="heading-text">
+              <p class="eyebrow" id="sampleKicker">Sample</p>
+              <h2 id="sampleTitle">Loading...</h2>
+            </div>
+            <div class="nav-buttons">
+              <button id="prevButton" type="button" title="Previous sample (←)" aria-label="Previous sample">&larr;</button>
+              <span class="nav-position" id="navPosition">– / –</span>
+              <button id="nextButton" type="button" title="Next sample (→)" aria-label="Next sample">&rarr;</button>
+            </div>
+          </div>
+          <div class="image-frame" id="imageFrame" title="Click to zoom">
+            <img id="sampleImage" alt="GameQA sample image">
+            <div class="image-placeholder" id="imagePlaceholder" hidden>No image for this sample</div>
+          </div>
+          <div class="image-toolbar">
+            <span class="image-name" id="imageName"></span>
+            <div class="image-actions">
+              <button id="copyImage" class="copy-btn" type="button" title="Copy the original image to clipboard">Copy image</button>
+              <a id="imageOpenLink" href="#" target="_blank" rel="noopener">Open original ↗</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="detail-panel">
+          <div class="meta-strip" id="metaStrip"></div>
+
+          <div class="detail-scroll">
+          <article class="qa-block">
+            <div class="block-heading">
+              <h3>Question</h3>
+              <button class="copy-btn" id="copyQuestion" type="button">Copy</button>
+            </div>
+            <div id="questionText" class="rich-text"></div>
+          </article>
+
+          <article class="qa-block" id="optionsBlock">
+            <h3>Options</h3>
+            <ol id="optionsList" class="options-list"></ol>
+          </article>
+
+          <article class="answer-block">
+            <h3>Answer</h3>
+            <div id="answerText"></div>
+          </article>
+
+          <article class="qa-block" id="analysisBlock">
+            <h3>Analysis</h3>
+            <div id="analysisText" class="rich-text"></div>
+          </article>
+
+          <details class="json-block" id="stateBlock">
+            <summary>
+              <span class="summary-title">State JSON</span>
+              <button class="copy-btn" id="copyState" type="button">Copy</button>
+            </summary>
+            <pre id="stateJson"></pre>
+          </details>
+
+          <details class="json-block">
+            <summary>
+              <span class="summary-title">Raw sample</span>
+              <button class="copy-btn" id="copyRaw" type="button">Copy</button>
+            </summary>
+            <pre id="rawJson"></pre>
+          </details>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <div class="lightbox" id="lightbox" hidden>
+      <img id="lightboxImage" alt="Zoomed sample image">
+      <p class="lightbox-hint">Click anywhere or press Esc to close</p>
+    </div>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
