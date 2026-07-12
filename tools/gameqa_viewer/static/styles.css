@@ -403,6 +403,21 @@ input:focus {
   color: var(--plot-ink);
 }
 
+.mini-tag.tag-plot.plot-easy {
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+.mini-tag.tag-plot.plot-medium {
+  background: var(--amber-soft);
+  color: var(--amber);
+}
+
+.mini-tag.tag-plot.plot-hard {
+  background: #fdeaea;
+  color: #b42318;
+}
+
 .mini-tag.level-easy {
   background: var(--green-soft);
   color: var(--green);
@@ -419,6 +434,11 @@ input:focus {
 }
 
 :root[data-theme="dark"] .mini-tag.level-hard {
+  background: #341518;
+  color: #f19999;
+}
+
+:root[data-theme="dark"] .mini-tag.tag-plot.plot-hard {
   background: #341518;
   color: #f19999;
 }

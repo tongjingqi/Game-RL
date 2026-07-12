@@ -288,7 +288,7 @@ function renderSampleList() {
         <div class="mini-tags">
           ${sample.qa_type ? `<span class="mini-tag tag-type">${escapeHtml(sample.qa_type)}</span>` : ""}
           ${sample.qa_level ? `<span class="mini-tag level-${escapeHtml(String(sample.qa_level).toLowerCase())}">${escapeHtml(sample.qa_level)}</span>` : ""}
-          ${sample.plot_level ? `<span class="mini-tag tag-plot">plot ${escapeHtml(sample.plot_level)}</span>` : ""}
+          ${sample.plot_level ? `<span class="mini-tag tag-plot plot-${escapeHtml(String(sample.plot_level).toLowerCase())}">plot ${escapeHtml(sample.plot_level)}</span>` : ""}
         </div>
       `;
       button.addEventListener("click", () => selectSample(sample.index));
