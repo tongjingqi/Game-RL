@@ -12,6 +12,8 @@ Official repository for paper "[Game-RL: Synthesizing Multimodal Verifiable Game
 
 ## 🎊 News
 
+* [2026/07] 🔥**Peking University and WeChat AI** use our Game-RL data synthesis code in the ICML 2026 paper [ReaForest](https://openreview.net/forum?id=Ktvb8rqFV7) for 2D Maze, 3D Maze, and Sokoban spatial-planning tasks.
+* [2026/06] 🔥**Shanghai AI Lab** uses our Game-RL codebase in [MoTiF](https://arxiv.org/abs/2606.12886), building 15K+ Sokoban and Maze interleaved-thinking samples.
 * [2026/04] 🔥**Princeton University** uses our GameQA dataset in their [Vero](https://github.com/zlab-princeton/vero) project.
 * [2026/03] 🔥**National University of Singapore** uses our games in the [Gym-V](https://arxiv.org/pdf/2603.15432) platform.
 * [2026/02] 🔥**Alibaba Group and Shanghai Jiao Tong University** use our GameQA-140K dataset at scale in the [DeepVision-103K](https://huggingface.co/datasets/skylenage/DeepVision-103K#%F0%9F%99%8F-acknowledgements) dataset, which accounts for around 50% of its "visual logic problems".
