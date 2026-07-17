@@ -1,0 +1,48 @@
+{
+  "size": 3,
+  "grid": [
+    [
+      0,
+      1,
+      1
+    ],
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      1
+    ]
+  ],
+  "board_kind": "two_press",
+  "generation_presses": [
+    [
+      0,
+      2
+    ],
+    [
+      2,
+      2
+    ]
+  ],
+  "on_count": 4,
+  "solver": {
+    "solvable": true,
+    "nullity": 0,
+    "min_weight": 2,
+    "min_presses": [
+      [
+        0,
+        2
+      ],
+      [
+        2,
+        2
+      ]
+    ],
+    "num_solutions": 1
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "code_length": 4,
+  "num_colors": 6,
+  "colors": [
+    "red",
+    "orange",
+    "yellow",
+    "green",
+    "blue",
+    "purple"
+  ],
+  "board_type": "multi",
+  "secret": [
+    "orange",
+    "blue",
+    "orange",
+    "orange"
+  ],
+  "guesses": [
+    {
+      "row": 1,
+      "pegs": [
+        "blue",
+        "blue",
+        "blue",
+        "purple"
+      ],
+      "black": 1,
+      "white": 0
+    },
+    {
+      "row": 2,
+      "pegs": [
+        "yellow",
+        "purple",
+        "yellow",
+        "blue"
+      ],
+      "black": 0,
+      "white": 1
+    },
+    {
+      "row": 3,
+      "pegs": [
+        "blue",
+        "yellow",
+        "yellow",
+        "green"
+      ],
+      "black": 0,
+      "white": 1
+    }
+  ],
+  "consistent_count": 46
+}

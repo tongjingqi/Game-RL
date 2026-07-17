@@ -1,0 +1,58 @@
+{
+  "rows": 7,
+  "cols": 7,
+  "blocked": [
+    [
+      1,
+      1
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      4,
+      3
+    ],
+    [
+      5,
+      6
+    ],
+    [
+      6,
+      6
+    ]
+  ],
+  "star": [
+    2,
+    6
+  ],
+  "die": [
+    3,
+    3
+  ],
+  "orientation": {
+    "top": 4,
+    "bottom": 3,
+    "north": 1,
+    "south": 6,
+    "east": 5,
+    "west": 2
+  },
+  "move_sequence": [
+    "West",
+    "North",
+    "North",
+    "South"
+  ],
+  "extra_move_sequence": [
+    "East",
+    "West",
+    "East",
+    "North"
+  ]
+}

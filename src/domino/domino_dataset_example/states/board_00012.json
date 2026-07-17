@@ -1,0 +1,85 @@
+{
+  "chain": [
+    [
+      4,
+      6
+    ],
+    [
+      6,
+      3
+    ],
+    [
+      3,
+      0
+    ],
+    [
+      0,
+      6
+    ],
+    [
+      6,
+      2
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      5
+    ],
+    [
+      5,
+      5
+    ]
+  ],
+  "chain_oriented": true,
+  "open_left": 4,
+  "open_right": 5,
+  "hand": [
+    {
+      "label": "A",
+      "tile": [
+        6,
+        5
+      ]
+    },
+    {
+      "label": "B",
+      "tile": [
+        2,
+        5
+      ]
+    },
+    {
+      "label": "C",
+      "tile": [
+        3,
+        4
+      ]
+    },
+    {
+      "label": "D",
+      "tile": [
+        6,
+        6
+      ]
+    },
+    {
+      "label": "E",
+      "tile": [
+        4,
+        2
+      ]
+    },
+    {
+      "label": "F",
+      "tile": [
+        5,
+        1
+      ]
+    }
+  ],
+  "table_note": "doubles vertical",
+  "plot_level": "Hard"
+}

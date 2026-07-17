@@ -1,0 +1,59 @@
+{
+  "chain": [
+    [
+      3,
+      4
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      5,
+      6
+    ],
+    [
+      6,
+      1
+    ],
+    [
+      1,
+      2
+    ]
+  ],
+  "chain_oriented": true,
+  "open_left": 3,
+  "open_right": 2,
+  "hand": [
+    {
+      "label": "A",
+      "tile": [
+        2,
+        2
+      ]
+    },
+    {
+      "label": "B",
+      "tile": [
+        2,
+        0
+      ]
+    },
+    {
+      "label": "C",
+      "tile": [
+        4,
+        0
+      ]
+    },
+    {
+      "label": "D",
+      "tile": [
+        0,
+        0
+      ]
+    }
+  ],
+  "table_note": "doubles vertical",
+  "plot_level": "Easy"
+}
