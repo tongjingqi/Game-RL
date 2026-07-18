@@ -48,7 +48,7 @@ The Code2Logic approach involves three main steps:
 Our GameQA dataset provides diverse verifiable game tasks along with controllable difficulty, extending RL training scenarios for VLMs to the domain of video games.
 * It encompasses 30 different games classified into 4 categories based on the core capabilities required to solve game tasks.
 * Four games from different categories and their example data samples are illustrated in the image above.
-* The GameQA data samples are also reasonably graded by difficulty (see [🤗 GameQA-140K](https://huggingface.co/datasets/Gabriel166/GameQA-140K)).
+* The GameQA data samples are also reasonably graded by difficulty (see [🤗 GameQA-140K](https://huggingface.co/datasets/OpenMOSS-Team/GameQA-140K)).
 
 ### Key Findings
 
