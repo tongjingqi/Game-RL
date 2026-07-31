@@ -12,6 +12,7 @@ Official repository for paper "[Game-RL: Synthesizing Multimodal Verifiable Game
 
 ## 🎊 News
 
+* [2026/07] 🔥**Peking University and Kuaishou Kling Team** evaluate their agentic visual reasoning method [Beacon](https://arxiv.org/abs/2607.28595) on our GameQA benchmark. Beacon learns *when* tools are truly needed (Mode Adaptiveness) and *how* tool use extends capability on hard problems (Tool Effect), and achieves the highest accuracy on GameQA among open-source models of the same scale (7B/8B), significantly outperforming its Qwen3-VL-8B-Instruct base.
 * [2026/07] 🔥**Peking University and WeChat AI** use our Game-RL data synthesis code in the ICML 2026 paper [ReaForest](https://openreview.net/forum?id=Ktvb8rqFV7) for 2D Maze, 3D Maze, and Sokoban spatial-planning tasks.
 * [2026/06] 🔥**Shanghai AI Lab** uses our Game-RL codebase in [MoTiF](https://arxiv.org/abs/2606.12886), building 15K+ Sokoban and Maze interleaved-thinking samples.
 * [2026/04] 🔥**Princeton University** uses our GameQA dataset in their [Vero](https://github.com/zlab-princeton/vero) project.
