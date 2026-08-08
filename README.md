@@ -4,7 +4,7 @@
 
 Official repository for paper "[Game-RL: Synthesizing Multimodal Verifiable Game Data to Boost VLMs' General Reasoning](https://proceedings.iclr.cc/paper_files/paper/2026/hash/3ad98e6306c5ed8a228b7240152f65af-Abstract-Conference.html)". This is the first work, to the best of our knowledge, that adapts game code to synthesize **multimodal game data** for ***training*** VLMs. When we apply **Game-RL**, which is simple GRPO on **GameQA** (synthesized via our **Code2Logic** approach), multiple cutting-edge open-source VLMs **exhibit out-of-domain generalization**. Remarkably, game data provides improvements comparable to general multimodal reasoning datasets (e.g. geometry/chart). More importantly, scaling up game diversity or game data volume consistently improves VLMs' generalizable reasoning capabilities. Our findings highlight scaling reinforcement learning in game environments as a promising direction for enhancing generalizable multimodal reasoning in foundation models.
 
-[ [📖 Paper](Game-RL.pdf) ] [ [🔗 Project Website](https://iclr26-game-rl.github.io/) ] [ [🔍 GameQA Data Viewer](https://iclr26-game-rl.github.io/gameqa_viewer/) ]
+[ [📖 Paper](Game-RL.pdf) ] [ [🔗 Project Website](https://iclr26-game-rl.github.io/) ] [ [🔍 GameQA Data Viewer](https://iclr26-game-rl.github.io/gameqa_viewer/) ] [ [📄 Citation](#-citation) ]
 
 [[🤗 GameQA-140K Dataset](https://huggingface.co/datasets/OpenMOSS-Team/GameQA-140K) ] [[🤗 GameQA-5K Dataset](https://huggingface.co/datasets/OpenMOSS-Team/GameQA-5K) ] [[🤗 GameQA-text Dataset](https://huggingface.co/datasets/OpenMOSS-Team/GameQA-text) ]
 
