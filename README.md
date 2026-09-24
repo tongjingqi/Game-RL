@@ -197,12 +197,3 @@ If you find our work (Game-RL) useful, we would appreciate it if you could cite 
   year = {2026}
 }
 ```
-
-```bibtex
-@article{tong2025game,
-  title={Game-RL: Synthesizing Multimodal Verifiable Game Data to Boost VLMs' General Reasoning},
-  author={Tong, Jingqi and Tang, Jixin and Li, Hangcheng and Mou, Yurong and Zhang, Ming and Zhao, Jun and Wen, Yanbo and Song, Fan and Zhan, Jiahao and Lu, Yuyang and others},
-  journal={arXiv preprint arXiv:2505.13886},
-  year={2025}
-}
-```
