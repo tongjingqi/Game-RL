@@ -4,34 +4,34 @@
     "mines": 3,
     "mine_board": [
         [
-            "M",
-            "M",
+            0,
+            1,
             "M",
             1
         ],
         [
+            0,
+            1,
             2,
-            3,
-            2,
-            1
+            2
         ],
         [
             0,
             0,
-            0,
-            0
+            2,
+            "M"
         ],
         [
             0,
             0,
-            0,
-            0
+            2,
+            "M"
         ]
     ],
     "revealed": [
         [
-            false,
-            false,
+            true,
+            true,
             false,
             false
         ],
@@ -39,25 +39,25 @@
             true,
             true,
             true,
-            true
+            false
         ],
         [
             true,
             true,
             true,
-            true
+            false
         ],
         [
             true,
             true,
             true,
-            true
+            false
         ]
     ],
     "flagged": [
         [
-            true,
-            true,
+            false,
+            false,
             true,
             false
         ],
@@ -71,7 +71,7 @@
             false,
             false,
             false,
-            false
+            true
         ],
         [
             false,

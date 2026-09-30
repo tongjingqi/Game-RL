@@ -103,17 +103,17 @@ The `mcq_dataset.json` file contains the following fields for each question:
 
 ```json
     {
-        "data_id": "tictactoe-mcq-6-State Prediction",
-        "qa_type": "State Prediction",
-        "question_id": 3,
-        "question_description": "Questions about the path to transition from one state to another.",
+        "data_id": "tictactoe-mcq-6-StrategyOptimization",
+        "qa_type": "Strategy Optimization",
+        "question_id": 2,
+        "question_description": "Questions about the optimal strategy to take a move of the current player of the board.",
         "image": "images/board_6.png",
         "state": "states/board_6.json",
-        "plot_level": "Medium",
-        "qa_level": "Hard",
-        "question": "If the current player moves to (0, 2), what is the opponent's optimal move?",
-        "answer": "B",
-        "analysis": "Since the current player moves to (0, 2), after that, Current player is X, opponent is O. Must block opponent O's potential double threat on Row 0 and Column 0.",
+        "plot_level": "Easy",
+        "qa_level": "Medium",
+        "question": "Principles: Tic-Tac-Toe is a classic two-player game played on a 3x3 grid, (row, col) from (0, 0) to (2, 2). Players take turns marking a space in the grid, one using **O** (the red block) and the other using **X** (the blue block). In each game, player **O** starts first. The objective is to be the first to get three of your marks in a row (horizontally, vertically, or diagonally). If all nine squares are filled without either player achieving this, the game ends in a draw. Notice: the current player to make a move should be inferred from the number of pieces for each players on the board. When inferring the optimal move, if optimal move can be inferred by some rules, choose the optimal move. Otherwise, choose the first move. (The order of choices is (0, 0), (0, 1), (0, 2), (1, 0), ..., (2, 2), choose the first move that is not occupied)\n\nQuestion: What is the optimal move for the current player? If no move exists, choose the answer \"None\".\n\nOptions: ['A.None', 'B.(0, 0)', 'C.(0, 1)', 'D.(0, 2)', 'E.(1, 0)', 'F.(1, 1)', 'G.(1, 2)', 'H.(2, 0) or (2, 1) or (2, 2)']",
+        "answer": "G",
+        "analysis": "The current board is [['O', 'X', 'O'], ['X', 'X', ' '], ['O', ' ', 'O']]. Since the player \"O\" plays first in each game, if the count of \"O\" is the same as \"X\", the current player is \"O\". Otherwise, the current player is \"X\". The count of \"O\" is 4 and the count of \"X\" is 3, so the player now is X. Current player is X, opponent is O. Player X can win on Row 1, so player X should choose position (1, 2).",
         "options": [
             "A.None",
             "B.(0, 0)",
@@ -122,9 +122,7 @@ The `mcq_dataset.json` file contains the following fields for each question:
             "E.(1, 0)",
             "F.(1, 1)",
             "G.(1, 2)",
-            "H.(2, 0)",
-            "I.(2, 1)",
-            "J.(2, 2)"
+            "H.(2, 0) or (2, 1) or (2, 2)"
         ]
     },
 ```
@@ -135,7 +133,7 @@ The recommendations for the Tic-Tac-Toe analysis provided in the data are based 
 (Executed sequentially; if the preceding condition is not met, the subsequent one is executed.)
 
 1. If the current player can win immediately, choose the corresponding position.
-2. If the opponent can win immediately, choose the corresponding position to block. (If the opponent has multiple immediate winning options, then the opponent is guaranteed to win, and an empty suggestion is returned.)
+2. If the opponent can win immediately, choose the corresponding position to block. (If the opponent has multiple immediate winning options, they cannot all be blocked, so no rule applies and the first empty position is chosen as in rule 5; "None" is only the answer when a move fails or wins immediately.)
 3. If the current player can create a "double threat" (after placing a piece, there are two rows/columns/diagonals each with two of the current player's pieces and no opponent's pieces, meaning the current player is guaranteed to win), choose the corresponding position.
 4. If the opponent can create a "double threat", block the corresponding position.
 5. Choose the first empty position from `(0, 0)` to `(2, 2)`.
@@ -155,9 +153,9 @@ Example text state fragment:
 ```text
 TICTACTOE STATE:
 Board:
-Row 0: [' ', 'O', ' ']
-Row 1: [' ', ' ', ' ']
-Row 2: [' ', 'X', 'O']
+Row 0: ['O', 'X', 'O']
+Row 1: ['X', 'X', ' ']
+Row 2: ['O', ' ', 'O']
 ```
 
 ## License

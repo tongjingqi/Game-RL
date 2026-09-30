@@ -49,7 +49,7 @@ The game uses two difficulty notions:
   - `action_outcome`: predict the projection after adding specified voxels
 - `Hard`
   - `strategy_optimization`: find the minimum number of extra voxels needed
-  - `transition_path`: choose the correct voxel-adding sequence
+  - `transition_path`: choose the correct set of voxel positions to add
 
 ### Structure Difficulty (`plot_level`)
 
@@ -184,15 +184,15 @@ Example text state fragment:
 
 ```text
 3D RECONSTRUCTION STATE:
-Current voxel positions: [[2, 1, 1], [2, 2, 1]]
-Remaining voxels: 4
+Current voxel positions: [[3, 2, 1]]
+Remaining voxels: 3
 Target YZ/front projection, listed from bottom z=1 to top z=3:
-z=1 layer: [1, 1, 1]
-z=2 layer: [0, 1, 0]
+z=1 layer: [0, 1, 0]
+z=2 layer: [1, 1, 0]
 z=3 layer: [0, 0, 0]
 Target XZ/side projection, listed from bottom z=1 to top z=3:
-z=1 layer: [0, 1, 1]
-z=2 layer: [0, 0, 1]
+z=1 layer: [0, 0, 1]
+z=2 layer: [0, 1, 1]
 z=3 layer: [0, 0, 0]
 ```
 

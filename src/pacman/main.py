@@ -23,7 +23,10 @@ def generate_valid_path(game, start, max_length):
     
     if not valid_positions:
         return []
-        
+
+    # Pac-Man never walks through a ghost (it would be caught there)
+    ghost_cells = {ghost.position for ghost in game.ghosts}
+
     # Random path length between 1 and max_length
     desired_length = random.randint(0, max_length) if max_length > 1 else 1
     
@@ -51,8 +54,9 @@ def generate_valid_path(game, start, max_length):
             next_pos = (row + direction[0], col + direction[1])
             
             # Check if move is valid
-            if (next_pos not in game.walls and 
-                next_pos not in visited and 
+            if (next_pos not in game.walls and
+                next_pos not in ghost_cells and
+                next_pos not in visited and
                 0 <= next_pos[0] < game.grid_size and 
                 0 <= next_pos[1] < game.grid_size):
                 
@@ -147,10 +151,13 @@ def main():
                         game.beans.remove(position)
                         game.score += 1
                 
-                # Set Pac-Man's final position and direction
-                final_pos = path[-1]
-                prev_pos = path[-2] if len(path) > 1 else path[0]
-                
+                # Pac-Man reached its cell by walking this path from the far end, so it faces away
+                # from the path (the cell behind it is the one it just ate). Putting Pac-Man at the far
+                # end instead would mostly leave it in a dead end: the path usually runs to the cell
+                # farthest from the start, because the desired length is rarely reachable.
+                final_pos = path[0]
+                prev_pos = path[1] if len(path) > 1 else path[0]
+
                 # Calculate direction based on final movement
                 row_diff = final_pos[0] - prev_pos[0]
                 col_diff = final_pos[1] - prev_pos[1]
@@ -166,12 +173,12 @@ def main():
             
             # Generate chessboard image
             image_filename = f"image_{str(sample_index).zfill(5)}.png"  # Sequential numbering
-            image_path = os.path.join("images", image_filename)  # Relative path
+            image_path = f"images/{image_filename}"  # Relative path (always with "/")
             generate_game_image(game, output_image_dir, image_filename)
 
             # Save game state
             state_filename = f"board_{str(sample_index).zfill(5)}.json"  # Sequential numbering
-            state_path = os.path.join("states", state_filename)  # Relative path
+            state_path = f"states/{state_filename}"  # Relative path (always with "/")
             game.save_to_json(output_state_dir, state_filename)
 
             for j in range(0,10):   # Ten questions per image

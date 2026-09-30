@@ -80,6 +80,7 @@ Jewel2 is a strategic puzzle game played on a grid. Your primary objective is to
    - **Conditions**:
      - Both elements involved in the swap must be basic elements. Swaps involving special elements are rejected.
      - The swap must result in a valid elimination; otherwise, the swap is undone.
+     - Swapping two identical elements is allowed: after any swap, every line of three or more identical elements through either swapped cell is eliminated, even if that line already existed before the swap.
    - **State Changes**:
      - **Successful Swap**: Elements are exchanged, any resulting eliminations are performed, and the score (Total Cleared) is updated accordingly.
      - **Unsuccessful Swap**: Elements revert to their original positions, and no changes are made to the score.
@@ -146,6 +147,77 @@ Maximize your **Total Cleared** count by strategically performing clear and swap
 - **Row and Column Elimination**: When checking whether an ordinary element can be eliminated, we check whether its rows and columns have three or more identical elements. If both rows and columns meet the elimination rule, both rows and columns are eliminated.
 - **Chain Elimination**: After the elimination operation is performed and new elements are generated, no chain elimination will occur.
 """
+
+Q6_NOTATION = ("If the answer is a swap command, name the upper cell of a vertical swap with `down`, "
+               "or the left cell of a horizontal swap with `right` "
+               "(for example, write `swap 1 2 right` rather than `swap 1 3 left`).")
+
+
+class UnknownRefill:
+    """Stands for a random refill: '?' never forms a line, triggers nothing and cannot be cleared."""
+
+    def next_chess(self) -> str:
+        return "?"
+
+
+def guaranteed_clear(chessboard: Chessboard, command: str) -> int:
+    """Execute `command` and return how many elements it clears for every possible refill.
+
+    Cells refilled after an earlier command hold '?' (see UnknownRefill). A swap involving one is
+    not guaranteed to happen (the refill could be a special element), and '+' / '|' also clear
+    the refilled cells in their area whatever those turn out to be.
+    """
+    parts = command.split()
+    x, y = int(parts[1]), int(parts[2])
+    board = chessboard.chessboard
+    if parts[0] == "swap":
+        dx, dy = {"up": (-1, 0), "down": (1, 0), "left": (0, -1), "right": (0, 1)}[parts[3]]
+        nx, ny = x + dx, y + dy
+        if 0 <= nx < chessboard.size and 0 <= ny < chessboard.size and "?" in (board[x][y], board[nx][ny]):
+            return 0
+        score_before = chessboard.score
+        return chessboard.score - score_before if chessboard.swap_chess(x, y, parts[3]) else 0
+    if board[x][y] not in ("+", "|"):
+        return chessboard.clear_chess(x, y)
+    chessboard.reset_signboard()
+    chessboard.check_chess(x, y)
+    unknown = sum(chessboard.signboard[i][j] == 1 and board[i][j] == "?"
+                  for i in range(chessboard.size) for j in range(chessboard.size))
+    cleared = chessboard.delete_chess() + unknown
+    chessboard.fill_chess()
+    return cleared
+
+
+def evaluate_single_commands(level, size):
+    """Every single command that clears something, with the number of elements it clears.
+
+    Each swap is listed once, named by its upper cell with `down` or its left cell with `right`
+    (the notation the q6 prompt asks for).
+    """
+    valid_moves = []
+    for r in range(size):
+        for c in range(size):
+            for d in ["down", "right"]:
+                temp_level = copy.deepcopy(level)
+                if temp_level.chessboard.swap_chess(r, c, d):
+                    cleared = temp_level.chessboard.score - level.chessboard.score
+                    valid_moves.append({"command": f"swap {r} {c} {d}", "cleared": cleared})
+    for r in range(size):
+        for c in range(size):
+            temp_level = copy.deepcopy(level)
+            cleared = temp_level.chessboard.clear_chess(r, c)
+            if cleared > 0:  # Only add if it actually clears something
+                valid_moves.append({"command": f"clear {r} {c}", "cleared": cleared})
+    return valid_moves
+
+
+def has_unique_best_command(level, size):
+    """q6 is a fill-in-the-blank with one gold command, so the best command must be unique."""
+    valid_moves = evaluate_single_commands(level, size)
+    if not valid_moves:
+        return True
+    max_cleared = max(move["cleared"] for move in valid_moves)
+    return sum(move["cleared"] == max_cleared for move in valid_moves) == 1
 
 def find_valid_clear_position(level, size):
     """
@@ -248,6 +320,9 @@ def generate_jewel2_QA(level: Level, num: int, size: int) -> Tuple[str, str, str
     # Initialize options as None
     options = None
     
+    # The coordinate section of the prompt names the bottom-right cell of this board size
+    prompt = question_prompt.replace("{size_minus_one}", str(size - 1))
+
     # Handle each question type accordingly
     if qa_type == "Target Perception" and "How many '{element}' elements are currently on the board?" in question_template:
         # Question Type 0
@@ -255,7 +330,7 @@ def generate_jewel2_QA(level: Level, num: int, size: int) -> Tuple[str, str, str
         # Find positions and count of the specified element
         positions = [(r, c) for r in range(size) for c in range(size) if level.chessboard.chessboard[r][c] == element]
         count = len(positions)
-        question = question_prompt + f"\n\n**Question:** {question_template.format(element=element)}"
+        question = prompt + f"\n\n**Question:** {question_template.format(element=element)}"
         answer = str(count)
         analysis = (
             f"By iterating through each row and column of the chessboard, we identified and counted all occurrences of the '{element}' element."
@@ -265,27 +340,22 @@ def generate_jewel2_QA(level: Level, num: int, size: int) -> Tuple[str, str, str
         )
     
     elif qa_type == "Target Perception" and "Which of the following positions does element '{element}' reside in?" in question_template:
-        while True:
-            # Randomly select an element from the common elements
-            element = random.choice(common_elements)
+        # Randomly select an element that is on the board and leaves at least 7 other cells for
+        # the incorrect options (padding with arbitrary cells could list more cells holding it)
+        size = len(level.chessboard.chessboard)
+        candidates = [e for e in common_elements
+                      if 1 <= sum(row.count(e) for row in level.chessboard.chessboard) <= size * size - 7]
+        if not candidates:
+            raise ValueError("No element leaves enough incorrect positions for this question")
+        element = random.choice(candidates)
             
-            # Find the positions where the element resides
-            size = len(level.chessboard.chessboard)
-            positions = [(r, c) for r in range(size) for c in range(size) if level.chessboard.chessboard[r][c] == element]
-
-            # positions is not empty
-            if positions:
-                break
+        # Find the positions where the element resides
+        positions = [(r, c) for r in range(size) for c in range(size) if level.chessboard.chessboard[r][c] == element]
 
         all_positions = [(r, c) for r in range(size) for c in range(size)]
         
         # Generate incorrect candidates: positions where the element does NOT reside
         incorrect_candidates = [pos for pos in all_positions if pos not in positions]
-        
-        # If there aren't enough incorrect candidates, randomly select incorrect positions
-        if len(incorrect_candidates) < 7:
-            # If there are not enough incorrect positions, we can randomly pick from all positions
-            incorrect_candidates = random.sample(all_positions, 7)
         
         # Select one correct option from the positions where the element resides
         correct_position = random.choice(positions)
@@ -304,7 +374,7 @@ def generate_jewel2_QA(level: Level, num: int, size: int) -> Tuple[str, str, str
         answer = correct_answer_letter
 
         # Prepare the question
-        question = question_prompt + f"\n\n**Question:**{question_template.format(element=element)}" + "\n\n**Options:**\n" + "\n".join(options)
+        question = prompt + f"\n\n**Question:**{question_template.format(element=element)}" + "\n\n**Options:**\n" + "\n".join(options)
         
         # Analysis: explain where the element is and where it isn't
         analysis = (
@@ -322,7 +392,7 @@ def generate_jewel2_QA(level: Level, num: int, size: int) -> Tuple[str, str, str
                     special_positions[level.chessboard.chessboard[r][c]].append((r, c))
 
         count = sum(len(positions) for positions in special_positions.values())
-        question = question_prompt + f"\n\n**Question:** {question_template}"
+        question = prompt + f"\n\n**Question:** {question_template}"
         answer = str(count)
         analysis = (
             f"By iterating through the chessboard, we counted all special elements (a, b, c, d, e, +, |).\n\n"
@@ -348,7 +418,7 @@ def generate_jewel2_QA(level: Level, num: int, size: int) -> Tuple[str, str, str
             y = random.randint(0, size - 1)
 
         target = level.chessboard.chessboard[x][y]
-        question = question_prompt + f"\n\n**Question:** {question_template.format(x=x, y=y)}"
+        question = prompt + f"\n\n**Question:** {question_template.format(x=x, y=y)}"
         
         # Simulate clear
         simulated_level = copy.deepcopy(level)
@@ -459,7 +529,7 @@ def generate_jewel2_QA(level: Level, num: int, size: int) -> Tuple[str, str, str
             pos = random.choice(directions)
 
         target_swap = (x, y, pos)
-        question = question_prompt + f"\n\n**Question:** {question_template.format(x=x, y=y, pos=pos)}"
+        question = prompt + f"\n\n**Question:** {question_template.format(x=x, y=y, pos=pos)}"
         
         # Simulate swap
         simulated_level = copy.deepcopy(level)
@@ -581,36 +651,14 @@ def generate_jewel2_QA(level: Level, num: int, size: int) -> Tuple[str, str, str
         while command2 == command1:
             command2 = random.choice(possible_commands)
 
+        # The elements that fall in after the first command are random; "at least" counts what the
+        # two commands clear for every possible refill (refilled cells are unknown '?' cells)
         simulated_level = copy.deepcopy(level)
-        total_cleared = 0
-        cleared1 = 0
-        cleared2 = 0
-
-        # Execute first command
-        score_before_command = simulated_level.chessboard.score
-        if command1.startswith("clear"):
-            _, x1, y1 = command1.split()
-            cleared1 = simulated_level.chessboard.clear_chess(int(x1), int(y1))
-        elif command1.startswith("swap"):
-            _, x1, y1, pos1 = command1.split()
-            success1 = simulated_level.chessboard.swap_chess(int(x1), int(y1), pos1)
-            if success1:
-                cleared1 = simulated_level.chessboard.score - score_before_command
-        simulated_level.total_cleared += cleared1
-        total_cleared += cleared1
-
-        # Execute second command
-        score_before_command = simulated_level.chessboard.score
-        if command2.startswith("clear"):
-            _, x2, y2 = command2.split()
-            cleared2 = simulated_level.chessboard.clear_chess(int(x2), int(y2))
-        elif command2.startswith("swap"):
-            _, x2, y2, pos2 = command2.split()
-            success2 = simulated_level.chessboard.swap_chess(int(x2), int(y2), pos2)
-            if success2:
-                cleared2 = simulated_level.chessboard.score - score_before_command
-        simulated_level.total_cleared += cleared2
-        total_cleared += cleared2
+        simulated_level.chessboard.randomizer = UnknownRefill()
+        cleared1 = guaranteed_clear(simulated_level.chessboard, command1)
+        cleared2 = guaranteed_clear(simulated_level.chessboard, command2)
+        simulated_level.total_cleared += cleared1 + cleared2
+        total_cleared = cleared1 + cleared2
 
         answer = str(total_cleared)
         analysis = (
@@ -618,41 +666,20 @@ def generate_jewel2_QA(level: Level, num: int, size: int) -> Tuple[str, str, str
             f"and executing `{command2}` resulted in vertically/horizontally clearing {cleared2} elements. "
             f"Overall, a total of {total_cleared} elements were cleared."
         )
-        question = question_prompt + f"\n\n**Question:** {question_template.format(command1=command1, command2=command2)}"
+        question = prompt + f"\n\n**Question:** {question_template.format(command1=command1, command2=command2)}"
         # No options for fill-in-the-blank
         options = None
 
     elif qa_type == "Strategy Optimization" and "What command will result in the maximum number of elements being cleared in a single move?" in question_template:
         # Question Type 6
-        question = question_prompt + f"\n\n**Question:** {question_template}"
+        question = prompt + f"\n\n**Question:** {question_template} {Q6_NOTATION}"
 
-        max_cleared = 0
-        best_command = "No command can clear any elements."
-        valid_moves = []  # List to store all valid moves and their clear counts
-
-        # Evaluate all possible swap commands
-        for r in range(size):
-            for c in range(size):
-                for d in directions:
-                    temp_level = copy.deepcopy(level)
-                    success = temp_level.chessboard.swap_chess(r, c, d)
-                    if success:
-                        cleared = temp_level.chessboard.score - level.chessboard.score
-                        valid_moves.append({"command": f"swap {r} {c} {d}", "cleared": cleared})
-                        if cleared > max_cleared:
-                            max_cleared = cleared
-                            best_command = f"swap {r} {c} {d}"
-
-        # Evaluate all possible clear commands
-        for r in range(size):
-            for c in range(size):
-                temp_level = copy.deepcopy(level)
-                cleared = temp_level.chessboard.clear_chess(r, c)
-                if cleared > 0:  # Only add if it actually clears something
-                    valid_moves.append({"command": f"clear {r} {c}", "cleared": cleared})
-                    if cleared > max_cleared:
-                        max_cleared = cleared
-                        best_command = f"clear {r} {c}"
+        valid_moves = evaluate_single_commands(level, size)  # List to store all valid moves and their clear counts
+        max_cleared = max((move["cleared"] for move in valid_moves), default=0)
+        best_moves = [move["command"] for move in valid_moves if move["cleared"] == max_cleared]
+        if len(best_moves) > 1:
+            raise ValueError(f"The best single command is not unique on this board: {best_moves}")
+        best_command = best_moves[0] if max_cleared > 0 else "No command can clear any elements."
 
         # Sort valid moves by number of elements cleared (descending)
         valid_moves.sort(key=lambda x: x["cleared"], reverse=True)

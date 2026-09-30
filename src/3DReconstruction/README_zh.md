@@ -49,7 +49,7 @@ pip install -r requirements.txt
   - `action_outcome`：预测添加指定体素后的投影结果。
 - `Hard`
   - `strategy_optimization`：计算达到目标所需的最少新增体素数。
-  - `transition_path`：选择满足目标投影的正确体素添加序列。
+  - `transition_path`：选择满足目标投影的正确新增体素位置集合。
 
 ### 立体结构难度（plot_level）
 
@@ -184,15 +184,15 @@ python src/Code_for_text_data_derivative/convert_text_data.py --game 3DReconstru
 
 ```text
 3D RECONSTRUCTION STATE:
-Current voxel positions: [[2, 1, 1], [2, 2, 1]]
-Remaining voxels: 4
+Current voxel positions: [[3, 2, 1]]
+Remaining voxels: 3
 Target YZ/front projection, listed from bottom z=1 to top z=3:
-z=1 layer: [1, 1, 1]
-z=2 layer: [0, 1, 0]
+z=1 layer: [0, 1, 0]
+z=2 layer: [1, 1, 0]
 z=3 layer: [0, 0, 0]
 Target XZ/side projection, listed from bottom z=1 to top z=3:
-z=1 layer: [0, 1, 1]
-z=2 layer: [0, 0, 1]
+z=1 layer: [0, 0, 1]
+z=2 layer: [0, 1, 1]
 z=3 layer: [0, 0, 0]
 ```
 

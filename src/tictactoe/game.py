@@ -167,10 +167,13 @@ class TicTacToe:
         option = chess_dict[(row, col)]
         
         level = "Hard"
-        if "win" in reason.lower():
-            level = "Easy"
-        elif "threat" in reason.lower():
-            level = "Medium"
+        # The fallback after an unstoppable double threat mentions the opponent's "winning moves",
+        # but like the no-special-case fallback it is just the first free cell, so it stays "Hard".
+        if "cannot block all" not in reason:
+            if "win" in reason.lower():
+                level = "Easy"
+            elif "threat" in reason.lower():
+                level = "Medium"
             
         return AIRecommendation(
             move_count=1,

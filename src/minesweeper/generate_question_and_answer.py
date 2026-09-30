@@ -22,137 +22,108 @@ plot_level_prompts = {
     "Hard": "This is a Minesweeper game. The size of the chessboard is 6x6, and there are a total of 8 mines hidden on the board.\n\n"
 }
 
-# Function to determine the status of a cell in the Minesweeper game(using logical reasoning)
-def determine_cell_status(game, row, col):
-    if game.revealed[row][col] or game.flagged[row][col]:
-        return "already_handled", []  # Return empty log for handled cells
+# Coordinates asked by the three q4 calls of the current board (reset at its first q4 call)
+q4_used_cells = []
 
-    def get_neighbors(r, c):
-        neighbors = []
-        for dr in range(-1, 2):
-            for dc in range(-1, 2):
-                if dr == 0 and dc == 0: continue
-                nr, nc = r + dr, c + dc
-                if 0 <= nr < game.rows and 0 <= nc < game.cols:
-                    neighbors.append((nr, nc))
-        return neighbors
 
-    neighbors = get_neighbors(row, col)
-    revealed_neighbors = [(nr, nc) for nr, nc in neighbors if game.revealed[nr][nc]]
+def get_neighbors(game, r, c):
+    """The (up to eight) cells adjacent to (r, c), including diagonals."""
+    return [(r + dr, c + dc) for dr in range(-1, 2) for dc in range(-1, 2)
+            if (dr or dc) and 0 <= r + dr < game.rows and 0 <= c + dc < game.cols]
 
-    if not revealed_neighbors:
-        return "uncertain", ["No revealed neighbors available for inference."]
 
-    inferred_mines = set()
-    inferred_safe = set()
-    status = "ok"  # Track overall status
-    path_log = []  # List to record the inference path steps
+def enumerate_mine_layouts(game):
+    """All mine placements consistent with the visible board.
 
-    target = (row, col)
+    Flagged cells count as mines, every revealed number must be matched exactly, and the total
+    number of mines stated in the question is respected. Hidden cells next to a revealed number
+    (the frontier) are enumerated one by one; the remaining hidden cells (the interior) are only
+    constrained by the mine total, so a layout records how many mines they hold.
 
-    def apply_rules(depth, max_depth):
-        nonlocal status, path_log
-        if depth > max_depth or status != "ok":
-            path_log.append(f"Depth {depth}: Exceeded max_depth or status not ok, stopping recursion.")
-            return False
+    Returns (interior cells, [(frozenset of frontier mines, number of interior mines), ...]).
+    """
+    hidden = [(r, c) for r in range(game.rows) for c in range(game.cols)
+              if not game.revealed[r][c] and not game.flagged[r][c]]
+    hidden_set = set(hidden)
+    constraints = []
+    for r in range(game.rows):
+        for c in range(game.cols):
+            if game.revealed[r][c]:
+                neighbors = get_neighbors(game, r, c)
+                flags = sum(game.flagged[nr][nc] for nr, nc in neighbors)
+                constraints.append(([p for p in neighbors if p in hidden_set], game.mine_board[r][c] - flags))
+    frontier = sorted({p for cells, _ in constraints for p in cells})
+    order = {p: i for i, p in enumerate(frontier)}
+    interior = [p for p in hidden if p not in order]
+    unflagged_mines = game.mines - sum(sum(row) for row in game.flagged)
+    layouts = []
 
-        # Early stop if target is already inferred
-        if target in inferred_mines or target in inferred_safe:
-            path_log.append(f"Depth {depth}: Target cell ({row},{col}) already inferred, stopping recursion early.")
-            return False
+    def search(i, mines):
+        for cells, need in constraints:
+            placed = sum(p in mines for p in cells)
+            open_cells = sum(order[p] >= i for p in cells)
+            if placed > need or placed + open_cells < need:
+                return
+        if i == len(frontier):
+            rest = unflagged_mines - len(mines)
+            if 0 <= rest <= len(interior):
+                layouts.append((frozenset(mines), rest))
+            return
+        search(i + 1, mines)
+        search(i + 1, mines | {frontier[i]})
 
-        changed = False
-        path_log.append(f"Starting inference at depth {depth} with revealed neighbors: {revealed_neighbors}; ")
+    search(0, frozenset())
+    return interior, layouts
 
-        for nr, nc in revealed_neighbors:
-            if status != "ok":
-                path_log.append(f"Depth {depth}: Status not ok, early exit.")
-                return False  # Early exit if uncertain
 
-            n = game.mine_board[nr][nc]  # Visible number
-            adj_neighbors = get_neighbors(nr, nc)
-
-            flagged_count = sum(1 for ar, ac in adj_neighbors if game.flagged[ar][ac] or (ar, ac) in inferred_mines)
-            unrevealed_count = sum(
-                1 for ar, ac in adj_neighbors
-                if (
-                    not game.revealed[ar][ac]
-                    and not game.flagged[ar][ac]
-                    and (ar, ac) not in inferred_mines
-                    and (ar, ac) not in inferred_safe
-                )
-            )
-
-            remaining_mines = n - flagged_count
-
-            path_log.append(f"Depth {depth}, Cell ({nr},{nc}) with n={n}: flagged_count={flagged_count}, unrevealed_count={unrevealed_count}, remaining_mines={remaining_mines}; ")
-
-            if remaining_mines < 0 or remaining_mines > unrevealed_count:
-                status = "invalid_board"
-                path_log.append(f"Depth {depth}: Invalid board detected for cell ({nr},{nc}).")
-                return False
-
-            if remaining_mines == unrevealed_count and unrevealed_count > 0:
-                path_log.append(f"Depth {depth}: Applying mine inference rule for cell ({nr},{nc}).")
-                for ar, ac in adj_neighbors:
-                    if not game.revealed[ar][ac] and not game.flagged[ar][ac] and (ar, ac) not in inferred_mines:
-                        if (ar, ac) in inferred_safe:
-                            status = "uncertain"
-                            path_log.append(f"Depth {depth}: Conflict detected for cell ({ar},{ac}) - already inferred safe.")
-                            return False
-                        inferred_mines.add((ar, ac))
-                        path_log.append(f"Depth {depth}: Inferred cell ({ar},{ac}) as mine.")
-                        changed = True
-                        if (ar, ac) == target:
-                            path_log.append(f"Depth {depth}: Target cell ({ar},{ac}) inferred as mine, stopping all loops and recursion.")
-                            status = "target_inferred"
-                            return False
-
-            if remaining_mines == 0 and unrevealed_count > 0:
-                path_log.append(f"Depth {depth}: Applying safe inference rule for cell ({nr},{nc}).")
-                for ar, ac in adj_neighbors:
-                    if not game.revealed[ar][ac] and (ar, ac) not in inferred_safe and not game.flagged[ar][ac] and (ar, ac) not in inferred_mines:
-                        if (ar, ac) in inferred_mines:
-                            status = "uncertain"
-                            path_log.append(f"Depth {depth}: Conflict detected for cell ({ar},{ac}) - already inferred mine.")
-                            return False
-                        inferred_safe.add((ar, ac))
-                        path_log.append(f"Depth {depth}: Inferred cell ({ar},{ac}) as safe.")
-                        changed = True
-                        # if (ar, ac) == target:
-                        #     path_log.append(f"Depth {depth}: Target cell ({ar},{ac}) inferred as safe, stopping all loops and recursion.")
-                        #     status = "target_inferred"
-                        #     return False
-
-        if changed:
-            path_log.append(f"Depth {depth}: Changes detected, recursing to depth {depth + 1}.")
-            return apply_rules(depth + 1, max_depth) or True
+def reveal_outcomes(game, row, col):
+    """What revealing (row, col) can show over all consistent layouts: "mine" and/or the numbers."""
+    if game.flagged[row][col]:
+        return {"mine"}
+    interior, layouts = enumerate_mine_layouts(game)
+    neighbors = get_neighbors(game, row, col)
+    flags = sum(game.flagged[nr][nc] for nr, nc in neighbors)
+    interior_neighbors = [p for p in neighbors if p in interior]
+    target_is_interior = (row, col) in interior
+    outcomes = set()
+    for mines, rest in layouts:
+        if target_is_interior:
+            if rest >= 1:
+                outcomes.add("mine")
+            if rest > len(interior) - 1:
+                continue
+            others = len(interior) - 1 - len(interior_neighbors)
         else:
-            path_log.append(f"Depth {depth}: No changes, ending recursion at this level.")
-        return False
+            if (row, col) in mines:
+                outcomes.add("mine")
+                continue
+            others = len(interior) - len(interior_neighbors)
+        base = flags + sum(p in mines for p in neighbors)
+        # j of the interior mines are next to the target, the other rest - j elsewhere in the interior
+        for j in range(len(interior_neighbors) + 1):
+            if 0 <= rest - j <= others:
+                outcomes.add(base + j)
+    return outcomes
 
-    max_depth = 10  # Limited recursion depth, adjustable based on board size
-    apply_rules(0, max_depth)
 
-    if status == "target_inferred" or status == "ok":
-        if target in inferred_mines:
-            path_log.append(f"Target cell ({row},{col}) inferred as must_be_mine.")
-            return "must_be_mine", path_log
-        elif target in inferred_safe:
-            path_log.append(f"Target cell ({row},{col}) inferred as must_be_safe.")
-            return "must_be_safe", path_log
-        else:
-            path_log.append(f"Target cell ({row},{col}) remains uncertain.")
-            return "uncertain", path_log
-    else:
-        path_log.append(f"Final status: {status}")
-        return status, path_log
+def describe_constraints(game, row, col):
+    """The revealed numbers and flags around (row, col) and the mine total, as analysis text."""
+    neighbors = get_neighbors(game, row, col)
+    numbers = [f"({r},{c}) shows {game.mine_board[r][c]}" for r, c in neighbors if game.revealed[r][c]]
+    flags = [f"({r},{c})" for r, c in neighbors if game.flagged[r][c]]
+    flagged_total = sum(sum(r) for r in game.flagged)
+    text = f"The cell at ({row},{col}) is hidden. "
+    text += (f"Its revealed neighbors: {', '.join(numbers)}. " if numbers else "It has no revealed neighbors. ")
+    text += (f"Its flagged neighbors: {', '.join(flags)}. " if flags else "It has no flagged neighbors. ")
+    text += (f"Flags count as mines, so {game.mines - flagged_total} of the {game.mines} mines are not flagged yet. "
+             f"Considering every placement of these mines that agrees with all the revealed numbers on the board, ")
+    return text
 
 def generate_question_and_answer(game, num, plot_level):
     """
     Randomly generate a question and answer related to the Minesweeper game state.
     """
-    global last_random_coordinates  # Reference global variable
+    global last_random_coordinates, q4_used_cells  # Reference global variables
 
     question_types = [
         # StateInfo questions
@@ -161,32 +132,15 @@ def generate_question_and_answer(game, num, plot_level):
         {"qa_type": "Target Perception", "template": "How many cells have been revealed?", "difficulty": "Easy", "description": "Count revealed cells"},
         {"qa_type": "Target Perception", "template": "What is the state of the cell at ({row},{col})? (revealed number, hidden, flagged as mine)", "difficulty": "Easy", "description": "Check cell state"},
 
-        # StrategyOptimization questions
-        {"qa_type": "Strategy Optimization", "template": "What will happen if the player reveals the cell at ({row},{col})?", "difficulty": "Hard", "description": "Predict cell reveal outcome"},
+        # State prediction and strategy questions
+        {"qa_type": "State Prediction", "template": "What will happen if the player reveals the cell at ({row},{col})?", "difficulty": "Hard", "description": "Predict cell reveal outcome"},
         {"qa_type": "Strategy Optimization", "template": "What is the best next move at ({row},{col})?", "difficulty": "Hard", "description": "Determine optimal move"},
     ]
 
-    # Select the question based on num
-    num = num % 6  # Ensure num is within the range of 0 to 5
-    question_id = 0
-    if num == 0:
-        question_choice = question_types[0]  # Question 0
-        question_id = 0
-    elif num == 1:
-        question_choice = question_types[1]  # Question 1
-        question_id = 1
-    elif num == 2:
-        question_choice = question_types[2]  # Question 2
-        question_id = 2
-    elif num == 3:
-        question_choice = question_types[3]  # Question 3
-        question_id = 3
-    elif num == 4:
-        question_choice = question_types[4]  # Question 4
-        question_id = 4
-    elif num == 5:
-        question_choice = question_types[5]  # Question 5
-        question_id = 5
+    # Select the question based on num: each board asks q3 twice, q4 three times and q5 twice
+    num = num % 10  # Ensure num is within the range of 0 to 9
+    question_id = [0, 1, 2, 3, 3, 4, 4, 4, 5, 5][num]
+    question_choice = question_types[question_id]
 
     qa_type = question_choice["qa_type"]
     question_template = question_choice["template"]
@@ -266,45 +220,39 @@ def generate_question_and_answer(game, num, plot_level):
             )
 
     elif "What will happen if the player reveals the cell at ({row},{col})?" in question_template:
-        # Only select cells at the boundary
-        boundary_cells = game.state_around()
-        if not boundary_cells:
+        # Only select cells at the boundary, a different one for each q4 call of the board
+        if num == 5:
+            q4_used_cells = []
+        boundary_cells = [(cell["row"], cell["col"]) for cell in game.state_around()]
+        unused_cells = [cell for cell in boundary_cells if cell not in q4_used_cells]
+        if unused_cells:
+            row, col = random.choice(unused_cells)
+        elif boundary_cells:
+            row, col = random.choice(boundary_cells)
+        else:
             row, col = random.randint(0, game.rows - 1), random.randint(0, game.cols - 1)
-        else:
-            chosen_cell = random.choice(boundary_cells)
-            row, col = chosen_cell["row"], chosen_cell["col"]
+        q4_used_cells.append((row, col))
 
-        # Determine the status using the inference algorithm
-        status, path_log = determine_cell_status(game, row, col)
+        # Everything revealing the cell can show, over all mine layouts consistent with the board
+        outcomes = reveal_outcomes(game, row, col)
 
-        # Initialize value and value2
-        if game.mine_board[row][col] == 'M':
-            # If the cell is a mine, randomly generate a number
-            value1 = random.randint(1, 9)
-        else:
-            # If the cell is not a mine, use the actual value
-            actual_value = game.mine_board[row][col]
-            value1 = actual_value
+        # Option C shows the number the cell hides; mines and empty cells get a random number from
+        # 1 to 8 instead ("the number 0" would repeat option B, and no cell can show 9)
+        actual_value = game.mine_board[row][col]
+        value1 = actual_value if actual_value != 'M' and actual_value > 0 else random.randint(1, 8)
 
         # Construct question and options
         options = [
             f"A: The game will end because the cell contains a mine. ",
             f"B: The cell will reveal an empty area, and adjacent cells will also be revealed. ",
             f"C: The cell will reveal the number {value1}. ",
-            f"D: Undecidable. It may contain a mine or not."
+            f"D: Undecidable. The result cannot be determined from the current board."
         ]
         
         question = (
             question_prompt
             + f"**Question:** What will happen if the player reveals the cell at ({row},{col})? "
             + f"\n\n**Options:**\n" + "\n".join(options)
-        )
-
-        # Common rule explanation for the inference
-        rule_explanation = (
-            "The inference uses two main rules: "
-            "1. Mine Inference Rule: If the remaining mines (calculated as the number on a revealed cell minus the flagged/inferred mines around it) equal the number of unrevealed neighbors, all those unrevealed neighbors must be mines. "
-            "2. Safe Inference Rule: If the remaining mines are zero, all unrevealed neighbors must be safe. "
         )
 
         # Generate the answer based on the cell's state
@@ -315,53 +263,41 @@ def generate_question_and_answer(game, num, plot_level):
                 f"According to the rules of Minesweeper, revealing this cell(which contains a mine) will end the game. "
                 f"Therefore, the correct answer is Option A."
             )
-        elif status == "uncertain":
-            answer = "D"
-            analysis = (
-                rule_explanation +
-                f"The status of the cell at ({row},{col}) cannot be definitively determined from the current board information. "
-                f"Detailed inference path: {' '.join(path_log)} "  
-                f"The surrounding cells do not provide enough constraints to prove it is definitely a mine or definitely safe, "
-                f"so revealing it carries a risk of hitting a mine or safely revealing a number/empty area."
-                f"Therefore, the correct answer is Option D."
-            )
-        elif status == "must_be_mine":
-            # If visible logic proves the cell is a mine, the answer is A
+        elif outcomes == {"mine"}:
             answer = "A"
-            analysis = (
-                rule_explanation +
-                f"Based on logical deduction from the surrounding revealed cells and flagged mines, the cell at ({row},{col}) must contain a mine. "
-                f"Detailed inference path: {' '.join(path_log)} "  # Join path_log for concise inclusion
-                f"For example, adjacent cells' numbers indicate that the remaining unrevealed cells in their vicinity, including this one, must all be mines to satisfy the counts. "
-                f"Revealing it will cause the game to end."
+            analysis = describe_constraints(game, row, col) + (
+                f"the cell at ({row},{col}) contains a mine in every placement, so revealing it will end the game. "
                 f"Therefore, the correct answer is Option A."
             )
-        elif status == "must_be_safe":
-            # If visible logic proves the cell is safe, the reveal outcome depends on its number
-            if actual_value == 0:
-                answer = "B"
-                analysis = (
-                    rule_explanation +
-                    f"Logical deduction shows that the cell at ({row},{col}) must be safe (no mine), as surrounding cells' remaining mine counts are zero for unrevealed neighbors. "
-                    f"Detailed inference path: {' '.join(path_log)} "  
-                    f"Since it has no adjacent mines, revealing it will open an empty area and recursively reveal adjacent safe cells."
-                    f"Therefore, the correct answer is Option B."
-                )
-            else:
-                answer = "C"
-                analysis = (
-                    rule_explanation +
-                    f"Logical deduction confirms the cell at ({row},{col}) is safe. Upon revelation, it will show the number {value1}, "
-                    f"which matches the expected count of adjacent mines based on the board state. "
-                    f"Detailed inference path: {' '.join(path_log)}"
-                    f"Therefore, the correct answer is Option C."
-                )
-        else:
+        elif outcomes == {0}:
+            answer = "B"
+            analysis = describe_constraints(game, row, col) + (
+                f"the cell at ({row},{col}) is safe in every placement and none of its neighbors contains a mine, "
+                f"so revealing it opens an empty area and the adjacent cells are revealed as well. "
+                f"Therefore, the correct answer is Option B."
+            )
+        elif len(outcomes) == 1 and "mine" not in outcomes:
+            number = next(iter(outcomes))
+            answer = "C"
+            analysis = describe_constraints(game, row, col) + (
+                f"the cell at ({row},{col}) is safe in every placement and always has exactly {number} {'mine' if number == 1 else 'mines'} among its neighbors (flags included), "
+                f"so revealing it will show the number {number}. "
+                f"Therefore, the correct answer is Option C."
+            )
+        elif "mine" in outcomes:
             answer = "D"
-            analysis = (
-                rule_explanation +
-                f"The status of the cell at ({row},{col}) cannot be safely classified from the current visible board. "
-                f"Detailed inference path: {' '.join(path_log)} "
+            analysis = describe_constraints(game, row, col) + (
+                f"the cell at ({row},{col}) contains a mine in some placements and is safe in others, "
+                f"so the result of revealing it cannot be determined from the current board. "
+                f"Therefore, the correct answer is Option D."
+            )
+        else:
+            numbers = [str(n) for n in sorted(outcomes)]
+            answer = "D"
+            analysis = describe_constraints(game, row, col) + (
+                f"the cell at ({row},{col}) is safe in every placement, but the number of mines around it can be "
+                f"{', '.join(numbers[:-1])} or {numbers[-1]} depending on where the remaining mines are, "
+                f"so the result of revealing it cannot be determined from the current board. "
                 f"Therefore, the correct answer is Option D."
             )
 
@@ -396,20 +332,6 @@ def generate_question_and_answer(game, num, plot_level):
             + "\n\n**Options:** \n" + "\n".join(options)
         )
 
-        # Check the state of the cell and whether it is on the boundary
-        is_boundary_cell = False
-        for i in range(-1, 2):
-            for j in range(-1, 2):
-                nr, nc = row + i, col + j
-                if 0 <= nr < game.rows and 0 <= nc < game.cols:
-                    if game.revealed[nr][nc]:
-                        is_boundary_cell = True
-                        break
-            if is_boundary_cell:
-                break
-
-        status, path_log = determine_cell_status(game, row, col)
-
         # Generate the answer based only on visible state and logical inference
         if game.flagged[row][col]:
             # If the cell is flagged, select F
@@ -432,26 +354,25 @@ def generate_question_and_answer(game, num, plot_level):
                 f"The cell at ({row},{col}) has been revealed and shows a value of 0. This means that no mines are adjacent to it. "
                 f"Since no further action is required for this cell, the correct answer is Option E."
             )
-        elif status == "must_be_mine":
-            answer = "A"
-            analysis = (
-                f"Based on visible revealed numbers and existing flags, the cell at ({row},{col}) is logically forced to be a mine. "
-                f"Detailed inference path: {' '.join(path_log)} "
-                f"The best move is to flag it as a mine (Option A)."
-            )
-        elif status == "must_be_safe":
-            answer = "B"
-            analysis = (
-                f"Based on visible revealed numbers and existing flags, the cell at ({row},{col}) is logically forced to be safe. "
-                f"Detailed inference path: {' '.join(path_log)} "
-                f"The best move is to reveal this cell (Option B)."
-            )
         else:
-            answer = "D"
-            analysis = (
-                f"The cell at ({row},{col}) is hidden and not flagged, but the visible board does not logically prove whether it is a mine or safe. "
-                f"Detailed inference path: {' '.join(path_log)} "
-                f"In this case, it is better to skip this move and wait for more information (Option D)."
-            )
+            outcomes = reveal_outcomes(game, row, col)
+            if outcomes == {"mine"}:
+                answer = "A"
+                analysis = describe_constraints(game, row, col) + (
+                    f"the cell at ({row},{col}) contains a mine in every placement. "
+                    f"The best move is to flag it as a mine (Option A)."
+                )
+            elif "mine" not in outcomes:
+                answer = "B"
+                analysis = describe_constraints(game, row, col) + (
+                    f"the cell at ({row},{col}) is safe in every placement. "
+                    f"The best move is to reveal this cell (Option B)."
+                )
+            else:
+                answer = "D"
+                analysis = describe_constraints(game, row, col) + (
+                    f"the cell at ({row},{col}) contains a mine in some placements and is safe in others, so the visible board does not prove whether it is a mine or safe. "
+                    f"In this case, it is better to skip this move and wait for more information (Option D)."
+                )
 
     return qa_type, qa_level, question, question_id, question_description, answer, analysis, options

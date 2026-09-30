@@ -91,7 +91,7 @@ def main():
             state_path = os.path.join(output_state_dir, state_filename)
             game.save_state(filename=state_filename, directory=output_state_dir)
 
-            for j in range(0, 6):   # Each image generates 6 questions
+            for j in range(0, 10):   # Each image generates 10 questions (q3 twice, q4 three times, q5 twice)
                 # Generate question and answer
                 qa_type, qa_level, question, question_id, question_description, answer, analysis, options = generate_question_and_answer(game, j, plot_level)
 
@@ -99,7 +99,7 @@ def main():
                 data_id = f"minesweeper-train-{str(image_counter).zfill(5)}-{j}"
 
                 vqa_entry = generate_vqa_entry(
-                    data_id, question_id, qa_level, os.path.join("images", image_filename), os.path.join("states", state_filename), plot_level, qa_type, question, question_description, answer, analysis, options
+                    data_id, question_id, qa_level, f"images/{image_filename}", f"states/{state_filename}", plot_level, qa_type, question, question_description, answer, analysis, options
                 )
                 vqa_data.append(vqa_entry)
 

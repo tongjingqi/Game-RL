@@ -49,8 +49,9 @@ def generate_dataset(num_boards: int, output_dir: str = "sokoban_dataset"):
             num_boxes = random.randint(2, 3) if board_id % 2 == 0 else 1
             
             try:
+                # 5x5 single-box boards are often unsolvable; 10 attempts dropped whole boards
                 board = generate_textured_random_board(size=num_moves, num_boxes=num_boxes, 
-                                         check_solvable=num_boxes==1)
+                                         check_solvable=num_boxes==1, max_attempts=200)
             except Exception as e:
                 logging.error(f"Failed to generate board {board_id}: {str(e)}")
                 continue
@@ -74,25 +75,15 @@ def generate_dataset(num_boards: int, output_dir: str = "sokoban_dataset"):
                 try:
                     qa_type = get_question_type(question_id)
                     
-                    # 设置问题类型
-                    question_type_mapping = {
-                        'State Prediction': ['next_position', 'box_position'],
-                        'Strategy Optimization': ['steps_to_target'],
-                        'Target Perception': ['state_info_player', 'state_info_distance'],
-                    }
-                    
-                    # 选择合适的内部类型
-                    if qa_type == 'State Prediction':
-                        if question_id in [1, 2]:
-                            internal_type = question_type_mapping[qa_type][question_id - 1]
-                        else:
-                            internal_type = 'transition_path'
-                    elif qa_type == 'Strategy Optimization':
-                        internal_type = question_type_mapping[qa_type][0]
-                    elif qa_type == 'Target Perception':
-                        internal_type = question_type_mapping[qa_type][question_id - 4]
-                    else:
-                        internal_type = 'transition_path'
+                    # 选择合适的内部类型（按题号映射，与 qa_type 无关）
+                    internal_type = {
+                        1: 'next_position',
+                        2: 'box_position',
+                        3: 'steps_to_target',
+                        4: 'state_info_player',
+                        5: 'state_info_distance',
+                        6: 'transition_path',
+                    }[question_id]
                     
                     # Generate each question on an isolated board copy. The timeout
                     # helper uses a background thread on Windows, so a timed-out
@@ -147,8 +138,8 @@ def generate_dataset(num_boards: int, output_dir: str = "sokoban_dataset"):
             continue
 
     # 保存数据和失败记录
-    with open(os.path.join(output_dir, "data.json"), "w") as f:
-        json.dump(all_data, f, indent=4)
+    with open(os.path.join(output_dir, "data.json"), "w", encoding="utf-8") as f:
+        json.dump(all_data, f, indent=4, ensure_ascii=False)
         
     if failed_questions:
         with open(os.path.join(output_dir, "failed_questions.json"), "w") as f:
@@ -167,7 +158,7 @@ def get_question_type(question_id: int) -> str:
         3: 'Strategy Optimization',
         4: 'Target Perception',
         5: 'Target Perception',
-        6: 'State Prediction'
+        6: 'Strategy Optimization'  # shortest path to a cell; labelled like this in the released benchmark
     }
     return type_mapping.get(question_id, 'State Prediction')
 

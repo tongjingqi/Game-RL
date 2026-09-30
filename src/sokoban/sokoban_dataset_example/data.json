@@ -8,18 +8,18 @@
         "qa_type": "State Prediction",
         "question_id": 1,
         "question_description": "Given a sequence of player moves, predict the final position of the player",
-        "question": "This is a Sokoban puzzle where cartoon person is player, green X is target, brown box with X is box to push, brown tiles are walls, and light brown areas are movable spaces.The coordinates (x, y) in this puzzle represent the matrix format.If the player makes these moves: Down → Up → Up → Up → Left → Right → Right → Up, where will player end up?\n\nOptions:\n[1] (6, 4)\n[2] (4, 4)\n[3] (2, 6)\n[4] (3, 2)\n[5] (6, 6)\n[6] (3, 5)\n[7] (6, 5)\n[8] (4, 2)",
+        "question": "This is a Sokoban puzzle where cartoon person is player, green X is target, brown box with X is box to push, brown tiles are walls, and light brown areas are movable spaces.The coordinates (x, y) in this puzzle represent the matrix format.If the player makes these moves: Left → Up → Right → Right → Up → Down → Up → Down, where will player end up?\n\nOptions:\n[1] (2, 6)\n[2] (5, 4)\n[3] (2, 4)\n[4] (4, 4)\n[5] (4, 6)\n[6] (3, 3)\n[7] (6, 4)\n[8] (1, 5)",
         "answer": 3,
-        "analysis": "- Player position: (6, 5)\n- Boxes positions: (3, 3)\n- Target positions: (4, 1)\nMove sequence analysis:\nInitial position: (6, 5)\nMove 1 - Down: Failed - Wall in the way (Player stays at (6, 5))\nMove 2 - Up: Player moves from (6, 5) to (5, 5)\nMove 3 - Up: Player moves from (5, 5) to (4, 5)\nMove 4 - Up: Player moves from (4, 5) to (3, 5)\nMove 5 - Left: Player moves from (3, 5) to (3, 4)\nMove 6 - Right: Player moves from (3, 4) to (3, 5)\nMove 7 - Right: Player moves from (3, 5) to (3, 6)\nMove 8 - Up: Player moves from (3, 6) to (2, 6)\n\nFinal position: (2, 6)\n\nSo the answer is (2, 6). The option number is 3. ",
+        "analysis": "- Player position: (2, 3)\n- Boxes positions: (4, 3)\n- Target positions: (2, 4)\nMove sequence analysis:\nInitial position: (2, 3)\nMove 1 - Left: Player moves from (2, 3) to (2, 2)\nMove 2 - Up: Player moves from (2, 2) to (1, 2)\nMove 3 - Right: Player moves from (1, 2) to (1, 3)\nMove 4 - Right: Player moves from (1, 3) to (1, 4)\nMove 5 - Up: Failed - Wall in the way (Player stays at (1, 4))\nMove 6 - Down: Player moves from (1, 4) to (2, 4)\nMove 7 - Up: Player moves from (2, 4) to (1, 4)\nMove 8 - Down: Player moves from (1, 4) to (2, 4)\n\nFinal position: (2, 4)\n\nSo the answer is (2, 4). The option number is 3. ",
         "options": [
-            "(6, 4)",
-            "(4, 4)",
             "(2, 6)",
-            "(3, 2)",
-            "(6, 6)",
-            "(3, 5)",
-            "(6, 5)",
-            "(4, 2)"
+            "(5, 4)",
+            "(2, 4)",
+            "(4, 4)",
+            "(4, 6)",
+            "(3, 3)",
+            "(6, 4)",
+            "(1, 5)"
         ]
     },
     {
@@ -31,18 +31,18 @@
         "qa_type": "State Prediction",
         "question_id": 2,
         "question_description": "Given a sequence of moves, predict the final position of the box",
-        "question": "This is a Sokoban puzzle where cartoon person is player, green X is target, brown box with X is box to push, brown tiles are walls, and light brown areas are movable spaces.The coordinates (x, y) in this puzzle represent the matrix format.Treat boxes as objects that can move by themselves, and treat people as floor (movable areas),After the moves right, up, right, up, right, left, down, up, where will the box that started at position (3, 3) end up?\n\nOptions:\n[1] (4, 2)\n[2] (3, 6)\n[3] (3, 4)\n[4] (6, 4)\n[5] (1, 3)\n[6] (6, 3)\n[7] (5, 5)\n[8] (4, 1)",
-        "answer": 5,
-        "analysis": "- Player position: (6, 5)\n- Boxes positions: (3, 3)\n- Target positions: (4, 1)\nMove sequence:\nMove right: Box moved from (3, 3) to (3, 4)\nMove up: Box moved from (3, 4) to (2, 4)\nMove right: Cannot move - blocked\nMove up: Box moved from (2, 4) to (1, 4)\nMove right: Cannot move - blocked\nMove left: Box moved from (1, 4) to (1, 3)\nMove down: Box moved from (1, 3) to (2, 3)\nMove up: Box moved from (2, 3) to (1, 3)\nBox moves from (3, 3) to (1, 3)\n\nSo the answer is (1, 3). The option number is 5. ",
+        "question": "This is a Sokoban puzzle where cartoon person is player, green X is target, brown box with X is box to push, brown tiles are walls, and light brown areas are movable spaces.The coordinates (x, y) in this puzzle represent the matrix format.Treat boxes as objects that can move by themselves, and treat people as floor (movable areas),After the moves down, up, up, left, left, up, left, down, where will the box that started at position (4, 3) end up?\n\nOptions:\n[1] (2, 2)\n[2] (6, 2)\n[3] (4, 1)\n[4] (6, 4)\n[5] (5, 4)\n[6] (1, 5)\n[7] (5, 5)\n[8] (3, 1)",
+        "answer": 3,
+        "analysis": "- Player position: (2, 3)\n- Boxes positions: (4, 3)\n- Target positions: (2, 4)\nMove sequence:\nMove down: Box moved from (4, 3) to (5, 3)\nMove up: Box moved from (5, 3) to (4, 3)\nMove up: Box moved from (4, 3) to (3, 3)\nMove left: Box moved from (3, 3) to (3, 2)\nMove left: Box moved from (3, 2) to (3, 1)\nMove up: Cannot move - blocked\nMove left: Cannot move - blocked\nMove down: Box moved from (3, 1) to (4, 1)\nBox moves from (4, 3) to (4, 1)\n\nSo the answer is (4, 1). The option number is 3. ",
         "options": [
-            "(4, 2)",
-            "(3, 6)",
-            "(3, 4)",
+            "(2, 2)",
+            "(6, 2)",
+            "(4, 1)",
             "(6, 4)",
-            "(1, 3)",
-            "(6, 3)",
+            "(5, 4)",
+            "(1, 5)",
             "(5, 5)",
-            "(4, 1)"
+            "(3, 1)"
         ]
     },
     {
@@ -54,18 +54,18 @@
         "qa_type": "Strategy Optimization",
         "question_id": 3,
         "question_description": "Determine the minimum number of moves needed to solve the puzzle",
-        "question": "This is a Sokoban puzzle where cartoon person is player, green X is target, brown box with X is box to push, brown tiles are walls, and light brown areas are movable spaces.The coordinates (x, y) in this puzzle represent the matrix format.What is the minimum number of moves needed to solve this puzzle?\n\nOptions:\n[1] 14\n[2] 10\n[3] 9\n[4] 13\n[5] 8\n[6] 18\n[7] 11\n[8] 12",
-        "answer": 7,
-        "analysis": "- Player position: (6, 5)\n- Boxes positions: (3, 3)\n- Target positions: (4, 1)\nSolution analysis:Step by step solution:\nPlayer moves from (6, 5) to (5, 5)\nPlayer moves from (5, 5) to (4, 5)\nPlayer moves from (4, 5) to (4, 4)\nPlayer moves from (4, 4) to (3, 4)\nPlayer moves from (3, 4) to (2, 4)\nPlayer moves from (2, 4) to (2, 3)\nPlayer moves from (2, 3) to ( 3,3) (box moves from (3, 3) to (4, 3))\nPlayer moves from (3, 3) to (3, 4)\nPlayer moves from (3, 4) to (4, 4)\nPlayer moves from (4, 4) to ( 4,3) (box moves from (4, 3) to (4, 2))\nPlayer moves from (4, 3) to ( 4,2) (box moves from (4, 2) to (4, 1))\n\nTotal player moves: 11\n\nSo the answer is 11. The option number is 7. ",
+        "question": "This is a Sokoban puzzle where cartoon person is player, green X is target, brown box with X is box to push, brown tiles are walls, and light brown areas are movable spaces.The coordinates (x, y) in this puzzle represent the matrix format.What is the minimum number of moves needed to solve this puzzle?\n\nOptions:\n[1] 8\n[2] 1\n[3] 5\n[4] 6\n[5] 3\n[6] 4\n[7] 7\n[8] 2",
+        "answer": 1,
+        "analysis": "- Player position: (2, 3)\n- Boxes positions: (4, 3)\n- Target positions: (2, 4)\nSolution analysis:Step by step solution:\nPlayer moves from (2, 3) to (3, 3)\nPlayer moves from (3, 3) to (3, 2)\nPlayer moves from (3, 2) to (4, 2)\nPlayer moves from (4, 2) to ( 4,3) (box moves from (4, 3) to (4, 4))\nPlayer moves from (4, 3) to (5, 3)\nPlayer moves from (5, 3) to (5, 4)\nPlayer moves from (5, 4) to ( 4,4) (box moves from (4, 4) to (3, 4))\nPlayer moves from (4, 4) to ( 3,4) (box moves from (3, 4) to (2, 4))\n\nTotal player moves: 8\n\nSo the answer is 8. The option number is 1. ",
         "options": [
-            "14",
-            "10",
-            "9",
-            "13",
             "8",
-            "18",
-            "11",
-            "12"
+            "1",
+            "5",
+            "6",
+            "3",
+            "4",
+            "7",
+            "2"
         ]
     },
     {
@@ -77,18 +77,18 @@
         "qa_type": "Target Perception",
         "question_id": 4,
         "question_description": "Identify the current position of the player on the board",
-        "question": "This is a Sokoban puzzle where cartoon person is player, green X is target, brown box with X is box to push, brown tiles are walls, and light brown areas are movable spaces.The coordinates (x, y) in this puzzle represent the matrix format.What is the current position of the player (row, column)?\nOptions:\n[1] (1, 4)\n[2] (3, 4)\n[3] (2, 1)\n[4] (6, 5)\n[5] (1, 1)\n[6] (4, 2)\n[7] (4, 4)\n[8] (3, 5)",
-        "answer": 4,
-        "analysis": "- Player position: (6, 5)\n- Boxes positions: (3, 3)\n- Target positions: (4, 1)\nThe player is currently at position (6, 5).\n\nSo the answer is (6, 5). The option number is 4.",
+        "question": "This is a Sokoban puzzle where cartoon person is player, green X is target, brown box with X is box to push, brown tiles are walls, and light brown areas are movable spaces.The coordinates (x, y) in this puzzle represent the matrix format.What is the current position of the player (row, column)?\nOptions:\n[1] (1, 3)\n[2] (4, 1)\n[3] (2, 3)\n[4] (5, 1)\n[5] (3, 3)\n[6] (6, 3)\n[7] (4, 6)\n[8] (5, 5)",
+        "answer": 3,
+        "analysis": "- Player position: (2, 3)\n- Boxes positions: (4, 3)\n- Target positions: (2, 4)\nThe player is currently at position (2, 3).\n\nSo the answer is (2, 3). The option number is 3.",
         "options": [
-            "(1, 4)",
-            "(3, 4)",
-            "(2, 1)",
-            "(6, 5)",
-            "(1, 1)",
-            "(4, 2)",
-            "(4, 4)",
-            "(3, 5)"
+            "(1, 3)",
+            "(4, 1)",
+            "(2, 3)",
+            "(5, 1)",
+            "(3, 3)",
+            "(6, 3)",
+            "(4, 6)",
+            "(5, 5)"
         ]
     },
     {
@@ -100,18 +100,18 @@
         "qa_type": "Target Perception",
         "question_id": 5,
         "question_description": "Calculate the Manhattan distance between a box and its target",
-        "question": "This is a Sokoban puzzle where cartoon person is player, green X is target, brown box with X is box to push, brown tiles are walls, and light brown areas are movable spaces.The coordinates (x, y) in this puzzle represent the matrix format.What is the Manhattan distance between the box and the target?\nOptions:\n[1] 7\n[2] 9\n[3] 15\n[4] 13\n[5] 12\n[6] 10\n[7] 11\n[8] 3",
-        "answer": 8,
-        "analysis": "- Player position: (6, 5)\n- Boxes positions: (3, 3)\n- Target positions: (4, 1)\nBox position: (3, 3)\nTarget position: (4, 1)\nManhattan distance = |3 - 4| + |3 - 1| = 3\n\nSo the answer is 3. The option number is 8. ",
+        "question": "This is a Sokoban puzzle where cartoon person is player, green X is target, brown box with X is box to push, brown tiles are walls, and light brown areas are movable spaces.The coordinates (x, y) in this puzzle represent the matrix format.What is the Manhattan distance between the box and the target?\nOptions:\n[1] 2\n[2] 7\n[3] 14\n[4] 8\n[5] 3\n[6] 13\n[7] 9\n[8] 6",
+        "answer": 5,
+        "analysis": "- Player position: (2, 3)\n- Boxes positions: (4, 3)\n- Target positions: (2, 4)\nBox position: (4, 3)\nTarget position: (2, 4)\nManhattan distance = |4 - 2| + |3 - 4| = 3\n\nSo the answer is 3. The option number is 5. ",
         "options": [
+            "2",
             "7",
-            "9",
-            "15",
+            "14",
+            "8",
+            "3",
             "13",
-            "12",
-            "10",
-            "11",
-            "3"
+            "9",
+            "6"
         ]
     },
     {
@@ -123,18 +123,18 @@
         "qa_type": "Strategy Optimization",
         "question_id": 6,
         "question_description": "Find the optimal sequence of moves to reach a specific position",
-        "question": "This is a Sokoban puzzle where cartoon person is player, green X is target, brown box with X is box to push, brown tiles are walls, and light brown areas are movable spaces.The coordinates (x, y) in this puzzle represent the matrix format.Treat the boxes as walls,What is the shortest sequence of moves for human to move himself from position (6, 5) to position (5, 6)?\n\nOptions:\n[1] Up\n[2] Up → Up\n[3] Up → Down\n[4] Left → Right\n[5] Up → Right\n[6] Up → Right → Up\n[7] Up → Up → Right\n[8] Right",
-        "answer": 5,
-        "analysis": "- Player position: (6, 5)\n- Boxes positions: (3, 3)\n- Target positions: (4, 1)\nStart position: (6, 5)\nEnd position: (5, 6)\nOptimal move sequence: Up → Right\n\nSo the answer is Up → Right. The option number is 5. ",
+        "question": "This is a Sokoban puzzle where cartoon person is player, green X is target, brown box with X is box to push, brown tiles are walls, and light brown areas are movable spaces.The coordinates (x, y) in this puzzle represent the matrix format.Treat the boxes as walls,What is the shortest sequence of moves for human to move himself from position (2, 3) to position (6, 6)?\n\nOptions:\n[1] Left → Right → Right → Down → Down → Down → Down\n[2] Right → Right → Left → Down → Down → Up → Down\n[3] Right → Left → Left → Right → Up → Left\n[4] Up → Left → Down → Right → Right → Up → Left → Right\n[5] Left → Right → Right → Down → Down → Up → Down\n[6] Up → Right → Left → Left → Down → Right → Right → Left\n[7] Right → Right → Right → Down → Down → Down → Down\n[8] Up → Right → Right → Down → Right → Down → Down → Down",
+        "answer": 7,
+        "analysis": "- Player position: (2, 3)\n- Boxes positions: (4, 3)\n- Target positions: (2, 4)\nStart position: (2, 3)\nEnd position: (6, 6)\nOptimal move sequence: Right → Right → Right → Down → Down → Down → Down\n\nSo the answer is Right → Right → Right → Down → Down → Down → Down. The option number is 7. ",
         "options": [
-            "Up",
-            "Up → Up",
-            "Up → Down",
-            "Left → Right",
-            "Up → Right",
-            "Up → Right → Up",
-            "Up → Up → Right",
-            "Right"
+            "Left → Right → Right → Down → Down → Down → Down",
+            "Right → Right → Left → Down → Down → Up → Down",
+            "Right → Left → Left → Right → Up → Left",
+            "Up → Left → Down → Right → Right → Up → Left → Right",
+            "Left → Right → Right → Down → Down → Up → Down",
+            "Up → Right → Left → Left → Down → Right → Right → Left",
+            "Right → Right → Right → Down → Down → Down → Down",
+            "Up → Right → Right → Down → Right → Down → Down → Down"
         ]
     },
     {
@@ -146,18 +146,18 @@
         "qa_type": "State Prediction",
         "question_id": 1,
         "question_description": "Given a sequence of player moves, predict the final position of the player",
-        "question": "This is a Sokoban puzzle where cartoon person is player, green X is target, brown box with X is box to push, brown tiles are walls, and light brown areas are movable spaces.The coordinates (x, y) in this puzzle represent the matrix format.If the player makes these moves: Down → Right → Up → Left → Up → Left → Left → Right → Up → Right → Up → Right, where will player end up?\n\nOptions:\n[1] (4, 10)\n[2] (9, 3)\n[3] (10, 5)\n[4] (1, 4)\n[5] (2, 9)\n[6] (3, 9)\n[7] (8, 7)\n[8] (7, 7)",
-        "answer": 4,
-        "analysis": "- Player position: (3, 3)\n- Boxes positions: (1, 7), (3, 4), (5, 2)\n- Target positions: (1, 6), (8, 6), (8, 7)\nMove sequence analysis:\nInitial position: (3, 3)\nMove 1 - Down: Player moves from (3, 3) to (4, 3)\nMove 2 - Right: Player moves from (4, 3) to (4, 4)\nMove 3 - Up: Player moves from (4, 4) to (3, 4)\nMove 4 - Left: Player moves from (3, 4) to (3, 3)\nMove 5 - Up: Player moves from (3, 3) to (2, 3)\nMove 6 - Left: Player moves from (2, 3) to (2, 2)\nMove 7 - Left: Player moves from (2, 2) to (2, 1)\nMove 8 - Right: Player moves from (2, 1) to (2, 2)\nMove 9 - Up: Player moves from (2, 2) to (1, 2)\nMove 10 - Right: Player moves from (1, 2) to (1, 3)\nMove 11 - Up: Failed - Wall in the way (Player stays at (1, 3))\nMove 12 - Right: Player moves from (1, 3) to (1, 4)\n\nFinal position: (1, 4)\n\nSo the answer is (1, 4). The option number is 4. ",
+        "question": "This is a Sokoban puzzle where cartoon person is player, green X is target, brown box with X is box to push, brown tiles are walls, and light brown areas are movable spaces.The coordinates (x, y) in this puzzle represent the matrix format.If the player makes these moves: Down → Down → Right → Right → Right → Right → Left → Up → Up → Down → Down → Left, where will player end up?\n\nOptions:\n[1] (2, 7)\n[2] (7, 9)\n[3] (5, 7)\n[4] (7, 2)\n[5] (7, 10)\n[6] (9, 1)\n[7] (5, 3)\n[8] (5, 8)",
+        "answer": 6,
+        "analysis": "- Player position: (6, 2)\n- Boxes positions: (3, 7), (6, 5)\n- Target positions: (2, 5), (8, 5)\nMove sequence analysis:\nInitial position: (6, 2)\nMove 1 - Down: Player moves from (6, 2) to (7, 2)\nMove 2 - Down: Player moves from (7, 2) to (8, 2)\nMove 3 - Right: Failed - Wall in the way (Player stays at (8, 2))\nMove 4 - Right: Failed - Wall in the way (Player stays at (8, 2))\nMove 5 - Right: Failed - Wall in the way (Player stays at (8, 2))\nMove 6 - Right: Failed - Wall in the way (Player stays at (8, 2))\nMove 7 - Left: Player moves from (8, 2) to (8, 1)\nMove 8 - Up: Player moves from (8, 1) to (7, 1)\nMove 9 - Up: Failed - Wall in the way (Player stays at (7, 1))\nMove 10 - Down: Player moves from (7, 1) to (8, 1)\nMove 11 - Down: Player moves from (8, 1) to (9, 1)\nMove 12 - Left: Failed - Wall in the way (Player stays at (9, 1))\n\nFinal position: (9, 1)\n\nSo the answer is (9, 1). The option number is 6. ",
         "options": [
-            "(4, 10)",
-            "(9, 3)",
-            "(10, 5)",
-            "(1, 4)",
-            "(2, 9)",
-            "(3, 9)",
-            "(8, 7)",
-            "(7, 7)"
+            "(2, 7)",
+            "(7, 9)",
+            "(5, 7)",
+            "(7, 2)",
+            "(7, 10)",
+            "(9, 1)",
+            "(5, 3)",
+            "(5, 8)"
         ]
     },
     {
@@ -169,18 +169,18 @@
         "qa_type": "Target Perception",
         "question_id": 4,
         "question_description": "Identify the current position of the player on the board",
-        "question": "This is a Sokoban puzzle where cartoon person is player, green X is target, brown box with X is box to push, brown tiles are walls, and light brown areas are movable spaces.The coordinates (x, y) in this puzzle represent the matrix format.What is the current position of the player (row, column)?\nOptions:\n[1] (5, 4)\n[2] (1, 9)\n[3] (3, 3)\n[4] (4, 3)\n[5] (9, 5)\n[6] (3, 7)\n[7] (1, 6)\n[8] (10, 1)",
-        "answer": 3,
-        "analysis": "- Player position: (3, 3)\n- Boxes positions: (1, 7), (3, 4), (5, 2)\n- Target positions: (1, 6), (8, 6), (8, 7)\nThe player is currently at position (3, 3).\n\nSo the answer is (3, 3). The option number is 3.",
+        "question": "This is a Sokoban puzzle where cartoon person is player, green X is target, brown box with X is box to push, brown tiles are walls, and light brown areas are movable spaces.The coordinates (x, y) in this puzzle represent the matrix format.What is the current position of the player (row, column)?\nOptions:\n[1] (7, 5)\n[2] (2, 9)\n[3] (10, 4)\n[4] (9, 5)\n[5] (6, 5)\n[6] (9, 7)\n[7] (3, 1)\n[8] (6, 2)",
+        "answer": 8,
+        "analysis": "- Player position: (6, 2)\n- Boxes positions: (3, 7), (6, 5)\n- Target positions: (2, 5), (8, 5)\nThe player is currently at position (6, 2).\n\nSo the answer is (6, 2). The option number is 8.",
         "options": [
-            "(5, 4)",
-            "(1, 9)",
-            "(3, 3)",
-            "(4, 3)",
+            "(7, 5)",
+            "(2, 9)",
+            "(10, 4)",
             "(9, 5)",
-            "(3, 7)",
-            "(1, 6)",
-            "(10, 1)"
+            "(6, 5)",
+            "(9, 7)",
+            "(3, 1)",
+            "(6, 2)"
         ]
     },
     {
@@ -192,18 +192,18 @@
         "qa_type": "State Prediction",
         "question_id": 1,
         "question_description": "Given a sequence of player moves, predict the final position of the player",
-        "question": "This is a Sokoban puzzle where cartoon person is player, green X is target, brown box with X is box to push, brown tiles are walls, and light brown areas are movable spaces.The coordinates (x, y) in this puzzle represent the matrix format.If the player makes these moves: Left → Left → Up → Right → Right, where will player end up?\n\nOptions:\n[1] (2, 2)\n[2] (2, 3)\n[3] (2, 1)\n[4] (3, 2)\n[5] (3, 3)\n[6] (1, 2)\n[7] (3, 1)\n[8] (1, 3)",
-        "answer": 1,
-        "analysis": "- Player position: (3, 3)\n- Boxes positions: (2, 2)\n- Target positions: (2, 1)\nMove sequence analysis:\nInitial position: (3, 3)\nMove 1 - Left: Player moves from (3, 3) to (3, 2)\nMove 2 - Left: Player moves from (3, 2) to (3, 1)\nMove 3 - Up: Player moves from (3, 1) to (2, 1)\nMove 4 - Right: Player moves from (2, 1) to (2, 2)\nMove 5 - Right: Failed - Cannot push box (Player stays at (2, 2))\n\nFinal position: (2, 2)\n\nSo the answer is (2, 2). The option number is 1. ",
+        "question": "This is a Sokoban puzzle where cartoon person is player, green X is target, brown box with X is box to push, brown tiles are walls, and light brown areas are movable spaces.The coordinates (x, y) in this puzzle represent the matrix format.If the player makes these moves: Up → Up → Right → Up → Down, where will player end up?\n\nOptions:\n[1] (3, 2)\n[2] (3, 3)\n[3] (1, 1)\n[4] (2, 2)\n[5] (2, 1)\n[6] (1, 2)\n[7] (3, 1)\n[8] (2, 3)",
+        "answer": 4,
+        "analysis": "- Player position: (3, 1)\n- Boxes positions: (2, 2)\n- Target positions: (1, 1)\nMove sequence analysis:\nInitial position: (3, 1)\nMove 1 - Up: Player moves from (3, 1) to (2, 1)\nMove 2 - Up: Player moves from (2, 1) to (1, 1)\nMove 3 - Right: Player moves from (1, 1) to (1, 2)\nMove 4 - Up: Failed - Wall in the way (Player stays at (1, 2))\nMove 5 - Down: Player moves from (1, 2) to (2, 2)\n\nFinal position: (2, 2)\n\nSo the answer is (2, 2). The option number is 4. ",
         "options": [
-            "(2, 2)",
-            "(2, 3)",
-            "(2, 1)",
             "(3, 2)",
             "(3, 3)",
+            "(1, 1)",
+            "(2, 2)",
+            "(2, 1)",
             "(1, 2)",
             "(3, 1)",
-            "(1, 3)"
+            "(2, 3)"
         ]
     },
     {
@@ -215,18 +215,18 @@
         "qa_type": "State Prediction",
         "question_id": 2,
         "question_description": "Given a sequence of moves, predict the final position of the box",
-        "question": "This is a Sokoban puzzle where cartoon person is player, green X is target, brown box with X is box to push, brown tiles are walls, and light brown areas are movable spaces.The coordinates (x, y) in this puzzle represent the matrix format.Treat boxes as objects that can move by themselves, and treat people as floor (movable areas),After the moves down, up, left, right, left, where will the box that started at position (2, 2) end up?\n\nOptions:\n[1] (3, 3)\n[2] (2, 2)\n[3] (1, 2)\n[4] (3, 2)\n[5] (2, 3)\n[6] (1, 1)\n[7] (3, 1)\n[8] (2, 1)",
-        "answer": 8,
-        "analysis": "- Player position: (3, 3)\n- Boxes positions: (2, 2)\n- Target positions: (2, 1)\nMove sequence:\nMove down: Box moved from (2, 2) to (3, 2)\nMove up: Box moved from (3, 2) to (2, 2)\nMove left: Box moved from (2, 2) to (2, 1)\nMove right: Box moved from (2, 1) to (2, 2)\nMove left: Box moved from (2, 2) to (2, 1)\nBox moves from (2, 2) to (2, 1)\n\nSo the answer is (2, 1). The option number is 8. ",
+        "question": "This is a Sokoban puzzle where cartoon person is player, green X is target, brown box with X is box to push, brown tiles are walls, and light brown areas are movable spaces.The coordinates (x, y) in this puzzle represent the matrix format.Treat boxes as objects that can move by themselves, and treat people as floor (movable areas),After the moves down, down, right, up, left, where will the box that started at position (2, 2) end up?\n\nOptions:\n[1] (2, 3)\n[2] (3, 1)\n[3] (2, 2)\n[4] (3, 3)\n[5] (1, 1)\n[6] (1, 2)\n[7] (2, 1)\n[8] (3, 2)",
+        "answer": 3,
+        "analysis": "- Player position: (3, 1)\n- Boxes positions: (2, 2)\n- Target positions: (1, 1)\nMove sequence:\nMove down: Box moved from (2, 2) to (3, 2)\nMove down: Cannot move - blocked\nMove right: Box moved from (3, 2) to (3, 3)\nMove up: Box moved from (3, 3) to (2, 3)\nMove left: Box moved from (2, 3) to (2, 2)\nBox moves from (2, 2) to (2, 2)\n\nSo the answer is (2, 2). The option number is 3. ",
         "options": [
-            "(3, 3)",
-            "(2, 2)",
-            "(1, 2)",
-            "(3, 2)",
             "(2, 3)",
-            "(1, 1)",
             "(3, 1)",
-            "(2, 1)"
+            "(2, 2)",
+            "(3, 3)",
+            "(1, 1)",
+            "(1, 2)",
+            "(2, 1)",
+            "(3, 2)"
         ]
     },
     {
@@ -238,18 +238,18 @@
         "qa_type": "Strategy Optimization",
         "question_id": 3,
         "question_description": "Determine the minimum number of moves needed to solve the puzzle",
-        "question": "This is a Sokoban puzzle where cartoon person is player, green X is target, brown box with X is box to push, brown tiles are walls, and light brown areas are movable spaces.The coordinates (x, y) in this puzzle represent the matrix format.What is the minimum number of moves needed to solve this puzzle?\n\nOptions:\n[1] 3\n[2] 8\n[3] 9\n[4] 4\n[5] 7\n[6] 2\n[7] 1\n[8] 5",
-        "answer": 6,
-        "analysis": "- Player position: (3, 3)\n- Boxes positions: (2, 2)\n- Target positions: (2, 1)\nSolution analysis:Step by step solution:\nPlayer moves from (3, 3) to (2, 3)\nPlayer moves from (2, 3) to ( 2,2) (box moves from (2, 2) to (2, 1))\n\nTotal player moves: 2\n\nSo the answer is 2. The option number is 6. ",
+        "question": "This is a Sokoban puzzle where cartoon person is player, green X is target, brown box with X is box to push, brown tiles are walls, and light brown areas are movable spaces.The coordinates (x, y) in this puzzle represent the matrix format.What is the minimum number of moves needed to solve this puzzle?\n\nOptions:\n[1] 1\n[2] 3\n[3] 6\n[4] 8\n[5] 2\n[6] 5\n[7] 4\n[8] 7",
+        "answer": 8,
+        "analysis": "- Player position: (3, 1)\n- Boxes positions: (2, 2)\n- Target positions: (1, 1)\nSolution analysis:Step by step solution:\nPlayer moves from (3, 1) to (3, 2)\nPlayer moves from (3, 2) to (3, 3)\nPlayer moves from (3, 3) to (2, 3)\nPlayer moves from (2, 3) to ( 2,2) (box moves from (2, 2) to (2, 1))\nPlayer moves from (2, 2) to (3, 2)\nPlayer moves from (3, 2) to (3, 1)\nPlayer moves from (3, 1) to ( 2,1) (box moves from (2, 1) to (1, 1))\n\nTotal player moves: 7\n\nSo the answer is 7. The option number is 8. ",
         "options": [
-            "3",
-            "8",
-            "9",
-            "4",
-            "7",
-            "2",
             "1",
-            "5"
+            "3",
+            "6",
+            "8",
+            "2",
+            "5",
+            "4",
+            "7"
         ]
     },
     {
@@ -261,18 +261,18 @@
         "qa_type": "Target Perception",
         "question_id": 4,
         "question_description": "Identify the current position of the player on the board",
-        "question": "This is a Sokoban puzzle where cartoon person is player, green X is target, brown box with X is box to push, brown tiles are walls, and light brown areas are movable spaces.The coordinates (x, y) in this puzzle represent the matrix format.What is the current position of the player (row, column)?\nOptions:\n[1] (2, 1)\n[2] (2, 3)\n[3] (3, 3)\n[4] (3, 1)\n[5] (3, 2)\n[6] (1, 1)\n[7] (1, 3)\n[8] (2, 2)",
-        "answer": 3,
-        "analysis": "- Player position: (3, 3)\n- Boxes positions: (2, 2)\n- Target positions: (2, 1)\nThe player is currently at position (3, 3).\n\nSo the answer is (3, 3). The option number is 3.",
+        "question": "This is a Sokoban puzzle where cartoon person is player, green X is target, brown box with X is box to push, brown tiles are walls, and light brown areas are movable spaces.The coordinates (x, y) in this puzzle represent the matrix format.What is the current position of the player (row, column)?\nOptions:\n[1] (2, 2)\n[2] (3, 2)\n[3] (1, 1)\n[4] (2, 1)\n[5] (3, 1)\n[6] (2, 3)\n[7] (3, 3)\n[8] (1, 2)",
+        "answer": 5,
+        "analysis": "- Player position: (3, 1)\n- Boxes positions: (2, 2)\n- Target positions: (1, 1)\nThe player is currently at position (3, 1).\n\nSo the answer is (3, 1). The option number is 5.",
         "options": [
-            "(2, 1)",
-            "(2, 3)",
-            "(3, 3)",
-            "(3, 1)",
+            "(2, 2)",
             "(3, 2)",
             "(1, 1)",
-            "(1, 3)",
-            "(2, 2)"
+            "(2, 1)",
+            "(3, 1)",
+            "(2, 3)",
+            "(3, 3)",
+            "(1, 2)"
         ]
     },
     {
@@ -284,18 +284,18 @@
         "qa_type": "Target Perception",
         "question_id": 5,
         "question_description": "Calculate the Manhattan distance between a box and its target",
-        "question": "This is a Sokoban puzzle where cartoon person is player, green X is target, brown box with X is box to push, brown tiles are walls, and light brown areas are movable spaces.The coordinates (x, y) in this puzzle represent the matrix format.What is the Manhattan distance between the box and the target?\nOptions:\n[1] 3\n[2] 2\n[3] 7\n[4] 1\n[5] 6\n[6] 10\n[7] 9\n[8] 5",
-        "answer": 4,
-        "analysis": "- Player position: (3, 3)\n- Boxes positions: (2, 2)\n- Target positions: (2, 1)\nBox position: (2, 2)\nTarget position: (2, 1)\nManhattan distance = |2 - 2| + |2 - 1| = 1\n\nSo the answer is 1. The option number is 4. ",
+        "question": "This is a Sokoban puzzle where cartoon person is player, green X is target, brown box with X is box to push, brown tiles are walls, and light brown areas are movable spaces.The coordinates (x, y) in this puzzle represent the matrix format.What is the Manhattan distance between the box and the target?\nOptions:\n[1] 7\n[2] 1\n[3] 8\n[4] 3\n[5] 5\n[6] 9\n[7] 4\n[8] 2",
+        "answer": 8,
+        "analysis": "- Player position: (3, 1)\n- Boxes positions: (2, 2)\n- Target positions: (1, 1)\nBox position: (2, 2)\nTarget position: (1, 1)\nManhattan distance = |2 - 1| + |2 - 1| = 2\n\nSo the answer is 2. The option number is 8. ",
         "options": [
-            "3",
-            "2",
             "7",
             "1",
-            "6",
-            "10",
+            "8",
+            "3",
+            "5",
             "9",
-            "5"
+            "4",
+            "2"
         ]
     },
     {
@@ -307,18 +307,18 @@
         "qa_type": "Strategy Optimization",
         "question_id": 6,
         "question_description": "Find the optimal sequence of moves to reach a specific position",
-        "question": "This is a Sokoban puzzle where cartoon person is player, green X is target, brown box with X is box to push, brown tiles are walls, and light brown areas are movable spaces.The coordinates (x, y) in this puzzle represent the matrix format.Treat the boxes as walls,What is the shortest sequence of moves for human to move himself from position (3, 3) to position (3, 2)?\n\nOptions:\n[1] Right → Up → Left\n[2] Left → Down → Up\n[3] Left → Right\n[4] Left\n[5] Up → Down\n[6] Up\n[7] Down\n[8] Up → Left",
-        "answer": 4,
-        "analysis": "- Player position: (3, 3)\n- Boxes positions: (2, 2)\n- Target positions: (2, 1)\nStart position: (3, 3)\nEnd position: (3, 2)\nOptimal move sequence: Left\n\nSo the answer is Left. The option number is 4. ",
+        "question": "This is a Sokoban puzzle where cartoon person is player, green X is target, brown box with X is box to push, brown tiles are walls, and light brown areas are movable spaces.The coordinates (x, y) in this puzzle represent the matrix format.Treat the boxes as walls,What is the shortest sequence of moves for human to move himself from position (3, 1) to position (2, 1)?\n\nOptions:\n[1] Up\n[2] Down → Left\n[3] Up → Up → Right\n[4] Up → Up\n[5] Down → Up\n[6] Right → Left\n[7] Right\n[8] Up → Right",
+        "answer": 1,
+        "analysis": "- Player position: (3, 1)\n- Boxes positions: (2, 2)\n- Target positions: (1, 1)\nStart position: (3, 1)\nEnd position: (2, 1)\nOptimal move sequence: Up\n\nSo the answer is Up. The option number is 1. ",
         "options": [
-            "Right → Up → Left",
-            "Left → Down → Up",
-            "Left → Right",
-            "Left",
-            "Up → Down",
             "Up",
-            "Down",
-            "Up → Left"
+            "Down → Left",
+            "Up → Up → Right",
+            "Up → Up",
+            "Down → Up",
+            "Right → Left",
+            "Right",
+            "Up → Right"
         ]
     }
 ]

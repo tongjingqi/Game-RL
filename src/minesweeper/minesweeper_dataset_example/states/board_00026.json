@@ -6,74 +6,74 @@
         [
             0,
             0,
+            0,
             1,
-            2,
-            2
+            1
+        ],
+        [
+            0,
+            0,
+            0,
+            1,
+            "M"
         ],
         [
             0,
             1,
             2,
+            4,
+            3
+        ],
+        [
+            0,
+            1,
+            "M",
             "M",
             "M"
         ],
         [
+            0,
             1,
-            2,
-            "M",
             3,
-            2
-        ],
-        [
             "M",
-            3,
-            2,
-            2,
-            0
-        ],
-        [
-            1,
-            2,
-            "M",
-            1,
-            0
+            3
         ]
     ],
     "revealed": [
         [
-            false,
-            false,
+            true,
+            true,
+            true,
+            true,
+            false
+        ],
+        [
+            true,
+            true,
+            true,
+            true,
+            false
+        ],
+        [
+            true,
+            true,
+            true,
+            true,
+            false
+        ],
+        [
+            true,
+            true,
             false,
             false,
             false
         ],
         [
-            false,
-            false,
+            true,
+            true,
             false,
             false,
             false
-        ],
-        [
-            false,
-            false,
-            false,
-            true,
-            true
-        ],
-        [
-            false,
-            false,
-            false,
-            true,
-            true
-        ],
-        [
-            false,
-            false,
-            false,
-            true,
-            true
         ]
     ],
     "flagged": [
@@ -88,19 +88,12 @@
             false,
             false,
             false,
-            true,
+            false,
             true
         ],
         [
             false,
             false,
-            true,
-            false,
-            false
-        ],
-        [
-            false,
-            false,
             false,
             false,
             false
@@ -109,6 +102,13 @@
             false,
             false,
             true,
+            false,
+            false
+        ],
+        [
+            false,
+            false,
+            false,
             false,
             false
         ]

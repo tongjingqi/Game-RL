@@ -202,6 +202,22 @@ class Board(object):
                     counter += 1
         return balls,counter
     
+    def open_blocks(self):
+        """(slot, color) for every 2x2 region holding three balls of one color and one empty slot
+        that can take a ball now; placing the missing ball completes a same-color block.
+        A slot is listed once per region it completes."""
+        blocks = []
+        for level in range(self.Level):
+            size = self.Level - level
+            for i in range(size - 1):
+                for j in range(size - 1):
+                    cells = [self[level, i + di, j + dj] for di, dj in ((0, 0), (1, 0), (0, 1), (1, 1))]
+                    empty = [cell for cell in cells if cell.Available]
+                    colors = {cell.Color for cell in cells if not cell.Available}
+                    if len(empty) == 1 and len(colors) == 1 and all(not base.Available for base in empty[0].Base):
+                        blocks.append((empty[0], colors.pop()))
+        return blocks
+
 class Pyramid_Chess_Random_Generate():
     def __init__(self,rand_turn_num,plot_level = "Medium",num_turns=None,max_turn=None):
         if plot_level in PLOT_LEVEL:
@@ -295,7 +311,7 @@ class Pyramid_Chess_Random_Generate():
             pos_more = self.Chess_Board.take_put_check()
             while not (pos_more == []):
                 if pr_info:
-                    print("Warning:Mutiple take happen ")
+                    print("Warning:Multiple take happen ")
                 num_take,take_info = self.take_random(pos_more,pr_info=pr_info)
                 pos_more = self.Chess_Board.take_put_check()
             self.Balls[self.Turn] += num_take 
@@ -351,11 +367,22 @@ class Pyramid_Chess_Random_Generate():
     #             turn = 0
     #     return self.Chess_Board,take_point,self.Turn,take_pos
     
-    def generate_stop_at_take(self, pr_info):
+    def generate_stop_at_take(self, pr_info, max_attempts=200):
         """
         生成只有第一层的棋盘，确保只有一个2x2区域为三个同色球+一个空位，
-        其他2x2区域都不是这种情况
+        其他2x2区域都不是这种情况。
+
+        单次构造里修正相邻区域时改色的球可能在别处又凑出一个这样的区域，
+        所以最后整体校验：整张棋盘上只有这一个落点能凑成同色 2x2（q3 的答案唯一），否则重来。
         """
+        for _ in range(max_attempts):
+            board, take_point, target_color, take_pos = self._generate_stop_at_take_once(pr_info)
+            if [slot for slot, _ in board.open_blocks()] == [take_point]:
+                return board, take_point, target_color, take_pos
+        raise ValueError("Could not generate a board whose best move is unique")
+
+    def _generate_stop_at_take_once(self, pr_info):
+        """One construction attempt of generate_stop_at_take (not checked for uniqueness)."""
         # 重置棋盘到初始状态
         self.refresh()
         

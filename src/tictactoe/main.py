@@ -260,7 +260,7 @@ def generate_questions(board, data_id):
            "qa_level": "Medium",
            "question": f"Principles: {PRINCIPLES}\n\nQuestion: What is the optimal move for the current player? If no move exists, choose the answer \"None\".\n\nOptions: {CHESS_OPTIONS}",
            "answer": "A",
-           "analysis": f"The current board is {board}. {current_player_reason} The game is already over, since {game_over_reason} in {game_over}. No valid move can be made.",
+           "analysis": f"The current board is {board}. {current_player_reason} The game is already over, since {game_over_reason}. No valid move can be made.",
            "options": CHESS_OPTIONS
        })
    else:

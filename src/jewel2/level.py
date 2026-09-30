@@ -17,11 +17,11 @@ class Level:
             return False
 
     def swap_chess(self, x: int, y: int, pos: str) -> bool:
-        cleared_before = self.total_cleared
+        score_before = self.chessboard.score
         success = self.chessboard.swap_chess(x, y, pos)
         if success:
             # Count the number of eliminations after this swap
-            cleared = self.chessboard.score - cleared_before
+            cleared = self.chessboard.score - score_before
             self.total_cleared += cleared
             return True
         else:

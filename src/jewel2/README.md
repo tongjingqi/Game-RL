@@ -96,6 +96,7 @@ jewel2/
    - **Conditions**:
      - Both elements must be basic.
      - Swap must result in a valid elimination; otherwise, it is undone.
+     - Swapping two identical elements is allowed: after any swap, every line of three or more identical elements through either swapped cell is eliminated, even if that line already existed before the swap.
    - **State Changes**:
      - **Successful Swap**: Exchanges elements, performs eliminations, updates **Total Cleared**.
      - **Unsuccessful Swap**: Reverts elements; no score changes.
@@ -202,25 +203,28 @@ Maximize your **Total Cleared** count by strategically performing clear and swap
        - H. After swap, elimination occurs, clearing {num11} elements, total cleared becomes {num12}.
 
 2. **Multi-Step Strategy Questions**
-   - *Example*: **How many elements will be eliminated after performing `clear 1 1` followed by `swap 2 2 right`?**
+   - *Example*: **How many elements will be eliminated at least after performing `clear 1 1` followed by `swap 2 2 right`?**
    - **Type**: Fill in the blank
+   - The elements that fall in after the first command are random, so the answer counts the eliminations that happen for every possible refill.
 
 ### Strategy Questions
 
 - *Example*: **What command will result in the maximum number of elements being cleared in a single move?**
 - **Type**: Fill in the blank
+- A swap answer names the upper cell of a vertical swap with `down` or the left cell of a horizontal swap with `right` (the question states this), so every swap has one spelling.
+- The best command is always unique: if several commands tie on the board of the other nine questions, this question is asked on a separate board of the same size (`<index>_q6.png` / `<index>_q6.json`).
 
 ## Output Contents
 
 ### 1. Image Files
 - **Location**: `jewel2_dataset_example/images/`
 - **Content**: Generated images representing the current game state, including elements and the total number of cleared elements.
-- **Naming Convention**: Sequentially named as `00001.png`, `00002.png`, etc.
+- **Naming Convention**: Sequentially named as `00001.png`, `00002.png`, etc.; a separate board for the single-move strategy question is named like `00003_q6.png`.
 
 ### 2. State Files
 - **Location**: `jewel2_dataset_example/states/`
 - **Content**: JSON files saving the current game state, including the elements on the board and the total number of cleared elements.
-- **Naming Convention**: Sequentially named as `00001.json`, `00002.json`, etc.
+- **Naming Convention**: Sequentially named as `00001.json`, `00002.json`, etc. (`00003_q6.json` for a separate strategy-question board).
 
 ### 3. VQA Dataset
 - **File**: `jewel2_dataset_example/data.json`
@@ -313,12 +317,12 @@ Example text state fragment:
 JEWEL2 STATE:
 Grid size: 5 rows x 5 columns.
 Board symbols/colors:
-Row 0: ['E', 'B', 'E', 'B', 'C']
-Row 1: ['D', 'D', 'E', 'D', 'A']
-Row 2: ['D', 'E', 'C', 'B', 'A']
-Row 3: ['A', 'B', 'A', 'C', 'D']
-Row 4: ['C', 'E', 'D', 'C', 'D']
-Total cleared so far: 83
+Row 0: ['A', 'E', 'B', 'A', 'a']
+Row 1: ['E', 'A', 'd', 'E', 'B']
+Row 2: ['a', 'D', 'C', 'E', 'B']
+Row 3: ['C', 'C', 'D', 'A', 'D']
+Row 4: ['C', 'E', 'E', 'C', 'B']
+Total cleared so far: 3
 ```
 
 ## License

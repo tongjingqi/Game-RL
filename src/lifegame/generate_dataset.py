@@ -182,9 +182,9 @@ def save_state_and_image(grid: List[List[int]], idx: int, grid_size: int) -> Tup
     image_path = os.path.join(IMAGES_DIR, f"board_{idx:03d}.png")
     pygame.image.save(screen, image_path)
     
-    # Return relative paths from project root
-    rel_state_path = os.path.relpath(state_path, DATASET_DIR)
-    rel_image_path = os.path.relpath(image_path, DATASET_DIR)
+    # Return relative paths from project root (always with '/', also on Windows)
+    rel_state_path = os.path.relpath(state_path, DATASET_DIR).replace(os.sep, "/")
+    rel_image_path = os.path.relpath(image_path, DATASET_DIR).replace(os.sep, "/")
     return rel_state_path, rel_image_path
 
 def init_grid(size: int) -> List[List[int]]:
@@ -820,6 +820,23 @@ class MCQOptionsGenerator:
         assert options[correct_index] == correct_answer, "Correct answer not at expected index"
         
         return options, correct_index
+
+    @staticmethod
+    def generate_block_options(correct_answer: int, num_options: int = 8,
+                               min_val: int = 0, max_val: int = None) -> Tuple[List[int], int]:
+        """
+        Generate the block of num_options consecutive integers (min_val, min_val + num_options, ...
+        onwards) that contains the correct answer, in random order, and return it with the index of the
+        correct answer. Every answer in a block gets the same options, so they say nothing about which
+        one is correct; distractors spread over [min_val, max_val] made a small answer one of the
+        smallest options most of the time. A block reaching past max_val is moved down to end there.
+        """
+        start = correct_answer - (correct_answer - min_val) % num_options
+        if max_val is not None:
+            start = max(min_val, min(start, max_val - num_options + 1))
+        options = list(range(start, start + num_options))
+        random.shuffle(options)
+        return options, options.index(correct_answer)
 
     @staticmethod
     def format_options(options: List[Any], correct_index: int) -> Tuple[List[str], str, str]:
@@ -1620,9 +1637,9 @@ def generate_state_info_question(grid: List[List[int]], data_id: int, plot_level
         analysis_count = int(analysis.split("Total live cells: ")[1].split()[0])
         assert total_count == analysis_count, f"Count mismatch: {total_count} vs {analysis_count}"
         
-        # 生成选项 - 现在返回选项列表和正确答案的索引
+        # 生成选项 - 包含正确答案的那一段连续 8 个整数（0-7、8-15……），返回选项列表和正确答案的索引
         options_generator = MCQOptionsGenerator()
-        options, correct_index = options_generator.generate_numeric_options(
+        options, correct_index = options_generator.generate_block_options(
             correct_answer=total_count,
             num_options=8,
             min_val=0,
@@ -1830,12 +1847,12 @@ def generate_stability_question(grid: List[List[int]], data_id: int, plot_level:
             print("Failed to reach stability within maximum steps")
             return None
             
-        # 3. 生成问题选项
+        # 3. 生成问题选项（0 始终在候选范围内：下限为 1 时，只有答案为 0 的题才会出现选项 0）
         options_generator = MCQOptionsGenerator()
         options, correct_index = options_generator.generate_numeric_options(
             correct_answer=steps_to_stability,
             num_options=8,
-            min_val=1,
+            min_val=0,
             max_val=max(steps_to_stability + 3, 8)
         )
         

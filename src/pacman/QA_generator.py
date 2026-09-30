@@ -9,6 +9,10 @@ VALID_QA_TYPES = {"Target Perception", "State Prediction", "Strategy Optimizatio
 
 directions = ["UP", "DOWN", "RIGHT", "LEFT"]
 
+# How one turn is played out in the questions where Pac-Man and both ghosts move (q4, q9)
+TURN_RULE = ("Pac-Man moves first, then Pinky and then Blinky each move one step toward their targets; "
+             "Pac-Man is caught as soon as it moves into a ghost's cell or a ghost moves onto its cell")
+
 question_prompt = """
 # Game Overview
 Pac-Man is a maze arcade game where the player controls Pac-Man to eat as many beans as possible while avoiding ghosts. If a ghost catches Pac-Man, the game ends.
@@ -45,6 +49,11 @@ Pac-Man is a maze arcade game where the player controls Pac-Man to eat as many b
 # Scoring
 The score equals the total number of beans eaten by Pac-Man
 """
+
+def ordinal(n: int) -> str:
+    """1 -> "1st", 2 -> "2nd", 3 -> "3rd", 4 -> "4th", 11 -> "11th"."""
+    suffix = "th" if 10 <= n % 100 <= 20 else {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th")
+    return f"{n}{suffix}"
 
 def handle_state_info_q0(game: PacManGame) -> Tuple[str, str, str, Optional[List[str]]]:
     """
@@ -142,18 +151,18 @@ def handle_state_info_q2(game: PacManGame) -> Tuple[str, str, str, Optional[List
         "C. Both ghosts are equidistant from Pac-Man"
     ]
 
-    # Determine answer and analysis
+    # Determine answer (the option letter) and analysis
     if pinky_distance < blinky_distance:
-        answer = options[0]
+        answer = "A"
         comparison = "less than"
     elif blinky_distance < pinky_distance:
-        answer = options[1]
+        answer = "B"
         comparison = "greater than"
     else:
-        answer = options[2]
+        answer = "C"
         comparison = "equal to"
 
-    question = question_prompt + "\n\n**Question:** Which ghost is closer to Pac-Man, Pinky or Blinky?" + "\n\n**Options:**\n" + "\n".join(options)
+    question = question_prompt + "\n\n**Question:** Which ghost is closer to Pac-Man, Pinky or Blinky? (Use the Manhattan distance: |row difference| + |column difference|.)" + "\n\n**Options:**\n" + "\n".join(options)
     
     analysis = (f"To determine which ghost is closer, we calculate Manhattan distance for each ghost.\n"
                f"Manhattan distance for Pinky is:\n"
@@ -166,11 +175,13 @@ def handle_state_info_q2(game: PacManGame) -> Tuple[str, str, str, Optional[List
 
 def handle_action_outcome_q3(game: PacManGame) -> Tuple[str, str, str, Optional[List[str]]]:
     """
-    Generates Q3: How many beans can Pac-Man eat if it moves in its current direction until hitting a wall?
+    Generates Q3: How many beans can Pac-Man eat if it moves in its current direction until it hits a wall or runs into a ghost?
     """
-    # Count beans in current direction until wall
+    # Count beans in current direction until wall, or until Pac-Man runs into a ghost and is caught
     row, col = game.pacman_position
     bean_count = 0
+    ghost_cells = {ghost.position: ghost.name for ghost in game.ghosts}
+    caught_by = None
     while True:
         if game.direction == 'UP':
             row -= 1
@@ -184,16 +195,66 @@ def handle_action_outcome_q3(game: PacManGame) -> Tuple[str, str, str, Optional[
         # Check if hit wall or out of bounds
         if (row, col) in game.walls or not (0 <= row < game.grid_size and 0 <= col < game.grid_size):
             break
+        if (row, col) in ghost_cells:
+            caught_by = (ghost_cells[(row, col)], (row, col))
+            break
         if (row, col) in game.beans:
             bean_count += 1
 
-    question = question_prompt + "\n\n**Question:** Assuming the ghosts don't move, how many beans can Pac-Man eat if it moves in its current direction until hitting a wall?"
+    question = question_prompt + "\n\n**Question:** Assuming the ghosts don't move, how many beans can Pac-Man eat if it moves in its current direction until it hits a wall or runs into a ghost (a ghost it runs into catches it)?"
     answer = str(bean_count)
+    path_end = ("until hitting wall or boundary" if caught_by is None else
+                f"until it runs into {caught_by[0]} at {caught_by[1]}, which catches it")
     analysis = (f"To count beans in Pac-Man's path, \n"
                f"we first find the starting position of the pacman. And it is ({game.pacman_position[0]}, {game.pacman_position[1]}).\n"
-               f"Then we counted all beans in the path moving in direction {game.direction} until hitting wall or boundary.\n"
+               f"Then we counted all beans in the path moving in direction {game.direction} {path_end}.\n"
                f"So there are {bean_count} beans in total.")
     return question, answer, analysis, None
+
+def describe_moves(direction: str, attempts: int, blocked: int) -> str:
+    """Analysis line for one movement sequence, saying how many of the moves a wall blocked."""
+    if blocked == 0:
+        return f"Successfully moves {direction} {attempts} times"
+    moved = attempts - blocked
+    return (f"Tries to move {direction} {attempts} times: {moved} of the moves {'succeeds' if moved == 1 else 'succeed'}, "
+            f"{blocked} {'is' if blocked == 1 else 'are'} blocked by a wall")
+
+def bean_block(count: int) -> List[int]:
+    """
+    Bean counts for options A-F: the block of six consecutive numbers 6k..6k+5 that contains `count`,
+    in random order. Every count in a block gets the same six options, so the options say nothing about
+    which one is the answer. (Distractors drawn from [1, count + 5] made the answer the largest option
+    minus 5 most of the time; a window placed at random around the count would still make the smallest
+    option the answer far too often, since bean counts are small.)
+    """
+    start = count - count % 6
+    values = list(range(start, start + 6))
+    random.shuffle(values)
+    return values
+
+def take_turn(test_game: PacManGame, direction: str, step: str, pacman_path, ghost_paths):
+    """
+    One turn: Pac-Man moves, then each ghost moves one step towards its target.
+    Pac-Man is caught if it moves into a ghost's cell (before the ghosts move) or if a ghost then
+    moves onto its cell. Returns (blocked by a wall, catching ghost or None, Pac-Man ran into it).
+    """
+    old_position = test_game.pacman_position
+    test_game.move_pacman(direction)
+    pacman_path.append((test_game.pacman_position, step))
+    blocked = test_game.pacman_position == old_position
+    for ghost in test_game.ghosts:
+        if ghost.position == test_game.pacman_position:
+            return blocked, ghost, True
+    for ghost in test_game.ghosts:
+        # Update ghost's target location
+        ghost.update_direction()
+        # Move if there is a viable path
+        if ghost.path and len(ghost.path) >= 2:
+            ghost.move()
+        ghost_paths[ghost.name].append((ghost.position, step))
+        if ghost.position == test_game.pacman_position:
+            return blocked, ghost, False
+    return blocked, None, False
 
 def handle_action_outcome_q4(game: PacManGame) -> Tuple[str, str, str, Optional[List[str]]]:
     """
@@ -208,250 +269,112 @@ def handle_action_outcome_q4(game: PacManGame) -> Tuple[str, str, str, Optional[
     test_game = copy.deepcopy(game)
     initial_score = test_game.score
     
-    question = question_prompt + f"\n\n**Question:** Assuming Pac-Man and both ghosts move one step at a time, what would happen if Pac-Man moves {direction1} {num1} times, then {direction2} {num2} times?"
+    question = question_prompt + f"\n\n**Question:** Assuming Pac-Man and both ghosts move one step at a time (each turn: {TURN_RULE}; a move into a wall leaves Pac-Man in place), what would happen if Pac-Man moves {direction1} {num1} times, then {direction2} {num2} times?"
+
+    caught_options = [
+        "G. It will be caught by Pinky (the pink ghost)",
+        "H. It will be caught by Blinky (the red ghost)"
+    ]
+
+    def bean_options(beans_list):
+        return [f"{chr(65+i)}. It will eat {beans_list[i]} beans, and the score will become {initial_score + beans_list[i]}"
+                for i in range(6)]
 
     # Initialize path tracking for first sequence
     ghost_paths_first = {ghost.name: [(ghost.position, 'initial')] for ghost in test_game.ghosts}
     pacman_path_first = [(test_game.pacman_position, 'initial')]
+    blocked_first = 0
 
     # First movement sequence
     for i in range(num1):
-        old_position = test_game.pacman_position
-        test_game.move_pacman(direction1)
-        pacman_path_first.append((test_game.pacman_position, f"step {i+1}"))
+        blocked, ghost, ran_into = take_turn(test_game, direction1, f"step {i+1}", pacman_path_first, ghost_paths_first)
+        blocked_first += blocked
+        if ghost is not None:
+            # Same kind of bean options as when Pac-Man survives, so they do not tell whether it is caught
+            beans_list = bean_block(test_game.score - initial_score)
+            options = bean_options(beans_list) + caught_options
+            question += "\n\n**Options:**\n" + "\n".join(options)
+
+            # The catching ghost is listed first
+            names = [ghost.name, "Blinky" if ghost.name == "Pinky" else "Pinky"]
+            catch = f"Pac-Man moves into {ghost.name}'s cell and is caught" if ran_into else f"{ghost.name} catches Pac-Man"
+            answer = "G" if ghost.name == 'Pinky' else "H"
+            analysis = (f"Let's analyze Pac-Man's movement step by step:\n\n"
+                        f"1. Initial state:\n"
+                        f"   - Pac-Man's starting position: {game.pacman_position}\n"
+                        f"   - {names[0]}'s starting position: {ghost_paths_first[names[0]][0][0]}\n"
+                        f"   - {names[1]}'s starting position: {ghost_paths_first[names[1]][0][0]}\n\n"
+                        f"2. Movement paths analysis:\n"
+                        f"   Pac-Man's path:\n")
+            for pos, step in pacman_path_first:
+                analysis += f"   - {step}: {pos}\n"
+            for name in names:
+                analysis += f"\n   {name}'s path:\n"
+                for pos, step in ghost_paths_first[name]:
+                    analysis += f"   - {step}: {pos}\n"
+            analysis += (f"\n3. Movement analysis:\n"
+                        f"   - Pac-Man attempts to move {direction1} {num1} times\n"
+                        f"   - During the {ordinal(i + 1)} move in direction {direction1}, {catch}\n"
+                        f"   - Collision occurs at position {ghost.position}\n\n"
+                        f"Therefore, Pac-Man is caught by {ghost.name} before completing its planned movement.")
+            return question, answer, analysis, options
         
-        """ if test_game.pacman_position == old_position:
-            break """
-
-        for ghost in test_game.ghosts:
-            old_ghost_pos = ghost.position
-            # Update ghost's target location
-            ghost.update_direction()
-            # Move if there is a viable path
-            if ghost.path and len(ghost.path) >= 2:
-                ghost.move()
-            ghost_paths_first[ghost.name].append((ghost.position, f"step {i+1}"))
-        
-
-
-            if ghost.position == test_game.pacman_position:
-
-                beans_list = []
-                for _ in range(6):
-                    while True:
-                        random_beans = random.randint(1, test_game.score - initial_score + 10)
-                        if random_beans not in beans_list:
-                            beans_list.append(random_beans)
-                            break
-
-                options = [
-                    f"A. It will eat {beans_list[0]} beans, and the score will become {initial_score + beans_list[0]}",
-                    f"B. It will eat {beans_list[1]} beans, and the score will become {initial_score + beans_list[1]}",
-                    f"C. It will eat {beans_list[2]} beans, and the score will become {initial_score + beans_list[2]}",
-                    f"D. It will eat {beans_list[3]} beans, and the score will become {initial_score + beans_list[3]}",
-                    f"E. It will eat {beans_list[4]} beans, and the score will become {initial_score + beans_list[4]}",
-                    f"F. It will eat {beans_list[5]} beans, and the score will become {initial_score + beans_list[5]}",
-                    "G. It will be caught by Pinky (the pink ghost)",
-                    "H. It will be caught by Blinky (the red ghost)"
-                ]
-
-                question += "\n\n**Options:**\n" + "\n".join(options)
-                
-                if ghost.name == 'Pinky':
-                    answer = "G"
-                    analysis = (f"Let's analyze Pac-Man's movement step by step:\n\n"
-                                f"1. Initial state:\n"
-                                f"   - Pac-Man's starting position: {game.pacman_position}\n"
-                                f"   - Pinky's starting position: {ghost_paths_first['Pinky'][0][0]}\n"
-                                f"   - Blinky's starting position: {ghost_paths_first['Blinky'][0][0]}\n\n"
-                                f"2. Movement paths analysis:\n"
-                                f"   Pac-Man's path:\n")
-                    for pos, step in pacman_path_first:
-                        analysis += f"   - {step}: {pos}\n"
-                    analysis += f"\n   Pinky's path:\n"
-                    for pos, step in ghost_paths_first['Pinky']:
-                        analysis += f"   - {step}: {pos}\n"
-                    analysis += f"\n   Blinky's path:\n"
-                    for pos, step in ghost_paths_first['Blinky']:
-                        analysis += f"   - {step}: {pos}\n"
-                    analysis += (f"\n3. Movement analysis:\n"
-                                f"   - Pac-Man attempts to move {direction1} {num1} times\n"
-                                f"   - During the {i+1}th move in direction {direction1}, Pinky catches Pac-Man\n"
-                                f"   - Collision occurs at position {ghost.position}\n\n"
-                                f"Therefore, Pac-Man is caught by Pinky before completing its planned movement.")
-                else:
-                    answer = "H"
-                    analysis = (f"Let's analyze Pac-Man's movement step by step:\n\n"
-                                f"1. Initial state:\n"
-                                f"   - Pac-Man's starting position: {game.pacman_position}\n"
-                                f"   - Blinky's starting position: {ghost_paths_first['Blinky'][0][0]}\n"
-                                f"   - Pinky's starting position: {ghost_paths_first['Pinky'][0][0]}\n\n"
-                                f"2. Movement paths analysis:\n"
-                                f"   Pac-Man's path:\n")
-                    for pos, step in pacman_path_first:
-                        analysis += f"   - {step}: {pos}\n"
-                    analysis += f"\n   Blinky's path:\n"
-                    for pos, step in ghost_paths_first['Blinky']:
-                        analysis += f"   - {step}: {pos}\n"
-                    analysis += f"\n   Pinky's path:\n"
-                    for pos, step in ghost_paths_first['Pinky']:
-                        analysis += f"   - {step}: {pos}\n"
-                    analysis += (f"\n3. Movement analysis:\n"
-                                f"   - Pac-Man attempts to move {direction1} {num1} times\n"
-                                f"   - During the {i+1}th move in direction {direction1}, Blinky catches Pac-Man\n"
-                                f"   - Collision occurs at position {ghost.position}\n\n"
-                                f"Therefore, Pac-Man is caught by Blinky before completing its planned movement.")
-                
-
-                return question, answer, analysis, options
-
+    beans_first = test_game.score - initial_score
 
     # Initialize path tracking for second sequence
     ghost_paths_second = {ghost.name: [(ghost.position, 'start_second_sequence')] for ghost in test_game.ghosts}
     pacman_path_second = [(test_game.pacman_position, 'start_second_sequence')]
-
+    blocked_second = 0
 
     # Second movement sequence
     for i in range(num2):
-        old_position = test_game.pacman_position
-        test_game.move_pacman(direction2)
-        pacman_path_second.append((test_game.pacman_position, f"step {i+1}"))
+        blocked, ghost, ran_into = take_turn(test_game, direction2, f"step {i+1}", pacman_path_second, ghost_paths_second)
+        blocked_second += blocked
+        if ghost is not None:
+            # Same kind of bean options as when Pac-Man survives, so they do not tell whether it is caught
+            beans_list = bean_block(test_game.score - initial_score)
+            options = bean_options(beans_list) + caught_options
+            question += "\n\n**Options:**\n" + "\n".join(options)
 
-        """ if test_game.pacman_position == old_position:
-            break """
-             
-        for ghost in test_game.ghosts:
-            old_ghost_pos = ghost.position
-            # Update ghost's target location
-            ghost.update_direction()
-            # Move if there is a viable path
-            if ghost.path and len(ghost.path) >= 2:
-                ghost.move()
-            ghost_paths_second[ghost.name].append((ghost.position, f"step {i+1}"))
+            # The catching ghost is listed first
+            names = [ghost.name, "Blinky" if ghost.name == "Pinky" else "Pinky"]
+            catch = f"Pac-Man moves into {ghost.name}'s cell and is caught" if ran_into else f"{ghost.name} catches Pac-Man"
+            answer = "G" if ghost.name == 'Pinky' else "H"
+            analysis = (f"Let's analyze Pac-Man's movement step by step:\n\n"
+                        f"1. First movement sequence:\n"
+                        f"   - {describe_moves(direction1, num1, blocked_first)}\n"
+                        f"   - Eats {beans_first} beans during this phase\n"
+                        f"   Paths during first sequence:\n"
+                        f"   Pac-Man's path:\n")
+            for pos, step in pacman_path_first:
+                analysis += f"   - {step}: {pos}\n"
+            analysis += f"\n   Ghost paths:\n"
+            for name in names:
+                for pos, step in ghost_paths_first[name]:
+                    analysis += f"   {name} {step}: {pos}\n"
 
+            analysis += (f"\n2. Second movement sequence:\n"
+                        f"   - Attempts to move {direction2} {num2} times\n"
+                        f"   Pac-Man's path:\n")
+            for pos, step in pacman_path_second:
+                analysis += f"   - {step}: {pos}\n"
+            analysis += f"\n   Ghost paths:\n"
+            for name in names:
+                for pos, step in ghost_paths_second[name]:
+                    analysis += f"   {name} {step}: {pos}\n"
 
-
-            if ghost.position == test_game.pacman_position:
-
-                beans_eaten = test_game.score - initial_score
-                
-                beans_list = []
-                for _ in range(6):
-                    while True:
-                        random_beans = random.randint(1, beans_eaten + 10)
-                        if random_beans not in beans_list:
-                            beans_list.append(random_beans)
-                            break
-
-                options = [
-                    f"A. It will eat {beans_list[0]} beans, and the score will become {initial_score + beans_list[0]}",
-                    f"B. It will eat {beans_list[1]} beans, and the score will become {initial_score + beans_list[1]}",
-                    f"C. It will eat {beans_list[2]} beans, and the score will become {initial_score + beans_list[2]}",
-                    f"D. It will eat {beans_list[3]} beans, and the score will become {initial_score + beans_list[3]}",
-                    f"E. It will eat {beans_list[4]} beans, and the score will become {initial_score + beans_list[4]}",
-                    f"F. It will eat {beans_list[5]} beans, and the score will become {initial_score + beans_list[5]}",
-                    "G. It will be caught by Pinky (the pink ghost)",
-                    "H. It will be caught by Blinky (the red ghost)"
-                ]
-
-                question += "\n\n**Options:**\n" + "\n".join(options)
-
-                if ghost.name == 'Pinky':
-                    answer = "G"
-                    analysis = (f"Let's analyze Pac-Man's movement step by step:\n\n"
-                                f"1. First movement sequence:\n"
-                                f"   - Successfully moves {direction1} {num1} times\n"
-                                f"   - Eats {beans_eaten} beans during this phase\n"
-                                f"   Paths during first sequence:\n"
-                                f"   Pac-Man's path:\n")
-                    for pos, step in pacman_path_first:
-                        analysis += f"   - {step}: {pos}\n"
-                    analysis += f"\n   Ghost paths:\n"
-                    for pos, step in ghost_paths_first['Pinky']:
-                        analysis += f"   Pinky {step}: {pos}\n"
-                    for pos, step in ghost_paths_first['Blinky']:
-                        analysis += f"   Blinky {step}: {pos}\n"
-                    
-                    analysis += (f"\n2. Second movement sequence:\n"
-                                f"   - Attempts to move {direction2} {num2} times\n"
-                                f"   Pac-Man's path:\n")
-                    for pos, step in pacman_path_second:
-                        analysis += f"   - {step}: {pos}\n"
-                    analysis += f"\n   Ghost paths:\n"
-                    for pos, step in ghost_paths_second['Pinky']:
-                        analysis += f"   Pinky {step}: {pos}\n"
-                    for pos, step in ghost_paths_second['Blinky']:
-                        analysis += f"   Blinky {step}: {pos}\n"
-                    
-                    analysis += (f"\n3. Final outcome:\n"
-                                f"   - During the {i+1}th move, Pinky catches Pac-Man\n"
-                                f"   - Collision occurs at position {ghost.position}\n\n"
-                                f"Therefore, Pac-Man is caught by Pinky before completing its planned movement.")
-                else:
-                    answer = "H"
-                    analysis = (f"Let's analyze Pac-Man's movement step by step:\n\n"
-                                f"1. First movement sequence:\n"
-                                f"   - Successfully moves {direction1} {num1} times\n"
-                                f"   - Eats {beans_eaten} beans during this phase\n"
-                                f"   Paths during first sequence:\n"
-                                f"   Pac-Man's path:\n")
-                    for pos, step in pacman_path_first:
-                        analysis += f"   - {step}: {pos}\n"
-                    analysis += f"\n   Ghost paths:\n"
-                    for pos, step in ghost_paths_first['Blinky']:
-                        analysis += f"   Blinky {step}: {pos}\n"
-                    for pos, step in ghost_paths_first['Pinky']:
-                        analysis += f"   Pinky {step}: {pos}\n"
-                    
-                    analysis += (f"\n2. Second movement sequence:\n"
-                                f"   - Attempts to move {direction2} {num2} times\n"
-                                f"   Pac-Man's path:\n")
-                    for pos, step in pacman_path_second:
-                        analysis += f"   - {step}: {pos}\n"
-                    analysis += f"\n   Ghost paths:\n"
-                    for pos, step in ghost_paths_second['Blinky']:
-                        analysis += f"   Blinky {step}: {pos}\n"
-                    for pos, step in ghost_paths_second['Pinky']:
-                        analysis += f"   Pinky {step}: {pos}\n"
-                    
-                    analysis += (f"\n3. Final outcome:\n"
-                                f"   - During the {i+1}th move, Blinky catches Pac-Man\n"
-                                f"   - Collision occurs at position {ghost.position}\n\n"
-                                f"Therefore, Pac-Man is caught by Blinky before completing its planned movement.")
-                return question, answer, analysis, options
+            analysis += (f"\n3. Final outcome:\n"
+                        f"   - During the {ordinal(i + 1)} move, {catch}\n"
+                        f"   - Collision occurs at position {ghost.position}\n\n"
+                        f"Therefore, Pac-Man is caught by {ghost.name} before completing its planned movement.")
+            return question, answer, analysis, options
     
     final_score = test_game.score
     beans_eaten = final_score - initial_score
 
-    options = []
-    correct_option = random.choice(['A', 'B', 'C', 'D', 'E', 'F'])
-    correct_index = ord(correct_option) - ord('A')
-
-    beans_list = [beans_eaten]
-    for _ in range(5):
-        while True:
-            random_beans = random.randint(1, beans_eaten + 5)
-            if random_beans != beans_eaten and random_beans not in beans_list:
-                beans_list.append(random_beans)
-                break
-
-    random.shuffle(beans_list[1:])
-
-    for i in range(6):
-        if i == correct_index:
-            bean_count = beans_eaten
-        elif i > correct_index:
-            bean_count = beans_list[i]
-        elif i < correct_index:
-            bean_count = beans_list[i + 1]
-        options.append(f"{chr(65+i)}. It will eat {bean_count} beans, and the score will become {initial_score + bean_count}")
-
-    options.extend([
-        "G. It will be caught by Pinky (the pink ghost)",
-        "H. It will be caught by Blinky (the red ghost)"
-    ])
-
-    answer = correct_option
+    beans_list = bean_block(beans_eaten)
+    options = bean_options(beans_list) + caught_options
+    answer = chr(65 + beans_list.index(beans_eaten))
     question += "\n\n**Options:**\n" + "\n".join(options)
 
     analysis = (f"Let's analyze Pac-Man's movement step by step:\n\n"
@@ -459,7 +382,7 @@ def handle_action_outcome_q4(game: PacManGame) -> Tuple[str, str, str, Optional[
                 f"   - Starting position: {game.pacman_position}\n"
                 f"   - Initial score: {initial_score}\n\n"
                 f"2. First movement sequence:\n"
-                f"   - Successfully moves {direction1} {num1} times\n"
+                f"   - {describe_moves(direction1, num1, blocked_first)}\n"
                 f"   - No collision with ghosts during this phase\n"
                 f"   Paths during first sequence:\n"
                 f"   Pac-Man's path:\n")
@@ -474,7 +397,7 @@ def handle_action_outcome_q4(game: PacManGame) -> Tuple[str, str, str, Optional[
         analysis += f"   Blinky {step}: {pos}\n"
         
     analysis += (f"\n3. Second movement sequence:\n"
-                f"   - Successfully moves {direction2} {num2} times\n"
+                f"   - {describe_moves(direction2, num2, blocked_second)}\n"
                 f"   - No collision with ghosts during this phase\n"
                 f"   Paths during second sequence:\n"
                 f"   Pac-Man's path:\n")
@@ -494,13 +417,29 @@ def handle_action_outcome_q4(game: PacManGame) -> Tuple[str, str, str, Optional[
                 f"Therefore, Pac-Man successfully completes its movement, eating {beans_eaten} beans and reaching a score of {final_score}.")
     return question, answer, analysis, options
 
+def runs_into_ghost(game: PacManGame, direction: str, times: int) -> bool:
+    """Whether moving `times` steps in `direction` (stopping at a wall) enters a ghost's cell."""
+    ghost_cells = {ghost.position for ghost in game.ghosts}
+    dr, dc = {'UP': (-1, 0), 'DOWN': (1, 0), 'LEFT': (0, -1), 'RIGHT': (0, 1)}[direction]
+    row, col = game.pacman_position
+    for _ in range(times):
+        if (row + dr, col + dc) in game.walls:
+            return False
+        row, col = row + dr, col + dc
+        if (row, col) in ghost_cells:
+            return True
+    return False
+
 def handle_action_outcome_q5(game: PacManGame) -> Tuple[str, str, str, Optional[List[str]]]:
     """
     Generates Q5: Will Pinky's next movement direction change after Pac-Man moves?
     """
-    # Generate random movement
+    # Generate random movement (one that does not run into a ghost, which would catch Pac-Man)
     direction0 = random.choice(directions)
     num1 = random.randint(1, 3)
+    while runs_into_ghost(game, direction0, num1):
+        direction0 = random.choice(directions)
+        num1 = random.randint(1, 3)
     
     # Get Pinky's current target and path
     pinky = None
@@ -572,9 +511,12 @@ def handle_action_outcome_q6(game: PacManGame) -> Tuple[str, str, str, Optional[
     """
     Generates Q6: Will Blinky's next movement direction change after Pac-Man moves?
     """
-    # Generate random movement
+    # Generate random movement (one that does not run into a ghost, which would catch Pac-Man)
     direction0 = random.choice(directions)
     num1 = random.randint(1, 3)
+    while runs_into_ghost(game, direction0, num1):
+        direction0 = random.choice(directions)
+        num1 = random.randint(1, 3)
     
     # Get Blinky
     blinky = None
@@ -681,7 +623,7 @@ def handle_transition_path_q7(game: PacManGame) -> Tuple[str, str, str, Optional
     
     analysis = (f"To determine Pinky's next move, we need to find the current target of Pinky.\n"
                f"Firstly, current Pinky position is {pinky.position}\n"
-               f"Currrent Pac-Man's position is {game.pacman_position}\n"
+               f"Current Pac-Man's position is {game.pacman_position}\n"
                f"And Pac-Man's direction is {game.direction}\n"
                f"So Pinky's target (4 spaces ahead) is {target}\n"
                f"Secondly, we calculate the shortest path using BFS: {path}\n"
@@ -774,6 +716,13 @@ def handle_strategy_optimization_q9(game: PacManGame) -> Tuple[str, str, str, Op
                 final_pacman_pos = test_game.pacman_position
                 final_ghost_positions = {ghost.name: ghost.position for ghost in test_game.ghosts}
                 break
+
+            # Moving into a ghost's cell gets Pac-Man caught before the ghosts move
+            if any(ghost.position == test_game.pacman_position for ghost in test_game.ghosts):
+                caught = True
+                final_pacman_pos = test_game.pacman_position
+                final_ghost_positions = {ghost.name: ghost.position for ghost in test_game.ghosts}
+                break
             
             for ghost in test_game.ghosts:
                 ghost.update_direction()
@@ -792,7 +741,10 @@ def handle_strategy_optimization_q9(game: PacManGame) -> Tuple[str, str, str, Op
         
         beans_eaten = test_game.score - initial_score
         results[test_direction] = (beans_eaten, caught, final_pacman_pos, final_ghost_positions, pacman_path, ghost_paths)
-        
+
+    # Ties go to the priority order stated in the question: UP > DOWN > LEFT > RIGHT
+    for test_direction in ["UP", "DOWN", "LEFT", "RIGHT"]:
+        beans_eaten, caught = results[test_direction][:2]
         if not caught and beans_eaten > max_beans:
             max_beans = beans_eaten
             best_direction = test_direction
@@ -807,7 +759,7 @@ def handle_strategy_optimization_q9(game: PacManGame) -> Tuple[str, str, str, Op
         "E. Pac-Man will be caught by a ghost regardless of direction"
     ]
     
-    question = question_prompt + "\n\n**Question:** If Pac-Man and both ghosts move one step at a time, in which direction should Pac-Man move continuously until hitting a wall to eat the most beans without being caught by a ghost? (When moving in more than one direction is optimal, the priority order is UP > DOWN > LEFT > RIGHT)" + "\n\n**Options:**\n" + "\n".join(options)
+    question = question_prompt + f"\n\n**Question:** If Pac-Man and both ghosts move one step at a time (each turn: {TURN_RULE}), in which direction should Pac-Man move continuously until hitting a wall to eat the most beans without being caught by a ghost? (When moving in more than one direction is optimal, the priority order is UP > DOWN > LEFT > RIGHT)" + "\n\n**Options:**\n" + "\n".join(options)
     
     if will_be_caught:
         answer = "E"
@@ -870,13 +822,13 @@ def generate_pacman_QA(game: PacManGame, num: int, size: int) -> Tuple[str, str,
         {"qa_type": "Target Perception", "template": "Now how many beans are visible there in the 5 by 5 grid around the Pac-man center?", "difficulty": "Easy", "is_mcq": False, "description": "Count Pacman's surrounding beans"},
         
         # 2: StateInfo - Multiple choice
-        {"qa_type": "Target Perception", "template": "Which ghost is closer to Pac-Man, Pinky or Blinky?", "difficulty": "Easy", "is_mcq": True, "description": "Identify the closest ghost"},
+        {"qa_type": "Target Perception", "template": "Which ghost is closer to Pac-Man, Pinky or Blinky? (Use the Manhattan distance: |row difference| + |column difference|.)", "difficulty": "Easy", "is_mcq": True, "description": "Identify the closest ghost"},
 
         # 3: ActionOutcome
-        {"qa_type": "State Prediction", "template": "Assuming the ghosts don't move, how many beans can Pac-Man eat if it moves in its current direction until hitting a wall?", "difficulty": "Easy", "is_mcq": False, "description": "Count beans in Pacman's path"},
+        {"qa_type": "State Prediction", "template": "Assuming the ghosts don't move, how many beans can Pac-Man eat if it moves in its current direction until it hits a wall or runs into a ghost (a ghost it runs into catches it)?", "difficulty": "Easy", "is_mcq": False, "description": "Count beans in Pacman's path"},
         
         # 4: ActionOutcome - Multiple choice
-        {"qa_type": "State Prediction", "template": "Assuming Pac-Man and both ghosts move one step at a time, what would happen if Pac-Man moves {direction1} {num1} times, then {direction2} {num2} times?", "difficulty": "Hard", "is_mcq": True, "description": "Predict Pacman's movement result"},
+        {"qa_type": "State Prediction", "template": "Assuming Pac-Man and both ghosts move one step at a time (each turn: " + TURN_RULE + "; a move into a wall leaves Pac-Man in place), what would happen if Pac-Man moves {direction1} {num1} times, then {direction2} {num2} times?", "difficulty": "Hard", "is_mcq": True, "description": "Predict Pacman's movement result"},
 
         # 5: ActionOutcome - Multiple choice
         {"qa_type": "State Prediction", "template": "Assuming Pinky doesn't move, if Pac-Man moves {direction0} {num1} times, will Pinky's next movement direction change?", "difficulty": "Medium", "is_mcq": True, "description": "Predict change in Pinky's movement"},
@@ -891,7 +843,7 @@ def generate_pacman_QA(game: PacManGame, num: int, size: int) -> Tuple[str, str,
         {"qa_type": "State Prediction", "template": "If Pac-Man stays still, where will Blinky move in the next turn?", "difficulty": "Medium", "is_mcq": True, "description": "Infer Blinky's next move"},
 
         # 9: StrategyOptimization - Multiple choice
-        {"qa_type": "Strategy Optimization", "template": "If Pac-Man and both ghosts move one step at a time, in which direction should Pac-Man move continuously until hitting a wall to eat the most beans without being caught by a ghost? (When moving in more than one direction is optimal, the priority order is UP > DOWN > LEFT > RIGHT)", "difficulty": "Hard", "is_mcq": True, "description": "Judge Pacman's optimal movement"},
+        {"qa_type": "Strategy Optimization", "template": "If Pac-Man and both ghosts move one step at a time (each turn: " + TURN_RULE + "), in which direction should Pac-Man move continuously until hitting a wall to eat the most beans without being caught by a ghost? (When moving in more than one direction is optimal, the priority order is UP > DOWN > LEFT > RIGHT)", "difficulty": "Hard", "is_mcq": True, "description": "Judge Pacman's optimal movement"},
         
     ]
         

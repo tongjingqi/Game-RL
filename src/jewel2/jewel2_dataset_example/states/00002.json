@@ -3,29 +3,29 @@
     "cols": 4,
     "chessboard": [
         [
+            "B",
+            "A",
             "C",
-            "B",
+            "A"
+        ],
+        [
+            "C",
+            "C",
             "D",
-            "E"
+            "C"
         ],
         [
             "A",
             "B",
-            "B",
+            "A",
             "E"
         ],
         [
-            "B",
-            "E",
-            "A",
-            "B"
-        ],
-        [
+            "C",
             "D",
             "E",
-            "D",
-            "d"
+            "D"
         ]
     ],
-    "total_cleared": 94
+    "total_cleared": 40
 }

@@ -34,26 +34,6 @@ class ThreeDReconstructionQAGenerator:
 
     def _output_path(self, relative_path):
         return os.path.join(self.output_dir, relative_path)
-
-    def _order_addition_sequence(self, additions, current_voxels, game):
-        """Return additions in an order that is legal under the adjacency rule."""
-        remaining = set(tuple(pos) for pos in additions)
-        structure = set(tuple(pos) for pos in current_voxels)
-        ordered = []
-
-        while remaining:
-            placeable = sorted(
-                pos for pos in remaining
-                if set(game._get_adjacent_neighbors(pos)) & structure
-            )
-            if not placeable:
-                return None
-            next_pos = placeable[0]
-            ordered.append(next_pos)
-            remaining.remove(next_pos)
-            structure.add(next_pos)
-
-        return ordered
         
     def get_plot_level(self, voxel_count):
         """根据体素数量确定难度级别"""
@@ -486,7 +466,7 @@ class ThreeDReconstructionQAGenerator:
                 test_voxels: 要添加的方块列表
                 current_voxels: 当前结构的方块列表
                 target_voxels: 目标结构的方块列表
-                remaining: 剩余可用方块数量
+                remaining: 剩余可用方块数量（题图中显示的 Remaining Available Voxels）
                 check_both: 是否检查两个投影
                 check_zy: 如果不检查两个投影，是否检查Y-Z投影（False则检查X-Z投影）
                 
@@ -497,26 +477,20 @@ class ThreeDReconstructionQAGenerator:
             if len(test_voxels) > remaining:
                 return False
             
-            # 2. 按选项顺序逐步放置，每一步都必须贴着已有结构
+            # 2. 新增位置必须互不相同，且当前没有体素
             current_set = set(tuple(pos) if isinstance(pos, list) else pos for pos in current_voxels)
-            additions = []
-            for voxel in test_voxels:
-                voxel = tuple(voxel) if isinstance(voxel, list) else voxel
-                if voxel in current_set:
-                    return False
-                if not (set(game._get_adjacent_neighbors(voxel)) & current_set):
-                    return False
-                current_set.add(voxel)
-                additions.append(voxel)
-
-            # 3. 组合当前结构和新增体素
-            test_structure = list(current_set)
-
-            # 4. 检查最终结构是否连通
-            if not game._is_connected(current_set):
+            additions = set(tuple(pos) if isinstance(pos, list) else pos for pos in test_voxels)
+            if len(additions) != len(test_voxels) or additions & current_set:
                 return False
             
-            # 5. 检查投影是否匹配
+            # 3. 组合当前结构和新增体素并检查是否连通。选项是位置集合：当前结构连通时，
+            #    整体连通等价于存在一个每步都贴着已有体素的放置顺序
+            test_structure_set = current_set | additions
+            if not game._is_connected(test_structure_set):
+                return False
+            test_structure = list(test_structure_set)
+
+            # 4. 检查投影是否匹配
             test_yz_proj, test_xz_proj = game.get_projections(test_structure)
             target_yz_proj, target_xz_proj = game.get_projections(target_voxels)
             
@@ -535,38 +509,19 @@ class ThreeDReconstructionQAGenerator:
         # 如果不是检查两个投影，确定是检查哪一个
         check_zy = not check_both and "Y-Z" in proj_type
         
-        question = (
-            "You are in the middle of a 3D reconstruction puzzle.\n"
-            "The current structure has some initial voxels, and your goal is to complete it as the game rules.\n\n"
-            "Game Rules:\n"
-            "1. Goal: Reconstruct a 3D structure by adding voxels to match given projections.\n"
-            "2. Grid Space: The game is played on a 3x3x3 cube grid.\n"
-            "3. Coordinates: Position (x,y,z) ranges from 1 to 3, with (1,1,1) at front-left-bottom.\n"
-            "4. Position Rule: Each position can contain at most one voxel.\n"
-            "5. Connectivity: All voxels must be connected face-to-face.\n"
-            "6. Voxel Limit: You have a maximum of n additional voxels available.\n"
-            "7. Placement Rule: New voxels can only be placed adjacent to existing ones.\n"
-            "8. Front View (Y-Z): Shows structure when viewed along the negative X-axis direction (front to back), with Y as horizontal axis and Z as vertical axis. Projection coordinates are in (y,z) format.\n"
-            "9. Side View (X-Z): Shows structure when viewed along the positive Y-axis direction (left to right), with X as horizontal axis and Z as vertical axis. Projection coordinates are in (x,z) format.\n"
-            "10. Projection Rule: A cell shows '1' if any voxel exists along that line of sight, and '0' if no voxel exists along that line.\n"
-            f"Question:\n"
-            f"Which sequence of voxel additions will make the structure match the {proj_type}?\n"
-            "Choose the correct sequence from the options below.\n\n"
-            "Options:\n"
-        )
+        question = self._transition_path_question_text(proj_type)
         
         # 生成选项
         current_voxels = game_state['current_state']['positions']
         minimal_addition = game_state['minimal_addition']['positions']
         target_voxels = game_state['complete_solution']['positions']
+        # remaining: size of the minimal addition, only used to size the distractors;
+        # budget: the voxel limit n printed on the image, used for validity and in the analysis
         remaining = len(target_voxels) - len(current_voxels)
-        
-        correct_sequence = self._order_addition_sequence(minimal_addition, current_voxels, game)
-        if correct_sequence is None:
-            raise ValueError("Minimal addition cannot be ordered as a legal placement sequence")
+        budget = game.remaining_voxels()
 
         # 正确选项
-        correct_option = f"Add voxels in this order: {correct_sequence}"
+        correct_option = f"Add voxels at positions: {sorted(minimal_addition)}"
         
         # 生成错误选项
         wrong_options = []
@@ -577,18 +532,18 @@ class ThreeDReconstructionQAGenerator:
         MAX_TOTAL_ATTEMPTS = 200  # 总的最大尝试次数
         total_attempts = 0
         
-        # 1. 先生成2个过多的方块（超出remaining的限制）
+        # 1. 先生成2个过多的方块（超出剩余体素上限）
         extra_count = 0
         attempts = 0
         
         while extra_count < 2 and attempts < MAX_ATTEMPTS and total_attempts < MAX_TOTAL_ATTEMPTS:
             # 随机选择一个超出限制的数量，但不超过27（3x3x3空间）
-            extra_count_range = min(27 - len(current_voxels), remaining + 10)
-            target_count = remaining + random.randint(1, extra_count_range)
+            extra_count_range = min(27 - len(current_voxels), budget + 10)
+            target_count = budget + random.randint(1, extra_count_range)
             _, extra_voxels = game.generate_random_connected_voxels(target_count)
-            option = f"Add voxels in this order: {extra_voxels}"
+            option = f"Add voxels at positions: {sorted(extra_voxels)}"
             
-            if option not in used_options and not is_valid_solution(extra_voxels, current_voxels, target_voxels, remaining, check_both, check_zy):
+            if option not in used_options and not is_valid_solution(extra_voxels, current_voxels, target_voxels, budget, check_both, check_zy):
                 wrong_options.append(option)
                 used_options.add(option)
                 extra_count += 1
@@ -615,9 +570,9 @@ class ThreeDReconstructionQAGenerator:
                 available.remove(pos)
                 inner_attempts += 1
                 
-            option = f"Add voxels in this order: {disconnected_voxels}"
+            option = f"Add voxels at positions: {sorted(disconnected_voxels)}"
             
-            if option not in used_options and not is_valid_solution(disconnected_voxels, current_voxels, target_voxels, remaining, check_both, check_zy):
+            if option not in used_options and not is_valid_solution(disconnected_voxels, current_voxels, target_voxels, budget, check_both, check_zy):
                 wrong_options.append(option)
                 used_options.add(option)
                 disconnected_count += 1
@@ -631,9 +586,9 @@ class ThreeDReconstructionQAGenerator:
         while invalid_count < 2 and attempts < MAX_ATTEMPTS and total_attempts < MAX_TOTAL_ATTEMPTS:
             target_count = random.randint(1, remaining)
             _, test_voxels = game.generate_random_connected_voxels(target_count)
-            option = f"Add voxels in this order: {test_voxels}"
+            option = f"Add voxels at positions: {sorted(test_voxels)}"
             
-            if option not in used_options and not is_valid_solution(test_voxels, current_voxels, target_voxels, remaining, check_both, check_zy):
+            if option not in used_options and not is_valid_solution(test_voxels, current_voxels, target_voxels, budget, check_both, check_zy):
                 wrong_options.append(option)
                 used_options.add(option)
                 invalid_count += 1
@@ -645,14 +600,14 @@ class ThreeDReconstructionQAGenerator:
         
         while len(wrong_options) < 7:  # 需要7个错误选项
             # 如果尝试次数过多，直接生成超出限制的选项
-            extra_count_range = min(27 - len(current_voxels), remaining + 10)
-            target_count = remaining + random.randint(1, extra_count_range)
+            extra_count_range = min(27 - len(current_voxels), budget + 10)
+            target_count = budget + random.randint(1, extra_count_range)
                 
             # 生成随机连通结构
             _, random_voxels = game.generate_random_connected_voxels(target_count)
-            option = f"Add voxels in this order: {random_voxels}"
+            option = f"Add voxels at positions: {sorted(random_voxels)}"
             
-            if option not in used_options and not is_valid_solution(random_voxels, current_voxels, target_voxels, remaining, check_both, check_zy):
+            if option not in used_options and not is_valid_solution(random_voxels, current_voxels, target_voxels, budget, check_both, check_zy):
                 wrong_options.append(option)
                 used_options.add(option)
             
@@ -673,8 +628,8 @@ class ThreeDReconstructionQAGenerator:
                         disconnected_voxels.append(pos)
                         available.remove(pos)
                     
-                    option = f"Add voxels in this order: {disconnected_voxels}"
-                    if option not in used_options:
+                    option = f"Add voxels at positions: {sorted(disconnected_voxels)}"
+                    if option not in used_options and not is_valid_solution(disconnected_voxels, current_voxels, target_voxels, budget, check_both, check_zy):
                         wrong_options.append(option)
                         used_options.add(option)
                 break
@@ -694,7 +649,44 @@ class ThreeDReconstructionQAGenerator:
         # 找到正确答案的索引（从1开始）
         correct_index = all_options.index(correct_option) + 1
         
-        # 生成分析
+        analysis = self._transition_path_analysis(all_options, correct_index, current_voxels, target_voxels,
+                                                  budget, check_both, proj_type, game)
+
+        return {
+            'question_type': 'transition_path',
+            'question_id': 4,
+            'question': question,
+            'options': all_options,
+            'answer': str(correct_index),
+            'analysis': analysis
+        }
+
+    def _transition_path_question_text(self, proj_type):
+        """Question text of the transition_path task, up to and including the "Options:" line."""
+        target = proj_type if proj_type.startswith("both") else f"the {proj_type}"
+        return (
+            "You are in the middle of a 3D reconstruction puzzle.\n"
+            "The current structure has some initial voxels, and your goal is to complete it as the game rules.\n\n"
+            "Game Rules:\n"
+            "1. Goal: Reconstruct a 3D structure by adding voxels to match given projections.\n"
+            "2. Grid Space: The game is played on a 3x3x3 cube grid.\n"
+            "3. Coordinates: Position (x,y,z) ranges from 1 to 3, with (1,1,1) at front-left-bottom.\n"
+            "4. Position Rule: Each position can contain at most one voxel.\n"
+            "5. Connectivity: All voxels must be connected face-to-face.\n"
+            "6. Voxel Limit: You have a maximum of n additional voxels available.\n"
+            "7. Placement Rule: New voxels can only be placed adjacent to existing ones.\n"
+            "8. Front View (Y-Z): Shows structure when viewed along the negative X-axis direction (front to back), with Y as horizontal axis and Z as vertical axis. Projection coordinates are in (y,z) format.\n"
+            "9. Side View (X-Z): Shows structure when viewed along the positive Y-axis direction (left to right), with X as horizontal axis and Z as vertical axis. Projection coordinates are in (x,z) format.\n"
+            "10. Projection Rule: A cell shows '1' if any voxel exists along that line of sight, and '0' if no voxel exists along that line.\n"
+            f"Question:\n"
+            f"Which set of voxel positions should be added to make the structure match {target}?\n"
+            "Choose the correct set of positions from the options below.\n\n"
+            "Options:\n"
+        )
+
+    def _transition_path_analysis(self, all_options, correct_index, current_voxels, target_voxels, budget,
+                                  check_both, proj_type, game):
+        """Per-option analysis of the transition_path task (each option is a set of positions to add)."""
         analysis = (
             f"Let's analyze each option:\n\n"
             f"Current structure: {sorted(current_voxels)}\n\n"
@@ -705,17 +697,9 @@ class ThreeDReconstructionQAGenerator:
             voxels_str = option.split(": ", 1)[1]
             voxels = eval(voxels_str)  # 将字符串转换回列表
             
-            # 检查是否可以按顺序逐步添加并保持连通
-            step_structure = set(current_voxels)
-            is_sequence_valid = True
-            for voxel in voxels:
-                voxel = tuple(voxel) if isinstance(voxel, list) else voxel
-                if voxel in step_structure or not (set(game._get_adjacent_neighbors(voxel)) & step_structure):
-                    is_sequence_valid = False
-                    break
-                step_structure.add(voxel)
-            test_structure = list(step_structure)
-            is_connected = is_sequence_valid and game._is_connected(step_structure)
+            # 检查是否连通
+            test_structure = current_voxels + voxels
+            is_connected = game._is_connected(set(test_structure))
             
             # 检查投影是否匹配
             yz_proj, xz_proj = game.get_projections(test_structure)
@@ -725,9 +709,9 @@ class ThreeDReconstructionQAGenerator:
             
             analysis += f"Option {i}:\n"
             if not is_connected:
-                analysis += "- The added voxels cannot be placed in this order while staying adjacent to the existing structure\n"
+                analysis += "- The added voxels are not all connected to the existing structure\n"
             else:
-                analysis += "- The ordered additions maintain connectivity at every step\n"
+                analysis += "- The added voxels maintain connectivity\n"
                 
             if check_both:
                 if not (yz_match and xz_match):
@@ -746,23 +730,15 @@ class ThreeDReconstructionQAGenerator:
                     else:
                         analysis += "- Matches the X-Z target projection\n"
                         
-            if len(voxels) > remaining:
-                analysis += f"- Uses {len(voxels)} voxels, which exceeds the remaining limit of {remaining}\n"
+            if len(voxels) > budget:
+                analysis += f"- Uses {len(voxels)} voxels, which exceeds the remaining limit of {budget}\n"
             else:
-                analysis += f"- Uses {len(voxels)} voxels, which is within the limit of {remaining}\n"
+                analysis += f"- Uses {len(voxels)} voxels, which is within the limit of {budget}\n"
                 
             analysis += "\n"
             
         analysis += f"Therefore, the correct answer is option {correct_index}."
-        
-        return {
-            'question_type': 'transition_path',
-            'question_id': 4,
-            'question': question,
-            'options': all_options,
-            'answer': str(correct_index),
-            'analysis': analysis
-        }
+        return analysis
         
     def generate_strategy_optimization_question(self, game_state, game):
         """生成StrategyOptimization类型的填空题"""
@@ -799,7 +775,7 @@ class ThreeDReconstructionQAGenerator:
             
             f"1. Basic Information:\n"
             f"   - Current structure: {len(current_voxels)} voxels at positions {sorted(current_voxels)}\n"
-            f"   - Remaining available voxels: {len(target_voxels) - len(current_voxels)}\n\n"
+            f"   - Remaining available voxels: {game.remaining_voxels()}\n\n"
             
             f"2. Analysis of Y-Z Projection (Front View):\n"
             f"   a) Current Y-Z projection:\n"
@@ -944,9 +920,14 @@ class ThreeDReconstructionQAGenerator:
         else:
             game.visualize_structure(structure=structure, name=self._output_path(image_path))
             
-        # 计算投影和剩余方块数
+        # 计算投影和剩余方块数（与图中 "Remaining Available Voxels" 一致；完整解视图不显示，记为 None）
         target_yz_proj, target_xz_proj = game.get_projections(game_state['complete_solution']['positions'])
-        remaining_voxels = len(game_state['complete_solution']['positions']) - len(structure)
+        if question_type in ['action_outcome', 'strategy_optimization', 'transition_path'] or structure_type == 'current':
+            remaining_voxels = game.remaining_voxels()
+        elif structure_type == 'solution':
+            remaining_voxels = game.remaining_voxels(show_solution=True)
+        else:
+            remaining_voxels = game.remaining_voxels(structure=structure)
             
         # 保存state信息
         state_info = {
@@ -998,7 +979,7 @@ class ThreeDReconstructionQAGenerator:
                 "Choose the position that contains a voxel from the given options." if question_type == 'position' else
                 "Choose how the given 3D structure's projections match with the target projections." if question_type == 'projection' else
                 "Predict the projection matrix after adding specified voxels to the current structure." if question_type == 'action_outcome' else
-                "Choose the correct sequence of voxel additions that will make the structure match the target projection(s) while following game rules." if question_type == 'transition_path' else
+                "Choose the correct set of voxel additions that will make the structure match the target projection(s) while following game rules." if question_type == 'transition_path' else
                 "Find the minimum number of additional voxels needed to match both target projections."
             )),
             ("image", image_path),

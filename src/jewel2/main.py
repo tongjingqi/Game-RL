@@ -7,7 +7,7 @@ from chessboard import Chessboard
 from randomizer import SpecialRandom
 from level import Level
 from image_generator import generate_jewel2_image
-from QA_generator import generate_jewel2_QA
+from QA_generator import generate_jewel2_QA, has_unique_best_command
 
 VALID_QA_TYPES = {"Target Perception", "State Prediction", "Strategy Optimization"}
 
@@ -31,6 +31,36 @@ def generate_vqa_entry(data_id, qa_type, question_id, question_description, imag
     if options:
         entry["options"] = options
     return entry
+
+
+def create_level(size):
+    """A random board of the given size with a random starting score."""
+    # Initialize random generator
+    randomizer = SpecialRandom()
+
+    # Initialize chessboard with dynamic size
+    chessboard = Chessboard(randomizer, size=size)
+
+    # Initialize level
+    level = Level(chessboard)
+
+    # Randomly initialize starting score
+    level.total_cleared = random.randint(0, 100)
+    return level
+
+
+def save_level(level, stem, output_image_dir, output_state_dir):
+    """Render the board and save its state; returns the image and state paths relative to the dataset."""
+    image_filename = f"{stem}.png"
+    generate_jewel2_image(
+        level.chessboard.chessboard,
+        level.total_cleared,
+        font_path="font/Arial.ttf",
+        output_path=os.path.join(output_image_dir, image_filename)
+    )
+    state_filename = f"{stem}.json"
+    level.save_game_state(filename=state_filename, directory=output_state_dir)
+    return f"images/{image_filename}", f"states/{state_filename}"  # dataset paths always use '/'
 
 
 def main():
@@ -66,36 +96,24 @@ def main():
         size = plot["size"]
 
         for i in range(1, num_samples_per_level + 1):
-            # Initialize random generator
-            randomizer = SpecialRandom()
+            level = create_level(size)
 
-            # Initialize chessboard with dynamic size
-            chessboard = Chessboard(randomizer, size=size)
-
-            # Initialize level
-            level = Level(chessboard)
-
-            # Randomly initialize starting score
-            level.total_cleared = random.randint(0, 100)
-
-            # Generate chessboard image
-            image_filename = f"{str(sample_index).zfill(5)}.png"  # Sequential numbering
-            image_path = os.path.join("images", image_filename)  # Relative path
-            generate_jewel2_image(
-                chessboard.chessboard,
-                level.total_cleared,
-                font_path="font/Arial.ttf",
-                output_path=os.path.join(output_image_dir, image_filename)
-            )
-
-            # Save game state
-            state_filename = f"{str(sample_index).zfill(5)}.json"  # Sequential numbering
-            state_path = os.path.join("states", state_filename)  # Relative path
-            level.save_game_state(filename=state_filename, directory=output_state_dir)
+            # Generate chessboard image and save game state (sequential numbering)
+            image_path, state_path = save_level(level, str(sample_index).zfill(5), output_image_dir, output_state_dir)
 
             for j in range(0,10):   # Ten questions per image
+                question_level, question_image, question_state = level, image_path, state_path
+                if j == 9 and not has_unique_best_command(level, size):
+                    # q6 is a fill-in-the-blank with a single gold command; when several commands tie
+                    # for the most eliminations, it is asked on a board of its own ("<index>_q6")
+                    question_level = create_level(size)
+                    while not has_unique_best_command(question_level, size):
+                        question_level = create_level(size)
+                    question_image, question_state = save_level(
+                        question_level, f"{str(sample_index).zfill(5)}_q6", output_image_dir, output_state_dir)
+
                 # Generate question and answer
-                qa_type, qa_level, question, question_id, question_description, answer, analysis, options = generate_jewel2_QA(level=level, num=j, size=size)
+                qa_type, qa_level, question, question_id, question_description, answer, analysis, options = generate_jewel2_QA(level=question_level, num=j, size=size)
 
                 # Ensure qa_type is in VALID_QA_TYPES
                 if qa_type not in VALID_QA_TYPES:
@@ -119,8 +137,8 @@ def main():
                     qa_type,
                     question_id,
                     question_description,
-                    image_path,
-                    state_path,
+                    question_image,
+                    question_state,
                     plot_level,
                     qa_level,
                     question,

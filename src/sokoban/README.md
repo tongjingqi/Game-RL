@@ -74,14 +74,13 @@ dataset = generate_dataset(num_boards=3)
    - Current player position identification
    - Manhattan distance calculations
 
-2. **State Prediction** (Medium/Hard Difficulty)
+2. **State Prediction** (Medium Difficulty)
    - Player position prediction after moves
    - Box position prediction after moves
-   - Optimal move sequence determination
 
 3. **Strategy Optimization** (Hard Difficulty)
-   - Minimum moves calculation
-   - Solution path finding
+   - Minimum moves calculation (walking and pushing both count as moves)
+   - Shortest move sequence to a given cell
 
 ## Board Representation
 
@@ -133,16 +132,16 @@ SOKOBAN STATE:
 Grid: #=wall, .=empty, P=player, B=box, T=target, *=box on target, +=player on target.
 Grid size: {'width': 8, 'height': 8}
 # # # # # # # #
-# . # . . # . #
-# . . . . # . #
+# . . . . . . #
+# # . P T . . #
+# . . . . . . #
 # . . B . . . #
-# T . . . . . #
-# . # . # . . #
-# . # . . P . #
+# . . . . . . #
+# # . . . . . #
 # # # # # # # #
-Player: {'x': 5, 'y': 6}
-Boxes: [{'x': 3, 'y': 3}]
-Targets: [{'x': 1, 'y': 4}]
+Player: {'x': 3, 'y': 2}
+Boxes: [{'x': 3, 'y': 4}]
+Targets: [{'x': 4, 'y': 2}]
 ```
 
 ## Contributing

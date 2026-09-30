@@ -84,10 +84,12 @@ def text_3d_reconstruction(state: dict[str, Any], item: dict[str, Any]) -> str:
             for z_index, row in enumerate(projection, start=1)
         )
 
+    remaining = state.get("remaining_voxels")
     body = (
         f"Current voxel positions: {state.get('voxel_positions', [])}\n"
-        f"Remaining voxels: {state.get('remaining_voxels')}\n"
-        "Target YZ/front projection, listed from bottom z=1 to top z=3:\n"
+        # The complete-solution view prints no remaining count (stored as None)
+        + (f"Remaining voxels: {remaining}\n" if remaining is not None else "")
+        + "Target YZ/front projection, listed from bottom z=1 to top z=3:\n"
         f"{projection_rows(state.get('target_yz_projection', []))}\n"
         "Target XZ/side projection, listed from bottom z=1 to top z=3:\n"
         f"{projection_rows(state.get('target_xz_projection', []))}"

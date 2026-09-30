@@ -5,38 +5,32 @@
     "mine_board": [
         [
             "M",
-            "M",
-            1,
-            0
-        ],
-        [
-            3,
-            3,
-            1,
-            0
-        ],
-        [
-            "M",
             1,
             0,
             0
         ],
         [
-            1,
-            1,
+            2,
+            2,
             0,
             0
+        ],
+        [
+            "M",
+            1,
+            1,
+            1
+        ],
+        [
+            1,
+            1,
+            1,
+            "M"
         ]
     ],
     "revealed": [
         [
             false,
-            false,
-            true,
-            true
-        ],
-        [
-            false,
             true,
             true,
             true
@@ -52,18 +46,30 @@
             true,
             true,
             true
+        ],
+        [
+            false,
+            false,
+            false,
+            false
         ]
     ],
     "flagged": [
         [
             true,
+            false,
+            false,
+            false
+        ],
+        [
+            false,
+            false,
+            false,
+            false
+        ],
+        [
             true,
             false,
-            false
-        ],
-        [
-            false,
-            false,
             false,
             false
         ],
@@ -71,13 +77,7 @@
             false,
             false,
             false,
-            false
-        ],
-        [
-            false,
-            false,
-            false,
-            false
+            true
         ]
     ],
     "first_click": false

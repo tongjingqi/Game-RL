@@ -45,7 +45,7 @@ The score equals the total number of beans eaten by Pac-Man
 ### 1. Image Files
 - **Location**: `pacman_dataset_example/images/`
 - **Content**: Generated images representing the current game state.
-- **Naming Convention**: Sequentially named as `board_00001.png`, `board_00002.png`, etc.
+- **Naming Convention**: Sequentially named as `image_00001.png`, `image_00002.png`, etc.
 
 ### 2. State Files
 - **Location**: `pacman_dataset_example/states/`
@@ -70,6 +70,10 @@ The score equals the total number of beans eaten by Pac-Man
 
 ## Dataset Details
 
+### Board Generation
+- Each board shows Pac-Man after it has walked along a random path: the empty corridor behind it is the path, and the score is the number of beans eaten on it. Pac-Man faces away from the path (the direction it was moving in).
+- Ghosts start on cells without beans and never on Pac-Man's path, so no bean is hidden under a ghost in the image.
+
 ### Difficulty Levels
 The Pacman VQA dataset supports three levels of difficulty, each with different board sizes:
 - **Easy**: 16*16 board.
@@ -93,18 +97,19 @@ The Pacman VQA dataset supports three levels of difficulty, each with different 
 2. **Now how many beans are visible there in the 5 by 5 grid around the Pac-man center?**
    - **Type**: Fill in the blank
 
-3. **Which ghost is closer to Pac-Man, Pinky or Blinky?**
+3. **Which ghost is closer to Pac-Man, Pinky or Blinky? (Use the Manhattan distance: |row difference| + |column difference|.)**
    - **Type**: Multiple choice
    - **Options**
      - A. Pinky is closer to Pac-Man
      - B. Blinky is closer to Pac-Man
      - C. Both ghosts are equidistant from Pac-Man
+   - The answer is the option letter (A, B or C), as for the other multiple-choice questions.
 
 #### State Prediction Questions (Action-Outcome Subtype)
-1. **Assuming the ghosts don't move, how many beans can Pac-Man eat if it moves in its current direction until hitting a wall?**
+1. **Assuming the ghosts don't move, how many beans can Pac-Man eat if it moves in its current direction until it hits a wall or runs into a ghost (a ghost it runs into catches it)?**
    - **Type**: Fill in the blank
 
-2. **Assuming Pac-Man and both ghosts move one step at a time, what would happen if Pac-Man moves {direction1} {num1} times, then {direction2} {num2} times?**
+2. **Assuming Pac-Man and both ghosts move one step at a time (each turn: Pac-Man moves first, then Pinky and then Blinky each move one step toward their targets; Pac-Man is caught as soon as it moves into a ghost's cell or a ghost moves onto its cell; a move into a wall leaves Pac-Man in place), what would happen if Pac-Man moves {direction1} {num1} times, then {direction2} {num2} times?**
    - **Type**: Multiple choice
    - **Options**
      - A. It will eat {bean1} beans, and the score will become {score1}
@@ -115,6 +120,7 @@ The Pacman VQA dataset supports three levels of difficulty, each with different 
      - F. It will eat {bean6} beans, and the score will become {score6}
      - G. It will be caught by Pinky (the pink ghost)
      - H. It will be caught by Blinky (the red ghost)
+   - The six bean counts are the block of consecutive numbers (0-5, 6-11, ...) that contains the number of beans Pac-Man eats (or has eaten when it is caught), in random order, so the options do not point at the answer.
 
 3. **Assuming Pinky doesn't move, if Pac-Man moves {direction0} {num1} times, will Pinky's next movement direction change?**
    - **Type**: Multiple choice
@@ -150,7 +156,7 @@ The Pacman VQA dataset supports three levels of difficulty, each with different 
      - D. Blinky will move one step {direction4}
 
 #### Strategy Optimization Questions
-1. **If Pac-Man and both ghosts move one step at a time, in which direction should Pac-Man move continuously until hitting a wall to eat the most beans without being caught by a ghost?**
+1. **If Pac-Man and both ghosts move one step at a time (each turn: Pac-Man moves first, then Pinky and then Blinky each move one step toward their targets; Pac-Man is caught as soon as it moves into a ghost's cell or a ghost moves onto its cell), in which direction should Pac-Man move continuously until hitting a wall to eat the most beans without being caught by a ghost? (When moving in more than one direction is optimal, the priority order is UP > DOWN > LEFT > RIGHT)**
    - **Type**: Multiple choice
    - **Options**
      - A. Pac-Man should move UP
@@ -229,19 +235,19 @@ Example text state fragment:
 PACMAN STATE:
 Grid: #=wall, o=bean, M=Pacman. Ghosts use uppercase initials, e.g. P=Pinky and B=Blinky.
 Multiple entities in one cell are joined with '+'.
-Pacman position: row 16, column 15
-Ghost positions: ['Pinky at row 8, column 1', 'Blinky at row 9, column 4']
-Pacman direction: UP
-Row 0: ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#']
-Row 1: ['#', 'o', 'o', 'o', 'o', 'o', '#', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', '#']
-Row 2: ['#', 'o', '#', '#', 'o', 'o', '#', '#', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', '#']
-Row 3: ['#', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', '#', 'o', 'o', 'o', '#', 'o', 'o', 'o', '#']
-Row 4: ['#', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', '#']
-Row 5: ['#', 'o', 'o', '#', 'o', 'o', 'o', '#', 'o', '#', 'o', 'o', 'o', 'o', 'o', 'o', '#', '#']
-Row 6: ['#', 'o', '#', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', '#']
-Row 7: ['#', 'o', '#', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', '#']
-Row 8: ['#', 'o+P', 'o', '#', 'o', 'o', 'o', 'o', 'o', 'o', '#', '#', 'o', 'o', 'o', 'o', 'o', '#']
-Row 9: ['#', 'o', 'o', 'o', 'o+B', 'o', 'o', '#', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', '#']
+Pacman position: row 5, column 14
+Ghost positions: ['Pinky at row 1, column 10', 'Blinky at row 10, column 9']
+Pacman direction: DOWN
+Row 0: ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#']
+Row 1: ['#', 'o', 'o', 'o', 'o', '#', '#', 'o', 'o', 'o', 'P', 'o', 'o', 'o', 'o', '#']
+Row 2: ['#', '.', 'o', 'o', '#', 'o', 'o', 'o', 'o', '#', 'o', 'o', 'o', 'o', 'o', '#']
+Row 3: ['#', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '#', 'o', 'o', '#']
+Row 4: ['#', '#', '#', 'o', '#', 'o', 'o', 'o', 'o', 'o', 'o', '.', '.', '.', '.', '#']
+Row 5: ['#', 'o', 'o', 'o', '#', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'M', '#']
+Row 6: ['#', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', '#']
+Row 7: ['#', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', '#', 'o', 'o', '#']
+Row 8: ['#', 'o', 'o', 'o', 'o', 'o', 'o', 'o', '#', 'o', 'o', 'o', 'o', 'o', 'o', '#']
+Row 9: ['#', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', '#']
 ...
 ```
 

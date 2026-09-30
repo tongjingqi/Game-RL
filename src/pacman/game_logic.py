@@ -137,6 +137,7 @@ class PacManGame:
         # Initialize ghosts list
         self.ghosts = []
         self.add_ghosts()
+        self.remove_beans_under_ghosts()
 
         # Game state
         self.game_over = False
@@ -272,6 +273,16 @@ class PacManGame:
         self.ghosts.append(pinky)
         self.ghosts.append(blinky)
 
+    def remove_beans_under_ghosts(self):
+        """
+        Ghosts start on cells without beans, so no bean is hidden under a ghost in the rendered image.
+        These beans are not eaten (the score stays the same), so they are taken out of total_beans too.
+        """
+        for ghost in self.ghosts:
+            if ghost.position in self.beans:
+                self.beans.remove(ghost.position)
+                self.total_beans -= 1
+
     def eat_bean(self, position):
         """
         Remove a bean from the specified position and update the score.
@@ -318,6 +329,7 @@ class PacManGame:
         # Reset ghosts
         self.ghosts = []
         self.add_ghosts()
+        self.remove_beans_under_ghosts()
 
         self.game_over = False
 

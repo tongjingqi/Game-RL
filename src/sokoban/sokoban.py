@@ -149,17 +149,24 @@ class SokobanBoard:
     
     
     
+    def _sample_distractor_cells(self, exclude: List[Tuple[int, int]], count: int) -> List[Tuple[int, int]]:
+        """Pick `count` distinct (row, col) cells not in `exclude`, free cells first.
+
+        Tiny boards can have fewer free cells than options; rejection sampling over free cells
+        alone never terminated there (the question timed out and was dropped), so walls fill in.
+        """
+        cells = [(r, c) for r in range(self.grid.shape[0]) for c in range(self.grid.shape[1]) if (r, c) not in exclude]
+        free = [cell for cell in cells if self.grid[cell[0], cell[1]] != 1]
+        walls = [cell for cell in cells if self.grid[cell[0], cell[1]] == 1]
+        picks = random.sample(free, min(count, len(free)))
+        return picks + random.sample(walls, count - len(picks))
+
     def _generate_player_position_question(self, num_options: int) -> Tuple[str, str, List[str], int]:
         """Generate question about player's current position."""
         player_pos = (self.player_y, self.player_x)  # Convert to (row, col) format
         
         # Generate other positions as options
-        options = [player_pos]
-        while len(options) < num_options:
-            pos = (random.randint(0, self.grid.shape[0]-1), 
-                  random.randint(0, self.grid.shape[1]-1))
-            if pos not in options and self.grid[pos[0], pos[1]] != 1:  # Not a wall
-                options.append(pos)
+        options = [player_pos] + self._sample_distractor_cells([player_pos], num_options - 1)
                 
         random.shuffle(options)
         correct_idx = options.index(player_pos)
@@ -193,7 +200,7 @@ class SokobanBoard:
                     target_pos = (y, x)
                     
         if not box_pos or not target_pos:
-            return "Invalid state", "No box or target found", ["Invalid"], 0
+            raise ValueError("No box or target found for a distance question")
             
         # Calculate Manhattan distance
         distance = abs(box_pos[0] - target_pos[0]) + abs(box_pos[1] - target_pos[1])
@@ -236,18 +243,14 @@ class SokobanBoard:
                 if self.grid[y, x] in [0, 3]:  # Empty space or target
                     floor_positions.append((x, y))
                     
-        if not floor_positions:
-            return "Invalid state", "No valid positions found", ["Invalid"], 0
-            
         # Current position is start (A)
         start_pos = (self.player_x, self.player_y)
         
-        # Try to find a valid end position (B)
-        attempts = 0
-        max_attempts = 3
-        while attempts < max_attempts:
-            # Randomly select end position from floor positions
-            end_pos = random.choice(floor_positions)
+        # Try every floor position in random order as the end position (B). Giving up after a
+        # few random picks used to emit a "No valid path" placeholder instead of a question.
+        candidates = floor_positions[:]
+        random.shuffle(candidates)
+        for end_pos in candidates:
             if end_pos != start_pos:
                 # Check if path exists
                 path = self._find_path(start_pos, end_pos)
@@ -281,10 +284,8 @@ class SokobanBoard:
                             formatted_question, formatted_analysis = format_question_and_analysis(
                             question, options, analysis, correct_idx,initial_state)
                             return formatted_question, formatted_analysis, options, correct_idx
-                            
-            attempts += 1
             
-        return "No valid path", "Could not find valid path after maximum attempts", ["No solution"], 0
+        raise ValueError("No reachable end position for a transition path question")
 
     def _find_path(self, start: Tuple[int, int], end: Tuple[int, int]) -> List[Tuple[int, int]]:
         """Find path between two points using BFS."""
@@ -423,14 +424,16 @@ class SokobanBoard:
             attempts += 1
         
         # If we couldn't generate enough valid paths, add some clearly wrong ones
+        # (they must still end elsewhere, or a random walk could be another shortest path)
         while len(valid_paths) < num_options:
             wrong_path = [random.choice(list(direction_deltas.keys())) 
                         for _ in range(random.randint(1, len(moves_list) + 2))]
             new_path = " → ".join(wrong_path)
-            if new_path not in valid_paths:
+            if new_path not in valid_paths and get_end_position(wrong_path, start_pos) != correct_end_pos:
                 valid_paths.add(new_path)
         
-        return list(valid_paths)
+        # Sorted so the option order depends only on the random seed, not on string hashing
+        return sorted(valid_paths)
     def is_solvable(self) -> bool:
         """Check if the current board configuration is solvable."""
         grid_chars = []
@@ -456,10 +459,11 @@ class SokobanBoard:
 
     def _generate_steps_question(self, num_moves: int, num_options: int) -> Tuple[str, str, List[str], int]:
         """Generate question about minimum moves needed."""
+        # Failures raise instead of returning a placeholder QA, so the caller skips the question.
         try:
             player_pos, boxes, targets = self.get_board_elements()
             if not boxes or not targets:
-                return "Invalid board state", "No boxes or targets found", ["Invalid"], 0
+                raise ValueError("No boxes or targets found")
             # Ensure positions are tuples
             player_pos = tuple(player_pos) if isinstance(player_pos, list) else player_pos
             if boxes and isinstance(boxes[0], list):
@@ -467,8 +471,7 @@ class SokobanBoard:
             if targets and isinstance(targets[0], list):
                 targets = [tuple(pos) for pos in targets]
         except Exception as e:
-            print(f"Error getting board elements: {e}")
-            return "Invalid board state", "Error processing board elements", ["Invalid"], 0
+            raise ValueError(f"Invalid board state for a steps question: {e}") from e
         
         # Convert grid to format expected by minPushBox
         grid_chars = []
@@ -492,7 +495,7 @@ class SokobanBoard:
         total_moves, _ = solution.minPushBox(grid_chars)
         
         if total_moves == -1:
-            return "How many moves are needed?", "Puzzle is unsolvable", ["Unsolvable"], 0
+            raise ValueError("Puzzle is unsolvable")
         
         solution_path = solution.get_solution_path()
         
@@ -525,22 +528,14 @@ class SokobanBoard:
         
         analysis += f"\nTotal player moves: {player_moves}"
         
-        # Generate options with safety limit
-        options = [player_moves]
-        attempts = 0
-        max_attempts = 100
-        
-        while len(options) < num_options and attempts < max_attempts:
-            new_move = max(1, player_moves + random.randint(-3, 3))
-            if new_move > 0 and new_move not in options:
-                options.append(new_move)
-            attempts += 1
-        
-        while len(options) < num_options:
-            new_move = max(1, player_moves + len(options))
-            if new_move not in options:
-                options.append(new_move)
-        
+        # Options are the block of consecutive move counts (1-8, 9-16, ...) that holds the answer, so
+        # every answer in a block gets the same options and they do not point at it. (Filling a +-3
+        # band and then appending answer + len(options) made the largest option always equal to the
+        # answer + 7; a window placed at random around the answer still favoured its lowest value,
+        # because short solutions are common.)
+        lowest = player_moves - (player_moves - 1) % num_options
+        options = list(range(lowest, lowest + num_options))
+
         random.shuffle(options)
         options_str = [str(moves) for moves in options]
         options_display = ", ".join(f"[{i+1}] {opt}" for i, opt in enumerate(options_str))
@@ -596,6 +591,8 @@ class SokobanBoard:
         
         if not positions[1:]:  # If no valid moves were made
             self.load_state(saved_state)
+            if num_moves <= 1:
+                raise ValueError("Player cannot move on this board")
             return self._generate_position_question(num_moves - 1, num_options)
             
         final_pos = positions[-1]
@@ -607,12 +604,7 @@ class SokobanBoard:
         analysis += f"\n\nFinal position: ({final_pos[1]}, {final_pos[0]})"
         
         # Generate options including the correct position
-        options = [final_pos]
-        while len(options) < num_options:
-            pos = (random.randint(0, self.grid.shape[1]-1), 
-                random.randint(0, self.grid.shape[0]-1))
-            if pos not in options and self.grid[pos[1], pos[0]] != 1:  # Not a wall
-                options.append(pos)
+        options = [final_pos] + [(x, y) for y, x in self._sample_distractor_cells([(final_pos[1], final_pos[0])], num_options - 1)]
                 
         self.load_state(saved_state)
         random.shuffle(options)
@@ -670,8 +662,9 @@ class SokobanBoard:
                       if self.grid[y, x] != 1 and (x,y) != final_box]
     
         options.extend(random.sample(valid_positions, min(num_options-1, len(valid_positions))))
-        while len(options) < num_options:
-            options.append((1, 1))
+        # Small boards: fill with other distinct cells (padding with a fixed (1, 1) could
+        # duplicate an option or even the answer)
+        options += [(x, y) for y, x in self._sample_distractor_cells([(y, x) for x, y in options], num_options - len(options))]
 
         random.shuffle(options)
         correct_idx = options.index((final_box[0], final_box[1]))

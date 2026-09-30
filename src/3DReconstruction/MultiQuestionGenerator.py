@@ -67,9 +67,9 @@ class MultiQuestionGenerator:
         else:
             game.visualize_structure(structure=structure, name=self._output_path(image_path))
             
-        # 计算投影和剩余方块数
+        # 计算投影和剩余方块数（与图中 "Remaining Available Voxels" 一致）
         target_yz_proj, target_xz_proj = game.get_projections(game_state['complete_solution']['positions'])
-        remaining_voxels = len(game_state['complete_solution']['positions']) - len(structure)
+        remaining_voxels = game.remaining_voxels()
             
         # 保存state信息
         state_info = {
@@ -172,7 +172,7 @@ class MultiQuestionGenerator:
                     "Choose the position that contains a voxel from the given options." if question_type == 'position' else
                     "Choose how the given 3D structure's projections match with the target projections." if question_type == 'projection' else
                     "Predict the projection matrix after adding specified voxels to the current structure." if question_type == 'action_outcome' else
-                    "Choose the correct sequence of voxel additions that will make the structure match the target projection(s) while following game rules." if question_type == 'transition_path' else
+                    "Choose the correct set of voxel additions that will make the structure match the target projection(s) while following game rules." if question_type == 'transition_path' else
                     "Find the minimum number of additional voxels needed to match both target projections."
                 )),
                 ("image", image_path),

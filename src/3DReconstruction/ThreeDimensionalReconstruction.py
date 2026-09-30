@@ -98,42 +98,40 @@ class ThreeDimensionalReconstruction:
         """Find minimal set of voxels to add to satisfy projections."""
         current_set = set(self.current_voxels)
         all_positions = [(x, y, z) for x in range(1, 4) for y in range(1, 4) for z in range(1, 4)]
-        candidates = [pos for pos in all_positions if pos not in current_set]
+        # A voxel outside either target projection would add a projection cell, so only
+        # positions inside both can be part of a solution (the search order is unchanged).
+        candidates = [pos for pos in all_positions if pos not in current_set
+                      and self.target_yz_projection[pos[1] - 1, pos[2] - 1]
+                      and self.target_xz_projection[pos[0] - 1, pos[2] - 1]]
 
         def validates_solution(additional_voxels):
             test_structure = current_set.union(set(additional_voxels))
             if not self._is_connected(test_structure):
                 return False
             yz_proj, xz_proj = self._calculate_projections(list(test_structure))
-            return (np.array_equal(yz_proj, self.target_yz_projection) and 
+            return (np.array_equal(yz_proj, self.target_yz_projection) and
                    np.array_equal(xz_proj, self.target_xz_projection))
 
-        def can_connect(voxel, structure):
-            return bool(set(self._get_adjacent_neighbors(voxel)) & structure)
-        
         if validates_solution([]):
             return []
-        
+
+        # The current structure is connected, so a face-connected final structure is exactly the
+        # condition that the additions can be placed one at a time next to existing voxels in some
+        # order. (Requiring the combination's own lexicographic order overestimated the minimum.)
         max_additional = len(self.target_voxels) - len(self.current_voxels)
         for size in range(1, max_additional + 1):
             for combination in combinations(candidates, size):
-                combination = list(combination)
-                test_structure = current_set.copy()
-
-                valid = True
-                for voxel in combination:
-                    if not can_connect(voxel, test_structure):
-                        valid = False
-                        break
-                    test_structure.add(voxel)
-
-                if not valid:
-                    continue
-
                 if validates_solution(combination):
-                    return combination
+                    return list(combination)
 
         return [v for v in self.target_voxels if v not in current_set]
+
+    def remaining_voxels(self, structure=None, show_solution=False):
+        """Remaining voxel budget as printed on the image (None for the complete-solution view)."""
+        if structure is not None:
+            added_voxels = len(set(structure) - set(self.current_voxels))
+            return len(self.target_voxels) - len(self.current_voxels) - added_voxels
+        return None if show_solution else len(self.target_voxels) - len(self.current_voxels)
 
     def generate_random_connected_voxels(self, count, respect_remaining=False):
         """
@@ -187,16 +185,13 @@ class ThreeDimensionalReconstruction:
                              to determine whether to show current_voxels or complete_solution.
         """
         # Determine which structure to show
+        remaining = self.remaining_voxels(structure=structure, show_solution=show_solution)
         if structure is not None:
             display_structure = structure
             title_prefix = 'Custom Structure'
-            # 计算custom结构的remaining
-            added_voxels = len(set(structure) - set(self.current_voxels))
-            remaining = len(self.target_voxels) - len(self.current_voxels) - added_voxels
         else:
             display_structure = self.complete_solution if show_solution else self.current_voxels
             title_prefix = 'Complete Solution' if show_solution else 'Current Structure'
-            remaining = len(self.target_voxels) - len(self.current_voxels) if not show_solution else None
         
         # Use custom name if provided, otherwise use default
         if name is None:

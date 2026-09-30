@@ -9,15 +9,15 @@ In addition to the questions, the dataset provides detailed analyses and accurat
 ```
 Pyramid Chess Rules:
 0.Game Board:
-The game board is square and comes in various sizes: 3x3, 4x4, or 5x5. On an nxn board, there are n levels (0 to n-1). At each level k, the x and y coordinates range from 0 to n-1-k, resulting in (n-k)**2 slots per level. The slots in the lower levels act as the base for the slots in the upper levels. Slots at level 0 have no base, while slots at level j (j!=0) with coordinates (m,n) are supported by four base slots (m,n),(m+1,n),(m,n+1),(m+1,n+1) from level j-1.
+The game board is square and comes in various sizes: 3x3, 4x4, or 5x5. On an nxn board, there are n levels (0 to n-1). At each level k, the x and y coordinates range from 0 to n-1-k, resulting in (n-k)**2 slots per level. The slots in the lower levels act as the base for the slots in the upper levels. Slots at level 0 have no base, while slots at level j (j!=0) with coordinates (a,b) are supported by four base slots (a,b),(a+1,b),(a,b+1),(a+1,b+1) from level j-1.
 1.Players and Initial Setup:
 The game is played between two players, designated as PLAYER_0 and PLAYER_1, each using balls of a distinct color from their color pool. Players take turns placing their balls on a square game board. The number of balls available to each player depends on the size of the board: on a 3x3 board, each player has 7 balls; on a 4x4 board, each has 15 balls; and on a 5x5 board, PLAYER_0 (the first player to place a ball) has 28 balls, while PLAYER_1 has 27 balls.
 2.Placing Balls and Creating New Slots:
 At the start of the game, the lowest level of the board (Level 0) is completely open and balls can be placed in any available slot on this level. After a ball is placed in a slot, that slot is no longer available for placing another ball. A ball can only be placed on the upper level if it is supported by a fully completed 2x2 block of balls on the level directly beneath. All four slots in the 2x2 block must be filled for the upper ball to be placed.
-3.Take-back mechnism:
+3.Take-back mechanism:
 If a player places a ball that completes a 2x2 block of the same color (all four balls belonging to that player), they may return up to two balls from the block to their color pool. A ball can only be removed if it does not have another ball directly above it, as removing a "base" ball would collapse the pyramid. Returning a ball reopens the slot it occupied, allowing it to be used for future placements, but the rule requiring a full 2x2 block as a base for placing balls on upper levels still applies. 
 4.Winning the Game:
-The game ends when one player successfully places the last ball on top of the pyramid. The player who place the ball on the top of the pyramid wins.
+The game ends when one player successfully places the last ball on top of the pyramid. The player who places the ball on the top of the pyramid wins.
 ```
 
 ## Project Structure
@@ -66,51 +66,50 @@ pyramidchess_data_generate (Dataset Generation)
 ## Supported Question Types 
 
 1. Choose a random coordinate and ask what status is the coordinate. （question_id:0）
-    ```json
-    {
-        "qa_type": "Target Perception",
-        "qa_level": "Easy",
-        "question": " What is the status of the ball on Level 0, which has coordinate ([0, 0])?\n
-                        Options:\n1. PLAYER_0\n2. PLAYER_1\n3. Empty\n4. Index out of bound\n",
-        "answer": 1,
-        "analysis": "From the image provided, we can observe the layout of the pyramid across its levels. Based on level 0's grid (specifically at coordinate [0, 0]), the ball is blue, which corresponds to PLAYER_0.",
-        "options": [
-            "PLAYER_0",
-            "PLAYER_1",
-            "Empty",
-            "Index out of bound"
-        ]
-    }
-   ```
-
-2. Select a coordinate and determine whether a ball can be placed at this coordinate. If so, what would happen after the place of the ball.（question_id:1）
-
-   ```json
-   {    
-        "qa_type": "State Prediction",
-        "qa_level": "Medium",
-        "question": "Can a ball be placed at coordinate [1, 0] on Level 0? If placed, what would be the outcome\n
-        Options:\n1. Can place and no balls taken\n2. Can place and then balls can be taken\n3. Cannot place, position already occupied\n4. Cannot place, ball not ready below\n",
-        "answer": 3,
-        "analysis": "From the image provided, the coordinate [1, 0] on level 0 is already occupied, so it is not possible to place a ball there. Therefore, the status is: Cannot place, position already occupied.",
-        "options": [
-            "Can place and no balls taken",
-            "Can place and then balls can be taken",
-            "Cannot place, position already occupied",
-            "Cannot place, ball not ready below"
-        ]
-   }
-   ```
-
-3. Calculate how many steps (turns) are required for a ball to be placed at certain coordinate.(Including the step putting the ball at the cooradinate)（question_id:2）
 
    ```json
    {
-        "qa_type": "State Prediction",
-        "qa_level": "Hard",
-        "question": "How many steps (turns) are required for a ball to be placed at coordinate [0, 0] on Level 2? (including the turn placing the ball)",
-        "answer": "It needs 12 step(s).",
-        "analysis": "To place a ball at coordinate [0, 0] on Level 2, we need to ensure all the balls in its sub-pyramid, which are the balls supporting the position, are placed.\nThis is determined by checking each level below the target position, from the highest level below it to the base level, and counting how many balls that support the position are missing in each layer. The total number of missing balls represents the steps needed.\nLevel 1: 4 more ball(s) need to be placed at [[0, 0], [1, 0], [0, 1], [1, 1]].\nLevel 0: 7 more ball(s) need to be placed at [[0, 0], [1, 0], [0, 1], [1, 1], [2, 0], [2, 1], [1, 2]].\nOnce all the required balls in the sub-pyramid are placed, the ball at the target position can be placed.\nTherefore, it needs 12 steps in total."
+       "qa_type": "Target Perception",
+       "qa_level": "Easy",
+       "question": "Question: What is the status of the ball on Level 1, which has coordinate [1, 1]?\nOptions:\n1. PLAYER_0\n2. PLAYER_1\n3. Empty\n4. Index out of bound",
+       "answer": 2,
+       "analysis": "From the image provided, we can recognize that the board is a 3x3 board. We can observe the layout of the pyramid across its levels. Based on level 1's grid (specifically at coordinate [1, 1]), the ball is red, which corresponds to PLAYER_1.",
+       "options": [
+           "PLAYER_0",
+           "PLAYER_1",
+           "Empty",
+           "Index out of bound"
+       ]
+   }
+   ```
+
+2. Select a coordinate and determine whether a ball can be placed at this coordinate. If so, what would happen after the ball is placed.（question_id:1）
+
+   ```json
+   {
+       "qa_type": "State Prediction",
+       "qa_level": "Medium",
+       "question": "Question: Can a ball be placed at coordinate [2, 2] on Level 0? If a red ball is placed there, what would be the outcome?\nOptions:\n1. Can place and no balls taken\n2. Can place and then balls can be taken\n3. Cannot place, position already occupied\n4. Cannot place, ball not ready below",
+       "answer": 3,
+       "analysis": "From the image provided, we can recognize that the board is a 3x3 board. The coordinate [2, 2] on level 0 is already occupied by a red ball, so it is not possible to place a ball there. Therefore, the status is: Cannot place, position already occupied.",
+       "options": [
+           "Can place and no balls taken",
+           "Can place and then balls can be taken",
+           "Cannot place, position already occupied",
+           "Cannot place, ball not ready below"
+       ]
+   }
+   ```
+
+3. Calculate how many steps (turns) are required for a ball to be placed at certain coordinate.(Including the step putting the ball at the coordinate)（question_id:2）
+
+   ```json
+   {
+       "qa_type": "State Prediction",
+       "qa_level": "Hard",
+       "question": "Question: How many steps (turns) are required for a ball to be placed at coordinate [0, 0] on Level 2? (including the turn placing the ball)",
+       "answer": "2",
+       "analysis": "From the image provided, we can recognize that the board is a 3x3 board. To place a ball at coordinate [0, 0] on Level 2, we need to ensure all the balls in its sub-pyramid, which are the balls supporting the position, are placed.\nThis is determined by checking each level below the target position, from the highest level below it to the base level, and counting how many balls that support the position are missing in each layer. The steps needed are the missing balls plus the turn placing the ball at the target position.\nLevel 1: 1 more ball(s) need to be placed at [[1, 0]].\nOnce all the required balls in the sub-pyramid are placed, the ball at the target position can be placed.\nTherefore, it needs 2 steps in total."
    }
    ```
 
@@ -118,23 +117,23 @@ pyramidchess_data_generate (Dataset Generation)
 
    ```json
    {
-        "qa_type": "Strategy Optimization",
-        "qa_level": "Hard",
-        "question": "It is PLAYER_0's turn Now.What is the best coordinate to put a ball in order to maximize the opportunity of winning.",
-        "answer": "The best coordinate is (0, [4, 2])",
-        "analysis": "To maximize the winning chance, one must try his best to form a 2x2 block of his color for the take-back mechanism. So that he avoid losing balls in his turn and therefore minimize the chance of running out of balls first.Blocking the opponents chance to form 2x2 block of his color also increase the oppotunity of winning.From the image provided,Putting a ball at [4, 2] at Level 0 stop the other player to form 2x2 block [[3, 1], [4, 1], [3, 2], [4, 2]].So the answer is Putting a ball at [4, 2] at Level 0."
+       "qa_type": "Strategy Optimization",
+       "qa_level": "Hard",
+       "question": "It is PLAYER_0's turn (which uses the blue ball). What is the best coordinate to put a ball in order to maximize the opportunity of winning? Please answer in the form of \"[x, y] at level z\".",
+       "answer": "[0, 1] at level 0",
+       "analysis": "From the image provided, we can recognize that the board is a 3x3 board. To maximize the winning chance, one must try his best to form a 2x2 block of his color for the take-back mechanism, so that he avoids losing balls in his turn and therefore minimizes the chance of running out of balls first. Blocking the opponent's chance to form a 2x2 block of his color also increases the opportunity of winning. From the question, it is PLAYER_0's turn now, who uses the blue ball. Putting a blue ball at [0, 1] at Level 0 stops the other player PLAYER_1 from forming a 2x2 block of red at [[0, 0], [1, 0], [1, 1], [0, 1]]. So the answer is [0, 1] at level 0."
    }
    ```
 
-5. Calculate how many balls are there one the board.（question_id:4）
+5. Calculate how many balls are there on the board.（question_id:4）
 
    ```json
-   {    
-        "qa_type": "Target Perception",
-        "qa_level": "Easy",
-        "question": "How many balls are there on the board in the image. ",
-        "answer": "There are 13 balls.",
-        "analysis": "From the image provided. There are 9  balls in level 0. There are 4  balls in level 1. There are 0  balls in level 2. Therefore, There are 13 balls in total."
+   {
+       "qa_type": "Target Perception",
+       "qa_level": "Easy",
+       "question": "Question: How many balls are there on the board in the image?",
+       "answer": "12",
+       "analysis": "From the image provided, we can recognize that the board is a 3x3 board. To count the total number of balls on the board, we start from the downmost level and proceed upward. For each level, we use the 2D representation of that level to count the balls row by row and column by column. Here is the detailed count:\nLevel 0 contains 9 ball(s):\nA red ball at (0, 0).\nA blue ball at (0, 1).\nA red ball at (0, 2).\nA red ball at (1, 0).\nA blue ball at (1, 1).\nA red ball at (1, 2).\nA blue ball at (2, 0).\nA red ball at (2, 1).\nA blue ball at (2, 2).\nLevel 1 contains 3 ball(s):\nA blue ball at (0, 1).\nA blue ball at (1, 0).\nA red ball at (1, 1).\nLevel 2 contains 0 ball(s):\n\nFrom the image provided, the total number of balls on the board is 12.\n"
    }
    ```
 
@@ -142,18 +141,18 @@ pyramidchess_data_generate (Dataset Generation)
 
    ```json
    {
-        "qa_type": "Target Perception",
-        "qa_level": "Medium",
-        "question": "What is the status of the ball on Level 0, which has coordinate ([0, 2])?\nIs the coordinate legal? Does it contain a ball? Can the ball be taken(has no ball directly above it)? Can a ball be placed?Options:\n1. The coordinate is out of bound\n2. It contain a ball and the ball can't be taken\n3. It contain a ball and can be taken\n4. It doesn't contain a ball and a ball can't be taken 5.It doesn't contain a ball and a ball can be taken\n",
-        "answer": 2,
-        "analysis": "From the image provided, there is a ball at the coordinate [0, 2] in level 0. And there are also balls sitting above the ball, so when the take-back happen, the ball can't be taken.Therefore, the status is it contain a ball and the ball can't be taken .",
-        "options": [
-            "The coordinate is out of bound",
-            "It contain a ball and the ball can't be taken",
-            "It contain a ball and can be taken",
-            "It doesn't contain a ball and the player can put a ball here this turn",
-            "It doesn't contain a ball and the player can't put a ball here this turn"
-        ]
+       "qa_type": "Target Perception",
+       "qa_level": "Medium",
+       "question": "Question: What is the status of the ball on Level 0, which has coordinate [2, 0]?\nIs the coordinate legal? Does it contain a ball? Can the ball be taken (has no ball directly above it)? Can a ball be placed?\nOptions:\n1. The coordinate is out of bound\n2. It contains a ball and the ball can't be taken\n3. It contains a ball and the ball can be taken\n4. It doesn't contain a ball and the player can put a ball here this turn\n5. It doesn't contain a ball and the player can't put a ball here this turn",
+       "answer": 3,
+       "analysis": "From the image provided, we can recognize that the board is a 3x3 board. From the image provided, there is a ball at the coordinate [2, 0] in level 0. And there is no ball sitting above the ball, which means the ball isn't supporting other balls, so when a take-back happens, the ball can be taken without collapsing the pyramid. Therefore, the status is: it contains a ball and the ball can be taken.",
+       "options": [
+           "The coordinate is out of bound",
+           "It contains a ball and the ball can't be taken",
+           "It contains a ball and the ball can be taken",
+           "It doesn't contain a ball and the player can put a ball here this turn",
+           "It doesn't contain a ball and the player can't put a ball here this turn"
+       ]
    }
    ```
 
@@ -205,14 +204,14 @@ PYRAMID CHESS STATE:
 {
   "0": [
     [
-      "P1",
-      "P0",
-      "P1"
-    ],
-    [
-      "P1",
+      "--",
       "P1",
       "P0"
+    ],
+    [
+      "--",
+      "P0",
+      "P1"
     ],
     [
       "P1",

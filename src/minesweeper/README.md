@@ -69,9 +69,11 @@ The Minesweeper VQA dataset supports three levels of difficulty, each with diffe
 - **Hard**: 6x6 board with 8 mines.
 
 ### Supported Question Types
+Each board gets 10 questions: mine counting, remaining mines and revealed-cell counting once each, cell status twice, reveal outcome three times and best next move twice (repeated questions of a board use different cells whenever possible).
+
 #### Questions About the Current Game State
 1. **Mine Counting**
-   - *Example*: **How many mines are currently flagged?**
+   - *Example*: **How many mines are currently flagged?** / **How many mines are left to be found?**
    - **Type**: Fill in the blank
 
 2. **Revealed Cell Counting**
@@ -88,27 +90,28 @@ The Minesweeper VQA dataset supports three levels of difficulty, each with diffe
      - D. It is revealed and shows no more information.
 
 #### Questions About Actions
-1. **Reveal Operation Outcome**
-   - *Example*: **What will happen if you reveal the cell at (1, 2)?**
+Answers use only what the image shows: every mine placement that agrees with all revealed numbers, the flags (counted as mines) and the total number of mines stated in the question is considered. A cell is a mine (or safe, or shows a number) only if it is so in every such placement.
+
+1. **Reveal Operation Outcome** (a hidden or flagged cell next to the revealed area)
+   - *Example*: **What will happen if the player reveals the cell at (1,2)?**
    - **Type**: Multiple choice
    - **Options**:
      - A. The game will end because the cell contains a mine.
      - B. The cell will reveal an empty area, and adjacent cells will also be revealed.
      - C. The cell will reveal the number {value1}.
-     - D. Undecidable. It may contain a mine or not.
+     - D. Undecidable. The result cannot be determined from the current board.
+   - D is correct when the cell may or may not be a mine, and also when it is surely safe but the number it would show is not determined.
 
 2. **Best Next Move**
-   - *Example*: **What is the best next move at (3, 4)?**
+   - *Example*: **What is the best next move at (3,4)?**
    - **Type**: Multiple choice
    - **Options**:
      - A. Flag this cell as a mine.
      - B. Reveal this cell.
-     - C. Skip this move and wait for more information.
-     - D. Analyze adjacent cells.
-
-#### Strategy Questions
-- *Example*: **What command will result in the maximum number of cells being revealed in a single move?**
-- **Type**: Fill in the blank
+     - C. Analyze adjacent cells for potential mines according to the number on it.
+     - D. Skip this move and wait for more information.
+     - E. This cell has already been revealed, and no further action is required.
+     - F. This cell has already been flagged as a mine, and no further action is needed.
 
 ## How to Use
 
@@ -146,20 +149,20 @@ python main.py
 ### 3. Customize Generation Parameters
 You can adjust the dataset generation parameters by modifying the `main.py` script:
 
-- **Number of Samples per Difficulty Level**:
-  - Locate the following line in `main.py`:
+- **Number of Boards per Difficulty Level**:
+  - Locate the following line in `main.py` (each batch creates one board per difficulty level, 10 questions each):
     ```python
-    num_samples_per_level = 10  # Adjust as needed
+    num_samples = 10  # Set the number of batches to generate
     ```
 
 - **Difficulty Levels and Board Sizes**:
   - The script supports three difficulty levels, each with a corresponding board size:
     ```python
-    plot_levels = [
-        {"plot_level": "Easy", "rows": 4, "cols": 4, "mines": 3},
-        {"plot_level": "Medium", "rows": 5, "cols": 5, "mines": 5},
-        {"plot_level": "Hard", "rows": 6, "cols": 6, "mines": 8}
-    ]
+    plot_levels = {
+        "Easy": {"rows": 4, "cols": 4, "mines": 3},
+        "Medium": {"rows": 5, "cols": 5, "mines": 5},
+        "Hard": {"rows": 6, "cols": 6, "mines": 8}
+    }
     ```
 
 ## Text-Only QA Conversion
@@ -178,10 +181,10 @@ Example text state fragment:
 MINESWEEPER VISIBLE STATE:
 Grid size: 5 rows x 5 columns.
 Cells: digit=visible clue, F=flagged, .=unrevealed. Hidden mines are not shown.
-Row 0: ['.', '.', 'F', '1', '0']
-Row 1: ['.', '.', '.', '2', '0']
-Row 2: ['.', '.', 'F', '2', '1']
-Row 3: ['.', '.', '.', '.', 'F']
+Row 0: ['0', '0', '0', '0', '0']
+Row 1: ['1', '1', '0', '0', '0']
+Row 2: ['F', '2', '1', '0', '0']
+Row 3: ['.', 'F', '2', '2', '1']
 Row 4: ['.', '.', '.', '.', '.']
 ```
 

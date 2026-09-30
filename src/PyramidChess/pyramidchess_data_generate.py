@@ -102,21 +102,21 @@ def get_question_info(question_id):
     if question_id == 0:
         question_type = "mcq"
         qa_type = "Target Perception"
-        description = "Choose a random coordinate and ask what status is the cooradinate"
+        description = "Choose a random coordinate and ask what status is the coordinate"
         level = "Easy"
         return question_type,qa_type,level,description
     
     elif question_id == 1:
         question_type = "mcq"
         qa_type = "State Prediction"
-        description = "Select a coordinate and determine whether a ball can be placed at this coordinate. If so, what would happen after the place of the ball."
+        description = "Select a coordinate and determine whether a ball can be placed at this coordinate. If so, what would happen after the ball is placed."
         level = "Medium"
         return question_type,qa_type,level,description
     
     elif question_id == 2:
         question_type = "fill"
         qa_type = "State Prediction"
-        description = "Calculate how many steps (turns) are required for a ball to be placed at certain coordinate.(Including the step putting the ball at the cooradinate)"
+        description = "Calculate how many steps (turns) are required for a ball to be placed at certain coordinate.(Including the step putting the ball at the coordinate)"
         level = "Hard"
         return question_type,qa_type,level,description
     
@@ -130,7 +130,7 @@ def get_question_info(question_id):
     elif question_id == 4:
         question_type = "fill"
         qa_type = "Target Perception"
-        description = "Calculate how many balls are there one the board."
+        description = "Calculate how many balls are there on the board."
         level = "Easy"
         return question_type,qa_type,level,description
     
@@ -175,21 +175,21 @@ def question_generate(question_id,board,param_list=None):
     rule = (
         "Pyramid Chess Rules:\n"
         "0.Game Board:\n"
-        "The game board is square and comes in various sizes: 3x3, 4x4, or 5x5. On an nxn board, there are n levels (0 to n-1). At each level k, the x and y coordinates range from 0 to n-1-k, resulting in (n-k)**2 slots per level. The slots in the lower levels act as the base for the slots in the upper levels. Slots at level 0 have no base, while slots at level j (j!=0) with coordinates (m,n) are supported by four base slots (m,n),(m+1,n),(m,n+1),(m+1,n+1) from level j-1.\n"
+        "The game board is square and comes in various sizes: 3x3, 4x4, or 5x5. On an nxn board, there are n levels (0 to n-1). At each level k, the x and y coordinates range from 0 to n-1-k, resulting in (n-k)**2 slots per level. The slots in the lower levels act as the base for the slots in the upper levels. Slots at level 0 have no base, while slots at level j (j!=0) with coordinates (a,b) are supported by four base slots (a,b),(a+1,b),(a,b+1),(a+1,b+1) from level j-1.\n"
         "1.Players and Initial Setup:\n"
         "The game is played between two players, designated as PLAYER_0 and PLAYER_1, each using balls of a distinct color from their color pool, blue balls for PLAYER_0 and red balls for PLAYER_1. Players take turns placing their balls on a square game board. The number of balls available to each player depends on the size of the board: on a 3x3 board, each player has 7 balls; on a 4x4 board, each has 15 balls; and on a 5x5 board, PLAYER_0 (the first player to place a ball) has 28 balls, while PLAYER_1 has 27 balls.\n"
         "2.Placing Balls and Creating New Slots:\n"
-        "At the start of the game, the lowest level of the board (Level 0) is completely open and balls can be placed in any available slot on this level(since there is no base for slots in level 0, slots in level 0 have full base). After a ball is placed in a slot, that slot is no longer available for placing another ball. A ball can only be placed on the upper level if it is supported by a fully completed 2x2 block of balls on the level directly beneath, which means all the base of the slot is full(there is a ball in each of these slots).\n"
-        "3.Take-back mechnism:\n"
+        "At the start of the game, the lowest level of the board (Level 0) is completely open and balls can be placed in any available slot on this level (since there is no base for slots in level 0, slots in level 0 have full base). After a ball is placed in a slot, that slot is no longer available for placing another ball. A ball can only be placed on the upper level if it is supported by a fully completed 2x2 block of balls on the level directly beneath, which means all the base of the slot is full (there is a ball in each of these slots).\n"
+        "3.Take-back mechanism:\n"
         "If a player places a ball that completes a 2x2 block of the same color (all four balls belonging to that player), they may return up to two balls from the block to their color pool. A ball can only be removed if it does not have another ball directly above it, as removing a \"base\" ball would collapse the pyramid. Returning a ball reopens the slot it occupied, allowing it to be used for future placements, but the rule requiring a full 2x2 block as a base for placing balls on upper levels still applies.\n"
         "4.Winning the Game:\n"
-        "The game ends when one player successfully places the last ball on top of the pyramid. The player who place the ball on the top of the pyramid wins.\n"
+        "The game ends when one player successfully places the last ball on top of the pyramid. The player who places the ball on the top of the pyramid wins.\n"
     )
     options = None
     length = len(board.Board)
     # board_dict = board.board_dict()
     # image_str = "Blue ball:PLAYER_0\nRed ball:PLAYER_1\n"+convert_dict_to_str(board_dict)
-    analysis = f"From the image provided, we can recognize that the board is a {length}x{length} board."
+    analysis = f"From the image provided, we can recognize that the board is a {length}x{length} board. "
     if question_id == 0:
         # 随机选择一个坐标，生成问题
         out_of_bound_flag = 0
@@ -219,7 +219,7 @@ def question_generate(question_id,board,param_list=None):
         question = (
             rule +
             f"\nQuestion: What is the status of the ball on Level {level}, "
-            f"which has coordinate ({position})?\n"
+            f"which has coordinate {position}?\n"
             "Options:\n1. PLAYER_0\n2. PLAYER_1\n3. Empty\n4. Index out of bound\n"
         )
 
@@ -295,7 +295,7 @@ def question_generate(question_id,board,param_list=None):
             if not take_check_result:  # 没有触发take机制
                 answer = 1
                 analysis += (
-                    f"Coordinate {position} on level {level} is empty and a ball can be placed there."
+                    f"Coordinate {position} on level {level} is empty and a ball can be placed there. "
                     f"Placing a {color} ball at coordinate {position} on level {level} does not form 2x2 block of the same color, and therefore no balls would be taken. "
                     "Therefore, the status is: Can place and no balls taken."
 
@@ -305,9 +305,9 @@ def question_generate(question_id,board,param_list=None):
                 take_position = [item.Position for item in take_check_result]
                 answer = 2
                 analysis += (
-                    f"Coordinate {position} on level {level} is empty and a ball can be placed there."
+                    f"Coordinate {position} on level {level} is empty and a ball can be placed there. "
                     f"Placing a {color} ball at coordinate {position} on level {level} forms a 2x2 block of the same color {color} at Level:{take_level},Position:{take_position} and triggers a take-back mechanism."
-                    "Therefore, the status is:Can place and 2x2 block formed, balls can be taken."
+                    "Therefore, the status is: Can place and then balls can be taken."
                 )
         else:
             # 如果不能放置，检查该位置是否已经被占用或未准备好
@@ -329,8 +329,8 @@ def question_generate(question_id,board,param_list=None):
                         not_ready.append(base.Position)
                 answer = 4
                 analysis += (
-                    f"The coordinate {position} on level {level} cannot have a ball placed there. Because there are no platform which four balls below it form a 2x2 block to support it."
-                    f"To put a ball at coordinate {position} on level {level}, the bases of the position which are {bases} on level{level-1} must be full. But there is no ball at {not_ready} on level{level-1}."
+                    f"The coordinate {position} on level {level} cannot have a ball placed there, because the 2x2 block of balls below it that would support it is not complete. "
+                    f"To put a ball at coordinate {position} on level {level}, the bases of the position which are {bases} on level {level-1} must be full. But there is no ball at {not_ready} on level {level-1}. "
                     "If a ball is placed at the position it will fall down. Therefore, the status is: Cannot place, ball not ready below."
                 )
 
@@ -370,13 +370,13 @@ def question_generate(question_id,board,param_list=None):
         
                 # Initialize the analysis string
         analysis_string = (
-            f"From the image provided, we can recognize that the board is a {length}x{length} board."
+            f"From the image provided, we can recognize that the board is a {length}x{length} board. "
             f"To place a ball at coordinate {position} on Level {level}, we need to ensure all the balls in its sub-pyramid, which are the balls supporting the position, are placed.\n"
         )
         # Describe the calculation process
         analysis_string += (
             "This is determined by checking each level below the target position, from the highest level below it to the base level, "
-            "and counting how many balls that support the position are missing in each layer. The total number of missing balls represents the steps needed.\n"
+            "and counting how many balls that support the position are missing in each layer. The steps needed are the missing balls plus the turn placing the ball at the target position.\n"
         )
 
         # Iterate from the target level downward and calculate missing balls
@@ -390,7 +390,7 @@ def question_generate(question_id,board,param_list=None):
         if level == 0:
             assert(steps_needed == 1)
             analysis_string += (
-            "Since the ball is on level 0 the ground of the board, there is no ball need to be placed to support te ball, the ball at the target position can be placed immediately.\n"
+            "Since the target position is on level 0, the ground of the board, no ball needs to be placed to support it, so the ball at the target position can be placed immediately.\n"
             f"Therefore, it needs 1 step in total."
         )
         elif full_flag == 0:
@@ -401,7 +401,7 @@ def question_generate(question_id,board,param_list=None):
         else:
             assert(steps_needed == 1)
             analysis_string += (
-            "All the required balls in the sub-pyramid has already been placed placed, the ball at the target position can be placed.\n"
+            "All the required balls in the sub-pyramid have already been placed, so the ball at the target position can be placed.\n"
             f"Therefore, it needs 1 step in total."
         )
         analysis = analysis_string
@@ -411,7 +411,7 @@ def question_generate(question_id,board,param_list=None):
         return question, answer, analysis, options
     elif question_id == 3:
         if param_list == None:
-            raise ValueError("Genration error in question id 3")
+            raise ValueError("Generation error in question id 3")
 
         take_point = param_list[0]
         turn = param_list[1]
@@ -426,30 +426,30 @@ def question_generate(question_id,board,param_list=None):
         COLOR = ['blue','red']
         question = (
             rule +
-            f"\nIt is {PLAYER[turn]}'s turn.(which uses the {COLOR[turn]} ball)What is the best coordinate to put a ball in order to maximize the opportunity of winning. Please answer in the form of \"[x,y] at level z\"."
+            f"\nIt is {PLAYER[turn]}'s turn (which uses the {COLOR[turn]} ball). What is the best coordinate to put a ball in order to maximize the opportunity of winning? Please answer in the form of \"[x, y] at level z\"."
         )
         answer = f"{take_point.Position} at level {take_point.Level}"
         if turn_flag:
             analysis += (
-                "To maximize the winning chance, one must try his best to form a 2x2 block of his color for the take-back mechanism. "
-                "So that he avoid losing balls in his turn and therefore minimize the chance of running out of balls first."
-                "Blocking the opponents chance to form 2x2 block of his color also increase the oppotunity of winning."
-                f"From the question, now is the {PLAYER[turn]}'s turn, who uses the {COLOR[turn]} ball. Putting a {COLOR[turn]} ball at {take_point.Position} at Level {take_point.Level} stop the other player {PLAYER[other_turn]} to form 2x2 block of {COLOR[other_turn]} at {take_pos}."
-                f"So the answer is Putting a ball at {take_point.Position} at level {take_point.Level}."
+                "To maximize the winning chance, one must try his best to form a 2x2 block of his color for the take-back mechanism, "
+                "so that he avoids losing balls in his turn and therefore minimizes the chance of running out of balls first. "
+                "Blocking the opponent's chance to form a 2x2 block of his color also increases the opportunity of winning. "
+                f"From the question, it is {PLAYER[turn]}'s turn now, who uses the {COLOR[turn]} ball. Putting a {COLOR[turn]} ball at {take_point.Position} at Level {take_point.Level} stops the other player {PLAYER[other_turn]} from forming a 2x2 block of {COLOR[other_turn]} at {take_pos}. "
+                f"So the answer is {take_point.Position} at level {take_point.Level}."
             )
         else:
             analysis += (
-                "To maximize the winning chance, one must try his best to form a 2x2 block of his color for the take-back mechanism. "
-                "So that he avoid losing balls in his turn and therefore minimize the chance of running out of balls first."
-                "Blocking the opponents chance to form 2x2 block of his color also increase the oppotunity of winning."
-                f"From the question, now is the {PLAYER[turn]}'s turn, who uses the {COLOR[turn]} ball. Putting a {COLOR[turn]} ball at {take_point.Position} at Level {take_point.Level} form 2x2 block of {COLOR[turn]} at {take_pos},which avoid losing a ball for {PLAYER[turn]} in this turn."
-                f"So the answer is Putting a ball at {take_point.Position} at level {take_point.Level}."
+                "To maximize the winning chance, one must try his best to form a 2x2 block of his color for the take-back mechanism, "
+                "so that he avoids losing balls in his turn and therefore minimizes the chance of running out of balls first. "
+                "Blocking the opponent's chance to form a 2x2 block of his color also increases the opportunity of winning. "
+                f"From the question, it is {PLAYER[turn]}'s turn now, who uses the {COLOR[turn]} ball. Putting a {COLOR[turn]} ball at {take_point.Position} at Level {take_point.Level} forms a 2x2 block of {COLOR[turn]} at {take_pos}, which avoids losing a ball for {PLAYER[turn]} in this turn. "
+                f"So the answer is {take_point.Position} at level {take_point.Level}."
             )
         return question, answer, analysis, options           
     elif question_id == 4:
         question = (
             rule +
-            f"\nQuestion: How many balls are there on the board in the image. "
+            f"\nQuestion: How many balls are there on the board in the image?"
         )
         ball_dict = board.board_dict()
         balls_list,count = gen_board.count_ball(ball_dict)
@@ -461,7 +461,7 @@ def question_generate(question_id,board,param_list=None):
 
         # Initialize the analysis string
         analysis_string = (
-            f"From the image provided, we can recognize that the board is a {length}x{length} board."
+            f"From the image provided, we can recognize that the board is a {length}x{length} board. "
             "To count the total number of balls on the board, we start from the downmost level and proceed upward. "
             "For each level, we use the 2D representation of that level to count the balls row by row and column by column. "
             "Here is the detailed count:\n"
@@ -509,12 +509,14 @@ def question_generate(question_id,board,param_list=None):
                     
 
 
+        # the prompt lists exactly the structured options, in the same order
+        options = ["The coordinate is out of bound", "It contains a ball and the ball can't be taken", "It contains a ball and the ball can be taken", "It doesn't contain a ball and the player can put a ball here this turn", "It doesn't contain a ball and the player can't put a ball here this turn"]
         question = (
             rule +
             f"\nQuestion: What is the status of the ball on Level {level}, "
-            f"which has coordinate ({position})?\n"
-            f"Is the coordinate legal? Does it contain a ball? Can the ball be taken(has no ball directly above it)? Can a ball be placed?"
-            "Options:\n1. The coordinate is out of bound\n2. It contain a ball and the ball can't be taken\n3. It contain a ball and can be taken\n4. It doesn't contain a ball and a ball can be put here\n5.It doesn't contain a ball and a ball can't be put here\n"
+            f"which has coordinate {position}?\n"
+            f"Is the coordinate legal? Does it contain a ball? Can the ball be taken (has no ball directly above it)? Can a ball be placed?\n"
+            "Options:\n" + "".join(f"{i}. {option}\n" for i, option in enumerate(options, 1))
         )
 
         if out_of_bound_flag == 1:
@@ -540,15 +542,15 @@ def question_generate(question_id,board,param_list=None):
                     answer = 2
                     analysis += (
                         f"From the image provided, there is a ball at the coordinate {position} in level {level}. "
-                        f"And there are also balls sitting above the ball, which means the ball is supporting other balls,so when the take-back happen, the ball can't be taken. Otherwise the pyramid would collapse."
-                        f"Therefore, the status is it contain a ball and the ball can't be taken ."
+                        f"And there are also balls sitting above the ball, which means the ball is supporting other balls, so when a take-back happens, the ball can't be taken. Otherwise the pyramid would collapse. "
+                        f"Therefore, the status is: it contains a ball and the ball can't be taken."
                     )
                 elif Can_be_taken:
                     answer = 3
                     analysis += (
                         f"From the image provided, there is a ball at the coordinate {position} in level {level}. "
-                        f"And there is no ball sitting above the ball, which means the ball isn't supporting other balls,so when the take-back happen, the ball can be taken without collapsing the pyramid."
-                        f"Therefore, the status is it contain a ball and the ball can be taken."
+                        f"And there is no ball sitting above the ball, which means the ball isn't supporting other balls, so when a take-back happens, the ball can be taken without collapsing the pyramid. "
+                        f"Therefore, the status is: it contains a ball and the ball can be taken."
                     )
                 else:
                     raise ValueError("Faulty item.")
@@ -556,23 +558,22 @@ def question_generate(question_id,board,param_list=None):
                 if Legal:
                     answer = 4
                     analysis += (
-                        f"From the image provided, there is no ball at the coordinate {position} in level {level}.  "
-                        f"The position is legal to put a ball(It is on the ground or the 2x2 block under it is full and a ball can be put in the center above the block)."
-                        f"Therefore, the status is it doesn't contain a ball and the player can put a ball here this turn."
+                        f"From the image provided, there is no ball at the coordinate {position} in level {level}. "
+                        f"The position is legal to put a ball (it is on the ground or the 2x2 block under it is full and a ball can be put in the center above the block). "
+                        f"Therefore, the status is: it doesn't contain a ball and the player can put a ball here this turn."
                     )
                 elif not Legal:
                     answer = 5
                     analysis += (
                         f"From the image provided, we can observe the layout of the pyramid across its levels. "
-                        f"The 2x2 block below it isn't full, putting a ball here the ball will fall off the pyramid. So it can't be put in the center above the block."
-                        f"Therefore, the status is it doesn't contain a ball and the player can't put a ball here this turn."
+                        f"The 2x2 block below it isn't full, so a ball put here would fall off the pyramid; it can't be put in the center above the block. "
+                        f"Therefore, the status is: it doesn't contain a ball and the player can't put a ball here this turn."
                     )
                 else:
                     raise ValueError("Faulty item.")
             else:
                 raise ValueError("Faulty item.")
 
-        options = ["The coordinate is out of bound", "It contain a ball and the ball can't be taken", "It contain a ball and can be taken", "It doesn't contain a ball and the player can put a ball here this turn","It doesn't contain a ball and the player can't put a ball here this turn"]
         return question, answer, analysis, options  
     else: 
         raise ValueError(f"Question_id:{question_id} unsupported")
