@@ -20,61 +20,63 @@
         "<Card Sprite(in 1 groups)>"
     ],
     "dump": [
-        "diamond 6",
-        "diamond 10",
-        "spade 13"
+        "club 9"
     ],
     "piles": [
-        [],
-        [],
+        [
+            "club 1",
+            "club 2",
+            "club 3"
+        ],
+        [
+            "heart 1",
+            "heart 2",
+            "heart 3",
+            "heart 4"
+        ],
         [],
         []
     ],
     "tableau": [
         [
-            "club 4",
-            "diamond 3",
-            "club 2",
+            "<Card Sprite(in 1 groups)>",
+            "heart 9",
+            "spade 8"
+        ],
+        [
+            "spade 4",
+            "diamond 3"
+        ],
+        [
+            "<Card Sprite(in 1 groups)>",
+            "<Card Sprite(in 1 groups)>",
+            "<Card Sprite(in 1 groups)>",
+            "diamond 4",
+            "spade 3",
+            "diamond 2"
+        ],
+        [
+            "<Card Sprite(in 1 groups)>",
+            "spade 5"
+        ],
+        [
+            "spade 2",
             "diamond 1"
         ],
         [
             "<Card Sprite(in 1 groups)>",
-            "spade 2",
-            "heart 1"
-        ],
-        [
-            "<Card Sprite(in 1 groups)>",
-            "<Card Sprite(in 1 groups)>",
-            "<Card Sprite(in 1 groups)>",
-            "heart 12",
-            "club 11",
-            "heart 10",
-            "club 9"
-        ],
-        [
-            "<Card Sprite(in 1 groups)>",
-            "<Card Sprite(in 1 groups)>",
-            "<Card Sprite(in 1 groups)>",
-            "<Card Sprite(in 1 groups)>",
-            "heart 2",
-            "spade 1"
-        ],
-        [
-            "spade 8",
-            "diamond 7",
-            "spade 6"
-        ],
-        [
-            "club 6",
-            "diamond 5"
-        ],
-        [
             "<Card Sprite(in 1 groups)>",
             "<Card Sprite(in 1 groups)>",
             "<Card Sprite(in 1 groups)>",
             "diamond 8",
-            "spade 7",
-            "heart 6"
+            "club 7",
+            "diamond 6"
+        ],
+        [
+            "<Card Sprite(in 1 groups)>",
+            "<Card Sprite(in 1 groups)>",
+            "<Card Sprite(in 1 groups)>",
+            "heart 5"
         ]
     ]
 }

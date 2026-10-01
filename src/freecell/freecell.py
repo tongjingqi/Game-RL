@@ -187,7 +187,7 @@ class FreeCell:
             if pile:  # 如果牌堆不为空
                 card = pile[-1]  # 取最上面的牌
                 for suit, foundation_pile in self.foundation_piles.items():
-                    if self._can_move_to_foundation(card, foundation_pile):  # 判断是否可以移动到基础牌堆
+                    if self._can_move_to_foundation(card, foundation_pile, suit):  # 判断是否可以移动到基础牌堆
                         valid_moves.append({
                             "card": card,
                             "from": f"Cascade {pile_index}",
@@ -199,7 +199,7 @@ class FreeCell:
         for free_cell_index, card in enumerate(self.free_cells):
             if card:  # 如果空闲单元有牌
                 for suit, foundation_pile in self.foundation_piles.items():
-                    if self._can_move_to_foundation(card, foundation_pile):  # 判断是否可以移动到基础牌堆
+                    if self._can_move_to_foundation(card, foundation_pile, suit):  # 判断是否可以移动到基础牌堆
                         valid_moves.append({
                             "card": card,
                             "from": f"FreeCell {free_cell_index}",
@@ -255,7 +255,7 @@ class FreeCell:
 
                 # 检查是否可以移动到基础牌堆
                 for suit, foundation_pile in self.foundation_piles.items():
-                    if self._can_move_to_foundation(card, foundation_pile):
+                    if self._can_move_to_foundation(card, foundation_pile, suit):
                         possible_moves.append({
                             "card": card,
                             "from": f"Cascade {from_pile_index}",
@@ -277,7 +277,7 @@ class FreeCell:
             if card:  # 如果空闲单元有牌
                 # 检查是否可以移动到基础牌堆
                 for suit, foundation_pile in self.foundation_piles.items():
-                    if self._can_move_to_foundation(card, foundation_pile):
+                    if self._can_move_to_foundation(card, foundation_pile, suit):
                         possible_moves.append({
                             "card": card,
                             "from": f"FreeCell {free_cell_index}",
@@ -297,10 +297,13 @@ class FreeCell:
         return possible_moves
  
     # 判断是否能移动到基堆
-    def _can_move_to_foundation(self, card, foundation_pile):
+    def _can_move_to_foundation(self, card, foundation_pile, suit):
         """
         判断是否可以将给定的牌移动到基础牌堆。
+        基础牌堆按花色区分(题目中称为 Foundation Heart 等),只接收自己花色的牌。
         """
+        if card.suit != suit:
+            return False
         if not foundation_pile:  # 基础牌堆为空
             return card.value == 1  # 只有A可以放置到空的基础牌堆
         top_card = foundation_pile[-1]

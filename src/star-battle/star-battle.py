@@ -310,7 +310,7 @@ Remember the rules:
 - Each region must contain exactly {stars} star(s).
 - Stars cannot be adjacent to each other, including diagonally.
 - The cells in the grid are labeled with row and column numbers starting from 0. The top-left corner of the grid is (0, 0).
-Now the puzzle has only one star left to be placed.The left star should be placed in which cell?
+Now the puzzle has only one star left to be placed. Which cell should the last star be placed in?
 """,
             "answer": str(answer),
             "analysis": f""""""
@@ -456,13 +456,13 @@ def generate_state_analysis_puzzle(num_puzzles,n,stars,grid_size,base_path):
         state=f"states/board_state_analysis_{plot_difficulty_map[n]}_{puzzles_generated+1:03d}.json"
         plot_level=plot_difficulty_map[n]
         question_base=f'''
-We have a {puzzle.n}*{puzzle.n} grid.The grid is divided into {n} regions.
+We have a {puzzle.n}*{puzzle.n} grid. The grid is divided into {n} regions.
 Cells with the same color belong to the same region.
 {color_description}
-In the image,a star is represented by a black dot. If a cell has been placed a star,a black dot will be shown on this cell. 
+In the image, a star is represented by a black dot. If a star has been placed in a cell, a black dot is shown on this cell.
 We should place the star in this Star Battle Puzzle according to the following rules:
 Each row must contain exactly {stars} star(s).
-Each column must contain {stars} star(s).
+Each column must contain exactly {stars} star(s).
 Each region must contain exactly {stars} star(s).
 Stars cannot be adjacent to each other, including diagonally.
 The cells in the grid are labeled with row and column numbers starting from 0. The top-left corner of the grid is (0, 0).
@@ -501,16 +501,16 @@ Now we have placed some stars in the grid.
             "data_id": data_id,
             "qa_type":"Target Perception",
             "question_id":2,
-            "question_description":f"Given current state and an index of a region.You should idectify which cell provided in the options belongs the region.",
+            "question_description":f"Given current state and an index of a region. You should identify which cell provided in the options belongs to the region.",
             "image": image,
             "state": state,
             "plot_level": plot_level,  # You can adjust difficulty based on your criteria
             "qa_level":qa_difficulty_map["cells_of_region"],
-            "question": question_base+f'''\nThe region with index {region_index} is represented by the color {region_color_map[region_index]} in the grid.Given the current state, which cell in the following options belong to region {region_index}?\n'''+f'''Options:\n{option_text}''',
+            "question": question_base+f'''\nThe region with index {region_index} is represented by the color {region_color_map[region_index]} in the grid. Given the current state, which cell in the following options belongs to region {region_index}?\n'''+f'''Options:\n{option_text}''',
             "answer": correct_answer_label,
             "analysis": f'''The region with index {region_index} is represented by the color {region_color_map[region_index]} in the grid.
 In this puzzle, we need to identify which cell in the following options belongs to this region.
-The region {region_index} contain the following cells:{puzzle.regions[region_index]}
+The region {region_index} contains the following cells: {puzzle.regions[region_index]}
 By inspecting the grid, we can see that the following cell is part of region {region_index}:
 Cell ({correct_cell[0]}, {correct_cell[1]})
 
@@ -549,12 +549,12 @@ Thus, the correct answer is: {correct_cell}.''',
             "data_id": f"star-battle-star_of_region-{plot_difficulty_map[n]}-{puzzles_generated+1:05d}",
             "qa_type":"Target Perception",
             "question_id":2,
-            "question_description":f"Given current state and an index of a region.You should idectify which cell provided in the options belongs the region.",
+            "question_description":f"Given current state and an index of a region. You should identify which cell provided in the options belongs to the region.",
             "image": image,
             "state": state,
             "plot_level": plot_level,  # You can adjust difficulty based on your criteria
             "qa_level":qa_difficulty_map["cells_of_region"],
-            "question": question_base+f'''\nThe region with index {region_index} is represented by the color {region_color_map[region_index]} in the grid.Given the current state, which cell in the following options belong to region {region_index}?\n'''+f'''Options:\n{option_text}''',
+            "question": question_base+f'''\nThe region with index {region_index} is represented by the color {region_color_map[region_index]} in the grid. Given the current state, which cell in the following options belongs to region {region_index}?\n'''+f'''Options:\n{option_text}''',
             "answer": correct_answer_label,
             "analysis": f'''''',
             "options":options
@@ -584,7 +584,7 @@ Thus, the correct answer is: {correct_cell}.''',
         if len(region_cells) < 8:
             remaining_cells = []
             for i, region in enumerate(puzzle.regions):
-                if i != region_index:  # 排除已选择的region
+                if i != region_index_2:  # 排除已选择的region
                     remaining_cells.extend(region)
     
             # 添加其他region的cell直到选项数量达到8个
@@ -610,16 +610,16 @@ Thus, the correct answer is: {correct_cell}.''',
         puzzle_data_2["qa_level"]=f"{qa_difficulty_map['star_of_region']}"
         puzzle_data_2["qa_type"]=f"Target Perception"
         puzzle_data_2["question_id"]=3
-        puzzle_data_2["question_description"]=f"Given current state and a region,Your task is to indentify which cell provided by options belongs to this region and has been placed a star. "
-        puzzle_data_2["question"]=question_base+f'''\nIn the current puzzle state, region {region_index_2} is associated with color {region_color_map[region_index_2]}. 
-Please identify which of the following cells in this region that contains a star?\nNote that:If no stars have been placed in the target region,please choose the option "null"\n'''+f'''Options:\n{option_text_2}'''
+        puzzle_data_2["question_description"]=f"Given current state and a region, your task is to identify which cell provided by options belongs to this region and contains a star. "
+        puzzle_data_2["question"]=question_base+f'''\nIn the current puzzle state, region {region_index_2} is associated with color {region_color_map[region_index_2]}.
+Which of the following cells in this region contains a star?\nNote that if no star has been placed in the target region, please choose the option "null".\n'''+f'''Options:\n{option_text_2}'''
         puzzle_data_2["answer"]=correct_answer_label
-        
+
         ## 构造 analysis
         detailed_analysis = f"In this task, we need to find all the stars in the region with index {region_index_2}.\n"
-        detailed_analysis += f"The region with index {region_index_2} corresponds to the color {region_color_map[region_index]}.\n"
+        detailed_analysis += f"The region with index {region_index_2} corresponds to the color {region_color_map[region_index_2]}.\n"
         detailed_analysis += f"This region contains the following cells: {region_cells}.\n"
-        detailed_analysis += f'''Note that a star is represented by a black,now scan the cells of the region {region_index_2} on the image.The cell with a black dot is: {correct_answer}. '''
+        detailed_analysis += f'''Note that a star is represented by a black dot. Now scan the cells of region {region_index_2} in the image. The cell with a black dot is: {correct_answer}. '''
         detailed_analysis += "\nAnalysis of each option:\n"
 
         for option in options_2:
@@ -636,12 +636,12 @@ Please identify which of the following cells in this region that contains a star
                     break
             
             # 判断该单元格是否包含星星
-            contains_star = "contain a star" if puzzle.grid[row][col] == 1 else "does not contain a star"
+            contains_star = "contains a star" if puzzle.grid[row][col] == 1 else "does not contain a star"
             
             # 分析该选项
             detailed_analysis += f"Cell {option} belongs to region {cell_region_index} and {contains_star}.\n"
 
-        detailed_analysis += f"\nTherefore,The stars found in region {region_index_2} are located at the following positions: {correct_cell if correct_cell is not None else 'No stars found'}.We should choose option {correct_answer_label}"
+        detailed_analysis += f"\nTherefore, the stars found in region {region_index_2} are located at the following positions: {correct_cell if correct_cell is not None else 'No stars found'}. We should choose option {correct_answer_label}"
                 
         puzzle_data_2["analysis"]=detailed_analysis
         puzzle_data_2["options"]=options_2
@@ -661,7 +661,7 @@ Please identify which of the following cells in this region that contains a star
             "data_id": f"star-battle-valid_cell-{plot_difficulty_map[n]}-{puzzles_generated+1:05d}",
             "qa_type":"Target Perception",
             "question_id":2,
-            "question_description":f"Given current state and an index of a region.You should idectify which cell provided in the options belongs the region.",
+            "question_description":f"Given current state and an index of a region. You should identify which cell provided in the options belongs to the region.",
             "image": image,
             "state": state,
             "plot_level": plot_level,  # You can adjust difficulty based on your criteria
@@ -710,7 +710,7 @@ Please identify which of the following cells in this region that contains a star
             if (i,j) in valid_cells:
                 cell_analysis = f"Cell ({i}, {j}) can hold a star because:\n"
             else:
-                cell_analysis = f"Cell ({i}, {j}) can not hold a star because:\n"
+                cell_analysis = f"Cell ({i}, {j}) cannot hold a star because:\n"
             
             # Check adjacency condition
             adjacent_to_star = False
@@ -762,13 +762,13 @@ Please identify which of the following cells in this region that contains a star
                     break
             if is_i_placed is False and is_j_placed is False:# 行列规则满足了
                 if adjacent_to_star is False and is_region_placed is False: # 正确答案
-                    cell_analysis +=f"Both row {i} and column {j} now has no stars."
+                    cell_analysis +=f" Both row {i} and column {j} have no stars yet."
             elif is_i_placed is True:   # 行列规则不满足
                 if not adjacent_to_star and not is_region_placed:   # 分区、相邻规则满足时，行列规则是错误的主要原因
-                    cell_analysis +=f"However,Row {i} has already been placed a star.Therefore,it cannot hold a star."
+                    cell_analysis +=f" However, row {i} already contains a star. Therefore, it cannot hold a star."
             elif is_j_placed is True:
                 if not adjacent_to_star and not is_region_placed:   # 分区、相邻规则满足时，行列规则是错误的主要原因
-                    cell_analysis +=f"However,Column {j} has already been placed a star.Therefore,it cannot hold a star."
+                    cell_analysis +=f" However, column {j} already contains a star. Therefore, it cannot hold a star."
             analysis_details.append(cell_analysis)
 
         # 生成选项文本
@@ -779,7 +779,7 @@ Please identify which of the following cells in this region that contains a star
         puzzle_data_3["qa_level"]=qa_difficulty_map["valid_cells"]
         puzzle_data_3["qa_type"]="Target Perception"
         puzzle_data_3["question_id"]=4
-        puzzle_data_3["question_description"]=f"Based on the current puzzle state, your task is to identify which of the following cells provided by the options can a star be placed in?"
+        puzzle_data_3["question_description"]=f"Based on the current puzzle state, your task is to identify which of the following cells provided by the options a star can be placed in."
         puzzle_data_3["answer"]=correct_answer_label
         puzzle_data_3["question"]=question_base + "\nBased on the current puzzle state, which of the following cells can a star be placed in?\n"+f"Options:\n{option_text_3}\n"
         puzzle_data_3["analysis"]="\n".join(analysis_details)

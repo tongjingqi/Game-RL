@@ -46,6 +46,24 @@ string_to_suit_map={
 def format_card_option(card):
     return f"({suit_to_string_map[card.suit.value]}, {value_map[card.value]})"
 
+def format_card(card):
+    return f"({suit_to_string_map[card.suit.value]},{value_map[card.value]})"
+
+def location_name(location):
+    # 引擎用花色符号表示基础牌堆(Foundation ♥),题目中用花色名称(Foundation Heart)
+    kind, index = location.split()
+    return f"{kind} {suit_to_string_map[index]}" if kind == "Foundation" else location
+
+def ordinal(n):
+    suffix = "th" if 10 <= n % 100 <= 20 else {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th")
+    return f"{n}{suffix}"
+
+def game_intro(game):
+    # 三类问题共用的开头;基础牌堆按 Suit 的顺序从左到右画出(见 FreeCell.visualize)
+    return (f"In this FreeCell game:\nWe have {game.cascade_number} cascade piles, and their indexes are {[i for i in range(game.cascade_number)]}. "
+            "We have 4 free cells on the top left, and their indexes are 0,1,2,3. "
+            "We have 4 foundation piles on the top right, one for each suit: Heart, Diamond, Club and Spade from left to right. ")
+
 def generate_dataset(num_puzzles,base_path):
     # 创建目录
     os.makedirs(base_path,exist_ok=True)
@@ -196,27 +214,25 @@ def generate_specified_card_dataset(game:FreeCell,generated_number,image_file,st
     # Generate analysis
     pile_analysis = ", ".join(f"({suit_to_string_map[card.suit.value]},{value_map[card.value]})" for card in reversed(selected_pile))
     analysis = (
-                f"The selected pile{cascade_index} contains (from top to bottom) the following cards:\n {pile_analysis}. "
-                f"The {n}-th card from the top is {correct_answer}.")
+                f"The selected pile {cascade_index} contains (from top to bottom) the following cards:\n{pile_analysis}. "
+                f"The {ordinal(n)} card from the top is {correct_answer}.")
 
     # Generate the puzzle data
     puzzle_data = {
         "data_id": f"free_cell-specified_card-{plot_level}-{generated_number+1:05d}",
         "qa_type": "Target Perception",
         "question_id":1,
-        "question_description":"Given a particular game state, the puzzle will present a question about which card is at a specific position in one of the cascade piles.Your task is to indentify the card in the options. ",
+        "question_description":"Given a particular game state, the puzzle will present a question about which card is at a specific position in one of the cascade piles. Your task is to identify the card in the options. ",
         "image": f"{image_file}",
         "state": f"{state_file}",
         "plot_level": plot_level,
         "qa_level": qa_level["specified_card"],
-        "question": (f"In this FreeCell game:\nwe have {game.cascade_number} cascade piles at sum, and their indexes are {[i for i in range(game.cascade_number)]}"
-                     f"We have 4 freecell on the left top, and their indexes are 0,1,2,3."
-                     f"We have 4 foundation piles on the right top, and their indexes are 0,1,2,3."
+        "question": (game_intro(game) +
                      f"In FreeCell, cards can be moved according to specific rules: "
                      "A card can be moved to a free cell if available, stacked in descending "
                      "order alternating colors in cascade piles, or placed in foundation piles "
-                     f"starting from Ace. Now, find the {n}-th card from the top of cascade pile {cascade_index}."
-                     f"the options are as follows:\n{options_text}"),
+                     f"starting from Ace. Now, find the {ordinal(n)} card from the top of cascade pile {cascade_index}. "
+                     f"The options are as follows:\n{options_text}"),
         "answer": answer_index,
         "analysis": analysis,
         "options": options
@@ -245,19 +261,12 @@ def generate_valid_move_dataset(game: FreeCell, generated_number, image_file, st
     correct_move = random.choice(valid_moves)
     options = []
     moves_info = []
-    
+    # 选项用花色名称表示基础牌堆,合法走法也换成同样的写法,才能从干扰项中排除
+    valid_move_keys = [(move['card'], location_name(move['from']), location_name(move['to'])) for move in valid_moves]
+
     # Add the correct move  {correct_move['card']}
-    from_=correct_move['from']
-    if "Foundation" in correct_move['from']:
-        suit=correct_move['from'].split()[1]
-        from_=f'''Foundation {suit_to_string_map[suit]}'''
-        correct_move['from']=from_
-    to_=correct_move['to']
-    if "Foundation" in correct_move['to']:
-        suit=correct_move['to'].split()[1]
-        to_=f'''Foundation {suit_to_string_map[suit]}'''
-        correct_move['to']=to_
-    correct_option = f"Move ({suit_to_string_map[correct_move['card'].suit.value]},{correct_move['card'].value}) from {from_} to {to_}"
+    correct_move = {"card": correct_move['card'], "from": location_name(correct_move['from']), "to": location_name(correct_move['to'])}
+    correct_option = f"Move {format_card(correct_move['card'])} from {correct_move['from']} to {correct_move['to']}"
     # print("正确选项:",correct_option)
     options.append(correct_option)
     moves_info.append(correct_move) # 加入的move都是修改suit为string的move
@@ -296,14 +305,14 @@ def generate_valid_move_dataset(game: FreeCell, generated_number, image_file, st
         if all_cards:
             card = random.choice(all_cards)
             invalid_move = {"card": card, "from": source, "to": dest}
-            if invalid_move not in invalid_moves and invalid_move not in valid_moves:
+            if source != dest and invalid_move not in invalid_moves and (card, source, dest) not in valid_move_keys:
                 # print("干扰项:",invalid_move)
                 invalid_moves.append(invalid_move)
     
     selected_invalid_moves = random.sample(invalid_moves, 3)
     # 构造一对三错的选项
     for move in selected_invalid_moves:
-        option = f"Move ({suit_to_string_map[move['card'].suit.value]},{move['card'].value}) from {move['from']} to {move['to']}"
+        option = f"Move {format_card(move['card'])} from {move['from']} to {move['to']}"
         options.append(option)
         moves_info.append(move)
     
@@ -342,97 +351,103 @@ def generate_valid_move_dataset(game: FreeCell, generated_number, image_file, st
     for i, (option, move) in enumerate(zip(options, moves_info), 1):
         analysis += f"Option {i}: {option}\n"
         card = move['card']
-        analysis += f"• Moving card: {card.value} of {suit_to_string_map[card.suit.value]} ({card.color.value})\n"
+        rank = value_map[card.value]
+        suit_name = suit_to_string_map[card.suit.value]
+        analysis += f"• Moving card: {rank} of {suit_name} ({card.color.value})\n"
         analysis += f"• From: {move['from']}\n"
         analysis += f"• To: {move['to']}\n"
-        
+
         if option == correct_option:
             analysis += "This is the CORRECT move because:\n"
-            
+
             if "Foundation" in move['to']:
                 dest_card = get_destination_info(move, game)
                 if dest_card == "empty":
-                    analysis += (f"- The foundation pile for {suit_to_string_map[card.suit.value]} is empty\n"
-                               f"- This card is an Ace ({card.value}), which is valid to start a foundation pile\n"
+                    analysis += (f"- The foundation pile for {suit_name} is empty\n"
+                               f"- This card is an Ace, which is valid to start a foundation pile\n"
                                f"- Foundation piles must start with Ace and build up by suit\n")
                 else:
-                    analysis += (f"- Top card of foundation pile: {dest_card.value} of {suit_to_string_map[dest_card.suit.value]}\n"
-                               f"- Moving {card.value} of {suit_to_string_map[card.suit.value]} on top\n"
+                    analysis += (f"- Top card of foundation pile: {value_map[dest_card.value]} of {suit_to_string_map[dest_card.suit.value]}\n"
+                               f"- Moving {rank} of {suit_name} on top\n"
                                f"- This follows the rule: same suit, ascending order (+1)\n")
-            
+
             elif "FreeCell" in move['to']:
                 cell_index = int(move['to'].split()[-1])
                 analysis += (f"- Free Cell {cell_index} is empty\n"
                            f"- Any single card can be moved to an empty free cell\n"
-                           f"- The {card.value} of {suit_to_string_map[card.suit.value]} is a single card move\n")
-            
+                           f"- The {rank} of {suit_name} is a single card move\n")
+
             else:  # Cascade pile
                 dest_card = get_destination_info(move, game)
                 if dest_card == "empty":
                     analysis += (f"- The destination cascade pile is empty\n"
                                f"- Any card can be placed on an empty cascade pile\n")
                 else:
-                    analysis += (f"- Top card of destination pile: {dest_card.value} of {suit_to_string_map[dest_card.suit.value]} ({dest_card.color.value})\n"
-                               f"- Moving {card.value} of {suit_to_string_map[card.suit.value]} ({card.color.value}) underneath\n"
+                    analysis += (f"- Top card of destination pile: {value_map[dest_card.value]} of {suit_to_string_map[dest_card.suit.value]} ({dest_card.color.value})\n"
+                               f"- Moving {rank} of {suit_name} ({card.color.value}) underneath\n"
                                f"- This follows cascade rules:\n"
                                f"  1. Colors alternate ({card.color.value} ≠ {dest_card.color.value})\n"
-                               f"  2. Values descend ({dest_card.value} = {card.value + 1})\n")
-        
+                               f"  2. Values descend ({rank} is one lower than {value_map[dest_card.value]})\n")
+
         else:   # 错误选项分析
             analysis += "This is an INVALID move because:\n"
-            
+
             # 先分析src
             src_index=(int)(move['from'].split()[1])
             if "Cascade" in move['from']:
                 src_top_card=game.cascade_piles[src_index][-1]
                 if src_top_card != move["card"]:
-                    analysis+=f'''card ({suit_to_string_map[card.suit.value]},{card.value}) is not the top card of Cascade  pile {src_index}\n'''
+                    analysis+=f'''- Card {format_card(card)} is not the top card of Cascade pile {src_index}\n'''
                 else:
-                    analysis+=f'''card ({suit_to_string_map[card.suit.value]},{card.value}) is the top card of Cascade  pile {src_index}\n'''
+                    analysis+=f'''- Card {format_card(card)} is the top card of Cascade pile {src_index}\n'''
             elif "FreeCell" in move["from"]:
-                if not game.free_cells[src_index]:
-                    free_cell_card = game.free_cells[src_index]
-                    if free_cell_card != move["card"]:
-                        analysis+=f'''Free Cell {src_index} doesn't hold the card ({suit_to_string_map[card.suit.value]},{card.value})\n'''
-                    else:
-                        analysis+=f'''Free Cell {src_index} holds the card ({suit_to_string_map[card.suit.value]},{card.value})\n'''
-            else:
-                analysis+=''
-            # 再分析dst
+                if game.free_cells[src_index] != move["card"]:
+                    analysis+=f'''- Free Cell {src_index} doesn't hold the card {format_card(card)}\n'''
+                else:
+                    analysis+=f'''- Free Cell {src_index} holds the card {format_card(card)}\n'''
+            # 再分析dst: 只写出实际违反的规则(目标位置本身能接收这张牌时,错误只在来源)
             if "Foundation" in move['to']:
                 dest_card = get_destination_info(move, game)
+                foundation_suit = move['to'].split()[-1]
                 if dest_card == "empty":
-                    analysis += (f"- The foundation pile is empty but the card ({card.value} of {suit_to_string_map[card.suit.value]}) "
-                               f"is not an Ace\n"
-                               f"- Foundation piles must start with Ace\n")
+                    if card.value != 1:
+                        analysis += (f"- The foundation pile is empty but the card ({rank} of {suit_name}) "
+                                   f"is not an Ace\n"
+                                   f"- Foundation piles must start with Ace\n")
+                    if suit_name != foundation_suit:
+                        analysis += f"- Foundation {foundation_suit} only takes {foundation_suit} cards, but this card is a {suit_name}\n"
                 else:
-                    analysis += (f"- Top card of foundation pile: {dest_card.value} of {suit_to_string_map[dest_card.suit.value]}\n"
-                               f"- Attempting to move: {card.value} of {suit_to_string_map[card.suit.value]}\n"
-                               f"- This violates foundation rules:\n")
+                    violations = []
                     if card.suit != dest_card.suit:
-                        analysis += f"  * Cards must be of the same suit\n"
+                        violations.append(f"  * Cards must be of the same suit\n")
                     if card.value != dest_card.value + 1:
-                        analysis += f"  * Cards must be placed in ascending order (+1)\n"
-            
+                        violations.append(f"  * Cards must be placed in ascending order (+1)\n")
+                    if violations:
+                        analysis += (f"- Top card of foundation pile: {value_map[dest_card.value]} of {suit_to_string_map[dest_card.suit.value]}\n"
+                                   f"- Attempting to move: {rank} of {suit_name}\n"
+                                   f"- This violates foundation rules:\n" + "".join(violations))
+
             elif "FreeCell" in move['to']:
                 cell_index = int(move['to'].split()[-1])
                 if game.free_cells[cell_index]:
-                    analysis += (f"- Free Cell {cell_index} is occupied by ({suit_to_string_map[game.free_cells[cell_index].suit.value]},{game.free_cells[cell_index].value})\n"
+                    analysis += (f"- Free Cell {cell_index} is occupied by {format_card(game.free_cells[cell_index])}\n"
                                f"- Free cells can only hold one card at a time\n")
-            
+
             else:  # Cascade pile
                 dest_card = get_destination_info(move, game)
                 if dest_card == "empty":
                     analysis += f"- The destination cascade pile is empty\n"
                 else:
-                    analysis += (f"- Top card of destination pile: {dest_card.value} of {suit_to_string_map[dest_card.suit.value]} ({dest_card.color.value})\n"
-                               f"- Attempting to move: {card.value} of {suit_to_string_map[card.suit.value]} ({card.color.value})\n"
-                               f"- This violates cascade rules:\n")
+                    violations = []
                     if card.color == dest_card.color:
-                        analysis += f"  * Colors must alternate (both are {card.color.value})\n"
+                        violations.append(f"  * Colors must alternate (both are {card.color.value})\n")
                     if card.value != dest_card.value - 1:
-                        analysis += f"  * Values must descend (difference is not 1)\n"
-        
+                        violations.append(f"  * Values must descend (difference is not 1)\n")
+                    if violations:
+                        analysis += (f"- Top card of destination pile: {value_map[dest_card.value]} of {suit_to_string_map[dest_card.suit.value]} ({dest_card.color.value})\n"
+                                   f"- Attempting to move: {rank} of {suit_name} ({card.color.value})\n"
+                                   f"- This violates cascade rules:\n" + "".join(violations))
+
         analysis += "\n"
     
     puzzle_data = {
@@ -445,16 +460,14 @@ def generate_valid_move_dataset(game: FreeCell, generated_number, image_file, st
         "plot_level": plot_level,
         "qa_level": qa_level["valid_move"],
         "question": (
-            f"In this FreeCell game:\nwe have {game.cascade_number} cascade piles at sum, and their indexes are {[i for i in range(game.cascade_number)]}"
-            f"We have 4 freecell on the left top, and their indexes are 0,1,2,3."
-            f"We have 4 foundation piles on the right top, and their indexes are 0,1,2,3."
+            game_intro(game) +
             "In FreeCell, cards must be moved according to specific rules:\n"
             "1. Cards in cascade piles must be stacked in descending order with alternating colors\n"
             "2. Only one card can be moved at a time (unless using free cells)\n"
             "3. Foundation piles must be built up by suit from Ace to King\n"
             "4. Free cells can hold only one card each\n\n"
-            "Which of the following moves is valid in the current game state?"
-            f'''the options are as follows:\n{options_text}'''
+            "Which of the following moves is valid in the current game state? "
+            f'''The options are as follows:\n{options_text}'''
         ),
         "answer": answer_index,
         "analysis": analysis,
@@ -486,14 +499,15 @@ def generate_state_after_move_dataset(game:FreeCell,generated_number,image_file,
         selected_move['to']=f'''Foundation {suit_to_string_map[suit]}'''
 
     # 构造正确选项
+    moved_card=selected_move['card']
     selected_card=game.cascade_piles[cascade_index][-2]
     answer_text=format_card_option(selected_card)
     options=[answer_text]
-    
+
 
     # 下面开始生成干扰选项
     all_cards = [card for pile in game.cascade_piles for card in pile]
-    
+
     # 完全随机的牌
     while len(options) < 8:
         random_card = random.choice(all_cards)
@@ -507,50 +521,29 @@ def generate_state_after_move_dataset(game:FreeCell,generated_number,image_file,
     for idx,option_idx in enumerate(options):
         options_text+=(f'''{idx+1}.'''+option_idx+"\n")
 
-    new_state={
-        "cascade_piles": [[f"({suit_to_string_map[card.suit.value]},{card.value})" for card in pile] if pile else None for pile in game.cascade_piles],
-        "free_cells": [f"({suit_to_string_map[card.suit.value]},{card.value})" if card else None for card in game.free_cells],
-        "foundation_piles": {suit.name: [str(card) for card in pile] if pile else None
-                             for suit, pile in game.foundation_piles.items()}
-    }
-
-    analysis = (f"We have {game.cascade_number} cascade piles.Their indexes are {[i for i in range(game.cascade_number)]}.\n"
-                f"Before the move,the state of the cascade_pile{cascade_index} is:{new_state['cascade_piles'][cascade_index]}. "
-                f"After moving the card ({suit_to_string_map[selected_move['card'].suit.value]},{value_map[selected_move['card'].value]}) from {selected_move['from']} to {selected_move['to']},the top card of the cascade_pile {cascade_index} is ({suit_to_string_map[selected_pile[-2].suit.value]},{selected_pile[-2].value})."
-                f"and the top card of the {selected_move['to']} becomes card ({suit_to_string_map[selected_card.suit.value]},{value_map[selected_card.value]}).")
-    new_state={
-        "cascade_piles": [[card for card in pile] if pile else None for pile in game.cascade_piles],
-        "free_cells": [str(card) if card else None for card in game.free_cells],
-        "foundation_piles": {suit.name: [str(card) for card in pile] if pile else None
-                             for suit, pile in game.foundation_piles.items()}
-    }
-    from_pile=int(selected_move["from"].split()[1])
-    new_state["cascade_piles"][from_pile].pop()
-    if selected_move["to"].startswith("Cascade"):
-        to_pile=int(selected_move["to"].split()[1])
-        card=new_state["cascade_piles"][from_pile][-1]
-        new_state["cascade_piles"][to_pile].append(card)
-    
-    
-    analysis+=f"the new state of the cascade_pile {cascade_index} is:\n{[f'({suit_to_string_map[card.suit.value]},{card.value})' for card in new_state['cascade_piles'][cascade_index]]}\n Therefore the top card of the cascade_pile {cascade_index} is {answer_text}"
+    # 被移走的是源牌堆最上面的牌,它成为目标位置的顶牌;源牌堆的新顶牌是原来的倒数第二张
+    analysis = (f"We have {game.cascade_number} cascade piles. Their indexes are {[i for i in range(game.cascade_number)]}.\n"
+                f"Before the move, the state of cascade pile {cascade_index} is: {[format_card(card) for card in selected_pile]}. "
+                f"After moving the card {format_card(moved_card)} from {selected_move['from']} to {selected_move['to']}, the top card of cascade pile {cascade_index} is {format_card(selected_card)}, "
+                f"and the top card of {selected_move['to']} becomes {format_card(moved_card)}. "
+                f"The new state of cascade pile {cascade_index} is:\n{[format_card(card) for card in selected_pile[:-1]]}\n"
+                f"Therefore the top card of cascade pile {cascade_index} is {answer_text}.")
     puzzle_data={
         "data_id": f"free_cell-card_after_move-{plot_level}-{generated_number+1:05d}",
         "qa_type": "State Prediction",
         "question_id":3,
-        "question_description":"Given a particular game state,a selected move and a selected cascade pile, the puzzle will present a question about which card is at the top of the cascade pile.\nYour task is to indentify the card in the options. ",
+        "question_description":"Given a particular game state, a selected move and a selected cascade pile, the puzzle will present a question about which card is at the top of the cascade pile.\nYour task is to identify the card in the options. ",
         "image": f"{image_file}",
         "state": f"{state_file}",
         "plot_level": plot_level,
         "qa_level": qa_level["card_after_move"],
         "question": (
-                     f"In this FreeCell game:\nwe have {game.cascade_number} cascade piles, and their indexes are {[i for i in range(game.cascade_number)]}"
-                     f"We have 4 freecell on the left top, and their indexes are 0,1,2,3."
-                     f"We have 4 foundation piles on the right top, and their indexes are 0,1,2,3."
+                     game_intro(game) +
                      f"In FreeCell, cards can be moved according to specific rules: "
                      "A card can be moved to a free cell if available, stacked in descending "
                      "order alternating colors in cascade piles, or placed in foundation piles "
-                     f"starting from Ace. Now, find the top card from cascade pile {cascade_index} after moving the card ({suit_to_string_map[selected_move['card'].suit.value]},{selected_move['card'].value}) from {selected_move['from']} to {selected_move['to']}."
-                     f"the options are as follows:\n{options_text}"),
+                     f"starting from Ace. Now, find the top card of cascade pile {cascade_index} after moving the card {format_card(moved_card)} from {selected_move['from']} to {selected_move['to']}. "
+                     f"The options are as follows:\n{options_text}"),
         "answer": answer_index,
         "analysis": analysis,
         "options": options

@@ -632,8 +632,10 @@ class KlondikeQAGenerator:
                     reason = f"moves {source_card['suit']} {source_card['rank']} to foundation"
                     foundation_moves.append((move_str, "foundation", True, reason))
 
-            # Check tableau to tableau moves
-            for to_tab in range(from_tab+1, 8):
+            # Check tableau to tableau moves (to piles on either side)
+            for to_tab in range(1, 8):
+                if to_tab == from_tab:
+                    continue
                 target_pile = self.tableau[to_tab - 1]
                 target_card = self._parse_card(target_pile[-1]) if target_pile else None
                 
@@ -719,16 +721,20 @@ class KlondikeQAGenerator:
                 
                 # Get pool of valid but ineffective moves
                 valid_ineffective = [move[0] for move in all_valid_moves if not move[2]]
-                
+                # A distractor must not be another valid and effective move
+                effective_move_strs = {move[0] for move in valid_effective_moves}
+
                 # Fill remaining positions with mix of valid ineffective and invalid moves
                 for pos in remaining_positions:
+                    # Skip valid but ineffective moves that a random option has already taken
+                    valid_ineffective = [move for move in valid_ineffective if move not in options]
                     if valid_ineffective and random.random() < 0.5:
                         move = valid_ineffective.pop(0)
                     else:
                         while True:
                             mis_from_pile = random.randint(1, 6)
                             move = f"Move from Tab{mis_from_pile} to Tab{random.randint(mis_from_pile+1, 7)}"
-                            if move not in options:
+                            if move not in options and move not in effective_move_strs:
                                 break
                     options[pos] = move
 
